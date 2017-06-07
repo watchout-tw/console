@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar sticky-top navbar-light">
   <el-menu theme="dark" :router="true" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="hello">Console</el-menu-item>
+    <el-menu-item index="/">Console</el-menu-item>
     <el-submenu v-for="(group, groupIndex) in menu" :index="group.id" :key="group.id">
       <template slot="title">{{ group.name }}</template>
       <el-menu-item v-for="(item, index) of group.pages" :index="item.id" :key="item.id">
@@ -17,11 +17,11 @@ export default {
   props: ['menu'],
   data() {
     return {
-      activeIndex: 'hello'
+      activeIndex: '/'
     }
   },
   created() {
-    this.activeIndex = this.$route.name
+    this.activeIndex = (this.$route.name === 'hello' ? '/' : this.$route.name)
   },
   methods: {
     handleSelect(key, keyPath) {
