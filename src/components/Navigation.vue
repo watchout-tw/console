@@ -2,9 +2,9 @@
 <nav class="navbar sticky-top navbar-light">
   <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
     <el-menu-item index="0">Console</el-menu-item>
-    <el-submenu v-for="(firstLevelItem, firstLevelItemIndex) in menu" :index="(firstLevelItemIndex + 1).toString()" :key="firstLevelItem.id">
-      <template slot="title">{{ firstLevelItem.name }}</template>
-      <el-menu-item v-for="(item, index) of firstLevelItem.pages" :index="(firstLevelItemIndex + 1) + '-' + (index + 1)" :key="item.id">
+    <el-submenu v-for="(group, groupIndex) in menu" :index="(groupIndex + 1).toString()" :key="group.id">
+      <template slot="title">{{ group.name }}</template>
+      <el-menu-item v-for="(item, index) of group.pages" :index="(groupIndex + 1) + '-' + (index + 1)" :key="item.id">
         <a :href="item.id">{{ item.name }}</a>
       </el-menu-item>
     </el-submenu>
