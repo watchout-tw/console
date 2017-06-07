@@ -4,8 +4,8 @@
     <el-menu-item index="/">Console</el-menu-item>
     <el-submenu v-for="(group, groupIndex) in menu" :index="group.id" :key="group.id">
       <template slot="title">{{ group.name }}</template>
-      <el-menu-item v-for="(item, index) of group.pages" :index="item.id" :key="item.id">
-        <router-link to="item.id">{{ item.name }}</router-link>
+      <el-menu-item v-for="(page, index) of group.pages" :index="page.id" :key="page.id">
+        <router-link :to="page.id">{{ page.name }}</router-link>
       </el-menu-item>
     </el-submenu>
   </el-menu>
