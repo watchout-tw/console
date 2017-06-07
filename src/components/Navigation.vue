@@ -1,11 +1,11 @@
 <template>
 <nav class="navbar sticky-top navbar-light">
-  <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-    <el-menu-item index="0">Console</el-menu-item>
-    <el-submenu v-for="(group, groupIndex) in menu" :index="(groupIndex + 1).toString()" :key="group.id">
+  <el-menu theme="dark" :router="true" :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+    <el-menu-item index="hello">Console</el-menu-item>
+    <el-submenu v-for="(group, groupIndex) in menu" :index="group.id" :key="group.id">
       <template slot="title">{{ group.name }}</template>
-      <el-menu-item v-for="(item, index) of group.pages" :index="(groupIndex + 1) + '-' + (index + 1)" :key="item.id">
-        <a :href="item.id">{{ item.name }}</a>
+      <el-menu-item v-for="(item, index) of group.pages" :index="item.id" :key="item.id">
+        <router-link to="item.id">{{ item.name }}</router-link>
       </el-menu-item>
     </el-submenu>
   </el-menu>
@@ -14,11 +14,14 @@
 
 <script>
 export default {
+  props: ['menu'],
   data() {
     return {
-      menu: this.$parent.$data.menu,
-      activeIndex: '0'
+      activeIndex: 'hello'
     }
+  },
+  created() {
+    this.activeIndex = this.$route.name
   },
   methods: {
     handleSelect(key, keyPath) {
