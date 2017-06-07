@@ -13,8 +13,8 @@ var routes = [
     component: Hello
   }
 ]
-for (let group of menu) {
-  for (let page of group.pages) {
+for(let group of menu) {
+  for(let page of group.pages) {
     routes.push({
       path: '/' + page.id,
       name: page.id,
