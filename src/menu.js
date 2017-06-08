@@ -5,7 +5,7 @@ export default [
     pages: [
       {
         id: 'terms',
-        name: '屆次、會期'
+        name: '屆期、會期'
       },
       {
         id: 'committees',
@@ -35,7 +35,7 @@ export default [
     pages: [
       {
         id: 'topics',
-        name: '大議題、小議題'
+        name: '議題'
       },
       {
         id: 'acts',
