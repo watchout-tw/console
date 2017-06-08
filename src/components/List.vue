@@ -4,7 +4,10 @@
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :pageID="pageID" :filter="filter"></list-filter>
   </div>
-  <div v-else>no-filter</div>
+  <div class="filters" v-else>no-filter</div>
+  <el-table :data="rows" style="width: 100%">
+    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width"></el-table-column>
+  </el-table>
 </div>
 </template>
 
@@ -63,30 +66,65 @@ let filtersPerList = {
   sponsorships: ['topics', 'terms', 'parties', 'reps', 'acts'],
   votes: ['topics', 'terms']
 }
+let columnsPerList = {
+  parties: [
+    {
+      prop: 'name',
+      label: '全名'
+    },
+    {
+      prop: 'abbreviation',
+      label: '短名'
+    },
+    {
+      prop: 'emblem',
+      label: '黨旗',
+      width: 100
+    },
+    {
+      prop: 'color',
+      label: '代表色',
+      width: 100
+    },
+    {
+      prop: 'actions',
+      label: '操作',
+      width: 100
+    }
+  ]
+}
 
 export default {
   props: ['pageID', 'pageTitle'],
   data() {
     return {
-      filters: []
+      filters: [],
+      columns: [],
+      rows: []
     }
   },
   mounted() {
     console.log('list:', this.pageID)
-    this.updateFilters()
+    this.update()
   },
   watch: {
-    pageID() {
-      this.updateFilters()
+    pageID() { // watch pageID to detect switching between pages
+      this.update()
     }
   },
   methods: {
-    updateFilters() {
+    update() {
+      // update filters
       if(filtersPerList[this.pageID]) {
         this.filters = filtersPerList[this.pageID].map(function(filter) {
           return allFilters[filter]
         })
       }
+      // update columns
+      if(columnsPerList[this.pageID]) {
+        this.columns = columnsPerList[this.pageID]
+      }
+      // get data
     }
   },
   components: {

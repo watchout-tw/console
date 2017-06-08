@@ -15,10 +15,6 @@ export default {
       options: []
     }
   },
-  props: ['pageID', 'filter'],
-  watch: {
-    pageID() {
-    }
-  }
+  props: ['pageID', 'filter']
 }
 </script>
