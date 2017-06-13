@@ -5,7 +5,9 @@
   "author": "Watchout <dev@watchout.tw>",
   "private": true,
   "scripts": {
+    "update": "npm uninstall common; npm i",
     "dev": "node build/dev-server.js",
+    "dev+": "npm uninstall common; npm i; node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "node build/build.js",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -13,6 +15,7 @@
     "lint": "eslint --ext .js,.vue src test/unit/specs"
   },
   "dependencies": {
+    "axios": "^0.16.2",
     "bootstrap": "^4.0.0-alpha.6",
     "element-ui": "^1.3.5",
     "jquery": "^3.2.1",
