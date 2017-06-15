@@ -21,30 +21,38 @@ export default {
       options: []
     }
   },
-  created() {
-    var self = this
-    if(this.filter.id === 'name') {
-      const url = '/console/lab/' + this.pageID
-      axios.get(url).then(function(response) {
-        self.options = response.data.rows.map(row => ({
-          value: row.name
-        }))
-      }).catch(function(error) {
-        console.error(error)
-      })
-    } else if(this.filter.id === 'parties') { // if(this.filter.type === 'select') {
-      const url = '/console/lab/' + this.filter.id
-      axios.get(url).then(function(response) {
-        self.options = response.data.rows.map(row => ({
-          value: row.name,
-          label: row.name
-        }))
-      }).catch(function(error) {
-        console.error(error)
-      })
+  mounted() {
+    this.update()
+  },
+  watch: {
+    pageID() {
+      this.update()
     }
   },
   methods: {
+    update() {
+      var self = this
+      if(this.filter.id === 'name') {
+        const url = '/console/lab/' + this.pageID
+        axios.get(url).then(function(response) {
+          self.options = response.data.rows.map(row => ({
+            value: row.name
+          }))
+        }).catch(function(error) {
+          console.error(error)
+        })
+      } else if(this.filter.id === 'parties') { // if(this.filter.type === 'select') {
+        const url = '/console/lab/' + this.filter.id
+        axios.get(url).then(function(response) {
+          self.options = response.data.rows.map(row => ({
+            value: row.name,
+            label: row.name
+          }))
+        }).catch(function(error) {
+          console.error(error)
+        })
+      }
+    },
     fetchSuggestions(queryString, callback) {
       callback(queryString
         ? this.options.filter(option => option.value.indexOf(queryString) > -1)
