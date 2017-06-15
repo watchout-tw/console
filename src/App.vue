@@ -25,4 +25,8 @@ export default {
 <style lang="scss">
 @import '~common/src/styles/resources';
 @import '~common/src/styles/main';
+
+h1 {
+  font-size: 1.5rem;
+}
 </style>

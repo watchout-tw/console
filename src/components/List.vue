@@ -1,98 +1,24 @@
 <template>
 <div class="list">
-  <h1>{{ pageTitle }}</h1>
+  <div class="title"><h1>{{ pageTitle }}</h1></div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :pageID="pageID" :filter="filter"></list-filter>
   </div>
   <div class="filters" v-else>no-filter</div>
   <el-table :data="rows" style="width: 100%">
-    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width"></el-table-column>
+    <el-table-column type="selection" width="55"></el-table-column>
+    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
   </el-table>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+import Filters from './filters'
+import Lists from './lists'
 import ListFilter from '@/components/ListFilter'
 
-let allFilters = {
-  name: {
-    id: 'name',
-    type: 'input',
-    feature: 'autocomplete'
-  },
-  terms: {
-    id: 'terms',
-    type: 'select'
-  },
-  parties: {
-    id: 'parties',
-    type: 'select'
-  },
-  districts: {
-    id: 'districts',
-    type: 'select',
-    feature: 'grouped'
-  },
-  topics: {
-    id: 'topics',
-    type: 'select',
-    feature: 'grouped'
-  },
-  acts: {
-    id: 'acts',
-    type: 'select'
-  },
-  act_dirs: {
-    id: 'act_dirs',
-    type: 'select'
-  },
-  reps: {
-    id: 'reps',
-    type: 'input',
-    feature: 'autocomplete'
-  }
-}
-let filtersPerList = {
-  terms: ['terms'],
-  committees: [],
-  reps: ['name', 'terms', 'parties', 'districts'],
-  districts: ['terms'],
-  parties: [],
-  caucuses: [],
-  topics: ['name'],
-  acts: ['topics'],
-  actFeatures: ['topics', 'acts', 'act_dirs'],
-  statements: ['topics', 'terms', 'parties', 'reps'],
-  sponsorships: ['topics', 'terms', 'parties', 'reps', 'acts'],
-  votes: ['topics', 'terms']
-}
-let columnsPerList = {
-  parties: [
-    {
-      prop: 'name',
-      label: '全名'
-    },
-    {
-      prop: 'abbreviation',
-      label: '短名'
-    },
-    {
-      prop: 'emblem',
-      label: '黨旗',
-      width: 100
-    },
-    {
-      prop: 'color',
-      label: '代表色',
-      width: 100
-    },
-    {
-      prop: 'actions',
-      label: '操作',
-      width: 100
-    }
-  ]
-}
+axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
 export default {
   props: ['pageID', 'pageTitle'],
@@ -114,17 +40,24 @@ export default {
   },
   methods: {
     update() {
+      var self = this
       // update filters
-      if(filtersPerList[this.pageID]) {
-        this.filters = filtersPerList[this.pageID].map(function(filter) {
-          return allFilters[filter]
+      if(Lists[this.pageID].filters) {
+        this.filters = Lists[this.pageID].filters.map(function(filter) {
+          return Filters[filter]
         })
       }
       // update columns
-      if(columnsPerList[this.pageID]) {
-        this.columns = columnsPerList[this.pageID]
+      if(Lists[this.pageID].columns) {
+        this.columns = Lists[this.pageID].columns
       }
       // get data
+      console.log('get', '/console/lab/' + this.pageID)
+      axios.get('/console/lab/' + this.pageID).then(function(response) {
+        self.rows = response.data.rows
+      }).catch(function(error) {
+        console.error(error)
+      })
     }
   },
   components: {
@@ -132,3 +65,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.list {
+  margin: 0 1rem;
+  > .title {
+    margin: 1rem 0;
+  }
+  > .filters {
+    margin: 1rem 0;
+  }
+}
+</style>
