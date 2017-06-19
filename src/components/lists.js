@@ -22,7 +22,7 @@ export default {
       },
       {
         prop: 'sessions',
-        label: '會期' // 請給我一個 array，包含該屆所有的會期
+        label: '會期' // 請給我一個 array，包含該屆所有的會期 from Term_Session
 /*
 Array of objects
 {
@@ -35,7 +35,7 @@ Array of objects
       },
       {
         prop: 'parties',
-        label: '有席次的政黨' // 請給我一個 array，包含是該屆所有有席次的政黨 (Term_Party)
+        label: '有席次的政黨' // 請給我一個 array，包含是該屆所有有席次的政黨 from Term_Party
 /*
 Array of objects
 {
@@ -48,7 +48,7 @@ Array of objects
       },
       {
         prop: 'caucuses',
-        label: '有席次的黨團或政團' // 請給我一個 array，包含是該屆所有有席次的政黨 (Term_Caucus)
+        label: '有席次的黨團或政團' // 請給我一個 array，包含是該屆所有有席次的政黨 from Term_Caucus
 /*
 Array of objects
 {
@@ -87,7 +87,7 @@ Array of objects
         width: 192
       },
       {
-        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 (Rep_Term)
+        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 from Rep_Term...
         label: '任職歷史',
         formatter: repHistoryFormatter
 /*
@@ -116,7 +116,7 @@ Array of objects:
         label: '屆期'
       },
       {
-        prop: 'district_name', // 選區詳細資料 (District)
+        prop: 'district_name', // 選區詳細資料 from District
         label: '選區'
       },
       {
@@ -141,7 +141,7 @@ Array of objects:
         label: '屆期'
       },
       {
-        prop: 'name', // 政黨詳細資料 (Party)
+        prop: 'name', // 政黨詳細資料 from Party
         label: '全名'
       },
       {
@@ -150,7 +150,7 @@ Array of objects:
       },
       {
         prop: 'emblem',
-        label: '代表旗'
+        label: '代表徽章'
       },
       {
         prop: 'color',
@@ -167,7 +167,7 @@ Array of objects:
       },
       {
         prop: 'name',
-        label: '全名' // 黨團或政團詳細資料 (Caucus)
+        label: '全名' // 黨團或政團詳細資料 from Caucus
       },
       {
         prop: 'abbreviation',
@@ -175,7 +175,7 @@ Array of objects:
       },
       {
         prop: 'emblem',
-        label: '代表旗'
+        label: '代表徽章'
       },
       {
         prop: 'color',
@@ -183,13 +183,90 @@ Array of objects:
       }
     ]
   },
-  topics: {
-    filters: ['name']
+  general_topics: {
+    filters: ['name'],
+    columns: [
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'index',
+        label: '排序'
+      },
+      {
+        prop: 'image',
+        label: '圖像'
+      },
+      {
+        prop: 'specific_topics',
+        label: '小議題' // Array of Specific_Topics
+/*
+Array of objects
+{
+  title
+  index
+  image
+}
+*/
+      }
+    ]
+  },
+  specific_topics: {
+    filters: ['name'],
+    columns: [
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'index',
+        label: '排序'
+      },
+      {
+        prop: 'image',
+        label: '圖像'
+      },
+      {
+        prop: 'general_topics',
+        label: '大議題' // Array of General_Topics
+/*
+Array of objects
+{
+  title
+  index
+  image
+}
+*/
+      },
+      {
+        prop: 'act_dirs',
+        label: '修法方向'
+/*
+Array of objects
+{
+  dir
+  index
+}
+*/
+      },
+      {
+        prop: 'st_questions',
+        label: '爭點'
+/*
+Array of objects
+{
+  question
+  index
+}
+*/
+      }
+    ]
   },
   acts: {
     filters: ['topics']
   },
-  actFeatures: {
+  act_features: {
     filters: ['topics', 'acts', 'act_dirs']
   },
   statements: {

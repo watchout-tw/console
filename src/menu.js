@@ -40,9 +40,14 @@ export default [
     name: '議題、法案',
     pages: [
       {
-        id: 'topics',
-        name: '議題',
-        title: '議題'
+        id: 'general_topics',
+        name: '大議題',
+        title: '大議題'
+      },
+      {
+        id: 'specific_topics',
+        name: '小議題',
+        title: '小議題'
       },
       {
         id: 'acts',
@@ -50,7 +55,7 @@ export default [
         title: '法案'
       },
       {
-        id: 'actFeatures',
+        id: 'act_features',
         name: '法案比較',
         title: '法案比較'
       }
