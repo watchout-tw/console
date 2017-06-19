@@ -67,18 +67,14 @@ export default {
 Array of objects:
 {
   term: 7,
-  party: {
-    name: '民主進步黨',
-    abbreviation: '民進黨',
-    emblem: 'dpp.png',
-    color: '#fff'
-  },
-  district: {
-    name: '台北市第一選舉區',
-    abbreviation: '台北一',
-    zone_name: '台北',
-    index: 1
-  },
+  party_name: '民主進步黨',
+  party_abbreviation: '民進黨',
+  party_emblem: 'dpp.png',
+  party_color: '#fff',
+  district_name: '台北市第一選舉區',
+  district_abbreviation: '台北一',
+  district_zone_name: '台北',
+  district_index: 1,
   change_type: '應屆就任'
 }
 */
