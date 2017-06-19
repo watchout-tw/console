@@ -14,7 +14,7 @@ import axios from 'axios'
 axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
 export default {
-  props: ['pageID', 'filter'],
+  props: ['page', 'filter'],
   data() {
     return {
       value: '',
@@ -25,7 +25,7 @@ export default {
     this.update()
   },
   watch: {
-    pageID() {
+    'page.id'() {
       this.update()
     }
   },
@@ -33,7 +33,7 @@ export default {
     update() {
       var self = this
       if(this.filter.id === 'name') {
-        const url = '/console/lab/' + this.pageID
+        const url = '/console/lab/' + this.page.id + '?all'
         axios.get(url).then(function(response) {
           self.options = response.data.rows.map(row => ({
             value: row.name

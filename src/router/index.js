@@ -20,8 +20,11 @@ for(let group of menu) {
       name: page.id,
       component: List,
       props: {
-        pageID: page.id,
-        pageTitle: page.name
+        page: {
+          id: page.id,
+          name: page.name,
+          title: page.title
+        }
       }
     })
   }

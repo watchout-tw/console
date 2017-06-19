@@ -27,6 +27,6 @@ export default {
 @import '~common/src/styles/main';
 
 h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 </style>

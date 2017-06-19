@@ -1,14 +1,15 @@
 <template>
 <div class="list">
-  <div class="title"><h1>{{ pageTitle }}</h1></div>
+  <div class="title d-flex justify-content-between align-items-center"><h1>{{ page.title }}</h1><el-button type="primary">新增{{ page.name }}</el-button></div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
-    <list-filter v-for="filter in filters" :key="filter.id" :pageID="pageID" :filter="filter"></list-filter>
+    <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
   </div>
   <div class="filters" v-else>no-filter</div>
-  <el-table :data="rows" style="width: 100%">
-    <el-table-column type="selection" width="55"></el-table-column>
-    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
+  <el-table :data="rows">
+    <el-table-column type="selection" width="46"></el-table-column>
+    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
   </el-table>
+  <el-pagination layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>
 </div>
 </template>
 
@@ -21,20 +22,28 @@ import ListFilter from '@/components/ListFilter'
 axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
 export default {
-  props: ['pageID', 'pageTitle'],
+  props: ['page'],
   data() {
     return {
       filters: [],
       columns: [],
-      rows: []
+      rows: [],
+      totalRowCount: 0,
+      paging: {
+        page: 1,
+        pageSize: 20
+      }
     }
   },
   mounted() {
-    console.log('list:', this.pageID)
+    console.log('list:', this.page.id)
     this.update()
   },
   watch: {
-    pageID() { // watch pageID to detect switching between pages
+    'page.id'() { // watch page.id to detect switching between pages
+      this.update()
+    },
+    'paging.page'() {
       this.update()
     }
   },
@@ -42,19 +51,22 @@ export default {
     update() {
       var self = this
       // update filters
-      if(Lists[this.pageID].filters) {
-        this.filters = Lists[this.pageID].filters.map(function(filter) {
+      if(Lists[this.page.id].filters) {
+        this.filters = Lists[this.page.id].filters.map(function(filter) {
           return Filters[filter]
         })
       }
       // update columns
-      if(Lists[this.pageID].columns) {
-        this.columns = Lists[this.pageID].columns
+      if(Lists[this.page.id].columns) {
+        this.columns = Lists[this.page.id].columns
       }
       // get data
-      console.log('get', '/console/lab/' + this.pageID)
-      axios.get('/console/lab/' + this.pageID).then(function(response) {
+      let url = `/console/lab/${this.page.id}?page=${this.paging.page}`
+      axios.get(url).then(function(response) {
+        console.log(response)
         self.rows = response.data.rows
+        self.paging.pageSize = 20
+        self.totalRowCount = response.data.totalRowCount
       }).catch(function(error) {
         console.error(error)
       })
