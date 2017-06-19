@@ -23,14 +23,41 @@ export default {
       {
         prop: 'sessions',
         label: '會期' // 請給我一個 array，包含該屆所有的會期
+/*
+Array of objects
+{
+  session_index: 1
+  temp_session_index: 1
+  start_date: [timestamp]
+  end_date: [timestamp]
+}
+*/
       },
       {
         prop: 'parties',
         label: '有席次的政黨' // 請給我一個 array，包含是該屆所有有席次的政黨 (Term_Party)
+/*
+Array of objects
+{
+  name: '時代力量'
+  abbreviation: '時力'
+  emblem: 'npp.png'
+  color: '#aaa'
+}
+*/
       },
       {
         prop: 'caucuses',
         label: '有席次的黨團或政團' // 請給我一個 array，包含是該屆所有有席次的政黨 (Term_Caucus)
+/*
+Array of objects
+{
+  name: '中國國民黨立法院黨團'
+  abbreviation: '國民黨黨團'
+  emblem: 'kmt.png'
+  color: '#00f'
+}
+*/
       }
     ]
   },
@@ -60,21 +87,21 @@ export default {
         width: 192
       },
       {
-        prop: 'history', // 該立委所有的任職歷史 (Rep_Term)
+        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 (Rep_Term)
         label: '任職歷史',
         formatter: repHistoryFormatter
 /*
 Array of objects:
 {
-  term: 7,
-  party_name: '民主進步黨',
-  party_abbreviation: '民進黨',
-  party_emblem: 'dpp.png',
-  party_color: '#fff',
-  district_name: '台北市第一選舉區',
-  district_abbreviation: '台北一',
-  district_zone_name: '台北',
-  district_index: 1,
+  term: 7
+  party_name: '民主進步黨'
+  party_abbreviation: '民進黨'
+  party_emblem: 'dpp.png'
+  party_color: '#fff'
+  district_name: '台北市第一選舉區'
+  district_abbreviation: '台北一'
+  district_zone_name: '台北'
+  district_index: 1
   change_type: '應屆就任'
 }
 */
