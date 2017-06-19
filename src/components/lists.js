@@ -63,6 +63,22 @@ export default {
         prop: 'history', // 該立委所有的任職歷史 (Rep_Term)
         label: '任職歷史',
         formatter: repHistoryFormatter
+/*
+{
+  term: 7,
+  party: {
+    name: '民主進步黨',
+    abbreviation: '民進黨',
+    emblem: 'dpp.png',
+    color: '#fff'
+  },
+  district: {
+    name: '台北市第一選舉區',
+    abbreviation: '台北一'
+  },
+  change_type: '應屆就任'
+}
+*/
       }
     ]
   },
