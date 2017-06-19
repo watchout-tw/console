@@ -64,6 +64,7 @@ export default {
         label: '任職歷史',
         formatter: repHistoryFormatter
 /*
+Array of objects:
 {
   term: 7,
   party: {
@@ -74,7 +75,9 @@ export default {
   },
   district: {
     name: '台北市第一選舉區',
-    abbreviation: '台北一'
+    abbreviation: '台北一',
+    zone_name: '台北',
+    index: 1
   },
   change_type: '應屆就任'
 }
