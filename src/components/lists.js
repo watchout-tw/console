@@ -289,7 +289,29 @@ Array of objects
     ]
   },
   act_features: {
-    filters: ['topics', 'acts', 'act_dirs']
+    filters: ['topics', 'acts', 'act_dirs'],
+    columns: [
+      {
+        prop: 'st_title',
+        label: '小議題'
+      },
+      {
+        prop: 'act',
+        label: '法案'
+      },
+      {
+        prop: 'act_dir',
+        label: '修法方向'
+      },
+      {
+        prop: 'feature',
+        label: '法案比較'
+      },
+      {
+        prop: 'dir',
+        label: '法案比較價值判斷'
+      }
+    ]
   },
   statements: {
     filters: ['topics', 'terms', 'parties', 'reps'],
