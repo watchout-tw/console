@@ -87,7 +87,7 @@ Array of objects
         width: 192
       },
       {
-        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 from Rep_Term...
+        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 from Rep_Party & Rep_Term...
         label: '任職歷史',
         formatter: repHistoryFormatter
 /*
@@ -200,7 +200,7 @@ Array of objects:
       },
       {
         prop: 'specific_topics',
-        label: '小議題' // Array of Specific_Topics
+        label: '小議題' // Array of Specific_Topics from Topic_Relation
 /*
 Array of objects
 {
@@ -229,7 +229,7 @@ Array of objects
       },
       {
         prop: 'general_topics',
-        label: '大議題' // Array of General_Topics
+        label: '大議題' // Array of General_Topics from Topic_Relation
 /*
 Array of objects
 {
@@ -264,7 +264,29 @@ Array of objects
     ]
   },
   acts: {
-    filters: ['topics']
+    filters: ['topics'],
+    columns: [
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'official_seq_no',
+        label: '院總字號'
+      },
+      {
+        prop: 'specific_topics',
+        label: '小議題' // Array of Specific_Topics from Topic_Relation
+/*
+Array of objects
+{
+  title
+  index
+  image
+}
+*/
+      }
+    ]
   },
   act_features: {
     filters: ['topics', 'acts', 'act_dirs']
