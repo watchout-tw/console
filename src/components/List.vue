@@ -14,26 +14,25 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { mapGetters } from 'vuex'
 import Filters from './filters'
 import Lists from './lists'
 import ListFilter from '@/components/ListFilter'
-
-axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
 export default {
   props: ['page'],
   data() {
     return {
       filters: [],
-      columns: [],
-      rows: [],
-      totalRowCount: 0,
-      paging: {
-        page: 1,
-        pageSize: 20
-      }
+      columns: []
     }
+  },
+  computed: {
+    ...mapGetters({
+      rows: 'rows',
+      paging: 'paging',
+      totalRowCount: 'totalRowCount'
+    })
   },
   mounted() {
     console.log('list:', this.page.id)
@@ -49,7 +48,6 @@ export default {
   },
   methods: {
     update() {
-      var self = this
       // update filters
       if(Lists[this.page.id].filters) {
         this.filters = Lists[this.page.id].filters.map(function(filter) {
@@ -64,15 +62,10 @@ export default {
       } else {
         this.columns = []
       }
-      // get data
-      let url = `/console/lab/${this.page.id}?page=${this.paging.page}`
-      axios.get(url).then(function(response) {
-        console.log(response)
-        self.rows = response.data.rows
-        self.paging.pageSize = 20
-        self.totalRowCount = response.data.totalRowCount
-      }).catch(function(error) {
-        console.error(error)
+      // dispatch action to get data
+      this.$store.dispatch('updateList', {
+        pageID: this.page.id,
+        page: this.paging.page
       })
     }
   },

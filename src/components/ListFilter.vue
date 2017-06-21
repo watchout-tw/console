@@ -3,12 +3,13 @@
   <el-input v-if="filter.type == 'input'" :placeholder="filter.label" v-model="value"></el-input>
   <el-autocomplete v-if="filter.type == 'autocomplete'" :placeholder="filter.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
   <el-select v-if="filter.type == 'select'" :placeholder="filter.label" v-model="value">
-    <el-option v-for="item in options" :label="item.label" :value="item.value" :key="item.value"></el-option>
+    <el-option v-for="item in options(filter.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import axios from 'axios'
 
 axios.defaults.baseURL = 'https://c0re.watchout.tw'
@@ -17,9 +18,14 @@ export default {
   props: ['page', 'filter'],
   data() {
     return {
-      value: '',
-      options: []
+      value: ''
+      // options: []
     }
+  },
+  computed: {
+    ...mapGetters({
+      options: 'options'
+    })
   },
   mounted() {
     this.update()
@@ -31,32 +37,21 @@ export default {
   },
   methods: {
     update() {
-      var self = this
-      if(this.filter.id === 'name') {
-        const url = '/console/lab/' + this.page.id + '?all'
-        axios.get(url).then(function(response) {
-          self.options = response.data.rows.map(row => ({
-            value: row.name
-          }))
-        }).catch(function(error) {
-          console.error(error)
+      // 拿 Filter 內容
+      if (this.filter.id === 'name') {
+        this.$store.dispatch('updateNameFilter', {
+          pageID: this.page.id
         })
-      } else if(this.filter.id === 'parties') { // if(this.filter.type === 'select') {
-        const url = '/console/lab/' + this.filter.id
-        axios.get(url).then(function(response) {
-          self.options = response.data.rows.map(row => ({
-            value: row.name,
-            label: row.name
-          }))
-        }).catch(function(error) {
-          console.error(error)
+      } else if (this.filter.id === 'parties') { // if(this.filter.type === 'select') {
+        this.$store.dispatch('updatePartyFilter', {
+          filterID: this.filter.id
         })
       }
     },
     fetchSuggestions(queryString, callback) {
       callback(queryString
-        ? this.options.filter(option => option.value.indexOf(queryString) > -1)
-        : this.options
+        ? this.options(this.filter.id).filter(option => option.value.indexOf(queryString) > -1)
+        : this.options(this.filter.id)
       )
     },
     handleSelect() {}
