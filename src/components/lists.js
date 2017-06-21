@@ -22,7 +22,7 @@ export default {
       },
       {
         prop: 'sessions',
-        label: '會期' // 請給我一個 array，包含該屆所有的會期 from Term_Session
+        label: '會期' // Array of 該屆所有的會期 from Term_Session
 /*
 Array of objects
 {
@@ -35,7 +35,7 @@ Array of objects
       },
       {
         prop: 'parties',
-        label: '有席次的政黨' // 請給我一個 array，包含是該屆所有有席次的政黨 from Term_Party
+        label: '政黨' // Array of 該屆所有有席次的政黨 from Term_Party
 /*
 Array of objects
 {
@@ -48,7 +48,7 @@ Array of objects
       },
       {
         prop: 'caucuses',
-        label: '有席次的黨團或政團' // 請給我一個 array，包含是該屆所有有席次的政黨 from Term_Caucus
+        label: '黨團或政團' // Array of 該屆所有有席次的政黨 from Term_Caucus
 /*
 Array of objects
 {
@@ -87,7 +87,7 @@ Array of objects
         width: 192
       },
       {
-        prop: 'history', // 請給我一個 array，包含該立委所有的任職歷史 from Rep_Party & Rep_Term...
+        prop: 'history', // Array of 該立委所有的任職歷史 from Rep_Party & Rep_Term...
         label: '任職歷史',
         formatter: repHistoryFormatter
 /*
@@ -116,7 +116,7 @@ Array of objects:
         label: '屆期'
       },
       {
-        prop: 'district_name', // 選區詳細資料 from District
+        prop: 'district_name', // from District
         label: '選區'
       },
       {
@@ -141,7 +141,7 @@ Array of objects:
         label: '屆期'
       },
       {
-        prop: 'name', // 政黨詳細資料 from Party
+        prop: 'name', // from Party
         label: '全名'
       },
       {
@@ -167,7 +167,7 @@ Array of objects:
       },
       {
         prop: 'name',
-        label: '全名' // 黨團或政團詳細資料 from Caucus
+        label: '全名' // from Caucus
       },
       {
         prop: 'abbreviation',
@@ -229,7 +229,7 @@ Array of objects
       },
       {
         prop: 'general_topics',
-        label: '大議題' // Array of General_Topics from Topic_Relation
+        label: '關聯大議題' // Array of General_Topics from Topic_Relation
 /*
 Array of objects
 {
@@ -276,7 +276,7 @@ Array of objects
       },
       {
         prop: 'specific_topics',
-        label: '小議題' // Array of Specific_Topics from Topic_Relation
+        label: '關聯小議題' // Array of Specific_Topics from Topic_Relation
 /*
 Array of objects
 {
@@ -293,15 +293,15 @@ Array of objects
     columns: [
       {
         prop: 'st_title',
-        label: '小議題'
+        label: '關聯小議題'
       },
       {
         prop: 'act',
-        label: '法案'
+        label: '關聯法案'
       },
       {
         prop: 'act_dir',
-        label: '修法方向'
+        label: '關聯修法方向'
       },
       {
         prop: 'feature',
@@ -318,7 +318,7 @@ Array of objects
     columns: [
       {
         prop: 'st_title',
-        label: '小議題'
+        label: '關聯小議題'
       },
       {
         prop: 'term_index',
@@ -347,7 +347,7 @@ Array of objects
     columns: [
       {
         prop: 'st_title',
-        label: '小議題'
+        label: '關聯小議題'
       },
       {
         prop: 'term_index',
@@ -363,7 +363,7 @@ Array of objects
       },
       {
         prop: 'sponsors',
-        label: '連署者'
+        label: '連署者' // Array of Reps
       },
       {
         prop: 'propose_date',

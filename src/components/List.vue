@@ -1,6 +1,6 @@
 <template>
 <div class="list">
-  <div class="title d-flex justify-content-between align-items-center"><h1>{{ page.title }}</h1><el-button type="primary">新增{{ page.name }}</el-button></div>
+  <div class="title d-flex justify-content-between align-items-center"><h1>{{ page.title }}</h1><el-button type="primary"><router-link to="/terms/create">新增{{ page.name }}</router-link></el-button></div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
   </div>
@@ -55,10 +55,14 @@ export default {
         this.filters = Lists[this.page.id].filters.map(function(filter) {
           return Filters[filter]
         })
+      } else {
+        this.filters = []
       }
       // update columns
       if(Lists[this.page.id].columns) {
         this.columns = Lists[this.page.id].columns
+      } else {
+        this.columns = []
       }
       // get data
       let url = `/console/lab/${this.page.id}?page=${this.paging.page}`
