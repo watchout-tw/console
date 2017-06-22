@@ -6,7 +6,6 @@
   </div>
   <div class="filters" v-else>no-filter</div>
   <el-table :data="rows">
-    <el-table-column type="selection" width="46"></el-table-column>
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
   </el-table>
   <el-pagination layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>

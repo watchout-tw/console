@@ -200,15 +200,7 @@ Array of objects:
       },
       {
         prop: 'specific_topics',
-        label: '小議題' // Array of Specific_Topics from Topic_Relation
-/*
-Array of objects
-{
-  title
-  index
-  image
-}
-*/
+        label: '關聯小議題'
       }
     ]
   },
@@ -229,37 +221,15 @@ Array of objects
       },
       {
         prop: 'general_topics',
-        label: '關聯大議題' // Array of General_Topics from Topic_Relation
-/*
-Array of objects
-{
-  title
-  index
-  image
-}
-*/
+        label: '關聯大議題'
       },
       {
         prop: 'act_dirs',
         label: '修法方向'
-/*
-Array of objects
-{
-  dir
-  index
-}
-*/
       },
       {
         prop: 'st_questions',
         label: '爭點'
-/*
-Array of objects
-{
-  question
-  index
-}
-*/
       }
     ]
   },
@@ -276,15 +246,7 @@ Array of objects
       },
       {
         prop: 'specific_topics',
-        label: '關聯小議題' // Array of Specific_Topics from Topic_Relation
-/*
-Array of objects
-{
-  title
-  index
-  image
-}
-*/
+        label: '關聯小議題'
       }
     ]
   },
@@ -292,7 +254,7 @@ Array of objects
     filters: ['topics', 'acts', 'act_dirs'],
     columns: [
       {
-        prop: 'st_title',
+        prop: 'specific_topic',
         label: '關聯小議題'
       },
       {
@@ -354,16 +316,24 @@ Array of objects
         label: '屆期'
       },
       {
-        prop: 'principle_sponsor_party_name',
-        label: '提案者政黨'
+        prop: 'principle_sponsor_type',
+        label: '首位提案者類別'
       },
       {
-        prop: 'principle_sponsor_name',
-        label: '提案者'
+        prop: 'principle_sponsor_party',
+        label: '首位提案者政黨'
+      },
+      {
+        prop: 'principle_sponsor',
+        label: '首位提案者'
       },
       {
         prop: 'sponsors',
-        label: '連署者' // Array of Reps
+        label: '提案者'
+      },
+      {
+        prop: 'cosponsors',
+        label: '連署者'
       },
       {
         prop: 'propose_date',
@@ -383,7 +353,7 @@ Array of objects
     columns: [
       {
         prop: 'st_title',
-        label: '小議題'
+        label: '關聯小議題'
       },
       {
         prop: 'term_index',
@@ -399,19 +369,19 @@ Array of objects
       },
       {
         prop: 'aye_count',
-        label: '贊成'
+        label: '贊成人數'
       },
       {
         prop: 'abstain_count',
-        label: '棄權'
+        label: '棄權人數'
       },
       {
         prop: 'nay_count',
-        label: '反對'
+        label: '反對人數'
       },
       {
         prop: 'absence_count',
-        label: '缺席'
+        label: '缺席人數'
       },
       {
         prop: 'g0v_link',
