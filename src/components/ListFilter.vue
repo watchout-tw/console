@@ -40,14 +40,11 @@ export default {
       // 拿 Filter 內容
       if (this.filter.id === 'name') {
         this.$store.dispatch('updateNameFilter', {
-          pageID: this.page.id
-        })
-      } else if (this.filter.id === 'parties') { // if(this.filter.type === 'select') {
-        this.$store.dispatch('updatePartyFilter', {
+          pageID: this.page.id,
           filterID: this.filter.id
         })
-      } else if (this.filter.id === 'districts') { // if(this.filter.type === 'select') {
-        this.$store.dispatch('updateDistrictFilter', {
+      } else { // if(this.filter.type === 'select') {
+        this.$store.dispatch('updateSelectedFilter', {
           filterID: this.filter.id
         })
       }
