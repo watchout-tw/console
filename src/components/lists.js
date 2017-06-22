@@ -79,7 +79,7 @@ Array of objects
     ]
   },
   reps: {
-    filters: ['name', 'terms', 'parties', 'districts'],
+    filters: ['name', 'term', 'party', 'district'],
     columns: [
       {
         prop: 'name',
@@ -109,7 +109,7 @@ Array of objects:
     ]
   },
   term_districts: {
-    filters: ['terms', 'zones'],
+    filters: ['term', 'zone'],
     columns: [
       {
         prop: 'term_index',
@@ -205,7 +205,7 @@ Array of objects:
     ]
   },
   specific_topics: {
-    filters: ['name'],
+    filters: ['name', 'general_topic'],
     columns: [
       {
         prop: 'title',
@@ -234,7 +234,7 @@ Array of objects:
     ]
   },
   acts: {
-    filters: ['topics'],
+    filters: ['name', 'specific_topic'],
     columns: [
       {
         prop: 'title',
@@ -251,7 +251,7 @@ Array of objects:
     ]
   },
   act_features: {
-    filters: ['topics', 'acts', 'act_dirs'],
+    filters: ['specific_topic', 'act', 'act_dir'],
     columns: [
       {
         prop: 'specific_topic',
@@ -276,7 +276,7 @@ Array of objects:
     ]
   },
   statements: {
-    filters: ['topics', 'terms', 'parties', 'reps'],
+    filters: ['specific_topic', 'term', 'rep', 'party'],
     columns: [
       {
         prop: 'st_title',
@@ -305,7 +305,7 @@ Array of objects:
     ]
   },
   sponsorships: {
-    filters: ['topics', 'terms', 'parties', 'reps', 'acts'],
+    filters: ['specific_topic', 'term', 'act', 'sponsor_type', 'party', 'sponsor'],
     columns: [
       {
         prop: 'st_title',
@@ -349,7 +349,7 @@ Array of objects:
     ]
   },
   votes: {
-    filters: ['topics', 'terms', 'name'],
+    filters: ['topic', 'term', 'name'],
     columns: [
       {
         prop: 'st_title',
