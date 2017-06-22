@@ -23,6 +23,13 @@ const actions = {
     }).catch(error => {
       commit(types.FETCH_FAIL, error)
     })
+  },
+  updateListNoPaging ({ commit }, reqObj) {
+    api.getListByNameNoPaging(reqObj).then(response => {
+      commit(types.UPDATE_LIST_NO_PAGING, response.data)
+    }).catch(error => {
+      commit(types.FETCH_FAIL, error)
+    })
   }
 }
 
@@ -30,6 +37,10 @@ const mutations = {
   [types.UPDATE_LIST] (state, data) {
     state.rows = data.rows
     state.paging.pageSize = data.paging ? data.paging.pageSize : 0
+    state.totalRowCount = data.totalRowCount
+  },
+  [types.UPDATE_LIST_NO_PAGING] (state, data) {
+    state.rows = data.rows
     state.totalRowCount = data.totalRowCount
   },
   [types.FETCH_FAIL] (state, error) {

@@ -7,6 +7,11 @@ export function getSelectedFilterList (reqObj) {
   return axios.get(reqUrl)
 }
 
+export function getListByNameNoPaging (reqObj) {
+  let reqUrl = `/console/lab/${reqObj.pageID}`
+  return axios.get(reqUrl)
+}
+
 export function getListByName (reqObj) {
   let reqUrl = `/console/lab/${reqObj.pageID}?all`
   return axios.get(reqUrl)

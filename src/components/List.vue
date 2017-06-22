@@ -62,10 +62,16 @@ export default {
         this.columns = []
       }
       // dispatch action to get data
-      this.$store.dispatch('updateList', {
-        pageID: this.page.id,
-        page: this.paging.page
-      })
+      if (Lists[this.page.id].paged) {
+        this.$store.dispatch('updateList', {
+          pageID: this.page.id,
+          page: this.paging.page
+        })
+      } else {
+        this.$store.dispatch('updateListNoPaging', {
+          pageID: this.page.id
+        })
+      }
     }
   },
   components: {
