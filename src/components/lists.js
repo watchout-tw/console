@@ -353,7 +353,7 @@ Array of objects:
     ]
   },
   votes: {
-    filters: ['topic', 'term', 'name'],
+    filters: ['specific_topic', 'term', 'name'],
     columns: [
       {
         prop: 'st_title',
