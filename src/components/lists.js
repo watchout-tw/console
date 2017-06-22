@@ -7,6 +7,7 @@ let repHistoryFormatter = (row, col) => {
 export default {
   terms: {
     filters: ['name'],
+    paged: true,
     columns: [
       {
         prop: 'index',
@@ -63,6 +64,7 @@ Array of objects
   },
   committees: {
     filters: ['name'],
+    paged: false,
     columns: [
       {
         prop: 'name',
@@ -80,6 +82,7 @@ Array of objects
   },
   reps: {
     filters: ['name', 'terms', 'parties', 'districts'],
+    paged: true,
     columns: [
       {
         prop: 'name',
@@ -110,6 +113,7 @@ Array of objects:
   },
   term_districts: {
     filters: ['terms', 'zones'],
+    paged: true,
     columns: [
       {
         prop: 'term_index',
