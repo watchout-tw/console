@@ -4,13 +4,14 @@ import filterConfig from '../../components/filters'
 
 // Compose filterOptions = { xxx: xxxOptions, yyy: yyyOptions}
 var filterOptions = {}
-for (var filter in filterConfig) {
-  filterOptions[filter] = filter + 'Options'
+for (let filter in filterConfig) {
+  var filterID = filterConfig[filter].api
+  filterOptions[filterID] = filterID + 'Options'
 }
 
 // Compose state = { xxxOptions: [], yyyOptions: [] }
 var stateBuilder = {}
-for (var options in filterOptions) {
+for (let options in filterOptions) {
   stateBuilder[filterOptions[options]] = []
 }
 const state = stateBuilder
