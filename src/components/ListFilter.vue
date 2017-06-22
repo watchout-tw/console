@@ -10,16 +10,12 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import axios from 'axios'
-
-axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
 export default {
   props: ['page', 'filter'],
   data() {
     return {
-      value: ''
-      // options: []
+      value: undefined
     }
   },
   computed: {

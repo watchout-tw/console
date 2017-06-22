@@ -4,11 +4,19 @@
   <section v-for="section in sections" :key="section.title">
     <h3>{{ section.title }}</h3>
     <p>{{ section.description }}</p>
+    <p>{{ section.interface.type }}</p>
+    <editor-form v-if="section.interface.type == 'form'" :fields="section.interface.fields"></editor-form>
+    <editor-table v-if="section.interface.type == 'table'" :columns="section.interface.columns"></editor-table>
+    <editor-checkbox-group v-if="section.interface.type == 'checkbox-group'" :source="section.interface.source"></editor-checkbox-group>
   </section>
 </div>
 </template>
 
 <script>
+import EditorForm from '@/components/EditorForm'
+import EditorTable from '@/components/EditorTable'
+import EditorCheckboxGroup from '@/components/EditorCheckboxGroup'
+
 var editors = {
   'term-editor': {
     sections: [
@@ -19,14 +27,17 @@ var editors = {
           type: 'form',
           fields: [
             {
+              id: 'term',
               label: '屆期',
-              type: 'input'
+              type: 'number'
             },
             {
+              id: 'start_date',
               label: '起始日',
               type: 'date'
             },
             {
+              id: 'end_date',
               label: '終止日',
               type: 'date'
             }
@@ -41,19 +52,23 @@ var editors = {
           columns: [
             {
               prop: 'session_index',
-              label: '會期'
+              label: '會期',
+              type: 'number'
             },
             {
               prop: 'temp_session_index',
-              label: '臨時會期'
+              label: '臨時會期',
+              type: 'number'
             },
             {
               prop: 'start_date',
-              label: '起'
+              label: '起',
+              type: 'date'
             },
             {
               prop: 'end_date',
-              label: '訖'
+              label: '訖',
+              type: 'date'
             }
           ]
         }
@@ -62,14 +77,22 @@ var editors = {
         title: '政黨',
         description: '這個屆期所有有席次的政黨',
         interface: {
-          type: 'checkbox-group'
+          type: 'checkbox-group',
+          source: {
+            id: 'party',
+            plural: 'parties'
+          }
         }
       },
       {
         title: '黨團、政團',
         description: '這個屆期所有有席次的黨團、政團',
         interface: {
-          type: 'checkbox-group'
+          type: 'checkbox-group',
+          source: {
+            id: 'caucus',
+            plural: 'caucuses'
+          }
         }
       }
     ]
@@ -102,6 +125,11 @@ export default {
         this.sections = editors[this.page.id].sections
       }
     }
+  },
+  components: {
+    EditorForm,
+    EditorTable,
+    EditorCheckboxGroup
   }
 }
 </script>
