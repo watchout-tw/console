@@ -2,7 +2,7 @@ import axios from 'axios'
 
 axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
-export function getPartyList (reqObj) {
+export function getSelectedFilterList (reqObj) {
   let reqUrl = `/console/lab/${reqObj.filterID}`
   return axios.get(reqUrl)
 }

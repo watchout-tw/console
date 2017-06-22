@@ -46,6 +46,10 @@ export default {
         this.$store.dispatch('updatePartyFilter', {
           filterID: this.filter.id
         })
+      } else if (this.filter.id === 'districts') { // if(this.filter.type === 'select') {
+        this.$store.dispatch('updateDistrictFilter', {
+          filterID: this.filter.id
+        })
       }
     },
     fetchSuggestions(queryString, callback) {

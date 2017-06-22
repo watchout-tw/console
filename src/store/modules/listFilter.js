@@ -3,7 +3,8 @@ import * as api from '../../util/api'
 
 const state = {
   nameOptions: [],
-  partyOptions: []
+  partyOptions: [],
+  districtOptions: []
 }
 
 const getters = {
@@ -16,6 +17,8 @@ const getters = {
       return state.nameOptions
     } else if (filterID === 'parties') {
       return state.partyOptions
+    } else if (filterID === 'districts') {
+      return state.districtOptions
     }
   }
 }
@@ -32,12 +35,23 @@ const actions = {
     })
   },
   updatePartyFilter ({ commit }, reqObj) {
-    api.getPartyList(reqObj).then(response => {
+    api.getSelectedFilterList(reqObj).then(response => {
       var options = response.data.rows.map(row => ({
         value: row.name,
         label: row.name
       }))
       commit(types.UPDATE_PARTY_FILTER, options)
+    }).catch(error => {
+      commit(types.FETCH_FAIL, error)
+    })
+  },
+  updateDistrictFilter ({ commit }, reqObj) {
+    api.getSelectedFilterList(reqObj).then(response => {
+      var options = response.data.rows.map(row => ({
+        value: row.name,
+        label: row.name
+      }))
+      commit(types.UPDATE_DISTRICT_FILTER, options)
     }).catch(error => {
       commit(types.FETCH_FAIL, error)
     })
@@ -50,8 +64,12 @@ const mutations = {
     state.nameOptions = data
   },
   [types.UPDATE_PARTY_FILTER] (state, data) {
-    console.log('party', data)
+    console.log('selectedFilter', data)
     state.partyOptions = data
+  },
+  [types.UPDATE_DISTRICT_FILTER] (state, data) {
+    console.log('selectedFilter', data)
+    state.districtOptions = data
   },
   [types.FETCH_FAIL] (state, error) {
     console.log(error)
