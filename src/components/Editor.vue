@@ -6,7 +6,7 @@
     <p>{{ section.description }}</p>
     <p>{{ section.interface.type }}</p>
     <editor-form v-if="section.interface.type == 'form'" :fields="section.interface.fields"></editor-form>
-    <editor-table v-if="section.interface.type == 'table'" :columns="section.interface.columns"></editor-table>
+    <editor-table v-if="section.interface.type == 'table'" :title="section.title" :columns="section.interface.columns"></editor-table>
     <editor-checkbox-group v-if="section.interface.type == 'checkbox-group'" :source="section.interface.source"></editor-checkbox-group>
   </section>
 </div>
@@ -80,7 +80,7 @@ var editors = {
           type: 'checkbox-group',
           source: {
             id: 'party',
-            plural: 'parties'
+            api: 'parties'
           }
         }
       },
@@ -91,7 +91,7 @@ var editors = {
           type: 'checkbox-group',
           source: {
             id: 'caucus',
-            plural: 'caucuses'
+            api: 'caucuses'
           }
         }
       }
@@ -133,3 +133,9 @@ export default {
   }
 }
 </script>
+
+<style>
+.editor {
+  margin: 0;
+}
+</style>
