@@ -35,13 +35,11 @@ export default {
   },
   methods: {
     addRow() {
-      console.log(this.columns)
-      var row = {}
-      for(let column of this.columns) {
-        row[column.prop] = undefined
-      }
-      console.log(row)
-      this.rows.push(row)
+      this.rows.push(
+        Object.assign(
+          ...this.columns.map(column => ({[column.prop]: undefined}))
+        )
+      )
     }
   }
 }
