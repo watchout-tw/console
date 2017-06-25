@@ -6,7 +6,7 @@ import filterConfig from '../../components/filters'
 var filterOptions = {}
 for (let filter in filterConfig) {
   var filterID = filterConfig[filter].api
-  filterOptions[filterID] = filterID + 'Options'
+  filterOptions[filterID] = filterID + '_options'
 }
 
 // Compose state = { xxxOptions: [], yyyOptions: [] }
@@ -18,7 +18,7 @@ const state = stateBuilder
 
 const getters = {
   options: state => (filterID) => {
-    return state[filterID + 'Options']
+    return state[filterID + '_options']
   }
 }
 

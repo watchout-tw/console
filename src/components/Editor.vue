@@ -1,14 +1,15 @@
 <template>
 <div class="editor">
-  {{ $route.params.id }}
+  {{ $route.fullPath }}
   <section v-for="section in sections" :key="section.title">
     <h3>{{ section.title }}</h3>
     <p>{{ section.description }}</p>
-    <p>{{ section.interface.type }}</p>
     <editor-form v-if="section.interface.type == 'form'" :fields="section.interface.fields"></editor-form>
     <editor-table v-if="section.interface.type == 'table'" :title="section.title" :columns="section.interface.columns"></editor-table>
     <editor-checkbox-group v-if="section.interface.type == 'checkbox-group'" :source="section.interface.source"></editor-checkbox-group>
   </section>
+  <el-button type="primary">儲存</el-button>
+  <el-button>取消</el-button>
 </div>
 </template>
 
@@ -107,7 +108,6 @@ export default {
     }
   },
   mounted() {
-    console.log('editor:', this.page.id)
     this.update()
   },
   watch: {
@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     update() {
-      console.log(this.page)
+      console.log('Editor update:', this.page)
       if(editors[this.page.id]) {
         this.sections = editors[this.page.id].sections
       }

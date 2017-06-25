@@ -1,6 +1,7 @@
 export default {
   name: {
     id: 'name',
+    api: '[name]',
     label: '名稱',
     type: 'autocomplete'
   },
@@ -14,6 +15,12 @@ export default {
     id: 'party',
     api: 'parties',
     label: '政黨',
+    type: 'select'
+  },
+  caucus: {
+    id: 'caucus',
+    api: 'caucuses',
+    label: '黨團、政團',
     type: 'select'
   },
   zone: {

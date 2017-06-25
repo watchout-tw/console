@@ -1,6 +1,6 @@
 <template>
 <div class="editor-table">
-  <el-button type="primary" @click="addRow">新增{{ title }}</el-button>
+  <el-button @click="addRow">新增{{ title }}</el-button>
   <el-table :data="rows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
