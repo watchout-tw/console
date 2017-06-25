@@ -1,29 +1,29 @@
 import * as types from '../mutation-types'
 import * as api from '../../util/api'
-import listFilters from '../../config/listFilters'
+import editorChecklists from '../../config/editorChecklists'
 
-// Compose filterOptions = { xxx: xxxOptions, yyy: yyyOptions}
-var filterOptions = {}
-for (let filter in listFilters) {
-  var filterID = listFilters[filter].id
-  filterOptions[filterID] = filterID + '_options'
+// Compose checklistOptions = { xxx: xxxOptions, yyy: yyyOptions}
+var checklistOptions = {}
+for (let checklist in editorChecklists) {
+  var checklistID = editorChecklists[checklist].id
+  checklistOptions[checklistID] = checklistID + '_options'
 }
 
 // Compose state = { xxxOptions: [], yyyOptions: [] }
 var stateBuilder = {}
-for (let options in filterOptions) {
-  stateBuilder[filterOptions[options]] = []
+for (let options in checklistOptions) {
+  stateBuilder[checklistOptions[options]] = []
 }
 const state = stateBuilder
 
 const getters = {
-  filterOptions: state => (filterID) => {
-    return state[filterID + '_options']
+  checklistOptions: state => (checklistID) => {
+    return state[checklistID + '_options']
   }
 }
 
 const actions = {
-  updateFilter ({ commit }, reqObj) {
+  updateChecklist ({ commit }, reqObj) {
     api.getDirectory(reqObj).then(response => {
       var respObj = {
         data: response.data.rows.map(row => {
@@ -32,10 +32,10 @@ const actions = {
             : [row.name, row.name]
           return { value, label }
         }),
-        filterID: reqObj.filterID,
+        checklistID: reqObj.checklistID,
         directoryID: reqObj.directoryID
       }
-      commit(types.UPDATE_FILTER, respObj)
+      commit(types.UPDATE_CHECKLIST, respObj)
     }).catch(error => {
       commit(types.FETCH_FAIL, error)
     })
@@ -43,9 +43,9 @@ const actions = {
 }
 
 const mutations = {
-  [types.UPDATE_FILTER] (state, mutateObj) {
-    console.log('mutation: UPDATE_FILTER', mutateObj)
-    state[filterOptions[mutateObj.filterID]] = mutateObj.data
+  [types.UPDATE_CHECKLIST] (state, mutateObj) {
+    console.log('mutation: UPDATE_CHECKLIST', mutateObj)
+    state[checklistOptions[mutateObj.checklistID]] = mutateObj.data
   },
   [types.FETCH_FAIL] (state, error) {
     console.log(error)

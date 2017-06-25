@@ -4,6 +4,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 import list from './modules/list'
 import listFilter from './modules/listFilter'
+import editorChecklist from './modules/editorChecklist'
 import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
@@ -15,7 +16,8 @@ export default new Vuex.Store({
   getters,
   modules: {
     list,
-    listFilter
+    listFilter,
+    editorChecklist
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

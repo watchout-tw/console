@@ -15,13 +15,13 @@ var routes = [
   },
   {
     path: '/terms/:id',
-    name: 'term-editor',
+    name: 'editor-term',
     component: Editor,
     props: {
       page: {
-        id: 'term-editor',
-        name: 'term-editor',
-        title: 'Editor - Term'
+        id: 'editor-term',
+        name: 'editor-term',
+        title: '屆期編輯器'
       }
     }
   }
@@ -33,11 +33,7 @@ for(let group of menu) {
       name: page.id,
       component: List,
       props: {
-        page: {
-          id: page.id,
-          name: page.name,
-          title: page.title
-        }
+        page: page
       }
     })
   }

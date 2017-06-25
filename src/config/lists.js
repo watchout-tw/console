@@ -1,13 +1,9 @@
-let repHistoryFormatter = (row, col) => {
-  return row.history.map((event) => {
-    return JSON.stringify(event)
-  }).join(';')
-}
+import formatter from '@/config/formatters'
 
 export default {
   terms: {
     filters: [],
-    paged: true,
+    paged: false,
     columns: [
       {
         prop: 'index',
@@ -15,15 +11,18 @@ export default {
       },
       {
         prop: 'start_date',
-        label: '起'
+        label: '起',
+        formatter: formatter.date
       },
       {
         prop: 'end_date',
-        label: '訖'
+        label: '訖',
+        formatter: formatter.date
       },
       {
         prop: 'sessions',
-        label: '會期' // Array of 該屆所有的會期 from Term_Session
+        label: '會期', // Array of 該屆所有的會期 from Term_Session
+        formatter: formatter.sessions
 /*
 Array of objects
 {
@@ -36,7 +35,8 @@ Array of objects
       },
       {
         prop: 'parties',
-        label: '政黨' // Array of 該屆所有有席次的政黨 from Term_Party
+        label: '政黨', // Array of 該屆所有有席次的政黨 from Term_Party
+        formatter: formatter.parties
 /*
 Array of objects
 {
@@ -49,7 +49,8 @@ Array of objects
       },
       {
         prop: 'caucuses',
-        label: '黨團或政團' // Array of 該屆所有有席次的政黨 from Term_Caucus
+        label: '黨團或政團', // Array of 該屆所有有席次的政黨 from Term_Caucus
+        formatter: formatter.caucuses
 /*
 Array of objects
 {
@@ -92,7 +93,7 @@ Array of objects
       {
         prop: 'history', // Array of 該立委所有的任職歷史 from Rep_Party & Rep_Term...
         label: '任職歷史',
-        formatter: repHistoryFormatter
+        formatter: formatter.repHistory
 /*
 Array of objects:
 {
@@ -138,7 +139,7 @@ Array of objects:
     ]
   },
   term_parties: {
-    filters: ['term', 'name'],
+    filters: ['term', 'party'],
     columns: [
       {
         prop: 'term_index',
@@ -163,7 +164,7 @@ Array of objects:
     ]
   },
   term_caucuses: {
-    filters: ['term', 'name'],
+    filters: ['term', 'caucus'],
     columns: [
       {
         prop: 'term_index',

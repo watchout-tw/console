@@ -4,24 +4,25 @@
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
   </div>
-  <div class="filters" v-else>no-filter</div>
+  <div class="filters" v-else>無法過濾</div>
   <el-table :data="rows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
   </el-table>
-  <el-pagination layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>
+  <el-pagination v-if="paged" layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>
 </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
-import Filters from './filters'
-import Lists from './lists'
+import lists from '@/config/lists'
+import listFilters from '@/config/listFilters'
 import ListFilter from '@/components/ListFilter'
 
 export default {
   props: ['page'],
   data() {
     return {
+      paged: false,
       filters: [],
       columns: []
     }
@@ -34,7 +35,6 @@ export default {
     })
   },
   mounted() {
-    console.log('list:', this.page.id)
     this.update()
   },
   watch: {
@@ -47,22 +47,19 @@ export default {
   },
   methods: {
     update() {
+      console.log('List:', this.page.id)
+      this.paged = lists[this.page.id].paged
+
       // update filters
-      if(Lists[this.page.id].filters) {
-        this.filters = Lists[this.page.id].filters.map(function(filter) {
-          return Filters[filter]
-        })
-      } else {
-        this.filters = []
-      }
+      this.filters = lists[this.page.id].filters.map(function(filterID) {
+        return listFilters[filterID]
+      })
+
       // update columns
-      if(Lists[this.page.id].columns) {
-        this.columns = Lists[this.page.id].columns
-      } else {
-        this.columns = []
-      }
+      this.columns = lists[this.page.id].columns
+
       // dispatch action to get data
-      if (Lists[this.page.id].paged) {
+      if (lists[this.page.id].paged) {
         this.$store.dispatch('updateList', {
           pageID: this.page.id,
           page: this.paging.page

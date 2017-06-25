@@ -3,7 +3,7 @@
   <el-input v-if="filter.type == 'input'" :placeholder="filter.label" v-model="value"></el-input>
   <el-autocomplete v-if="filter.type == 'autocomplete'" :placeholder="filter.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
   <el-select v-if="filter.type == 'select'" :placeholder="filter.label" v-model="value">
-    <el-option v-for="item in options(filter.api)" :label="item.label" :value="item.value" :key="item.value"></el-option>
+    <el-option v-for="item in filterOptions(filter.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      options: 'options'
+      filterOptions: 'filterOptions'
     })
   },
   mounted() {
@@ -33,22 +33,15 @@ export default {
   },
   methods: {
     update() {
-      // 拿 Filter 內容
-      if (this.filter.id === 'name') {
-        this.$store.dispatch('updateNameFilter', {
-          pageID: this.page.id,
-          filterID: this.filter.api
-        })
-      } else { // if(this.filter.type === 'select') {
-        this.$store.dispatch('updateSelectedFilter', {
-          filterID: this.filter.api
-        })
-      }
+      this.$store.dispatch('updateFilter', {
+        filterID: this.filter.id,
+        directoryID: this.filter.id === 'name' ? this.page.directory : this.filter.directory
+      })
     },
     fetchSuggestions(queryString, callback) {
       callback(queryString
-        ? this.options(this.filter.api).filter(option => option.value.indexOf(queryString) > -1)
-        : this.options(this.filter.api)
+        ? this.filterOptions(this.filter.id).filter(option => option.value.indexOf(queryString) > -1)
+        : this.filterOptions(this.filter.id)
       )
     },
     handleSelect() {}
