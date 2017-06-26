@@ -1,6 +1,6 @@
 <template>
 <div class="list">
-  <div class="title d-flex justify-content-between align-items-center"><h1 class="small">{{ page.title }}</h1><el-button type="primary"><router-link to="/terms/create">新增{{ page.name }}</router-link></el-button></div>
+  <div class="title d-flex justify-content-between align-items-center"><h1 class="small">{{ page.title }}</h1><el-button type="primary"><router-link :to="{ name: page.createRouteName }">新增{{ page.name }}</router-link></el-button></div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
   </div>

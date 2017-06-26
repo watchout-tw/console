@@ -12,18 +12,6 @@ var routes = [
     path: '/',
     name: 'hello',
     component: Hello
-  },
-  {
-    path: '/terms/:id',
-    name: 'editor-term',
-    component: Editor,
-    props: {
-      page: {
-        id: 'editor-term',
-        name: 'editor-term',
-        title: '屆期編輯器'
-      }
-    }
   }
 ]
 for(let group of menu) {
@@ -34,6 +22,18 @@ for(let group of menu) {
       component: List,
       props: {
         page: page
+      }
+    })
+    routes.push({
+      path: '/' + page.id + '/create',
+      name: page.createRouteName,
+      component: Editor,
+      props: {
+        page: {
+          id: 'editor-term',
+          name: 'editor-term',
+          title: '編輯器'
+        }
       }
     })
   }
