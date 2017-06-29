@@ -90,7 +90,7 @@ Array of objects
       {
         prop: 'name',
         label: '全名',
-        width: 192
+        width: columnWidth(10)
       },
       {
         prop: 'history', // Array of 該立委所有的任職歷史 from Rep_Party & Rep_Term...
