@@ -23,7 +23,10 @@ export default {
               label: '終止日',
               type: 'date'
             }
-          ]
+          ],
+          options: {
+            labelWidth: '4rem'
+          }
         }
       },
       {

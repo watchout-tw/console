@@ -1,8 +1,8 @@
 <template>
 <div class="list-filter">
-  <el-input v-if="filter.type == 'input'" :placeholder="filter.label" v-model="value"></el-input>
-  <el-autocomplete v-if="filter.type == 'autocomplete'" :placeholder="filter.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
-  <el-select v-if="filter.type == 'select'" :placeholder="filter.label" v-model="value">
+  <el-input v-if="is('input')" :placeholder="filter.label" v-model="value"></el-input>
+  <el-autocomplete v-if="is('autocomplete')" :placeholder="filter.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
+  <el-select v-if="is('select')" :placeholder="filter.label" v-model="value">
     <el-option v-for="item in filterOptions(filter.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>
@@ -32,6 +32,9 @@ export default {
     }
   },
   methods: {
+    is(type) {
+      return this.filter.type === type
+    },
     update() {
       this.$store.dispatch('updateFilter', {
         filterID: this.filter.id,

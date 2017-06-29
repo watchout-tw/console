@@ -1,6 +1,6 @@
 <template>
 <div class="editor-table">
-  <el-button @click="addRow">新增{{ title }}</el-button>
+  <el-button class="add" @click="addRow">新增{{ title }}</el-button>
   <el-table :data="rows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
@@ -31,3 +31,16 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.editor-table {
+  position: relative;
+  > .add {
+    position: absolute;
+    right: 0;
+    margin-top: -1rem;
+    transform: translateY(-100%);
+  }
+}
+
+</style>

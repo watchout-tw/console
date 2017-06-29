@@ -1,12 +1,12 @@
 <template>
 <div class="editor">
   <div class="title"><h1 class="small">{{ page.routes.edit.title }}</h1></div>
-  <section v-for="section in sections" :key="section.title">
+  <section v-for="(section, index) in sections" :key="section.title">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
-    <editor-form v-if="section.interface.type == 'form'" :fields="section.interface.fields" :model="model"></editor-form>
-    <editor-table v-if="section.interface.type == 'table'" :title="section.title" :columns="section.interface.columns" :rows="model[section.id]"></editor-table>
-    <editor-checklist v-if="section.interface.type == 'checklist'" :page="page" :interface="section.interface" :model.sync="model[section.id]"></editor-checklist>
+    <editor-form v-if="sectionIs(index, 'form')" :fields="section.interface.fields" :options="section.interface.options" :model="model"></editor-form>
+    <editor-checklist v-if="sectionIs(index, 'checklist')" :interface="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
+    <editor-table v-if="sectionIs(index, 'table')" :title="section.title" :columns="section.interface.columns" :rows="model[section.id]"></editor-table>
   </section>
   <el-button type="primary">儲存</el-button>
   <el-button>取消</el-button>
@@ -39,6 +39,9 @@ export default {
     }
   },
   methods: {
+    sectionIs(index, type) {
+      return this.sections[index].interface.type === type
+    },
     update() {
       console.log('Editor:', this.page.id)
       this.sections = editors[this.page.editor].sections.map(section => {
@@ -81,6 +84,11 @@ export default {
   margin: 1rem;
   > .title {
     margin: 1rem 0;
+  }
+  > section {
+    > .title {
+      margin: 0.5rem 0;
+    }
   }
 }
 </style>
