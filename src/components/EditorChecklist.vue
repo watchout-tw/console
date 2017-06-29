@@ -52,3 +52,12 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.el-checkbox + .el-checkbox {
+  margin-left: 0;
+}
+.el-checkbox {
+  margin-right: 1rem;
+}
+</style>
