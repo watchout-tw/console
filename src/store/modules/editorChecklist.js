@@ -1,6 +1,7 @@
 import * as types from '../mutation-types'
 import * as api from '../../util/api'
-import editorChecklists from '../../config/editorChecklists'
+import directories from '@/config/directories'
+import editorChecklists from '@/config/editorChecklists'
 
 // Compose checklistOptions = { xxx: xxxOptions, yyy: yyyOptions}
 var checklistOptions = {}
@@ -25,12 +26,15 @@ const getters = {
 const actions = {
   updateChecklist ({ commit }, reqObj) {
     api.getDirectory(reqObj).then(response => {
+      var valueCol = directories[reqObj.directoryID].value
+      var labelCol = directories[reqObj.directoryID].label
+      console.log('updateChecklist', response.data.rows, valueCol, labelCol)
       var respObj = {
         data: response.data.rows.map(row => {
-          let [value, label] = reqObj.directoryID === 'term'
-            ? [row.index, row.index]
-            : [row.name, row.name]
-          return { value, label }
+          return {
+            value: row[valueCol],
+            label: row[labelCol]
+          }
         }),
         checklistID: reqObj.checklistID,
         directoryID: reqObj.directoryID

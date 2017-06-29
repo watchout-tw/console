@@ -1,7 +1,7 @@
 <template>
 <div class="editor-checklist">
-  <el-checkbox-group v-model="values">
-    <el-checkbox v-for="item in checklistOptions(interface.id)" :label="item.label" :key="item.value"></el-checkbox>
+  <el-checkbox-group v-model="tmp" @change="handleChange">
+    <el-checkbox v-for="item in checklistOptions(interface.id)" :label="item.value" :key="item.value">{{ item.label }}</el-checkbox>
   </el-checkbox-group>
 </div>
 </template>
@@ -10,10 +10,11 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['page', 'interface'],
+  props: ['page', 'interface', 'model'],
   data() {
     return {
-      values: []
+      initialized: false,
+      tmp: []
     }
   },
   computed: {
@@ -27,6 +28,14 @@ export default {
   watch: {
     'page.id'() {
       this.update()
+    },
+    'model'() {
+      if(!this.initialized) {
+        for(let item of this.model) {
+          this.tmp.push(item.id)
+        }
+        this.initialized = true
+      }
     }
   },
   methods: {
@@ -35,6 +44,10 @@ export default {
         checklistID: this.interface.id,
         directoryID: this.interface.directory
       })
+      this.initialized = false
+    },
+    handleChange(now) {
+      this.$emit('update:model', now.map(item => ({id: item})))
     }
   }
 }

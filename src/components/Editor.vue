@@ -6,7 +6,7 @@
     <p>{{ section.description }}</p>
     <editor-form v-if="section.interface.type == 'form'" :fields="section.interface.fields" :model="model"></editor-form>
     <editor-table v-if="section.interface.type == 'table'" :title="section.title" :columns="section.interface.columns" :rows="model[section.id]"></editor-table>
-    <editor-checklist v-if="section.interface.type == 'checklist'" :page="page" :interface="section.interface"></editor-checklist>
+    <editor-checklist v-if="section.interface.type == 'checklist'" :page="page" :interface="section.interface" :model.sync="model[section.id]"></editor-checklist>
   </section>
   <el-button type="primary">儲存</el-button>
   <el-button>取消</el-button>
