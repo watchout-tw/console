@@ -1,4 +1,5 @@
 import formatter from '@/config/formatters'
+import { columnWidth } from '@/util/element'
 
 export default {
   terms: {
@@ -7,7 +8,8 @@ export default {
     columns: [
       {
         prop: 'index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'start_date',
@@ -118,7 +120,8 @@ Array of objects:
     columns: [
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'district_name', // from District
@@ -130,7 +133,8 @@ Array of objects:
       },
       {
         prop: 'district_index',
-        label: '編號'
+        label: '編號',
+        width: columnWidth(2)
       },
       {
         prop: 'neighborhoods',
@@ -143,7 +147,8 @@ Array of objects:
     columns: [
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'name', // from Party
@@ -168,7 +173,8 @@ Array of objects:
     columns: [
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'name',
@@ -197,7 +203,8 @@ Array of objects:
       },
       {
         prop: 'index',
-        label: '排序'
+        label: '排序',
+        width: columnWidth(2)
       },
       {
         prop: 'image',
@@ -218,7 +225,8 @@ Array of objects:
       },
       {
         prop: 'index',
-        label: '排序'
+        label: '排序',
+        width: columnWidth(2)
       },
       {
         prop: 'image',
@@ -289,7 +297,8 @@ Array of objects:
       },
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'rep_name',
@@ -318,7 +327,8 @@ Array of objects:
       },
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'principle_sponsor_type',
@@ -362,7 +372,8 @@ Array of objects:
       },
       {
         prop: 'term_index',
-        label: '屆期'
+        label: '屆期',
+        width: columnWidth(2)
       },
       {
         prop: 'date',
