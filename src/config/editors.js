@@ -2,13 +2,14 @@ export default {
   term: {
     sections: [
       {
+        id: 'base',
         title: '屆期',
         description: '這個屆期的基本資料',
         interface: {
           type: 'form',
           fields: [
             {
-              id: 'term',
+              id: 'index',
               label: '屆期',
               type: 'number'
             },
@@ -26,6 +27,7 @@ export default {
         }
       },
       {
+        id: 'sessions',
         title: '會期',
         description: '這個屆期的所有會期、臨時會會期',
         interface: {
@@ -55,6 +57,7 @@ export default {
         }
       },
       {
+        id: 'parties',
         title: '政黨',
         description: '這個屆期所有有席次的政黨',
         interface: {
@@ -63,11 +66,31 @@ export default {
         }
       },
       {
+        id: 'caucuses',
         title: '黨團、政團',
         description: '這個屆期所有有席次的黨團、政團',
         interface: {
           type: 'checklist',
           id: 'caucus'
+        }
+      }
+    ]
+  },
+  term_district: {
+    sections: [
+      {
+        id: 'base',
+        title: '選區',
+        description: '屆期選區基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'index',
+              label: '屆期',
+              type: 'number'
+            }
+          ]
         }
       }
     ]

@@ -5,7 +5,7 @@
     <el-submenu v-for="(group, groupIndex) in menu" :index="group.id" :key="group.id">
       <template slot="title">{{ group.name }}</template>
       <el-menu-item v-for="(page, index) of group.pages" :index="page.id" :key="page.id">
-        <router-link :to="{ name: page.id }">{{ page.title }}</router-link>
+        <router-link :to="{ name: page.routes.list.name }">{{ page.title }}</router-link>
       </el-menu-item>
     </el-submenu>
   </el-menu>

@@ -1,6 +1,7 @@
 import * as types from '../mutation-types'
 import * as api from '../../util/api'
-import listFilters from '../../config/listFilters'
+import directories from '@/config/directories'
+import listFilters from '@/config/listFilters'
 
 // Compose filterOptions = { xxx: xxxOptions, yyy: yyyOptions}
 var filterOptions = {}
@@ -25,16 +26,20 @@ const getters = {
 const actions = {
   updateFilter ({ commit }, reqObj) {
     api.getDirectory(reqObj).then(response => {
+      var valueCol = directories[reqObj.directoryID].value
+      var labelCol = directories[reqObj.directoryID].label
+      console.log('updateFilter', response.data.rows, valueCol, labelCol)
       var respObj = {
         data: response.data.rows.map(row => {
-          let [value, label] = reqObj.directoryID === 'term'
-            ? [row.index, row.index]
-            : [row.name, row.name]
-          return { value, label }
+          return {
+            value: row[valueCol],
+            label: row[labelCol]
+          }
         }),
         filterID: reqObj.filterID,
         directoryID: reqObj.directoryID
       }
+      console.log(respObj)
       commit(types.UPDATE_FILTER, respObj)
     }).catch(error => {
       commit(types.FETCH_FAIL, error)

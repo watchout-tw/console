@@ -1,6 +1,6 @@
 <template>
 <div class="hello">
-  <h1 class="small">Hello.</h1>
+  <div class="title"><h1 class="small">Hello.</h1></div>
 </div>
 </template>
 
@@ -17,6 +17,9 @@ export default {
 
 <style lang="scss">
 .hello {
-  height: 1600px;
+  margin: 0 1rem;
+  > .title {
+    margin: 1rem 0;
+  }
 }
 </style>

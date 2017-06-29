@@ -1,10 +1,13 @@
 <template>
 <div class="list">
-  <div class="title d-flex justify-content-between align-items-center"><h1 class="small">{{ page.title }}</h1><el-button type="primary"><router-link :to="{ name: page.createRouteName }">新增{{ page.name }}</router-link></el-button></div>
+  <div class="title d-flex justify-content-between align-items-center">
+    <h1 class="small">{{ page.routes.list.title }}</h1>
+    <el-button type="primary"><router-link :to="{ name: page.routes.edit.name, params: { id: 'create' } }">新增{{ page.name }}</router-link></el-button>
+  </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
   </div>
-  <div class="filters" v-else>無法過濾</div>
+  <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="rows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
   </el-table>

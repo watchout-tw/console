@@ -18,22 +18,18 @@ for(let group of menu) {
   for(let page of group.pages) {
     routes.push({
       path: '/' + page.id,
-      name: page.id,
+      name: page.routes.list.name,
       component: List,
       props: {
-        page: page
+        page
       }
     })
     routes.push({
-      path: '/' + page.id + '/create',
-      name: page.createRouteName,
+      path: '/' + page.id + '/:id',
+      name: page.routes.edit.name,
       component: Editor,
       props: {
-        page: {
-          id: 'editor-term',
-          name: 'editor-term',
-          title: '編輯器'
-        }
+        page
       }
     })
   }
