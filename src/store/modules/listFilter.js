@@ -39,7 +39,6 @@ const actions = {
         filterID: reqObj.filterID,
         directoryID: reqObj.directoryID
       }
-      console.log(respObj)
       commit(types.UPDATE_FILTER, respObj)
     }).catch(error => {
       commit(types.FETCH_FAIL, error)

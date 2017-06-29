@@ -52,7 +52,6 @@ export default {
       let key = this.$route.params.id
       if(key === 'create') {
         for(let section of this.sections) {
-          console.log(section.id)
           if(section.id === 'base') {
             for(let field of section.interface.fields) {
               this.$set(this.model, field.id, undefined)
