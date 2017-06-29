@@ -90,4 +90,8 @@ export default {
     margin: 1rem 0;
   }
 }
+.el-pagination {
+  margin: 1rem 0;
+  padding: 0;
+}
 </style>
