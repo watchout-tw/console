@@ -1,3 +1,5 @@
+import { labelWidth } from '@/util/element'
+
 export default {
   term: {
     sections: [
@@ -25,7 +27,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: '4rem'
+            labelWidth: labelWidth(4)
           }
         }
       },
