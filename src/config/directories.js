@@ -63,7 +63,11 @@ export default {
     id: 'rep',
     api: 'reps',
     value: 'id',
-    label: 'name'
+    label: 'name',
+    paging: {
+      page: true,
+      all: true
+    }
   },
   sponsor_type: {
     id: 'sponsor_type',
