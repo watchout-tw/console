@@ -37,6 +37,7 @@ export default {
         description: '這個屆期的所有會期、臨時會會期',
         interface: {
           type: 'table',
+          name: '會期',
           columns: [
             {
               prop: 'session_index',

@@ -1,7 +1,7 @@
 <template>
 <div class="editor-form">
-  <el-form :label-width="options.labelWidth" label-position="left">
-    <el-form-item v-for="field in fields" :key="field.id" :label="field.label">
+  <el-form :label-width="config.options.labelWidth" label-position="left">
+    <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label">
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
       <el-date-picker v-if="fieldIs(field, 'date')" v-model="model[field.id]"></el-date-picker>
     </el-form-item>
@@ -11,7 +11,7 @@
 
 <script>
 export default {
-  props: ['fields', 'options', 'model'],
+  props: ['config', 'model'],
   methods: {
     fieldIs(field, type) {
       return field.type === type

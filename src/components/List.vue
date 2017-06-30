@@ -5,7 +5,7 @@
     <el-button type="primary"><router-link :to="{ name: page.routes.edit.name, params: { id: 'create' } }">新增{{ page.name }}</router-link></el-button>
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
-    <list-filter v-for="filter in filters" :key="filter.id" :page="page" :filter="filter"></list-filter>
+    <list-filter v-for="filter in filters" :key="filter.id" :page="page" :config="filter"></list-filter>
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="rows">

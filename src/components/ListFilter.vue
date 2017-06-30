@@ -1,9 +1,9 @@
 <template>
 <div class="list-filter">
-  <el-input v-if="is('input')" :placeholder="filter.label" v-model="value"></el-input>
-  <el-autocomplete v-if="is('autocomplete')" :placeholder="filter.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
-  <el-select v-if="is('select')" :placeholder="filter.label" v-model="value">
-    <el-option v-for="item in filterOptions(filter.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
+  <el-input v-if="is('input')" :placeholder="config.label" v-model="value"></el-input>
+  <el-autocomplete v-if="is('autocomplete')" :placeholder="config.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
+  <el-select v-if="is('select')" :placeholder="config.label" v-model="value">
+    <el-option v-for="item in filterOptions(config.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>
 </template>
@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['page', 'filter'],
+  props: ['page', 'config'],
   data() {
     return {
       value: undefined
@@ -33,18 +33,18 @@ export default {
   },
   methods: {
     is(type) {
-      return this.filter.type === type
+      return this.config.type === type
     },
     update() {
       this.$store.dispatch('updateFilter', {
-        filterID: this.filter.id,
-        directoryID: this.filter.id === 'name' ? this.page.directory : this.filter.directory
+        filterID: this.config.id,
+        directoryID: this.config.id === 'name' ? this.page.directory : this.config.directory
       })
     },
     fetchSuggestions(queryString, callback) {
       callback(queryString
-        ? this.filterOptions(this.filter.id).filter(option => option.value.indexOf(queryString) > -1)
-        : this.filterOptions(this.filter.id)
+        ? this.filterOptions(this.config.id).filter(option => option.value.indexOf(queryString) > -1)
+        : this.filterOptions(this.config.id)
       )
     },
     handleSelect() {}

@@ -4,9 +4,9 @@
   <section v-for="section in sections" :key="section.title">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
-    <editor-form v-if="sectionIs(section, 'form')" :fields="section.interface.fields" :options="section.interface.options" :model="model"></editor-form>
-    <editor-checklist v-if="sectionIs(section, 'checklist')" :interface="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
-    <editor-table v-if="sectionIs(section, 'table')" :title="section.title" :columns="section.interface.columns" :rows="model[section.id]"></editor-table>
+    <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model"></editor-form>
+    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows="model[section.id]"></editor-table>
+    <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
   </section>
   <el-button type="primary">儲存</el-button>
   <el-button>取消</el-button>
