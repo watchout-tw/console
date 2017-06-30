@@ -1,8 +1,8 @@
 <template>
 <div class="list-filter">
-  <el-input v-if="is('input')" :placeholder="config.label" v-model="value"></el-input>
-  <el-autocomplete v-if="is('autocomplete')" :placeholder="config.label" v-model="value" :fetch-suggestions="fetchSuggestions" @select="handleSelect"></el-autocomplete>
-  <el-select v-if="is('select')" :placeholder="config.label" v-model="value">
+  <el-input v-if="is('input')" :placeholder="config.label" v-model="tmp" @change="handleChange"></el-input>
+  <el-autocomplete v-if="is('autocomplete')" :placeholder="config.label" v-model="tmp" @change="handleChange" :fetch-suggestions="fetchSuggestions"></el-autocomplete>
+  <el-select v-if="is('select')" :placeholder="config.label" v-model="tmp" @change="handleChange">
     <el-option v-for="item in filterOptions(config.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>
@@ -12,10 +12,10 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['page', 'config'],
+  props: ['model', 'config', 'page'],
   data() {
     return {
-      value: undefined
+      tmp: undefined
     }
   },
   computed: {
@@ -36,10 +36,12 @@ export default {
       return this.config.type === type
     },
     update() {
-      this.$store.dispatch('updateFilter', {
-        filterID: this.config.id,
-        directoryID: this.config.id === 'name' ? this.page.directory : this.config.directory
-      })
+      if(this.config.type !== 'input') {
+        this.$store.dispatch('updateFilter', {
+          filterID: this.config.id,
+          directoryID: this.config.id === 'name' ? this.page.directory : this.config.directory
+        })
+      }
     },
     fetchSuggestions(queryString, callback) {
       callback(queryString
@@ -47,7 +49,9 @@ export default {
         : this.filterOptions(this.config.id)
       )
     },
-    handleSelect() {}
+    handleChange(now) {
+      this.$emit('update:value', this.tmp)
+    }
   }
 }
 </script>

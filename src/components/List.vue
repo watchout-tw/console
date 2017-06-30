@@ -5,7 +5,7 @@
     <el-button type="primary"><router-link :to="{ name: page.routes.edit.name, params: { id: 'create' } }">新增{{ page.name }}</router-link></el-button>
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
-    <list-filter v-for="filter in filters" :key="filter.id" :page="page" :config="filter"></list-filter>
+    <list-filter v-for="filter in filters" :key="filter.id" :value.sync="queryParameters[filter.id]" :config="filter" :page="page" ></list-filter>
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="rows">
@@ -25,9 +25,10 @@ export default {
   props: ['page'],
   data() {
     return {
-      paged: false,
       filters: [],
-      columns: []
+      columns: [],
+      queryParameters: {},
+      paged: false
     }
   },
   computed: {
@@ -46,6 +47,12 @@ export default {
     },
     'paging.page'() {
       this.update()
+    },
+    queryParameters: {
+      handler(now) {
+        console.log(now)
+      },
+      deep: true
     }
   },
   methods: {
@@ -53,8 +60,14 @@ export default {
       console.log('List:', this.page.id)
       this.paged = lists[this.page.id].paged
 
+      // construct query parameter
+      this.queryParameters = {}
+      lists[this.page.id].filters.forEach(filterID => {
+        this.$set(this.queryParameters, filterID, undefined)
+      })
+
       // update filters
-      this.filters = lists[this.page.id].filters.map(function(filterID) {
+      this.filters = lists[this.page.id].filters.map(filterID => {
         return listFilters[filterID]
       })
 
@@ -62,7 +75,7 @@ export default {
       this.columns = lists[this.page.id].columns
 
       // dispatch action to get data
-      if (lists[this.page.id].paged) {
+      if(this.paged) {
         this.$store.dispatch('updateList', {
           pageID: this.page.id,
           page: this.paging.page
