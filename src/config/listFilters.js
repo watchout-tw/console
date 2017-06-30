@@ -1,9 +1,8 @@
 export default {
   name: {
     id: 'name',
-    directory: undefined,
     label: '名稱',
-    type: 'autocomplete'
+    type: 'input'
   },
   term: {
     id: 'term',
