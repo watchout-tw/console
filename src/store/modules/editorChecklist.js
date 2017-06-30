@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import * as api from '../../util/api'
+import * as api from '@/util/api'
 import directories from '@/config/directories'
 import editorChecklists from '@/config/editorChecklists'
 

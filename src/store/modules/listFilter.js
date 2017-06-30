@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import * as api from '../../util/api'
+import * as api from '@/util/api'
 import directories from '@/config/directories'
 import listFilters from '@/config/listFilters'
 
@@ -28,7 +28,6 @@ const actions = {
     api.getDirectory(reqObj).then(response => {
       var valueCol = directories[reqObj.directoryID].value
       var labelCol = directories[reqObj.directoryID].label
-      console.log('updateFilter', response.data.rows, valueCol, labelCol)
       var respObj = {
         data: response.data.rows.map(row => {
           return {
@@ -48,7 +47,6 @@ const actions = {
 
 const mutations = {
   [types.UPDATE_FILTER] (state, mutateObj) {
-    console.log('mutation: UPDATE_FILTER', mutateObj)
     state[filterOptions[mutateObj.filterID]] = mutateObj.data
   },
   [types.FETCH_FAIL] (state, error) {
