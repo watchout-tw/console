@@ -27,14 +27,18 @@ export default {
     directory: 'zone',
     label: '區域',
     type: 'select',
-    feature: 'grouped'
+    feature: {
+      grouped: true
+    }
   },
   district: {
     id: 'district',
     directory: 'district',
     label: '選區',
     type: 'select',
-    feature: 'grouped'
+    feature: {
+      grouped: true
+    }
   },
   general_topic: {
     id: 'general_topic',
@@ -64,7 +68,10 @@ export default {
     id: 'rep',
     directory: 'rep',
     label: '立法委員',
-    type: 'autocomplete'
+    type: 'select',
+    feature: {
+      filterable: true
+    }
   },
   sponsor_type: {
     id: 'sponsor_type',
