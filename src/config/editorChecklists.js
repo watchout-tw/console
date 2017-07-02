@@ -6,5 +6,9 @@ export default {
   caucus: {
     id: 'caucus',
     directory: 'caucus'
+  },
+  district: {
+    id: 'district',
+    directory: 'district'
   }
 }

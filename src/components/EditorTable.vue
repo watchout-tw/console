@@ -4,11 +4,12 @@
   <el-table :data="rows">
     <el-table-column v-for="column in config.columns" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
+        <el-input v-if="columnIs(column, 'text')" size="small" v-model="scope.row[column.prop]"></el-input>
         <el-input-number v-if="columnIs(column, 'number')" size="small" v-model="scope.row[column.prop]"></el-input-number>
         <el-date-picker v-else-if="columnIs(column, 'date')" size="small" v-model="scope.row[column.prop]"></el-date-picker>
       </template>
     </el-table-column>
-    <el-table-column fixed="right" width="48">
+    <el-table-column width="48">
       <template scope="scope">
         <el-button type="text" size="small" icon="delete2"></el-button>
       </template>

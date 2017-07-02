@@ -79,22 +79,305 @@ export default {
           type: 'checklist',
           id: 'caucus'
         }
+      },
+      {
+        id: 'districts',
+        title: '選區',
+        description: '這個屆期的所有選區',
+        interface: {
+          type: 'checklist',
+          id: 'district'
+        }
       }
     ]
   },
-  term_district: {
+  district: {
     sections: [
       {
         id: 'base',
         title: '選區',
-        description: '屆期選區基本資料',
+        description: '選區基本資料',
         interface: {
           type: 'form',
           fields: [
             {
+              id: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              id: 'abbreviation',
+              label: '短名',
+              type: 'text'
+            },
+            {
+              id: 'zone_name',
+              label: '區域',
+              type: 'select',
+              directory: 'zone'
+            },
+            {
               id: 'index',
+              label: '編號',
+              type: 'number'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(3)
+          }
+        }
+      }
+    ]
+  },
+  party: {
+    sections: [
+      {
+        id: 'base',
+        title: '政黨',
+        description: '政黨基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              id: 'abbreviation',
+              label: '短名',
+              type: 'text'
+            },
+            {
+              id: 'emblem',
+              label: '代表徽章',
+              type: 'text'
+            },
+            {
+              id: 'color',
+              label: '代表色',
+              type: 'color'
+            },
+            {
+              id: 'basic_info',
+              label: '基本資訊',
+              type: 'textarea'
+            },
+            {
+              id: 'add_info',
+              label: '補充資訊',
+              type: 'textarea'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(5)
+          }
+        }
+      }
+    ]
+  },
+  caucus: {
+    sections: [
+      {
+        id: 'base',
+        title: '黨團或政團',
+        description: '黨團或政團基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              id: 'abbreviation',
+              label: '短名',
+              type: 'text'
+            },
+            {
+              id: 'emblem',
+              label: '代表徽章',
+              type: 'text'
+            },
+            {
+              id: 'color',
+              label: '代表色',
+              type: 'color'
+            },
+            {
+              id: 'basic_info',
+              label: '基本資訊',
+              type: 'textarea'
+            },
+            {
+              id: 'add_info',
+              label: '補充資訊',
+              type: 'textarea'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(5)
+          }
+        }
+      }
+    ]
+  },
+  rep: {
+    sections: [
+      {
+        id: 'base',
+        title: '委員',
+        description: '委員基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              id: 'birth_date',
+              label: '出生日期',
+              type: 'date'
+            },
+            {
+              id: 'gender',
+              label: '性別',
+              type: 'slider'
+            },
+            {
+              id: 'highest_edu_degree',
+              label: '最高學歷',
+              type: 'select',
+              directory: 'edu_degree'
+            },
+            {
+              id: 'edu_record',
+              label: '學歷',
+              type: 'textarea'
+            },
+            {
+              id: 'experience',
+              label: '經歷',
+              type: 'textarea'
+            },
+            {
+              id: 'policy_proposal',
+              label: '政見',
+              type: 'textarea'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(5)
+          }
+        }
+      },
+      {
+        id: 'contacts',
+        title: '實體聯絡資訊',
+        description: '委員的實體聯絡資訊',
+        interface: {
+          type: 'table',
+          name: '實體聯絡資訊',
+          columns: [
+            {
+              prop: 'name',
+              label: '名稱',
+              type: 'text'
+            },
+            {
+              prop: 'phone',
+              label: '電話',
+              type: 'text'
+            },
+            {
+              prop: 'fax',
+              label: '傳真',
+              type: 'text'
+            },
+            {
+              prop: 'address',
+              label: '地址',
+              type: 'text'
+            }
+          ]
+        }
+      },
+      {
+        id: 'party-history',
+        title: '政黨歷史',
+        description: '委員的政黨歷史紀錄',
+        interface: {
+          type: 'table',
+          name: '政黨歷史紀錄',
+          columns: [
+            {
+              prop: 'term_index',
               label: '屆期',
               type: 'number'
+            },
+            {
+              prop: 'party_id',
+              label: '政黨',
+              type: 'select',
+              directory: 'party'
+            },
+            {
+              prop: 'caucus_id',
+              label: '黨團或政團',
+              type: 'select',
+              directory: 'caucus'
+            }
+          ]
+        }
+      },
+      {
+        id: 'election-history',
+        title: '選任歷史',
+        description: '委員的選任歷史紀錄',
+        interface: {
+          type: 'table',
+          name: '選任歷史紀錄',
+          columns: [
+            {
+              prop: 'term_index',
+              label: '屆期',
+              type: 'number'
+            },
+            {
+              prop: 'change_date',
+              label: '變更日期',
+              type: 'date'
+            },
+            {
+              prop: 'change_type',
+              label: '變更類型',
+              type: 'select',
+              directory: 'rep_term_change_type'
+            },
+            {
+              prop: 'district',
+              label: '選區',
+              type: 'select',
+              directory: 'district'
+            },
+            {
+              prop: 'office',
+              label: '院內職務',
+              type: 'select',
+              directory: 'rep_term_office'
+            },
+            {
+              prop: 'office_phone',
+              label: '辦公室電話',
+              type: 'text'
+            },
+            {
+              prop: 'note',
+              label: '備註',
+              type: 'text'
             }
           ]
         }
