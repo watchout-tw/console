@@ -10,8 +10,13 @@
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="rows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
+    <el-table-column width="48">
+      <template scope="scope">
+        <router-link :to="editItemLink(scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
+      </template>
+    </el-table-column>
   </el-table>
-  <el-pagination v-if="paged" layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>
+  <el-pagination v-if="config.paged" layout="prev, pager, next" :current-page.sync="paging.page" :page-size="paging.pageSize" :total="totalRowCount"></el-pagination>
 </div>
 </template>
 
@@ -28,7 +33,7 @@ export default {
       filters: [],
       columns: [],
       queryParameters: {},
-      paged: false
+      config: undefined
     }
   },
   computed: {
@@ -38,7 +43,7 @@ export default {
       totalRowCount: 'totalRowCount'
     })
   },
-  mounted() {
+  beforeMount() {
     this.update()
   },
   watch: {
@@ -50,7 +55,7 @@ export default {
     },
     queryParameters: {
       handler(now) {
-        console.log(now)
+        console.log('query updated', now)
       },
       deep: true
     }
@@ -58,7 +63,8 @@ export default {
   methods: {
     update() {
       console.log('List:', this.page.id)
-      this.paged = lists[this.page.id].paged
+      this.config = lists[this.page.id]
+      this.config.key = this.config.key ? this.config.key : 'id'
 
       // construct query parameter
       this.queryParameters = {}
@@ -75,7 +81,7 @@ export default {
       this.columns = lists[this.page.id].columns
 
       // dispatch action to get data
-      if(this.paged) {
+      if(this.config.paged) {
         this.$store.dispatch('updateList', {
           pageID: this.page.id,
           page: this.paging.page
@@ -85,6 +91,9 @@ export default {
           pageID: this.page.id
         })
       }
+    },
+    editItemLink(row) {
+      return this.$route.fullPath + '/' + row[this.config.key]
     }
   },
   components: {
