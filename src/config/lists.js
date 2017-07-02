@@ -4,6 +4,7 @@ import { columnWidth } from '@/util/element'
 export default {
   terms: {
     filters: [],
+    key: 'index',
     paged: false,
     columns: [
       {
@@ -40,6 +41,7 @@ export default {
   },
   committees: {
     filters: ['name'],
+    key: 'name',
     paged: false,
     columns: [
       {
@@ -72,25 +74,24 @@ export default {
       }
     ]
   },
-  term_districts: {
-    filters: ['term', 'zone'],
-    paged: true,
+  districts: {
+    filters: ['name', 'zone'],
+    paged: false,
     columns: [
       {
-        prop: 'term_index',
-        label: '屆期',
-        width: columnWidth(2)
+        prop: 'name',
+        label: '全名'
       },
       {
-        prop: 'district_name',
-        label: '選區'
+        prop: 'abbreviation',
+        label: '短名'
       },
       {
-        prop: 'district_zone_name',
+        prop: 'zone_name',
         label: '區域'
       },
       {
-        prop: 'district_index',
+        prop: 'index',
         label: '編號',
         width: columnWidth(2)
       },
@@ -100,14 +101,10 @@ export default {
       }
     ]
   },
-  term_parties: {
-    filters: ['term', 'party'],
+  parties: {
+    filters: ['name'],
+    paged: false,
     columns: [
-      {
-        prop: 'term_index',
-        label: '屆期',
-        width: columnWidth(2)
-      },
       {
         prop: 'name',
         label: '全名'
@@ -126,14 +123,10 @@ export default {
       }
     ]
   },
-  term_caucuses: {
-    filters: ['term', 'caucus'],
+  caucuses: {
+    filters: ['name'],
+    paged: false,
     columns: [
-      {
-        prop: 'term_index',
-        label: '屆期',
-        width: columnWidth(2)
-      },
       {
         prop: 'name',
         label: '全名'

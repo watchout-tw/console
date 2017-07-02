@@ -25,23 +25,23 @@ var menu = [
         title: '委員'
       },
       {
-        id: 'term_districts',
-        directory: 'term_district',
-        editor: 'term_district',
+        id: 'districts',
+        directory: 'district',
+        editor: 'district',
         name: '選區',
         title: '選區'
       },
       {
-        id: 'term_parties',
-        directory: 'term_party',
-        editor: 'term_party',
+        id: 'parties',
+        directory: 'party',
+        editor: 'party',
         name: '政黨',
         title: '政黨'
       },
       {
-        id: 'term_caucuses',
-        directory: 'term_caucus',
-        editor: 'term_caucus',
+        id: 'caucuses',
+        directory: 'caucus',
+        editor: 'caucus',
         name: '黨團或政團',
         title: '黨團、政團'
       }
