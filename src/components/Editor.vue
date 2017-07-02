@@ -9,7 +9,7 @@
     <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
   </section>
   <el-button type="primary">儲存</el-button>
-  <el-button>取消</el-button>
+  <el-button @click="goBack()">取消</el-button>
 </div>
 </template>
 
@@ -69,6 +69,9 @@ export default {
           this.model = response.data.rows[key - 1]
         })
       }
+    },
+    goBack() {
+      history.back()
     }
   },
   components: {
