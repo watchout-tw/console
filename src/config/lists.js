@@ -15,11 +15,13 @@ export default {
       {
         prop: 'start_date',
         label: '起',
+        width: columnWidth(4),
         formatter: formatter.date
       },
       {
         prop: 'end_date',
         label: '訖',
+        width: columnWidth(4),
         formatter: formatter.date
       },
       {
