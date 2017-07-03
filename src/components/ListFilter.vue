@@ -2,7 +2,7 @@
 <div class="list-filter">
   <el-input v-if="is('input')" :placeholder="config.label" v-model="tmp" @change="handleChange"></el-input>
   <el-autocomplete v-if="is('autocomplete')" :placeholder="config.label" v-model="tmp" @change="handleChange" :fetch-suggestions="fetchSuggestions"></el-autocomplete>
-  <el-select v-if="is('select')" :placeholder="config.label" v-model="tmp" @change="handleChange" :filterable="config.feature ? config.feature.filterable : false">
+  <el-select v-if="is('select')" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable>
     <el-option v-for="item in filterOptions(config.id)" :label="item.label" :value="item.value" :key="item.value"></el-option>
   </el-select>
 </div>

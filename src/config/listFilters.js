@@ -68,10 +68,7 @@ export default {
     id: 'rep',
     directory: 'rep',
     label: '立法委員',
-    type: 'select',
-    feature: {
-      filterable: true
-    }
+    type: 'select'
   },
   sponsor_type: {
     id: 'sponsor_type',
