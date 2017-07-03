@@ -12,7 +12,7 @@
 import { mapGetters } from 'vuex'
 
 export default {
-  props: ['model', 'config', 'page'],
+  props: ['value', 'config', 'page'],
   data() {
     return {
       tmp: undefined
