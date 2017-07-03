@@ -8,7 +8,7 @@
     <list-filter v-for="filter in filters" :key="filter.id" :value.sync="queryParameters[filter.id]" :config="filter" :page="page" ></list-filter>
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
-  <el-table :data="rows">
+  <el-table :data="filteredRows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
@@ -21,13 +21,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import Vue from 'vue'
+import Vuex from 'vuex'
 import lists from '@/config/lists'
 import listFilters from '@/config/listFilters'
 import ListFilter from '@/components/ListFilter'
 
 // test
 import AbstractSelect from '@/components/AbstractSelect'
+
+Vue.use(Vuex)
 
 export default {
   props: ['page'],
@@ -40,11 +43,18 @@ export default {
     }
   },
   computed: {
-    ...mapGetters({
-      rows: 'rows',
-      paging: 'paging',
-      totalRowCount: 'totalRowCount'
-    })
+    rows() {
+      return this.$store.state.list.rows
+    },
+    paging() {
+      return this.$store.state.list.paging
+    },
+    totalRowCount() {
+      return this.$store.state.list.totalRowCount
+    },
+    filteredRows () {
+      return this.$store.state.list.filteredRows
+    }
   },
   beforeMount() {
     this.update()
@@ -58,6 +68,7 @@ export default {
     },
     queryParameters: {
       handler(now) {
+        this.generateFilteredList()
         console.log('query updated', now)
       },
       deep: true
@@ -97,6 +108,17 @@ export default {
     },
     editItemLink($index, row) {
       return this.$route.fullPath + '/' + $index // row[this.config.key]
+    },
+    generateFilteredList() {
+      if(this.config.paged) {
+        console.log('an api call is needed')
+      } else {
+        this.$store.dispatch('filterList', {
+          rows: this.rows,
+          queryParameters: this.queryParameters,
+          filterInfo: lists[this.page.id].filters
+        })
+      }
     }
   },
   components: {
