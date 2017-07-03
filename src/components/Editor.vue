@@ -110,8 +110,8 @@ export default {
   }
 }
 .el-table .cell, .el-table th>div {
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 </style>
