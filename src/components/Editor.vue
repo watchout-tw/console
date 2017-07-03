@@ -94,4 +94,12 @@ export default {
     }
   }
 }
+
+.el-date-editor.el-input {
+  width: 160px;
+
+  &.el-input--small {
+    width: 120px;
+  }
+}
 </style>
