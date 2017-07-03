@@ -27,9 +27,6 @@ import lists from '@/config/lists'
 import listFilters from '@/config/listFilters'
 import ListFilter from '@/components/ListFilter'
 
-// test
-import AbstractSelect from '@/components/AbstractSelect'
-
 Vue.use(Vuex)
 
 export default {
@@ -122,8 +119,7 @@ export default {
     }
   },
   components: {
-    ListFilter,
-    AbstractSelect // test
+    ListFilter
   }
 }
 </script>
