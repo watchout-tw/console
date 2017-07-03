@@ -1,7 +1,9 @@
 <template>
-<el-select :placeholder="config.label" v-model="tmp" @change="handleChange" :filterable="config.feature ? config.feature.filterable : false">
-  <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
-</el-select>
+<div class="abstract-select">
+  <el-select v-if="is('select')" :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" :filterable="config.feature ? config.feature.filterable : false">
+    <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
+  </el-select>
+</div>
 </template>
 
 <script>
@@ -12,7 +14,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default {
-  props: ['value', 'config', 'page'],
+  props: ['size', 'value', 'config', 'page'],
   data() {
     return {
       uniqueID: 'sel-' + uuid(),

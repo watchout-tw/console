@@ -4,9 +4,10 @@
   <el-table :data="rows">
     <el-table-column v-for="column in config.columns" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
-        <el-input v-if="columnIs(column, 'text')" size="small" v-model="scope.row[column.prop]"></el-input>
-        <el-input-number v-if="columnIs(column, 'number')" size="small" v-model="scope.row[column.prop]"></el-input-number>
-        <el-date-picker v-else-if="columnIs(column, 'date')" size="small" v-model="scope.row[column.prop]"></el-date-picker>
+        <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
+        <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]"></el-input-number>
+        <el-date-picker v-else-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
+        <abstract-select v-else-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :config="column" :page="page"></abstract-select>
       </template>
     </el-table-column>
     <el-table-column width="48">
@@ -19,8 +20,15 @@
 </template>
 
 <script>
+import AbstractSelect from '@/components/AbstractSelect'
+
 export default {
-  props: ['config', 'rows'],
+  props: ['rows', 'config', 'page'],
+  data() {
+    return {
+      componentSize: 'small'
+    }
+  },
   methods: {
     columnIs(column, type) {
       return column.type === type
@@ -32,6 +40,9 @@ export default {
         )
       )
     }
+  },
+  components: {
+    AbstractSelect
   }
 }
 </script>
