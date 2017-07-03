@@ -7,9 +7,9 @@ export default {
     const directory = directories[reqObj.directoryID]
     if(!directory.api) {
       // use values defined in directories.js
-      if(directory.values) {
+      if(directory.options) {
         var respObj = {
-          data: directory.values,
+          data: directory.options,
           directoryID: reqObj.directoryID,
           uniqueID: reqObj.uniqueID
         }

@@ -61,7 +61,8 @@ export default {
       },
       {
         prop: 'category',
-        label: '分類'
+        label: '分類',
+        formatter: formatter.committeeCategory
       }
     ]
   },

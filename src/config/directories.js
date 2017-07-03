@@ -79,7 +79,7 @@ export default {
   },
   committee_category: {
     id: 'committee_category',
-    values: [
+    options: [
       {
         value: 'regular',
         label: '常設'
@@ -96,7 +96,7 @@ export default {
   },
   edu_degree: {
     id: 'edu_degree',
-    values: [
+    options: [
       {
         value: 'doctorate',
         label: '博士'
@@ -129,13 +129,13 @@ export default {
   },
   rep_term_change_type: {
     id: 'rep_term_change_type',
-    values: [
+    options: [
       {
-        value: 'assume_office_regular_election',
+        value: 'assume_office_through_regular_election',
         label: '應屆就任'
       },
       {
-        value: 'assume_office_by_election',
+        value: 'assume_office_through_by_election',
         label: '補選就任'
       },
       {
@@ -150,7 +150,7 @@ export default {
   },
   rep_term_office: {
     id: 'rep_term_office',
-    values: [
+    options: [
       {
         value: 'speaker',
         label: '院長'

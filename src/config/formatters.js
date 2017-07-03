@@ -1,3 +1,5 @@
+import directories from './directories'
+
 const mandarinComma = '、'
 let arrayJoinAtIndex = (array, index, separator = mandarinComma) => {
   return array.map(item => item[index]).join(separator)
@@ -22,5 +24,9 @@ export default {
     return row.history.map((event) => {
       return JSON.stringify(event)
     }).join(',')
+  },
+  committeeCategory(row, col) {
+    let value = row[col.property]
+    return directories.committee_category.options.filter(option => option.value === value).pop().label
   }
 }
