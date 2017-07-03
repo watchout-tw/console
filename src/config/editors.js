@@ -278,7 +278,7 @@ export default {
             {
               id: 'gender',
               label: '性別',
-              type: 'slider'
+              type: 'gender'
             },
             {
               id: 'highest_edu_degree',

@@ -7,7 +7,8 @@
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
       <el-date-picker v-if="fieldIs(field, 'date')" v-model="model[field.id]"></el-date-picker>
       <el-color-picker v-if="fieldIs(field, 'color')" v-model="model[field.id]" show-alpha></el-color-picker>
-      <abstract-select v-if="fieldIs(field, 'select')" v-model="model[field.id]" :value.sync="model[field.id]" :config="field" :page="page"></abstract-select>
+      <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :config="field" :page="page"></abstract-select>
+      <gender-slider v-if="fieldIs(field, 'gender')" :value.sync="model[field.id]" :config="field" :page="page"></gender-slider>
     </el-form-item>
   </el-form>
 </div>
@@ -15,6 +16,7 @@
 
 <script>
 import AbstractSelect from '@/components/AbstractSelect'
+import GenderSlider from '@/components/GenderSlider'
 
 export default {
   props: ['model', 'config', 'page'],
@@ -24,7 +26,8 @@ export default {
     }
   },
   components: {
-    AbstractSelect
+    AbstractSelect,
+    GenderSlider
   }
 }
 </script>
