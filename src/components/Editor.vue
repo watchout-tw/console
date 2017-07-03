@@ -66,7 +66,7 @@ export default {
       } else {
         let path = this.$route.fullPath.split('/')
         axios.get('https://c0re.watchout.tw/console/lab/' + path[1]).then(response => {
-          this.model = response.data.rows[key - 1]
+          this.model = response.data.rows[key]
         })
       }
     },
@@ -108,6 +108,10 @@ export default {
   &.el-input-number--small {
     width: 100px;
   }
+}
+.el-table .cell, .el-table th>div {
+  padding-left: 8px;
+  padding-right: 8px;
 }
 
 </style>

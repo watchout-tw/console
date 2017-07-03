@@ -12,7 +12,7 @@
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
-        <router-link :to="editItemLink(scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
+        <router-link :to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
       </template>
     </el-table-column>
   </el-table>
@@ -95,8 +95,8 @@ export default {
         })
       }
     },
-    editItemLink(row) {
-      return this.$route.fullPath + '/' + row[this.config.key]
+    editItemLink($index, row) {
+      return this.$route.fullPath + '/' + $index // row[this.config.key]
     }
   },
   components: {
