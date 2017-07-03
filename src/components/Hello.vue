@@ -1,6 +1,6 @@
 <template>
 <div class="hello">
-  <div class="title"><h1 class="small">{{ message }}</h1></div>
+  <blockquote>{{ message }}</blockquote>
 </div>
 </template>
 
@@ -17,10 +17,15 @@ export default {
 </script>
 
 <style lang="scss">
+@import '~common/src/styles/resources';
+
 .hello {
   margin: 0 1rem;
-  > .title {
-    margin: 1rem 0;
+  > blockquote {
+    @include font-serif;
+    font-style: italic;
+    font-size: 2rem;
+
   }
 }
 </style>

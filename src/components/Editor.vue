@@ -102,4 +102,12 @@ export default {
     width: 120px;
   }
 }
+.el-input-number {
+  width: 160px;
+
+  &.el-input-number--small {
+    width: 100px;
+  }
+}
+
 </style>
