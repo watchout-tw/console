@@ -416,5 +416,175 @@ export default {
         }
       }
     ]
+  },
+  general_topic: {
+    sections: [
+      {
+        id: 'base',
+        title: '大議題',
+        description: '這個大議題的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'index',
+              label: '排序',
+              type: 'number'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              label: '敘述',
+              type: 'textarea'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(3)
+          }
+        }
+      },
+      {
+        id: 'specific_topics',
+        title: '關聯小議題',
+        description: '與這個大議題相關的小議題',
+        interface: {
+          type: 'checklist',
+          id: 'specific_topic'
+        }
+      }
+    ]
+  },
+  specific_topic: {
+    sections: [
+      {
+        id: 'base',
+        title: '小議題',
+        description: '這個小議題的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'index',
+              label: '排序',
+              type: 'number'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              label: '敘述',
+              type: 'textarea'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(3)
+          }
+        }
+      },
+      {
+        id: 'general_topics',
+        title: '關聯大議題',
+        description: '與這個小議題相關的大議題',
+        interface: {
+          type: 'checklist',
+          id: 'general_topic'
+        }
+      },
+      {
+        id: 'act_dirs',
+        title: '修法方向',
+        description: '這個小議題的各種修法方向',
+        interface: {
+          type: 'table',
+          name: '修法方向',
+          columns: [
+            {
+              prop: 'name',
+              label: '名稱',
+              type: 'text'
+            },
+            {
+              prop: 'index',
+              label: '排序',
+              type: 'number'
+            }
+          ]
+        }
+      },
+      {
+        id: 'st_questions',
+        title: '爭點',
+        description: '這個小議題的各種爭點',
+        interface: {
+          type: 'table',
+          name: '爭點',
+          columns: [
+            {
+              prop: 'question',
+              label: '爭點',
+              type: 'text'
+            },
+            {
+              prop: 'index',
+              label: '排序',
+              type: 'number'
+            }
+          ]
+        }
+      }
+    ]
+  },
+  act: {
+    sections: [
+      {
+        id: 'base',
+        title: '法案',
+        description: '這個法案的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'official_seq_no',
+              label: '院總字號',
+              type: 'number'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(5)
+          }
+        }
+      },
+      {
+        id: 'specific_topics',
+        title: '關聯小議題',
+        description: '與這個大議題相關的小議題',
+        interface: {
+          type: 'checklist',
+          id: 'specific_topic'
+        }
+      }
+    ]
   }
 }
