@@ -40,7 +40,12 @@ export default {
     ]
   },
   committees: {
-    filters: ['name'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      }
+    ],
     key: 'name',
     paged: false,
     columns: [
@@ -59,7 +64,27 @@ export default {
     ]
   },
   reps: {
-    filters: ['name', 'term', 'party', 'district'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      },
+      {
+        id: 'term',
+        mapToColumn: 'history',
+        compare: (needle, haystack) => {
+          return true
+        }
+      },
+      {
+        id: 'party',
+        mapToColumn: 'history'
+      },
+      {
+        id: 'district',
+        mapToColumn: 'history'
+      }
+    ],
     paged: true,
     columns: [
       {
@@ -75,7 +100,16 @@ export default {
     ]
   },
   districts: {
-    filters: ['name', 'zone'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      },
+      {
+        id: 'zone',
+        mapToColumn: 'zone_name'
+      }
+    ],
     paged: false,
     columns: [
       {
@@ -102,7 +136,12 @@ export default {
     ]
   },
   parties: {
-    filters: ['name'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      }
+    ],
     paged: false,
     columns: [
       {
@@ -124,7 +163,12 @@ export default {
     ]
   },
   caucuses: {
-    filters: ['name'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      }
+    ],
     paged: false,
     columns: [
       {
@@ -146,7 +190,12 @@ export default {
     ]
   },
   general_topics: {
-    filters: ['name'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'title'
+      }
+    ],
     columns: [
       {
         prop: 'title',
@@ -168,7 +217,16 @@ export default {
     ]
   },
   specific_topics: {
-    filters: ['name', 'general_topic'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      },
+      {
+        id: 'general_topic',
+        mapToColumn: 'general_topics'
+      }
+    ],
     columns: [
       {
         prop: 'title',
@@ -198,7 +256,16 @@ export default {
     ]
   },
   acts: {
-    filters: ['name', 'specific_topic'],
+    filters: [
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      },
+      {
+        id: 'specific_topic',
+        mapToColumn: 'specifi_topics'
+      }
+    ],
     columns: [
       {
         prop: 'title',
@@ -215,7 +282,20 @@ export default {
     ]
   },
   act_features: {
-    filters: ['specific_topic', 'act', 'act_dir'],
+    filters: [
+      {
+        id: 'specific_topic',
+        mapToColumn: 'specific_topic'
+      },
+      {
+        id: 'act',
+        mapToColumn: 'act'
+      },
+      {
+        id: 'act_dir',
+        mapToColumn: 'act_dir'
+      }
+    ],
     columns: [
       {
         prop: 'specific_topic',
@@ -240,7 +320,24 @@ export default {
     ]
   },
   statements: {
-    filters: ['specific_topic', 'term', 'rep', 'party'],
+    filters: [
+      {
+        id: 'specific_topic',
+        mapToColumn: 'st_title'
+      },
+      {
+        id: 'term',
+        mapToColumn: 'term_index'
+      },
+      {
+        id: 'rep',
+        mapToColumn: 'rep_name'
+      },
+      {
+        id: 'party',
+        mapToColumn: 'party_name'
+      }
+    ],
     columns: [
       {
         prop: 'st_title',
@@ -270,7 +367,32 @@ export default {
     ]
   },
   sponsorships: {
-    filters: ['specific_topic', 'term', 'act', 'sponsor_type', 'party', 'sponsor'],
+    filters: [
+      {
+        id: 'specific_topic',
+        mapToColumn: 'st_title'
+      },
+      {
+        id: 'term',
+        mapToColumn: 'term_index'
+      },
+      {
+        id: 'act',
+        mapToColumn: 'act'
+      },
+      {
+        id: 'sponsor_type',
+        mapToColumn: 'principle_sponsor_type'
+      },
+      {
+        id: 'party',
+        mapToColumn: 'principle_sponsor_party'
+      },
+      {
+        id: 'sponsor',
+        mapToColumn: 'principle_sponsor'
+      }
+    ],
     columns: [
       {
         prop: 'st_title',
@@ -315,7 +437,20 @@ export default {
     ]
   },
   votes: {
-    filters: ['specific_topic', 'term', 'name'],
+    filters: [
+      {
+        id: 'specific_topic',
+        mapToColumn: 'st_title'
+      },
+      {
+        id: 'term',
+        mapToColumn: 'term_index'
+      },
+      {
+        id: 'name',
+        mapToColumn: 'name'
+      }
+    ],
     columns: [
       {
         prop: 'st_title',

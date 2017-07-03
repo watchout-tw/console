@@ -68,13 +68,13 @@ export default {
 
       // construct query parameter
       this.queryParameters = {}
-      lists[this.page.id].filters.forEach(filterID => {
-        this.$set(this.queryParameters, filterID, undefined)
+      lists[this.page.id].filters.forEach(filter => {
+        this.$set(this.queryParameters, filter.id, undefined)
       })
 
       // update filters
-      this.filters = lists[this.page.id].filters.map(filterID => {
-        return listFilters[filterID]
+      this.filters = lists[this.page.id].filters.map(filter => {
+        return Object.assign({}, filter, listFilters[filter.id])
       })
 
       // update columns
