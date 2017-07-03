@@ -91,6 +91,39 @@ export default {
       }
     ]
   },
+  committee: {
+    sections: [
+      {
+        id: 'base',
+        title: '委員會',
+        description: '委員會基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              id: 'abbreviation',
+              label: '短名',
+              type: 'text'
+            },
+            {
+              id: 'category',
+              label: '分類',
+              type: 'select',
+              directory: 'committee_category'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(3)
+          }
+        }
+      }
+    ]
+  },
   district: {
     sections: [
       {
@@ -306,7 +339,7 @@ export default {
         }
       },
       {
-        id: 'party-history',
+        id: 'party_history',
         title: '政黨歷史',
         description: '委員的政黨歷史紀錄',
         interface: {
@@ -334,7 +367,7 @@ export default {
         }
       },
       {
-        id: 'election-history',
+        id: 'election_history',
         title: '選任歷史',
         description: '委員的選任歷史紀錄',
         interface: {

@@ -26,6 +26,9 @@ import lists from '@/config/lists'
 import listFilters from '@/config/listFilters'
 import ListFilter from '@/components/ListFilter'
 
+// test
+import AbstractSelect from '@/components/AbstractSelect'
+
 export default {
   props: ['page'],
   data() {
@@ -97,7 +100,8 @@ export default {
     }
   },
   components: {
-    ListFilter
+    ListFilter,
+    AbstractSelect // test
   }
 }
 </script>

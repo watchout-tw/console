@@ -76,5 +76,35 @@ export default {
   sponsor: {
     id: 'sponsor',
     api: 'sponsors'
+  },
+  committee_category: {
+    id: 'committee_category',
+    values: [
+      {
+        value: 'regular',
+        label: '常設'
+      },
+      {
+        value: 'ad_hoc',
+        label: '特種'
+      },
+      {
+        value: 'other',
+        label: '其他'
+      }
+    ]
+  },
+  edu_degree: {
+    id: 'edu_degree',
+    values: [
+      {
+        value: 'doctorate',
+        label: '博士'
+      },
+      {
+        value: 'masters',
+        label: '碩士'
+      }
+    ]
   }
 }
