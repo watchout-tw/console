@@ -1,7 +1,7 @@
 <template>
 <nav class="navbar sticky-top navbar-light">
   <el-menu theme="dark" :router="true" :default-active="activeIndex" mode="horizontal" @select="handleSelect">
-    <el-menu-item :index="root">主控室</el-menu-item>
+    <el-menu-item :index="root">中控室</el-menu-item>
     <el-submenu v-for="(group, groupIndex) in menu" :index="root + group.id" :key="group.id">
       <template slot="title">{{ group.name }}</template>
       <el-menu-item v-for="(page, index) of group.pages" :index="root + page.id" :key="page.id">
