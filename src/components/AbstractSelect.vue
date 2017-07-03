@@ -32,6 +32,9 @@ export default {
   watch: {
     'page.id'() {
       this.update()
+    },
+    'value'() {
+      this.tmp = this.value
     }
   },
   methods: {
