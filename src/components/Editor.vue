@@ -64,6 +64,7 @@ export default {
           }
         }
       } else {
+        // this is temporary until /list/:id is ready
         let path = this.$route.fullPath.split('/')
         axios.get('https://c0re.watchout.tw/console/lab/' + path[1]).then(response => {
           this.model = response.data.rows[key]

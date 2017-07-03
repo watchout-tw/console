@@ -49,7 +49,7 @@ export default {
     totalRowCount() {
       return this.$store.state.list.totalRowCount
     },
-    filteredRows () {
+    filteredRows() {
       return this.$store.state.list.filteredRows
     }
   },
@@ -105,6 +105,7 @@ export default {
     },
     editItemLink($index, row) {
       return this.$route.fullPath + '/' + $index // row[this.config.key]
+      // this is temporary until /list/:id is ready
     },
     generateFilteredList() {
       if(this.config.paged) {
