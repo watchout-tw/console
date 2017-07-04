@@ -35,15 +35,15 @@ const actions = {
   filterList ({ commit }, reqObj) {
     var filteredRows = reqObj.rows
     for (var key in reqObj.queryParameters) {
-      var columnKey = reqObj.filterInfo.find(fil => {
-        return fil.id === key
-      })
       if (!reqObj.queryParameters[key]) {
         // Skipped if corresponding filter is empty
         continue
       }
+      var curFilter = reqObj.filterInfo.find(fil => {
+        return fil.id === key
+      })
       filteredRows = filteredRows.filter(row => {
-        return row[columnKey.mapToColumn].indexOf(reqObj.queryParameters[key]) > -1
+        return curFilter.compare(row[curFilter.mapToColumn], reqObj.queryParameters[key])
       })
     }
     var data = {

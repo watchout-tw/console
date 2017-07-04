@@ -1,6 +1,14 @@
 import formatter from '@/config/formatters'
 import { columnWidth } from '@/util/element'
 
+function stringComare (haystack, needle) {
+  return haystack.indexOf(needle) > -1
+}
+
+function idPropCompare (haystack, needle) {
+  return haystack.id === needle
+}
+
 export default {
   terms: {
     filters: [],
@@ -45,7 +53,8 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'name',
+        compare: stringComare
       }
     ],
     key: 'name',
@@ -70,22 +79,23 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'name',
+        compare: stringComare
       },
       {
         id: 'term',
         mapToColumn: 'history',
-        compare: (needle, haystack) => {
-          return true
-        }
+        compare: stringComare
       },
       {
         id: 'party',
-        mapToColumn: 'history'
+        mapToColumn: 'history',
+        compare: stringComare
       },
       {
         id: 'district',
-        mapToColumn: 'history'
+        mapToColumn: 'history',
+        compare: stringComare
       }
     ],
     paged: true,
@@ -106,11 +116,13 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'name',
+        compare: stringComare
       },
       {
         id: 'zone',
-        mapToColumn: 'zone_name'
+        mapToColumn: 'zone_name',
+        compare: stringComare
       }
     ],
     paged: false,
@@ -142,7 +154,8 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'name',
+        compare: stringComare
       }
     ],
     paged: false,
@@ -169,7 +182,8 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'name',
+        compare: stringComare
       }
     ],
     paged: false,
@@ -196,7 +210,8 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'title'
+        mapToColumn: 'title',
+        compare: stringComare
       }
     ],
     columns: [
@@ -224,11 +239,13 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'title'
+        mapToColumn: 'title',
+        compare: stringComare
       },
       {
         id: 'general_topic',
-        mapToColumn: 'general_topic'
+        mapToColumn: 'general_topic',
+        compare: stringComare
       }
     ],
     columns: [
@@ -266,11 +283,13 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'title',
+        compare: stringComare
       },
       {
         id: 'specific_topic',
-        mapToColumn: 'specifi_topics'
+        mapToColumn: 'specifi_topics',
+        compare: stringComare
       }
     ],
     columns: [
@@ -293,7 +312,8 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        mapToColumn: 'specific_topic'
+        mapToColumn: 'specific_topic',
+        compare: idPropCompare
       },
       {
         id: 'act',
