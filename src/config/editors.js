@@ -65,7 +65,7 @@ export default {
       {
         id: 'parties',
         title: '政黨',
-        description: '這個屆期所有有席次的政黨',
+        description: '這個屆期所有曾經有席次的政黨',
         interface: {
           type: 'checklist',
           id: 'party'
@@ -74,7 +74,7 @@ export default {
       {
         id: 'caucuses',
         title: '黨團、政團',
-        description: '這個屆期所有有席次的黨團、政團',
+        description: '這個屆期所有曾經有席次的黨團、政團',
         interface: {
           type: 'checklist',
           id: 'caucus'
@@ -85,8 +85,36 @@ export default {
         title: '選區',
         description: '這個屆期的所有選區',
         interface: {
-          type: 'checklist',
-          id: 'district'
+          type: 'table',
+          name: '選區',
+          columns: [
+            {
+              prop: 'name',
+              label: '全名',
+              type: 'text'
+            },
+            {
+              prop: 'abbreviation',
+              label: '短名',
+              type: 'text'
+            },
+            {
+              prop: 'zone_name',
+              label: '區域',
+              type: 'select',
+              directory: 'zone'
+            },
+            {
+              prop: 'index',
+              label: '編號',
+              type: 'number'
+            },
+            {
+              prop: 'neighborhoods',
+              label: '選區內行政區',
+              type: 'text'
+            }
+          ]
         }
       }
     ]
@@ -316,6 +344,11 @@ export default {
           name: '實體聯絡資訊',
           columns: [
             {
+              prop: 'is_active',
+              label: '最新',
+              type: 'checkbox'
+            },
+            {
               prop: 'name',
               label: '名稱',
               type: 'text'
@@ -349,7 +382,8 @@ export default {
             {
               prop: 'term_index',
               label: '屆期',
-              type: 'number'
+              type: 'select',
+              directory: 'term'
             },
             {
               prop: 'party_id',
@@ -362,6 +396,26 @@ export default {
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus'
+            },
+            {
+              prop: 'start_date',
+              label: '起始日期',
+              type: 'date'
+            },
+            {
+              prop: 'is_officer',
+              label: '幹部',
+              type: 'checkbox'
+            },
+            {
+              prop: 'officer_title',
+              label: '職稱',
+              type: 'text'
+            },
+            {
+              prop: 'note',
+              label: '備註',
+              type: 'text'
             }
           ]
         }
@@ -377,7 +431,8 @@ export default {
             {
               prop: 'term_index',
               label: '屆期',
-              type: 'number'
+              type: 'select',
+              directory: 'term'
             },
             {
               prop: 'change_date',
@@ -403,14 +458,42 @@ export default {
               directory: 'rep_term_office'
             },
             {
-              prop: 'office_phone',
-              label: '辦公室電話',
-              type: 'text'
-            },
-            {
               prop: 'note',
               label: '備註',
               type: 'text'
+            }
+          ]
+        }
+      },
+      {
+        id: 'committee_history',
+        title: '委員會歷史',
+        description: '委員的委員會歷史紀錄',
+        interface: {
+          type: 'table',
+          name: '委員會歷史紀錄',
+          columns: [
+            {
+              prop: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term'
+            },
+            {
+              prop: 'session_index',
+              label: '會期',
+              type: 'number'
+            },
+            {
+              prop: 'committee_name',
+              label: '委員會',
+              type: 'select',
+              directory: 'committee'
+            },
+            {
+              prop: 'is_convener',
+              label: '召委',
+              type: 'checkbox'
             }
           ]
         }
@@ -568,7 +651,7 @@ export default {
             {
               id: 'official_seq_no',
               label: '院總字號',
-              type: 'number'
+              type: 'text'
             }
           ],
           options: {

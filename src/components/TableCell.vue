@@ -1,3 +1,3 @@
 <template>
-<div class="table-cell">hahaha</div>
+<div class="table-cell">test</div>
 </template>

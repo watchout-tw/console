@@ -1,9 +1,14 @@
 import directories from './directories'
 
-const mandarinComma = '、'
-let arrayJoinAtIndex = (array = [], index, separator = mandarinComma) => {
+const punct = {
+  separator: '、',
+  colon: '：'
+}
+let arrayJoinAtIndex = (array = [], index, separator = punct.separator) => {
   return array.map(item => item[index]).join(separator)
 }
+let number = ['〇', '一', '二', '三', '四', '五', '六', '七', '八', '九']
+let termString = term => `第${number[term]}屆`
 
 export default {
   date(row, col) {
@@ -12,7 +17,7 @@ export default {
   sessions(row, col) {
     return row.sessions
       .map(session => `${session.session_index}-${session.temp_session_index}`)
-      .join(mandarinComma)
+      .join(punct.separator)
   },
   title(row, col) {
     return row[col.property].title
@@ -36,9 +41,9 @@ export default {
     return row.history
       .filter(event => !!event.term)
       .map(event => {
-        return event.term
+        return `${termString(event.term)}${event.party.abbreviation}${event.district.abbreviation}`
       })
-      .join(mandarinComma)
+      .join(punct.separator)
   },
   committee_category(row, col) {
     let value = row[col.property]

@@ -12,7 +12,7 @@
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
-        <router-link :to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
+        <router-link :scope="scope" to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
       </template>
     </el-table-column>
   </el-table>
@@ -26,6 +26,7 @@ import Vuex from 'vuex'
 import lists from '@/config/lists'
 import listFilters from '@/config/listFilters'
 import ListFilter from '@/components/ListFilter'
+import TableCell from '@/components/TableCell'
 
 Vue.use(Vuex)
 
@@ -120,7 +121,8 @@ export default {
     }
   },
   components: {
-    ListFilter
+    ListFilter,
+    TableCell
   }
 }
 </script>

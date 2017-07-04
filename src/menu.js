@@ -25,13 +25,6 @@ var menu = [
         title: '委員'
       },
       {
-        id: 'districts',
-        directory: 'district',
-        editor: 'district',
-        name: '選區',
-        title: '選區'
-      },
-      {
         id: 'parties',
         directory: 'party',
         editor: 'party',
