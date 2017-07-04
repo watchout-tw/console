@@ -2,14 +2,14 @@
 <div class="list">
   <div class="title d-flex justify-content-between align-items-center">
     <h1 class="small">{{ page.routes.list.title }}</h1>
-    <el-button type="primary"><router-link :to="{ name: page.routes.edit.name, params: { id: 'create' } }">新增{{ page.name }}</router-link></el-button>
+    <el-button type="primary"><router-link :to="{name: page.routes.edit.name, params: {id: 'create'}}">新增{{ page.name }}</router-link></el-button>
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <list-filter v-for="filter in filters" :key="filter.id" :value.sync="queryParameters[filter.id]" :config="filter" :page="page" ></list-filter>
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="filteredRows">
-    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :sortable="column.flags ? column.flags.sortable : false" :width="column.width" :formatter="column.formatter"></el-table-column>
+    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
         <router-link :to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>

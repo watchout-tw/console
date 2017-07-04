@@ -436,10 +436,7 @@ export default {
       },
       {
         prop: 'propose_date',
-        label: '日期',
-        flags: {
-          sortable: true
-        }
+        label: '日期'
       },
       {
         prop: 'speech_content',

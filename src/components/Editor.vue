@@ -100,7 +100,7 @@ export default {
   width: 160px;
 
   &.el-input--small {
-    width: 120px;
+    width: 128px;
   }
 }
 .el-input-number {
