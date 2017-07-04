@@ -139,12 +139,12 @@ export default {
         label: '補選就任'
       },
       {
-        value: 'leave_office',
-        label: '離任'
-      },
-      {
         value: 'end_of_term',
         label: '屆期結束'
+      },
+      {
+        value: 'leave_office',
+        label: '離任'
       }
     ]
   },
