@@ -224,11 +224,11 @@ export default {
     filters: [
       {
         id: 'name',
-        mapToColumn: 'name'
+        mapToColumn: 'title'
       },
       {
         id: 'general_topic',
-        mapToColumn: 'general_topics'
+        mapToColumn: 'general_topic'
       }
     ],
     columns: [
