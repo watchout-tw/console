@@ -15,13 +15,13 @@ export default {
       {
         prop: 'start_date',
         label: '起',
-        width: columnWidth(4),
+        width: columnWidth(5),
         formatter: formatter.date
       },
       {
         prop: 'end_date',
         label: '訖',
-        width: columnWidth(4),
+        width: columnWidth(5),
         formatter: formatter.date
       },
       {
@@ -32,12 +32,12 @@ export default {
       {
         prop: 'parties',
         label: '政黨',
-        formatter: formatter.parties
+        formatter: formatter.list_abbreviations
       },
       {
         prop: 'caucuses',
         label: '黨團或政團',
-        formatter: formatter.caucuses
+        formatter: formatter.list_abbreviations
       }
     ]
   },
@@ -62,7 +62,7 @@ export default {
       {
         prop: 'category',
         label: '分類',
-        formatter: formatter.committeeCategory
+        formatter: formatter.committee_category
       }
     ]
   },
@@ -98,7 +98,7 @@ export default {
       {
         prop: 'history',
         label: '任職歷史',
-        formatter: formatter.repHistory
+        formatter: formatter.rep_history
       }
     ]
   },
@@ -215,7 +215,8 @@ export default {
       },
       {
         prop: 'specific_topics',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatter.list_titles
       }
     ]
   },
@@ -246,15 +247,18 @@ export default {
       },
       {
         prop: 'general_topics',
-        label: '關聯大議題'
+        label: '關聯大議題',
+        formatter: formatter.list_titles
       },
       {
         prop: 'act_dirs',
-        label: '修法方向'
+        label: '修法方向',
+        formatter: formatter.list_names
       },
       {
         prop: 'st_questions',
-        label: '爭點'
+        label: '爭點',
+        formatter: formatter.list_questions
       }
     ]
   },
@@ -280,7 +284,8 @@ export default {
       },
       {
         prop: 'specific_topics',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatter.list_titles
       }
     ]
   },
@@ -302,15 +307,18 @@ export default {
     columns: [
       {
         prop: 'specific_topic',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatter.title
       },
       {
         prop: 'act',
-        label: '關聯法案'
+        label: '關聯法案',
+        formatter: formatter.title
       },
       {
         prop: 'act_dir',
-        label: '關聯修法方向'
+        label: '關聯修法方向',
+        formatter: formatter.name
       },
       {
         prop: 'feature',

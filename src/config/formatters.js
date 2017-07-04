@@ -1,7 +1,7 @@
 import directories from './directories'
 
 const mandarinComma = '、'
-let arrayJoinAtIndex = (array, index, separator = mandarinComma) => {
+let arrayJoinAtIndex = (array = [], index, separator = mandarinComma) => {
   return array.map(item => item[index]).join(separator)
 }
 
@@ -14,19 +14,37 @@ export default {
       .map(session => `${session.session_index}-${session.temp_session_index}`)
       .join(mandarinComma)
   },
-  parties(row, col) {
-    return arrayJoinAtIndex(row.parties, 'abbreviation')
+  title(row, col) {
+    return row[col.property].title
   },
-  caucuses(row, col) {
-    return arrayJoinAtIndex(row.caucuses, 'abbreviation')
+  name(row, col) {
+    return row[col.property].name
   },
-  repHistory(row, col) {
-    return row.history.map((event) => {
-      return JSON.stringify(event)
-    }).join(',')
+  list_abbreviations(row, col) {
+    return arrayJoinAtIndex(row[col.property], 'abbreviation')
   },
-  committeeCategory(row, col) {
+  list_titles(row, col) {
+    return arrayJoinAtIndex(row[col.property], 'title')
+  },
+  list_names(row, col) {
+    return arrayJoinAtIndex(row[col.property], 'name')
+  },
+  list_questions(row, col) {
+    return arrayJoinAtIndex(row[col.property], 'question')
+  },
+  rep_history(row, col) {
+    return row.history
+      .filter(event => !!event.term)
+      .map(event => {
+        return event.term
+      })
+      .join(mandarinComma)
+  },
+  committee_category(row, col) {
     let value = row[col.property]
-    return directories.committee_category.options.filter(option => option.value === value).pop().label
+    return directories.committee_category.options
+      .filter(option => option.value === value)
+      .pop()
+      .label
   }
 }

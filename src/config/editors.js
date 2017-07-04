@@ -586,5 +586,55 @@ export default {
         }
       }
     ]
+  },
+  act_feature: {
+    sections: [
+      {
+        id: 'base',
+        title: '法案比較',
+        description: '這個法案比較的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'specific_topic',
+              label: '小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              id: 'act_dir',
+              label: '修法方向',
+              type: 'select',
+              directory: 'act_dir'
+            },
+            {
+              id: 'act',
+              label: '法案',
+              type: 'select',
+              directory: 'act'
+            },
+            {
+              id: 'feature',
+              label: '法案比較',
+              type: 'text'
+            },
+            {
+              id: 'dir',
+              label: '法案比較價值判斷',
+              type: 'text'
+            },
+            {
+              id: 'content',
+              label: '法案比較內容說明',
+              type: 'text'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(9)
+          }
+        }
+      }
+    ]
   }
 }

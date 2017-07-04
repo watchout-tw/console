@@ -34,7 +34,11 @@ export default {
       this.update()
     },
     'value'() {
-      this.tmp = this.value
+      if(typeof this.value === 'object') {
+        this.tmp = this.value.id
+      } else {
+        this.tmp = this.value
+      }
     }
   },
   methods: {
