@@ -5,14 +5,19 @@
     <router-link :to="{name: page.routes.edit.name, params: {id: 'create'}}"><el-button type="primary">新增{{ page.name }}</el-button></router-link>
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
-    <list-filter v-for="filter in filters" :key="filter.id" :value.sync="queryParameters[filter.id]" :config="filter" :page="page" ></list-filter>
+    <template v-for="filter in filters" >
+      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :config="filter" :page="page"></abstract-select>
+      <div v-else class="list-filter-input">
+        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label"></el-input>
+      </div>
+    </template>
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="filteredRows">
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
-        <router-link :scope="scope" to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
+        <router-link :scope="scope" :to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
       </template>
     </el-table-column>
   </el-table>
@@ -25,7 +30,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
 import listFilters from '@/config/listFilters'
-import ListFilter from '@/components/ListFilter'
+import AbstractSelect from '@/components/AbstractSelect'
 import TableCell from '@/components/TableCell'
 
 Vue.use(Vuex)
@@ -73,6 +78,9 @@ export default {
     }
   },
   methods: {
+    filterIs(filter, type) {
+      return filter.type === type
+    },
     update() {
       console.log('List:', this.page.id)
       this.config = lists[this.page.id]
@@ -121,7 +129,7 @@ export default {
     }
   },
   components: {
-    ListFilter,
+    AbstractSelect,
     TableCell
   }
 }
@@ -135,10 +143,16 @@ export default {
   }
   > .filters {
     margin: 1rem 0;
+    > *:not(:last-of-type) {
+      margin-right: 0.5rem;
+    }
   }
 }
 .el-pagination {
   margin: 1rem 0;
   padding: 0;
+}
+.list-filter-input {
+  max-width: 16rem;
 }
 </style>
