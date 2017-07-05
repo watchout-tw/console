@@ -31,9 +31,9 @@ export default {
   },
   district: {
     id: 'district',
-    api: 'districts',
-    value: 'id',
-    label: 'name'
+    api: 'term_districts',
+    value: 'district_name',
+    label: 'district_name'
   },
   general_topic: {
     id: 'general_topic',
@@ -71,7 +71,20 @@ export default {
   },
   sponsor_type: {
     id: 'sponsor_type',
-    api: 'sponsor_types'
+    options: [
+      {
+        value: 'Gov_Agency',
+        label: '政府單位'
+      },
+      {
+        value: 'Caucus',
+        label: '黨團或政團'
+      },
+      {
+        value: 'Rep',
+        label: '委員'
+      }
+    ]
   },
   sponsor: {
     id: 'sponsor',
@@ -158,6 +171,35 @@ export default {
       {
         value: 'deputy_speaker',
         label: '副院長'
+      }
+    ]
+  },
+  st_question: {
+    id: 'st_question',
+    api: 'st_questions',
+    value: 'id',
+    label: 'question'
+  },
+  rs_tag: {
+    id: 'rs_tag',
+    api: 'rs_tags',
+    value: 'id',
+    label: 'name'
+  },
+  rs_position: {
+    id: 'rs_position',
+    options: [
+      {
+        value: 'ambiguous',
+        label: '模糊'
+      },
+      {
+        value: 'pro',
+        label: '支持'
+      },
+      {
+        value: 'con',
+        label: '反對'
       }
     ]
   }
