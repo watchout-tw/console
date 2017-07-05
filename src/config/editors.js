@@ -719,5 +719,101 @@ export default {
         }
       }
     ]
+  },
+  statement: {
+    sections: [
+      {
+        id: 'base',
+        title: '屆期',
+        description: '這個發言的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'specific_topic',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              id: 'principle_committee',
+              label: '主審委員會',
+              type: 'select',
+              directory: 'committee'
+            },
+            {
+              id: 'joint_committee',
+              label: '聯席委員會',
+              type: 'select',
+              directory: 'committee'
+            },
+            {
+              id: 'speech_date',
+              label: '發言日期',
+              type: 'date'
+            },
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term'
+            },
+            {
+              id: 'session_index',
+              label: '會期',
+              type: 'number'
+            },
+            {
+              id: 'rep',
+              label: '委員',
+              type: 'select',
+              directory: 'rep'
+            },
+            {
+              id: 'rep_party',
+              label: '政黨',
+              type: 'select',
+              directory: 'party'
+            },
+            {
+              id: 'speech_content',
+              label: '發言內容',
+              type: 'textarea'
+            },
+            {
+              id: 'st_question_id',
+              label: '爭點',
+              type: 'select',
+              directory: 'st_question'
+            },
+            {
+              id: 'position',
+              label: '立場',
+              type: 'select',
+              directory: 'rs_position'
+            },
+            {
+              id: 'summary',
+              label: '摘要',
+              type: 'textarea'
+            },
+            {
+              id: 'source_link',
+              label: '原始資料連結',
+              type: 'text'
+            },
+            {
+              id: 'tag',
+              label: '標籤',
+              type: 'select',
+              directory: 'rs_tag'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
   }
 }
