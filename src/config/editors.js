@@ -729,7 +729,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '屆期',
+        title: '發言',
         description: '這個發言的基本資料',
         interface: {
           type: 'form',
@@ -812,6 +812,89 @@ export default {
               label: '標籤',
               type: 'select',
               directory: 'rs_tag'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
+  },
+  sponsorship: {
+    sections: [
+      {
+        id: 'base',
+        title: '提案',
+        description: '這個提案的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'act',
+              label: '關聯法案',
+              type: 'select',
+              directory: 'act'
+            },
+            {
+              id: 'specific_topic',
+              label: '關聯小議題',
+              type: 'text'
+            },
+            {
+              id: 'proposal_no',
+              label: '字號',
+              type: 'text'
+            },
+            {
+              id: 'propose_date',
+              label: '日期',
+              type: 'date'
+            },
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term'
+            },
+            {
+              id: 'principle_sponsor_type',
+              label: '第一提案人類別',
+              type: 'select',
+              directory: 'sponsor_type'
+            },
+            {
+              id: 'principle_sponsor_value',
+              label: '第一提案人',
+              type: 'select',
+              directory: 'sponsor'
+            },
+            {
+              id: 'sponsors',
+              label: '提案人',
+              type: 'select-multiple',
+              directory: 'sponsor'
+            },
+            {
+              id: 'cosponsors',
+              label: '連署人',
+              type: 'select-multiple',
+              directory: 'sponsor'
+            },
+            {
+              id: 'description',
+              label: '提案說明',
+              type: 'textarea'
+            },
+            {
+              id: 'data_source_link',
+              label: '資料來源連結',
+              type: 'text'
+            },
+            {
+              id: 'progress_source_link',
+              label: '進程來源連結',
+              type: 'text'
             }
           ],
           options: {
