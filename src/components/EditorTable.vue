@@ -4,16 +4,23 @@
   <el-table :data="rows">
     <el-table-column v-for="column in config.columns" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
-        <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
-        <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]"></el-input-number>
-        <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
-        <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
-        <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :config="column" :page="page"></abstract-select>
+        <template v-if="flags[scope.$index].isEditing">
+          <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
+          <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]"></el-input-number>
+          <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
+          <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
+          <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :config="column" :page="page"></abstract-select>
+        </template>
+        <template v-else>
+          {{ column.formatter ? column.formatter(scope.row, scope.column) : scope.row[scope.column.property] }}
+        </template>
       </template>
     </el-table-column>
-    <el-table-column width="48">
+    <el-table-column width="64">
       <template scope="scope">
-        <el-button type="text" size="small" icon="delete2"></el-button>
+        <el-button v-if="flags[scope.$index].isEditing" type="text" size="small" icon="check" @click="confirmRow(scope.$index)"></el-button>
+        <el-button v-else type="text" size="small" icon="edit" @click="editRow(scope.$index)"></el-button>
+        <el-button type="text" size="small" icon="delete2" @click="deleteRow(scope.$index)"></el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -27,12 +34,31 @@ export default {
   props: ['rows', 'config', 'page'],
   data() {
     return {
-      componentSize: 'small'
+      componentSize: 'small',
+      intialized: false,
+      flags: []
+    }
+  },
+  watch: {
+    'rows'() {
+      if(!this.initialized) {
+        console.log('editor table init')
+        this.flags = this.rows.map(row => ({isEditing: false}))
+        this.initialized = true
+      }
     }
   },
   methods: {
     columnIs(column, type) {
       return column.type === type
+    },
+    confirmRow($index) {
+      this.flags[$index].isEditing = false
+    },
+    editRow($index) {
+      this.flags[$index].isEditing = true
+    },
+    deleteRow($index) {
     },
     addRow() {
       this.rows.push(
@@ -40,6 +66,9 @@ export default {
           ...this.config.columns.map(column => ({[column.prop]: undefined}))
         )
       )
+      this.flags.push({
+        isEditing: true
+      })
     }
   },
   components: {

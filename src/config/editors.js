@@ -1,4 +1,5 @@
 import { labelWidth } from '@/util/element'
+import formatters from '@/config/formatters'
 
 export default {
   term: {
@@ -52,12 +53,14 @@ export default {
             {
               prop: 'start_date',
               label: '起',
-              type: 'date'
+              type: 'date',
+              formatter: formatters.date
             },
             {
               prop: 'end_date',
               label: '訖',
-              type: 'date'
+              type: 'date',
+              formatter: formatters.date
             }
           ]
         }
@@ -400,7 +403,8 @@ export default {
             {
               prop: 'start_date',
               label: '起始日期',
-              type: 'date'
+              type: 'date',
+              formatter: formatters.date
             },
             {
               prop: 'is_officer',
@@ -437,7 +441,8 @@ export default {
             {
               prop: 'change_date',
               label: '變更日期',
-              type: 'date'
+              type: 'date',
+              formatter: formatters.date
             },
             {
               prop: 'change_type',
