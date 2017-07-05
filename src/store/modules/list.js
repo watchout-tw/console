@@ -39,11 +39,11 @@ const actions = {
         // Skipped if corresponding filter is empty
         continue
       }
-      var curFilter = reqObj.filterInfo.find(fil => {
+      var currentFilter = reqObj.filterInfo.find(fil => {
         return fil.id === key
       })
       filteredRows = filteredRows.filter(row => {
-        return curFilter.compare(row[curFilter.mapToColumn], reqObj.queryParameters[key])
+        return currentFilter.compare(row[currentFilter.mapToColumn], reqObj.queryParameters[key])
       })
     }
     var data = {

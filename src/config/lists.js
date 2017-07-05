@@ -1,12 +1,16 @@
 import formatter from '@/config/formatters'
 import { columnWidth } from '@/util/element'
 
-function stringComare (haystack, needle) {
+function stringCompare (haystack, needle) {
   return haystack.indexOf(needle) > -1
 }
 
 function idPropCompare (haystack, needle) {
   return haystack.id === needle
+}
+
+function idFromList (haystack, needle) {
+  return haystack.filter(item => item.id === needle).length > 0
 }
 
 export default {
@@ -54,7 +58,7 @@ export default {
       {
         id: 'name',
         mapToColumn: 'name',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     key: 'name',
@@ -80,22 +84,22 @@ export default {
       {
         id: 'name',
         mapToColumn: 'name',
-        compare: stringComare
+        compare: stringCompare
       },
       {
         id: 'term',
         mapToColumn: 'history',
-        compare: stringComare
-      },
-      {
-        id: 'party',
-        mapToColumn: 'history',
-        compare: stringComare
+        compare: stringCompare
       },
       {
         id: 'district',
         mapToColumn: 'history',
-        compare: stringComare
+        compare: stringCompare
+      },
+      {
+        id: 'party',
+        mapToColumn: 'history',
+        compare: stringCompare
       }
     ],
     paged: true,
@@ -117,12 +121,12 @@ export default {
       {
         id: 'name',
         mapToColumn: 'name',
-        compare: stringComare
+        compare: stringCompare
       },
       {
         id: 'zone',
         mapToColumn: 'zone_name',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     paged: false,
@@ -155,7 +159,7 @@ export default {
       {
         id: 'name',
         mapToColumn: 'name',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     paged: false,
@@ -183,7 +187,7 @@ export default {
       {
         id: 'name',
         mapToColumn: 'name',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     paged: false,
@@ -211,7 +215,7 @@ export default {
       {
         id: 'name',
         mapToColumn: 'title',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     columns: [
@@ -240,12 +244,12 @@ export default {
       {
         id: 'name',
         mapToColumn: 'title',
-        compare: stringComare
+        compare: stringCompare
       },
       {
         id: 'general_topic',
         mapToColumn: 'general_topic',
-        compare: stringComare
+        compare: stringCompare
       }
     ],
     columns: [
@@ -284,12 +288,12 @@ export default {
       {
         id: 'name',
         mapToColumn: 'title',
-        compare: stringComare
+        compare: stringCompare
       },
       {
         id: 'specific_topic',
-        mapToColumn: 'specifi_topics',
-        compare: stringComare
+        mapToColumn: 'specific_topics',
+        compare: idFromList
       }
     ],
     columns: [
@@ -317,11 +321,13 @@ export default {
       },
       {
         id: 'act',
-        mapToColumn: 'act'
+        mapToColumn: 'act',
+        compare: idPropCompare
       },
       {
         id: 'act_dir',
-        mapToColumn: 'act_dir'
+        mapToColumn: 'act_dir',
+        compare: idPropCompare
       }
     ],
     columns: [
