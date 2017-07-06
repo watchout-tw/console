@@ -38,8 +38,8 @@ export default {
     return arrayJoinAtIndex(row[col.property], 'question')
   },
   rep_history(row, col) {
-    row.history = row.history ? row.history : []
-    return row.history
+    const history = row.history ? row.history : []
+    return history
       .filter(event => !!event.term)
       .map(event => {
         var eventStr = `${termString(event.term)}`
