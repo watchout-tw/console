@@ -38,10 +38,14 @@ export default {
     return arrayJoinAtIndex(row[col.property], 'question')
   },
   rep_history(row, col) {
+    row.history = row.history ? row.history : []
     return row.history
       .filter(event => !!event.term)
       .map(event => {
-        return `${termString(event.term)}${event.party.abbreviation}${event.district.abbreviation}`
+        var eventStr = `${termString(event.term)}`
+        eventStr += event.party && event.party.abbreviation ? event.party.abbreviation : ''
+        eventStr += event.district && event.district.abbreviation ? event.district.abbreviation : ''
+        return eventStr
       })
       .join(punct.separator)
   },
