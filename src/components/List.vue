@@ -8,7 +8,7 @@
     <template v-for="filter in filters" >
       <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
-        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label"></el-input>
+        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
       </div>
     </template>
   </div>
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import debounce from 'lodash.debounce'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
@@ -63,16 +64,17 @@ export default {
     this.update()
   },
   watch: {
-    'page.id'() { // watch page.id to detect switching between pages
+    // watch page.id to detect switching between pages
+    'page.id'() {
       this.update()
     },
     'paging.page'() {
       this.update()
     },
+    // FIXME: Should find a better approach for this
     queryParameters: {
       handler(now) {
         this.generateFilteredList()
-        console.log('query updated', now)
       },
       deep: true
     }
@@ -116,9 +118,12 @@ export default {
       return this.$route.fullPath + '/' + $index // row[this.config.key]
       // this is temporary until /list/:id is ready
     },
-    generateFilteredList() {
-      if(this.config.paged) {
-        console.log('an api call is needed')
+    generateFilteredList: debounce(function () {
+      if (this.config.paged) {
+        this.$store.dispatch('getFilteredList', {
+          pageID: this.page.id,
+          queryParameters: this.queryParameters
+        })
       } else {
         this.$store.dispatch('filterList', {
           rows: this.rows,
@@ -126,7 +131,7 @@ export default {
           filterInfo: lists[this.page.id].filters
         })
       }
-    }
+    }, 300)
   },
   components: {
     AbstractSelect,

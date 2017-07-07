@@ -50,6 +50,14 @@ const actions = {
       rows: filteredRows
     }
     commit(types.FILTER_LIST, data)
+  },
+  getFilteredList ({ commit }, reqObj) {
+    api.getListByFilter(reqObj).then(response => {
+      console.log('response.daata', response.data)
+      commit(types.GET_FILTERED_LIST, response.data)
+    }).catch(error => {
+      commit(types.FETCH_FAIL, error)
+    })
   }
 }
 
@@ -66,6 +74,9 @@ const mutations = {
     state.totalRowCount = data.totalRowCount
   },
   [types.FILTER_LIST] (state, data) {
+    state.filteredRows = data.rows
+  },
+  [types.GET_FILTERED_LIST] (state, data) {
     state.filteredRows = data.rows
   },
   [types.FETCH_FAIL] (state, error) {

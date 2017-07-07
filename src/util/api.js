@@ -1,7 +1,16 @@
 import directories from '@/config/directories'
 import axios from 'axios'
+import queryString from 'query-string'
 
 axios.defaults.baseURL = 'https://c0re.watchout.tw'
+
+function trimQueryString (query) {
+  var temp = {}
+  for (var key in query) {
+    temp[key] = query[key] ? query[key] : undefined
+  }
+  return temp
+}
 
 export function getDirectory (reqObj) {
   let directory = directories[reqObj.directoryID]
@@ -22,5 +31,11 @@ export function getListByNameWithPaging (reqObj) {
 
 export function getListByNameNoPaging (reqObj) {
   let url = `/console/lab/${reqObj.pageID}`
+  return axios.get(url)
+}
+
+export function getListByFilter (reqObj) {
+  var query = queryString.stringify(trimQueryString(reqObj.queryParameters))
+  let url = `/console/lab/${reqObj.pageID}?${query}`
   return axios.get(url)
 }
