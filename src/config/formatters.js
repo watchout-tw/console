@@ -12,30 +12,31 @@ let termString = term => `第${number[term]}屆`
 
 export default {
   date(row, col) {
-    return new Date(row[col.property]).toLocaleDateString('zh-Hans-TW')
+    return row[col.property] ? new Date(row[col.property]).toLocaleDateString('zh-Hans-TW') : ''
   },
   sessions(row, col) {
-    return row.sessions
+    const sessions = row.sessions ? row.sessions : []
+    return sessions
       .map(session => `${session.session_index}-${session.temp_session_index}`)
       .join(punct.separator)
   },
   title(row, col) {
-    return row[col.property].title
+    return row[col.property] ? row[col.property].title : ''
   },
   name(row, col) {
-    return row[col.property].name
+    return row[col.property] ? row[col.property].name : ''
   },
   list_abbreviations(row, col) {
-    return arrayJoinAtIndex(row[col.property], 'abbreviation')
+    return row[col.property] ? arrayJoinAtIndex(row[col.property], 'abbreviation') : ''
   },
   list_titles(row, col) {
-    return arrayJoinAtIndex(row[col.property], 'title')
+    return row[col.property] ? arrayJoinAtIndex(row[col.property], 'title') : ''
   },
   list_names(row, col) {
-    return arrayJoinAtIndex(row[col.property], 'name')
+    return row[col.property] ? arrayJoinAtIndex(row[col.property], 'name') : ''
   },
   list_questions(row, col) {
-    return arrayJoinAtIndex(row[col.property], 'question')
+    return row[col.property] ? arrayJoinAtIndex(row[col.property], 'question') : ''
   },
   rep_history(row, col) {
     const history = row.history ? row.history : []

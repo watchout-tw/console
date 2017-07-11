@@ -267,7 +267,7 @@ export default {
         label: '圖像'
       },
       {
-        prop: 'general_topics',
+        prop: 'general_topic',
         label: '關聯大議題',
         formatter: formatter.list_titles
       },
