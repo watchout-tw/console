@@ -5,6 +5,7 @@ import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
 import list from './modules/list'
+import editor from './modules/editor'
 import editorChecklist from './modules/editorChecklist'
 import createLogger from 'vuex/dist/logger'
 
@@ -19,6 +20,7 @@ export default new Vuex.Store({
   mutations,
   modules: {
     list,
+    editor,
     editorChecklist
   },
   strict: debug,
