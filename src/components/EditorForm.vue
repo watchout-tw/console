@@ -1,7 +1,7 @@
 <template>
 <div class="editor-form">
   <el-form :label-width="config.options.labelWidth" label-position="left">
-    <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :style="formItemStyle(field)">
+    <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
       <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]"></el-input>
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]"></el-input>
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
@@ -24,12 +24,12 @@ export default {
     fieldIs(field, type) {
       return field.type.split('-').shift() === type
     },
-    formItemStyle(field) {
-      var styleObj = {}
+    formItemClasses(field) {
+      var classes = []
       if(field.determined_by) {
-        styleObj.marginLeft = this.config.options.labelWidth
+        classes.push('has-dependency')
       }
-      return styleObj
+      return classes
     }
   },
   components: {
@@ -38,3 +38,24 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.editor-form {
+  .el-form-item.has-dependency {
+    position: relative;
+
+    &:before {
+      $font-size: 1rem;
+      content: '↳';
+      display: block;
+      position: absolute;
+      top: -$font-size/2;
+      left: 0;
+      font-size: $font-size;
+      line-height: 1;
+      height: $font-size;
+      opacity: 0.5;
+    }
+  }
+}
+</style>
