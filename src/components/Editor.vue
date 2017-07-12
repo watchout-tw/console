@@ -8,19 +8,22 @@
     <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows="model[section.id]" :page="page"></editor-table>
     <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
   </section>
-  <el-button type="primary">儲存</el-button>
+  <el-button @click="submit()" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
 </div>
 </template>
 
 <script>
+import axios from 'axios'
+import Vue from 'vue'
+import Vuex from 'vuex'
 import editors from '@/config/editors'
 import editorChecklists from '@/config/editorChecklists'
 import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 
-import axios from 'axios'
+Vue.use(Vuex)
 
 export default {
   props: ['page'],
@@ -72,7 +75,10 @@ export default {
       }
     },
     goBack() {
-      history.back()
+      this.$router.push({name: this.page.routes.list.name})
+    },
+    submit() {
+      this.$store.dispatch('submitForm', this.model)
     }
   },
   components: {
