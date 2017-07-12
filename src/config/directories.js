@@ -190,12 +190,12 @@ export default {
     id: 'rs_position',
     options: [
       {
-        value: 'ambiguous',
-        label: '模糊'
-      },
-      {
         value: 'pro',
         label: '支持'
+      },
+      {
+        value: 'ambiguous',
+        label: '模糊'
       },
       {
         value: 'con',

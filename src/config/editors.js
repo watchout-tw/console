@@ -667,7 +667,7 @@ export default {
       {
         id: 'specific_topics',
         title: '關聯小議題',
-        description: '與這個大議題相關的小議題',
+        description: '與這個法案相關的小議題',
         interface: {
           type: 'checklist',
           id: 'specific_topic'
@@ -722,10 +722,31 @@ export default {
             labelWidth: labelWidth(9)
           }
         }
+      },
+      {
+        id: 'level',
+        title: '法案比較量尺',
+        description: '法案比較的評分量尺',
+        interface: {
+          type: 'table',
+          name: '分數',
+          columns: [
+            {
+              prop: 'score',
+              label: '分數',
+              type: 'number'
+            },
+            {
+              prop: 'description',
+              label: '分數敘述',
+              type: 'text'
+            }
+          ]
+        }
       }
     ]
   },
-  statement: {
+  rs_statement: {
     sections: [
       {
         id: 'base',
@@ -735,10 +756,41 @@ export default {
           type: 'form',
           fields: [
             {
-              id: 'specific_topic',
+              id: 'st_id',
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
+            },
+            {
+              id: 'date',
+              label: '日期',
+              type: 'date'
+            },
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term',
+              determined_by: 'speech_date'
+            },
+            {
+              id: 'session_index',
+              label: '會期',
+              type: 'number',
+              determined_by: 'speech_date'
+            },
+            {
+              id: 'rep',
+              label: '委員',
+              type: 'select',
+              directory: 'rep'
+            },
+            {
+              id: 'rep_party_id',
+              label: '當時所屬政黨',
+              type: 'select',
+              directory: 'party',
+              determined_by: 'speech_date'
             },
             {
               id: 'principle_committee',
@@ -749,40 +801,12 @@ export default {
             {
               id: 'joint_committee',
               label: '聯席委員會',
-              type: 'select',
+              type: 'select-multiple',
               directory: 'committee'
             },
             {
-              id: 'speech_date',
-              label: '發言日期',
-              type: 'date'
-            },
-            {
-              id: 'term_index',
-              label: '屆期',
-              type: 'select',
-              directory: 'term'
-            },
-            {
-              id: 'session_index',
-              label: '會期',
-              type: 'number'
-            },
-            {
-              id: 'rep',
-              label: '委員',
-              type: 'select',
-              directory: 'rep'
-            },
-            {
-              id: 'rep_party',
-              label: '政黨',
-              type: 'select',
-              directory: 'party'
-            },
-            {
-              id: 'speech_content',
-              label: '發言內容',
+              id: 'content',
+              label: '內容',
               type: 'textarea'
             },
             {
@@ -798,8 +822,8 @@ export default {
               directory: 'rs_position'
             },
             {
-              id: 'summary',
-              label: '摘要',
+              id: 'position_summary',
+              label: '立場摘要',
               type: 'textarea'
             },
             {
@@ -810,7 +834,7 @@ export default {
             {
               id: 'tag',
               label: '標籤',
-              type: 'select',
+              type: 'select-multiple',
               directory: 'rs_tag'
             }
           ],
@@ -821,7 +845,7 @@ export default {
       }
     ]
   },
-  sponsorship: {
+  rs_bill: {
     sections: [
       {
         id: 'base',
@@ -831,15 +855,10 @@ export default {
           type: 'form',
           fields: [
             {
-              id: 'act',
+              id: 'act_id',
               label: '關聯法案',
               type: 'select',
               directory: 'act'
-            },
-            {
-              id: 'specific_topic',
-              label: '關聯小議題',
-              type: 'text'
             },
             {
               id: 'proposal_no',
@@ -847,7 +866,7 @@ export default {
               type: 'text'
             },
             {
-              id: 'propose_date',
+              id: 'date',
               label: '日期',
               type: 'date'
             },
@@ -855,7 +874,14 @@ export default {
               id: 'term_index',
               label: '屆期',
               type: 'select',
-              directory: 'term'
+              directory: 'term',
+              determined_by: 'date'
+            },
+            {
+              id: 'session_index',
+              label: '會期',
+              type: 'number',
+              determined_by: 'date'
             },
             {
               id: 'principle_sponsor_type',
@@ -873,17 +899,17 @@ export default {
               id: 'sponsors',
               label: '提案人',
               type: 'select-multiple',
-              directory: 'sponsor'
+              directory: 'rep'
             },
             {
               id: 'cosponsors',
               label: '連署人',
               type: 'select-multiple',
-              directory: 'sponsor'
+              directory: 'rep'
             },
             {
-              id: 'description',
-              label: '提案說明',
+              id: 'content',
+              label: '內容',
               type: 'textarea'
             },
             {
@@ -895,6 +921,97 @@ export default {
               id: 'progress_source_link',
               label: '進程來源連結',
               type: 'text'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(7)
+          }
+        }
+      }
+    ]
+  },
+  rs_vote: {
+    sections: [
+      {
+        id: 'base',
+        title: '表決',
+        description: '這個表決的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              id: 'date',
+              label: '日期',
+              type: 'date'
+            },
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term',
+              determined_by: 'date'
+            },
+            {
+              id: 'session_index',
+              label: '會期',
+              type: 'number',
+              determined_by: 'date'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'content',
+              label: '內容',
+              type: 'textarea'
+            },
+            {
+              id: 'aye',
+              label: '贊成',
+              type: 'select-multiple',
+              directory: 'rep'
+            },
+            {
+              id: 'nay',
+              label: '反對',
+              type: 'select-multiple',
+              directory: 'rep'
+            },
+            {
+              id: 'abstain',
+              label: '棄權',
+              type: 'select-multiple',
+              directory: 'rep'
+            },
+            {
+              id: 'absence',
+              label: '缺席',
+              type: 'select-multiple',
+              directory: 'rep'
+            },
+            {
+              id: 'g0v_link',
+              label: 'g0v連結',
+              type: 'text'
+            },
+            {
+              id: 'source_link',
+              label: '原始資料連結',
+              type: 'text'
+            },
+            {
+              id: 'tag',
+              label: '標籤',
+              type: 'select-multiple',
+              directory: 'rs_tag'
             }
           ],
           options: {

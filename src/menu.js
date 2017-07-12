@@ -79,23 +79,23 @@ var menu = [
     name: '委員表態',
     pages: [
       {
-        id: 'statements',
-        directory: 'statement',
-        editor: 'statement',
+        id: 'rs_statements',
+        directory: 'rs_statement',
+        editor: 'rs_statement',
         name: '發言',
         title: '發言'
       },
       {
-        id: 'sponsorships',
-        directory: 'sponsorship',
-        editor: 'sponsorship',
+        id: 'rs_bills',
+        directory: 'rs_bill',
+        editor: 'rs_bill',
         name: '提案',
         title: '提案、連署'
       },
       {
-        id: 'votes',
-        directory: 'vote',
-        editor: 'vote',
+        id: 'rs_votes',
+        directory: 'rs_vote',
+        editor: 'rs_vote',
         name: '表決',
         title: '表決'
       }

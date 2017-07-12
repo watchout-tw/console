@@ -81,5 +81,11 @@ export default {
     directory: 'sponsor',
     label: '提案者',
     type: 'select'
+  },
+  rs_position: {
+    id: 'rs_position',
+    directory: 'rs_position',
+    label: '立場',
+    type: 'select'
   }
 }

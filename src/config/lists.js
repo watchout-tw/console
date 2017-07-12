@@ -356,11 +356,11 @@ export default {
       }
     ]
   },
-  statements: {
+  rs_statements: {
     filters: [
       {
         id: 'specific_topic',
-        mapToColumn: 'st_title'
+        mapToColumn: 'st_id'
       },
       {
         id: 'term',
@@ -368,16 +368,20 @@ export default {
       },
       {
         id: 'rep',
-        mapToColumn: 'rep_name'
+        mapToColumn: 'rep_id'
       },
       {
         id: 'party',
-        mapToColumn: 'party_name'
+        mapToColumn: 'rep_party_id'
+      },
+      {
+        id: 'rs_position',
+        mapToColumn: 'position'
       }
     ],
     columns: [
       {
-        prop: 'st_title',
+        prop: 'st_id',
         label: '關聯小議題'
       },
       {
@@ -386,28 +390,32 @@ export default {
         width: columnWidth(2)
       },
       {
-        prop: 'rep_name',
+        prop: 'rep_id',
         label: '立法委員'
       },
       {
-        prop: 'party_name',
+        prop: 'rep_party_id',
         label: '政黨'
       },
       {
-        prop: 'summary',
-        label: '摘要'
+        prop: 'content',
+        label: '內容'
       },
       {
-        prop: 'speech_content',
-        label: '內容'
+        prop: 'position',
+        label: '立場'
+      },
+      {
+        prop: 'position_summary',
+        label: '立場摘要'
       }
     ]
   },
-  sponsorships: {
+  rs_bills: {
     filters: [
       {
         id: 'specific_topic',
-        mapToColumn: 'st_title'
+        mapToColumn: 'specific_topics'
       },
       {
         id: 'term',
@@ -415,7 +423,7 @@ export default {
       },
       {
         id: 'act',
-        mapToColumn: 'act'
+        mapToColumn: 'act_id'
       },
       {
         id: 'sponsor_type',
@@ -432,8 +440,12 @@ export default {
     ],
     columns: [
       {
-        prop: 'st_title',
+        prop: 'specific_topics',
         label: '關聯小議題'
+      },
+      {
+        prop: 'act_id',
+        label: '關聯法案'
       },
       {
         prop: 'term_index',
@@ -442,52 +454,36 @@ export default {
       },
       {
         prop: 'principle_sponsor_type',
-        label: '首位提案者類別'
-      },
-      {
-        prop: 'principle_sponsor_party',
-        label: '首位提案者政黨'
+        label: '第一提案者類別'
       },
       {
         prop: 'principle_sponsor',
-        label: '首位提案者'
+        label: '第一提案者'
       },
       {
-        prop: 'sponsors',
-        label: '提案者'
+        prop: 'principle_sponsor_party',
+        label: '第一提案者政黨'
       },
       {
-        prop: 'cosponsors',
-        label: '連署者'
-      },
-      {
-        prop: 'propose_date',
-        label: '日期'
-      },
-      {
-        prop: 'speech_content',
+        prop: 'content',
         label: '內容'
       }
     ]
   },
-  votes: {
+  rs_votes: {
     filters: [
       {
         id: 'specific_topic',
-        mapToColumn: 'st_title'
+        mapToColumn: 'st_id'
       },
       {
         id: 'term',
         mapToColumn: 'term_index'
-      },
-      {
-        id: 'name',
-        mapToColumn: 'name'
       }
     ],
     columns: [
       {
-        prop: 'st_title',
+        prop: 'st_id',
         label: '關聯小議題'
       },
       {
@@ -496,24 +492,20 @@ export default {
         width: columnWidth(2)
       },
       {
-        prop: 'date',
-        label: '日期'
-      },
-      {
-        prop: 'name',
-        label: '名稱'
+        prop: 'title',
+        label: '標題'
       },
       {
         prop: 'aye_count',
         label: '贊成人數'
       },
       {
-        prop: 'abstain_count',
-        label: '棄權人數'
-      },
-      {
         prop: 'nay_count',
         label: '反對人數'
+      },
+      {
+        prop: 'abstain_count',
+        label: '棄權人數'
       },
       {
         prop: 'absence_count',
