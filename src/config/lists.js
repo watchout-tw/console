@@ -418,24 +418,24 @@ export default {
         mapToColumn: 'specific_topics'
       },
       {
-        id: 'term',
-        mapToColumn: 'term_index'
-      },
-      {
         id: 'act',
         mapToColumn: 'act_id'
+      },
+      {
+        id: 'term',
+        mapToColumn: 'term_index'
       },
       {
         id: 'sponsor_type',
         mapToColumn: 'principle_sponsor_type'
       },
       {
-        id: 'party',
-        mapToColumn: 'principle_sponsor_party'
+        id: 'sponsor',
+        mapToColumn: 'principle_sponsor_value'
       },
       {
-        id: 'sponsor',
-        mapToColumn: 'principle_sponsor'
+        id: 'party',
+        mapToColumn: 'principle_sponsor_party'
       }
     ],
     columns: [
@@ -457,7 +457,7 @@ export default {
         label: '第一提案者類別'
       },
       {
-        prop: 'principle_sponsor',
+        prop: 'principle_sponsor_value',
         label: '第一提案者'
       },
       {
