@@ -5,7 +5,7 @@
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
-    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows="model[section.id]" :page="page"></editor-table>
+    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows="model[section.id]" :page="page" :isInitialized="isInitialized"></editor-table>
     <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
@@ -29,6 +29,7 @@ export default {
   props: ['page'],
   data() {
     return {
+      isInitialized: false,
       sections: [],
       model: {}
     }
@@ -77,11 +78,13 @@ export default {
             this.$set(this.model, section.id, [])
           }
         }
+        this.isInitialized = true
       } else {
         // this is temporary until /list/:id is ready
         let path = this.$route.fullPath.split('/')
         axios.get('https://c0re.watchout.tw/console/lab/' + path[1]).then(response => {
           this.model = response.data.rows[key]
+          this.isInitialized = true
         })
       }
     },

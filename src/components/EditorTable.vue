@@ -31,21 +31,16 @@
 import AbstractSelect from '@/components/AbstractSelect'
 
 export default {
-  props: ['rows', 'config', 'page'],
+  props: ['rows', 'config', 'page', 'isInitialized'],
   data() {
     return {
       componentSize: 'small',
-      intialized: false,
       flags: []
     }
   },
   watch: {
-    'rows'() {
-      if(!this.initialized) {
-        console.log('editor table init')
-        this.flags = this.rows.map(row => ({isEditing: false}))
-        this.initialized = true
-      }
+    'isInitialized'(now) {
+      this.flags = this.rows.map(row => ({isEditing: false}))
     }
   },
   methods: {
