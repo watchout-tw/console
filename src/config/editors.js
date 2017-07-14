@@ -1,3 +1,4 @@
+import uuid from 'uuid/v4'
 import { labelWidth } from '@/util/element'
 import formatters from '@/config/formatters'
 
@@ -13,16 +14,19 @@ export default {
           fields: [
             {
               id: 'index',
+              uniqueID: 'number-' + uuid(),
               label: '屆期',
               type: 'number'
             },
             {
               id: 'start_date',
+              uniqueID: 'date-' + uuid(),
               label: '起始日',
               type: 'date'
             },
             {
               id: 'end_date',
+              uniqueID: 'date-' + uuid(),
               label: '終止日',
               type: 'date'
             }
@@ -147,16 +151,19 @@ export default {
           fields: [
             {
               id: 'name',
+              uniqueID: 'text-' + uuid(),
               label: '全名',
               type: 'text'
             },
             {
               id: 'abbreviation',
+              uniqueID: 'text-' + uuid(),
               label: '短名',
               type: 'text'
             },
             {
               id: 'category',
+              uniqueID: 'sel-' + uuid(),
               label: '分類',
               type: 'select',
               directory: 'committee_category'
@@ -180,22 +187,26 @@ export default {
           fields: [
             {
               id: 'name',
+              uniqueID: 'text-' + uuid(),
               label: '全名',
               type: 'text'
             },
             {
               id: 'abbreviation',
+              uniqueID: 'text-' + uuid(),
               label: '短名',
               type: 'text'
             },
             {
               id: 'zone_name',
+              uniqueID: 'zone-' + uuid(),
               label: '區域',
               type: 'select',
               directory: 'zone'
             },
             {
               id: 'index',
+              uniqueID: 'number-' + uuid(),
               label: '編號',
               type: 'number'
             }
@@ -218,31 +229,37 @@ export default {
           fields: [
             {
               id: 'name',
+              uniqueID: 'text-' + uuid(),
               label: '全名',
               type: 'text'
             },
             {
               id: 'abbreviation',
+              uniqueID: 'text-' + uuid(),
               label: '短名',
               type: 'text'
             },
             {
               id: 'emblem',
+              uniqueID: 'text-' + uuid(),
               label: '代表徽章',
               type: 'text'
             },
             {
               id: 'color',
+              uniqueID: 'color-' + uuid(),
               label: '代表色',
               type: 'color'
             },
             {
               id: 'basic_info',
+              uniqueID: 'textarea-' + uuid(),
               label: '基本資訊',
               type: 'textarea'
             },
             {
               id: 'add_info',
+              uniqueID: 'textarea-' + uuid(),
               label: '補充資訊',
               type: 'textarea'
             }
@@ -265,31 +282,37 @@ export default {
           fields: [
             {
               id: 'name',
+              uniqueID: 'text-' + uuid(),
               label: '全名',
               type: 'text'
             },
             {
               id: 'abbreviation',
+              uniqueID: 'text-' + uuid(),
               label: '短名',
               type: 'text'
             },
             {
               id: 'emblem',
+              uniqueID: 'text-' + uuid(),
               label: '代表徽章',
               type: 'text'
             },
             {
               id: 'color',
+              uniqueID: 'color-' + uuid(),
               label: '代表色',
               type: 'color'
             },
             {
               id: 'basic_info',
+              uniqueID: 'textarea-' + uuid(),
               label: '基本資訊',
               type: 'textarea'
             },
             {
               id: 'add_info',
+              uniqueID: 'textarea-' + uuid(),
               label: '補充資訊',
               type: 'textarea'
             }
@@ -312,37 +335,44 @@ export default {
           fields: [
             {
               id: 'name',
+              uniqueID: 'text-' + uuid(),
               label: '全名',
               type: 'text'
             },
             {
               id: 'birth_date',
+              uniqueID: 'date-' + uuid(),
               label: '出生日期',
               type: 'date'
             },
             {
               id: 'gender',
+              uniqueID: 'gender-' + uuid(),
               label: '性別',
               type: 'gender'
             },
             {
               id: 'highest_edu_degree',
+              uniqueID: 'sel-' + uuid(),
               label: '最高學歷',
               type: 'select',
               directory: 'edu_degree'
             },
             {
               id: 'edu_record',
+              uniqueID: 'textarea-' + uuid(),
               label: '學歷',
               type: 'textarea'
             },
             {
               id: 'experience',
+              uniqueID: 'textarea-' + uuid(),
               label: '經歷',
               type: 'textarea'
             },
             {
               id: 'policy_proposal',
+              uniqueID: 'textarea-' + uuid(),
               label: '政見',
               type: 'textarea'
             }
@@ -530,21 +560,25 @@ export default {
           fields: [
             {
               id: 'title',
+              uniqueID: 'text-' + uuid(),
               label: '標題',
               type: 'text'
             },
             {
               id: 'index',
+              uniqueID: 'number-' + uuid(),
               label: '排序',
               type: 'number'
             },
             {
               id: 'image',
+              uniqueID: 'text-' + uuid(),
               label: '圖像',
               type: 'text'
             },
             {
               id: 'description',
+              uniqueID: 'textarea-' + uuid(),
               label: '敘述',
               type: 'textarea'
             }
@@ -576,21 +610,25 @@ export default {
           fields: [
             {
               id: 'title',
+              uniqueID: 'text-' + uuid(),
               label: '標題',
               type: 'text'
             },
             {
               id: 'index',
+              uniqueID: 'number-' + uuid(),
               label: '排序',
               type: 'number'
             },
             {
               id: 'image',
+              uniqueID: 'text-' + uuid(),
               label: '圖像',
               type: 'text'
             },
             {
               id: 'description',
+              uniqueID: 'textarea-' + uuid(),
               label: '敘述',
               type: 'textarea'
             }
@@ -664,11 +702,13 @@ export default {
           fields: [
             {
               id: 'title',
+              uniqueID: 'text-' + uuid(),
               label: '標題',
               type: 'text'
             },
             {
               id: 'official_seq_no',
+              uniqueID: 'text-' + uuid(),
               label: '院總字號',
               type: 'text'
             }
@@ -700,34 +740,40 @@ export default {
           fields: [
             {
               id: 'specific_topic',
+              uniqueID: 'sel-' + uuid(),
               label: '小議題',
               type: 'select',
               directory: 'specific_topic'
             },
             {
               id: 'act_dir',
+              uniqueID: 'sel-' + uuid(),
               label: '修法方向',
               type: 'select',
               directory: 'act_dir'
             },
             {
               id: 'act',
+              uniqueID: 'sel-' + uuid(),
               label: '法案',
               type: 'select',
               directory: 'act'
             },
             {
               id: 'feature',
+              uniqueID: 'text-' + uuid(),
               label: '法案比較',
               type: 'text'
             },
             {
               id: 'dir',
+              uniqueID: 'text-' + uuid(),
               label: '法案比較價值判斷',
               type: 'text'
             },
             {
               id: 'content',
+              uniqueID: 'text-' + uuid(),
               label: '法案比較內容說明',
               type: 'text'
             }
@@ -771,17 +817,20 @@ export default {
           fields: [
             {
               id: 'st_id',
+              uniqueID: 'sel-' + uuid(),
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
             },
             {
               id: 'date',
+              uniqueID: 'date-' + uuid(),
               label: '日期',
               type: 'date'
             },
             {
               id: 'term_index',
+              uniqueID: 'sel-' + uuid(),
               label: '屆期',
               type: 'select',
               directory: 'term',
@@ -789,18 +838,21 @@ export default {
             },
             {
               id: 'session_index',
+              uniqueID: 'number-' + uuid(),
               label: '會期',
               type: 'number',
               determined_by: 'speech_date'
             },
             {
               id: 'rep',
+              uniqueID: 'sel-' + uuid(),
               label: '委員',
               type: 'select',
               directory: 'rep'
             },
             {
               id: 'rep_party_id',
+              uniqueID: 'sel-' + uuid(),
               label: '當時所屬政黨',
               type: 'select',
               directory: 'party',
@@ -808,45 +860,53 @@ export default {
             },
             {
               id: 'principle_committee',
+              uniqueID: 'sel-' + uuid(),
               label: '主審委員會',
               type: 'select',
               directory: 'committee'
             },
             {
               id: 'joint_committee',
+              uniqueID: 'mulsel-' + uuid(),
               label: '聯席委員會',
               type: 'select-multiple',
               directory: 'committee'
             },
             {
               id: 'content',
+              uniqueID: 'textarea-' + uuid(),
               label: '內容',
               type: 'textarea'
             },
             {
               id: 'st_question_id',
+              uniqueID: 'sel-' + uuid(),
               label: '爭點',
               type: 'select',
               directory: 'st_question'
             },
             {
               id: 'position',
+              uniqueID: 'sel-' + uuid(),
               label: '立場',
               type: 'select',
               directory: 'rs_position'
             },
             {
               id: 'position_summary',
+              uniqueID: 'textarea-' + uuid(),
               label: '立場摘要',
               type: 'textarea'
             },
             {
               id: 'source_link',
+              uniqueID: 'text-' + uuid(),
               label: '原始資料連結',
               type: 'text'
             },
             {
               id: 'tag',
+              uniqueID: 'mulsel-' + uuid(),
               label: '標籤',
               type: 'select-multiple-creative',
               directory: 'rs_tag'
@@ -870,17 +930,20 @@ export default {
           fields: [
             {
               id: 'act_id',
+              uniqueID: 'sel-' + uuid(),
               label: '關聯法案',
               type: 'select',
               directory: 'act'
             },
             {
               id: 'date',
+              uniqueID: 'date-' + uuid(),
               label: '日期',
               type: 'date'
             },
             {
               id: 'term_index',
+              uniqueID: 'sel-' + uuid(),
               label: '屆期',
               type: 'select',
               directory: 'term',
@@ -888,6 +951,7 @@ export default {
             },
             {
               id: 'session_index',
+              uniqueID: 'number-' + uuid(),
               label: '會期',
               type: 'number',
               determined_by: 'date'
@@ -936,45 +1000,53 @@ export default {
           fields: [
             {
               id: 'proposal_no',
+              uniqueID: 'text-' + uuid(),
               label: '字號',
               type: 'text'
             },
             {
               id: 'principle_sponsor_type',
+              uniqueID: 'sel-' + uuid(),
               label: '第一提案人類別',
               type: 'select',
               directory: 'sponsor_type'
             },
             {
               id: 'principle_sponsor_value',
+              uniqueID: 'sel-' + uuid(),
               label: '第一提案人',
               type: 'select',
               directory: 'sponsor'
             },
             {
               id: 'sponsors',
+              uniqueID: 'mulsel-' + uuid(),
               label: '提案人',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'cosponsors',
+              uniqueID: 'mulsel-' + uuid(),
               label: '連署人',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'content',
+              uniqueID: 'textarea-' + uuid(),
               label: '內容',
               type: 'textarea'
             },
             {
               id: 'data_source_link',
+              uniqueID: 'text-' + uuid(),
               label: '資料來源連結',
               type: 'text'
             },
             {
               id: 'progress_source_link',
+              uniqueID: 'text-' + uuid(),
               label: '進程來源連結',
               type: 'text'
             }
@@ -1090,17 +1162,20 @@ export default {
           fields: [
             {
               id: 'st_id',
+              uniqueID: 'sel-' + uuid(),
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
             },
             {
               id: 'date',
+              uniqueID: 'date-' + uuid(),
               label: '日期',
               type: 'date'
             },
             {
               id: 'term_index',
+              uniqueID: 'sel-' + uuid(),
               label: '屆期',
               type: 'select',
               directory: 'term',
@@ -1108,56 +1183,66 @@ export default {
             },
             {
               id: 'session_index',
+              uniqueID: 'number-' + uuid(),
               label: '會期',
               type: 'number',
               determined_by: 'date'
             },
             {
               id: 'title',
+              uniqueID: 'text-' + uuid(),
               label: '標題',
               type: 'text'
             },
             {
               id: 'content',
+              uniqueID: 'textarea-' + uuid(),
               label: '內容',
               type: 'textarea'
             },
             {
               id: 'aye',
+              uniqueID: 'mulsel-' + uuid(),
               label: '贊成',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'nay',
+              uniqueID: 'mulsel-' + uuid(),
               label: '反對',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'abstain',
+              uniqueID: 'mulsel-' + uuid(),
               label: '棄權',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'absence',
+              uniqueID: 'mulsel-' + uuid(),
               label: '缺席',
               type: 'select-multiple',
               directory: 'rep'
             },
             {
               id: 'g0v_link',
+              uniqueID: 'text-' + uuid(),
               label: 'g0v連結',
               type: 'text'
             },
             {
               id: 'source_link',
+              uniqueID: 'text-' + uuid(),
               label: '原始資料連結',
               type: 'text'
             },
             {
               id: 'tag',
+              uniqueID: 'mulsel-' + uuid(),
               label: '標籤',
               type: 'select-multiple-creative',
               directory: 'rs_tag'
