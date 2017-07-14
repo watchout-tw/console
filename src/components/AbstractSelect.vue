@@ -47,6 +47,9 @@ export default {
       return this.config.type === type
     },
     update() {
+      if (!this.config.directory) {
+        return
+      }
       this.$store.dispatch('updateSelect', {
         directoryID: this.config.directory,
         uniqueID: this.config.uniqueID
@@ -54,12 +57,13 @@ export default {
     },
     handleChange() {
       this.$emit('update:value', this.tmp)
-      if (this.config.cascade_update) {
-        this.$emit('update:cascade', {
-          target: this.config.cascade_update,
-          directoryID: this.tmp
-        })
+      if (!this.config.cascade_update) {
+        return
       }
+      this.$emit('update:cascade', {
+        target: this.config.cascade_update,
+        directoryID: this.tmp
+      })
     }
   }
 }
