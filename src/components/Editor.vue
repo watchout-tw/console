@@ -1,7 +1,7 @@
 <template>
 <div class="editor">
   <div class="title"><h1 class="small">{{ page.routes.edit.title }}</h1></div>
-  <section v-for="section in sections" :key="section.title">
+  <section v-for="section in sections" :key="section.title" v-if="shouldSectionRender(section)">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
@@ -44,6 +44,17 @@ export default {
   methods: {
     sectionIs(section, type) {
       return section.interface.type === type
+    },
+    shouldSectionRender(section) {
+      if(section.condition) {
+        var result = true
+        for(let key in section.condition) {
+          let requiredValue = section.condition[key]
+          result = result && (this.model[key] === requiredValue)
+        }
+        return result
+      }
+      return true
     },
     update() {
       console.log('Editor:', this.page.id)

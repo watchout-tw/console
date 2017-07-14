@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable :multiple="isMultiple" :allow-create="isMultiple">
+  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable :multiple="isMultiple" :allow-create="isCreative">
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>
@@ -24,6 +24,9 @@ export default {
   computed: {
     isMultiple(type) {
       return this.config.type.indexOf('multiple') > -1
+    },
+    isCreative(type) {
+      return this.config.type.indexOf('creative') > -1
     },
     options() {
       return this.$store.state[this.uniqueID]

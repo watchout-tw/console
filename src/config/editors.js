@@ -6,7 +6,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '屆期',
+        title: '基本資料',
         description: '這個屆期的基本資料',
         interface: {
           type: 'form',
@@ -77,10 +77,24 @@ export default {
       {
         id: 'caucuses',
         title: '黨團、政團',
-        description: '這個屆期所有曾經有席次的黨團、政團',
+        description: '這個屆期所有曾經有席次的黨團或政團',
         interface: {
-          type: 'checklist',
-          id: 'caucus'
+          type: 'table',
+          name: '黨團或政團',
+          columns: [
+            {
+              prop: 'caucus_id',
+              label: '黨團或政團',
+              type: 'select',
+              directory: 'caucus'
+            },
+            {
+              prop: 'party_id_array',
+              label: '關聯政黨',
+              type: 'select-multiple',
+              directory: 'party'
+            }
+          ]
         }
       },
       {
@@ -126,7 +140,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '委員會',
+        title: '基本資料',
         description: '委員會基本資料',
         interface: {
           type: 'form',
@@ -159,7 +173,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '選區',
+        title: '基本資料',
         description: '選區基本資料',
         interface: {
           type: 'form',
@@ -197,7 +211,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '政黨',
+        title: '基本資料',
         description: '政黨基本資料',
         interface: {
           type: 'form',
@@ -244,7 +258,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '黨團或政團',
+        title: '基本資料',
         description: '黨團或政團基本資料',
         interface: {
           type: 'form',
@@ -291,7 +305,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '委員',
+        title: '基本資料',
         description: '委員基本資料',
         interface: {
           type: 'form',
@@ -509,7 +523,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '大議題',
+        title: '基本資料',
         description: '這個大議題的基本資料',
         interface: {
           type: 'form',
@@ -555,7 +569,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '小議題',
+        title: '基本資料',
         description: '這個小議題的基本資料',
         interface: {
           type: 'form',
@@ -643,7 +657,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '法案',
+        title: '基本資料',
         description: '這個法案的基本資料',
         interface: {
           type: 'form',
@@ -679,7 +693,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '法案比較',
+        title: '基本資料',
         description: '這個法案比較的基本資料',
         interface: {
           type: 'form',
@@ -750,7 +764,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '發言',
+        title: '基本資料',
         description: '這個發言的基本資料',
         interface: {
           type: 'form',
@@ -834,7 +848,7 @@ export default {
             {
               id: 'tag',
               label: '標籤',
-              type: 'select-multiple',
+              type: 'select-multiple-creative',
               directory: 'rs_tag'
             }
           ],
@@ -849,7 +863,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '提案',
+        title: '基本資料',
         description: '這個提案的基本資料',
         interface: {
           type: 'form',
@@ -859,11 +873,6 @@ export default {
               label: '關聯法案',
               type: 'select',
               directory: 'act'
-            },
-            {
-              id: 'proposal_no',
-              label: '字號',
-              type: 'text'
             },
             {
               id: 'date',
@@ -884,6 +893,48 @@ export default {
               determined_by: 'date'
             },
             {
+              id: 'is_law',
+              label: '是否為現行法律',
+              type: 'switch'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(7)
+          }
+        }
+      },
+      {
+        id: 'law',
+        title: '現行法律',
+        description: '現行法律詳細資訊',
+        condition: {
+          is_law: true
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'law_version',
+              label: '法律版本',
+              type: 'text'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(7)
+          }
+        }
+      },
+      {
+        id: 'proposal',
+        title: '提案',
+        description: '提案詳細資訊',
+        condition: {
+          is_law: false
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
               id: 'principle_sponsor_type',
               label: '第一提案人類別',
               type: 'select',
@@ -894,6 +945,11 @@ export default {
               label: '第一提案人',
               type: 'select',
               directory: 'sponsor'
+            },
+            {
+              id: 'proposal_no',
+              label: '字號',
+              type: 'text'
             },
             {
               id: 'sponsors',
@@ -927,6 +983,99 @@ export default {
             labelWidth: labelWidth(7)
           }
         }
+      },
+      {
+        id: 'progress',
+        title: '審議進度',
+        description: '本提案的審議進度',
+        condition: {
+          is_law: false
+        },
+        interface: {
+          type: 'table',
+          name: '審議進度',
+          columns: [
+            {
+              prop: 'date',
+              label: '日期',
+              type: 'date'
+            },
+            {
+              prop: 'progress',
+              label: '審議進度',
+              type: 'select',
+              directory: 'legislative_step'
+            }
+          ]
+        }
+      },
+      {
+        id: 'st_questions',
+        title: '爭點',
+        description: '本提案的爭點立場判斷',
+        interface: {
+          type: 'table',
+          name: '爭點立場判斷',
+          columns: [
+            {
+              prop: 'specific_topic',
+              label: '小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              prop: 'st_question_id',
+              label: '爭點',
+              type: 'select',
+              directory: 'st_question'
+            },
+            {
+              prop: 'position',
+              label: '立場',
+              type: 'select',
+              directory: 'rs_position'
+            }
+          ]
+        }
+      },
+      {
+        id: 'act_features',
+        title: '法案比較',
+        description: '與本提案相關聯的法案比較',
+        interface: {
+          type: 'table',
+          name: '法案比較',
+          columns: [
+            {
+              prop: 'specific_topic',
+              label: '小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              prop: 'act_dir',
+              label: '修法方向',
+              type: 'select',
+              directory: 'act_dir'
+            },
+            {
+              prop: 'act_feature',
+              label: '比較項目',
+              type: 'select',
+              directory: 'act_feature'
+            },
+            {
+              prop: 'short_content',
+              label: '簡短內容',
+              type: 'text'
+            },
+            {
+              prop: 'content',
+              label: '完整內容',
+              type: 'text'
+            }
+          ]
+        }
       }
     ]
   },
@@ -934,7 +1083,7 @@ export default {
     sections: [
       {
         id: 'base',
-        title: '表決',
+        title: '基本資料',
         description: '這個表決的基本資料',
         interface: {
           type: 'form',
@@ -1010,7 +1159,7 @@ export default {
             {
               id: 'tag',
               label: '標籤',
-              type: 'select-multiple',
+              type: 'select-multiple-creative',
               directory: 'rs_tag'
             }
           ],

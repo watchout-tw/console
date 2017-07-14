@@ -6,6 +6,7 @@
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]"></el-input>
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
       <el-date-picker v-if="fieldIs(field, 'date')" v-model="model[field.id]"></el-date-picker>
+      <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
       <el-color-picker v-if="fieldIs(field, 'color')" v-model="model[field.id]" show-alpha></el-color-picker>
       <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :config="field" :page="page"></abstract-select>
       <gender-slider v-if="fieldIs(field, 'gender')" :value.sync="model[field.id]" :config="field" :page="page"></gender-slider>

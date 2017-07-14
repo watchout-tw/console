@@ -59,6 +59,12 @@ export default {
     value: 'id',
     label: 'name'
   },
+  act_feature: {
+    id: 'act_feature',
+    api: 'act_features',
+    value: 'id',
+    label: 'feature'
+  },
   rep: {
     id: 'rep',
     api: 'reps',
@@ -202,5 +208,11 @@ export default {
         label: '反對'
       }
     ]
+  },
+  legislative_step: {
+    id: 'legislative_step',
+    api: 'legislative_steps',
+    value: 'id',
+    label: 'name'
   }
 }

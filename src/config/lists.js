@@ -435,7 +435,8 @@ export default {
       },
       {
         id: 'party',
-        mapToColumn: 'principle_sponsor_party'
+        mapToColumn: 'principle_sponsor_parties',
+        compare: idFromList
       }
     ],
     columns: [
@@ -461,7 +462,7 @@ export default {
         label: '第一提案者'
       },
       {
-        prop: 'principle_sponsor_party',
+        prop: 'principle_sponsor_parties',
         label: '第一提案者政黨'
       },
       {

@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     columnIs(column, type) {
-      return column.type === type
+      return column.type.split('-').shift() === type
     },
     confirmRow($index) {
       this.flags[$index].isEditing = false
