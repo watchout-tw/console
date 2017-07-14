@@ -60,11 +60,11 @@ export default {
     },
     handleChange() {
       this.$emit('update:value', this.tmp)
-      if (!this.config.cascade_update) {
+      if (!this.config.cascadeUpdate) {
         return
       }
       this.$emit('update:cascade', {
-        target: this.config.cascade_update,
+        target: this.config.cascadeUpdate,
         directoryID: this.tmp
       })
     }

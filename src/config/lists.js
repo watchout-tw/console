@@ -454,7 +454,7 @@ export default {
       {
         id: 'sponsor_type',
         uniqueID: 'sel-' + uuid(),
-        cascade_update: 'sponsor',
+        cascadeUpdate: 'sponsor',
         mapToColumn: 'principle_sponsor_type'
       },
       {
