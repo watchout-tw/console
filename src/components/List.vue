@@ -6,7 +6,7 @@
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <template v-for="filter in filters" >
-      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :config="filter" :page="page"></abstract-select>
+      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :cascade.sync="cascadeSelect" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
         <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
       </div>
@@ -43,7 +43,8 @@ export default {
       filters: [],
       columns: [],
       queryParameters: {},
-      config: undefined
+      config: undefined,
+      cascadeSelect: {}
     }
   },
   computed: {
@@ -77,6 +78,9 @@ export default {
         this.generateFilteredList()
       },
       deep: true
+    },
+    'cascadeSelect'(newVal) {
+      this.updateCascadeSelect(newVal)
     }
   },
   methods: {
@@ -131,7 +135,16 @@ export default {
           filterInfo: lists[this.page.id].filters
         })
       }
-    }, 300)
+    }, 300),
+    updateCascadeSelect (updateObj) {
+      var cascadeSelect = this.filters.find(fil => {
+        return fil.id === updateObj.target
+      })
+      this.$store.dispatch('updateSelect', {
+        directoryID: updateObj.directoryID,
+        uniqueID: cascadeSelect.uniqueID
+      })
+    }
   },
   components: {
     AbstractSelect,

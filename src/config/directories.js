@@ -77,11 +77,11 @@ export default {
         label: '政府單位'
       },
       {
-        value: 'Caucus',
+        value: 'caucus',
         label: '黨團或政團'
       },
       {
-        value: 'Rep',
+        value: 'rep',
         label: '委員'
       }
     ]
