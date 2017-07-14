@@ -914,7 +914,7 @@ export default {
           type: 'form',
           fields: [
             {
-              id: 'law_version',
+              id: 'law_version_no',
               label: '法律版本',
               type: 'text'
             }
@@ -935,6 +935,11 @@ export default {
           type: 'form',
           fields: [
             {
+              id: 'proposal_no',
+              label: '字號',
+              type: 'text'
+            },
+            {
               id: 'principle_sponsor_type',
               label: '第一提案人類別',
               type: 'select',
@@ -945,11 +950,6 @@ export default {
               label: '第一提案人',
               type: 'select',
               directory: 'sponsor'
-            },
-            {
-              id: 'proposal_no',
-              label: '字號',
-              type: 'text'
             },
             {
               id: 'sponsors',
