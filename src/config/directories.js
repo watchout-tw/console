@@ -73,7 +73,7 @@ export default {
     id: 'sponsor_type',
     options: [
       {
-        value: 'Gov_Agency',
+        value: 'gov_agency',
         label: '政府單位'
       },
       {
