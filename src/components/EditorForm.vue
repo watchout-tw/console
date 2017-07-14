@@ -9,6 +9,7 @@
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
       <el-color-picker v-if="fieldIs(field, 'color')" v-model="model[field.id]" show-alpha></el-color-picker>
       <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :config="field" :page="page"></abstract-select>
+      <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :config="field" :page="page"></abstract-multi-select>
       <gender-slider v-if="fieldIs(field, 'gender')" :value.sync="model[field.id]" :config="field" :page="page"></gender-slider>
     </el-form-item>
   </el-form>
@@ -17,6 +18,7 @@
 
 <script>
 import AbstractSelect from '@/components/AbstractSelect'
+import AbstractMultiSelect from '@/components/AbstractMultiSelect'
 import GenderSlider from '@/components/GenderSlider'
 
 export default {
@@ -35,6 +37,7 @@ export default {
   },
   components: {
     AbstractSelect,
+    AbstractMultiSelect,
     GenderSlider
   }
 }

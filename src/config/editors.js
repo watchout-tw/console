@@ -95,7 +95,7 @@ export default {
             {
               prop: 'party_id_array',
               label: '關聯政黨',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'party'
             }
           ]
@@ -867,9 +867,9 @@ export default {
             },
             {
               id: 'joint_committee',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '聯席委員會',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'committee'
             },
             {
@@ -906,9 +906,9 @@ export default {
             },
             {
               id: 'tag',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '標籤',
-              type: 'select-multiple-creative',
+              type: 'multiselect-creative',
               directory: 'rs_tag'
             }
           ],
@@ -958,6 +958,7 @@ export default {
             },
             {
               id: 'is_law',
+              uniqueID: 'switch-' + uuid(),
               label: '是否為現行法律',
               type: 'switch'
             }
@@ -979,6 +980,7 @@ export default {
           fields: [
             {
               id: 'law_version_no',
+              uniqueID: 'text-' + uuid(),
               label: '法律版本',
               type: 'text'
             }
@@ -1020,16 +1022,16 @@ export default {
             },
             {
               id: 'sponsors',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '提案人',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
               id: 'cosponsors',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '連署人',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
@@ -1202,30 +1204,30 @@ export default {
             },
             {
               id: 'aye',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '贊成',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
               id: 'nay',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '反對',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
               id: 'abstain',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '棄權',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
               id: 'absence',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '缺席',
-              type: 'select-multiple',
+              type: 'multiselect',
               directory: 'rep'
             },
             {
@@ -1242,9 +1244,9 @@ export default {
             },
             {
               id: 'tag',
-              uniqueID: 'mulsel-' + uuid(),
+              uniqueID: 'multisel-' + uuid(),
               label: '標籤',
-              type: 'select-multiple-creative',
+              type: 'multiselect-creative',
               directory: 'rs_tag'
             }
           ],

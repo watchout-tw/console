@@ -70,7 +70,7 @@ export default {
       let key = this.$route.params.id
       if(key === 'create') {
         for(let section of this.sections) {
-          if(section.id === 'base') {
+          if(section.interface.type === 'form') {
             for(let field of section.interface.fields) {
               this.$set(this.model, field.id, undefined)
             }
