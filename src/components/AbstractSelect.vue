@@ -7,7 +7,6 @@
 </template>
 
 <script>
-import uuid from 'uuid/v4'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -17,7 +16,6 @@ export default {
   props: ['size', 'value', 'config', 'page'],
   data() {
     return {
-      uniqueID: 'sel-' + uuid(),
       tmp: undefined
     }
   },
@@ -29,7 +27,7 @@ export default {
       return this.config.type.indexOf('creative') > -1
     },
     options() {
-      return this.$store.state[this.uniqueID]
+      return this.$store.state[this.config.uniqueID]
     }
   },
   beforeMount() {
@@ -52,13 +50,23 @@ export default {
       return this.config.type === type
     },
     update() {
+      if (!this.config.directory) {
+        return
+      }
       this.$store.dispatch('updateSelect', {
         directoryID: this.config.directory,
-        uniqueID: this.uniqueID
+        uniqueID: this.config.uniqueID
       })
     },
     handleChange() {
       this.$emit('update:value', this.tmp)
+      if (!this.config.cascade_update) {
+        return
+      }
+      this.$emit('update:cascade', {
+        target: this.config.cascade_update,
+        directoryID: this.tmp
+      })
     }
   }
 }

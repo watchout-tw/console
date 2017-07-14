@@ -78,7 +78,6 @@ export default {
   },
   sponsor: {
     id: 'sponsor',
-    directory: 'sponsor',
     label: '提案者',
     type: 'select'
   },

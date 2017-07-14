@@ -79,22 +79,18 @@ export default {
     id: 'sponsor_type',
     options: [
       {
-        value: 'Gov_Agency',
+        value: 'gov_agency',
         label: '政府單位'
       },
       {
-        value: 'Caucus',
+        value: 'caucus',
         label: '黨團或政團'
       },
       {
-        value: 'Rep',
+        value: 'rep',
         label: '委員'
       }
     ]
-  },
-  sponsor: {
-    id: 'sponsor',
-    api: 'sponsors'
   },
   committee_category: {
     id: 'committee_category',
