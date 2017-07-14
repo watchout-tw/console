@@ -86,10 +86,6 @@ export default {
       }
     ]
   },
-  sponsor: {
-    id: 'sponsor',
-    api: 'sponsors'
-  },
   committee_category: {
     id: 'committee_category',
     options: [
