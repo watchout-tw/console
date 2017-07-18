@@ -163,8 +163,8 @@ export default {
       }
     ]
   },
-  rep_term_office: {
-    id: 'rep_term_office',
+  rep_term_duty: {
+    id: 'rep_term_duty',
     options: [
       {
         value: 'speaker',

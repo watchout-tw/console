@@ -58,7 +58,7 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'name',
         compare: stringCompare
       }
@@ -85,25 +85,25 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'name',
         compare: stringCompare
       },
       {
         id: 'term',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'history',
         compare: stringCompare
       },
       {
         id: 'district',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'history',
         compare: stringCompare
       },
       {
         id: 'party',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'history',
         compare: stringCompare
       }
@@ -126,13 +126,13 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'name',
         compare: stringCompare
       },
       {
         id: 'zone',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'zone_name',
         compare: stringCompare
       }
@@ -166,7 +166,7 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'name',
         compare: stringCompare
       }
@@ -195,7 +195,7 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'name',
         compare: stringCompare
       }
@@ -224,7 +224,7 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'title',
         compare: stringCompare
       }
@@ -254,13 +254,13 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'title',
         compare: stringCompare
       },
       {
         id: 'general_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'general_topic',
         compare: stringCompare
       }
@@ -300,13 +300,13 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'title',
         compare: stringCompare
       },
       {
         id: 'specific_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'specific_topics',
         compare: idFromList
       }
@@ -331,19 +331,19 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'specific_topic',
         compare: idPropCompare
       },
       {
         id: 'act',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'act',
         compare: idPropCompare
       },
       {
         id: 'act_dir',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'act_dir',
         compare: idPropCompare
       }
@@ -378,27 +378,27 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'st_id'
       },
       {
         id: 'term',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'term_index'
       },
       {
         id: 'rep',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'rep_id'
       },
       {
         id: 'party',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'rep_party_id'
       },
       {
         id: 'rs_position',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'position'
       }
     ],
@@ -438,33 +438,33 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'specific_topics'
       },
       {
         id: 'act',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'act_id'
       },
       {
         id: 'term',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'term_index'
       },
       {
         id: 'sponsor_type',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         cascadeUpdate: 'sponsor',
         mapToColumn: 'principle_sponsor_type'
       },
       {
         id: 'sponsor',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'principle_sponsor_value'
       },
       {
         id: 'party',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'principle_sponsor_party',
         compare: idFromList
       }
@@ -505,12 +505,12 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'st_id'
       },
       {
         id: 'term',
-        uniqueID: 'sel-' + uuid(),
+        uniqueID: uuid(),
         mapToColumn: 'term_index'
       }
     ],

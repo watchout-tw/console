@@ -8,8 +8,10 @@
           <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
           <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]"></el-input-number>
           <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
+          <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
           <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :config="column" :page="page"></abstract-select>
+          <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :config="column" :page="page"></abstract-multi-select>
         </template>
         <template v-else>
           {{ column.formatter ? column.formatter(scope.row, scope.column) : scope.row[scope.column.property] }}
@@ -29,6 +31,7 @@
 
 <script>
 import AbstractSelect from '@/components/AbstractSelect'
+import AbstractMultiSelect from '@/components/AbstractMultiSelect'
 
 export default {
   props: ['rows', 'config', 'page', 'isInitialized'],
@@ -67,7 +70,8 @@ export default {
     }
   },
   components: {
-    AbstractSelect
+    AbstractSelect,
+    AbstractMultiSelect
   }
 }
 </script>
