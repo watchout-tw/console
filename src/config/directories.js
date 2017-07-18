@@ -210,5 +210,17 @@ export default {
     api: 'legislative_steps',
     value: 'id',
     label: 'name'
+  },
+  session: {
+    id: 'session',
+    api: 'term_sessions',
+    value: 'session_index',
+    label: 'session_index'
+  },
+  temp_session: {
+    id: 'temp_session',
+    api: 'term_sessions',
+    value: 'temp_session_index',
+    label: 'temp_session_index'
   }
 }

@@ -531,7 +531,9 @@ export default {
             {
               prop: 'session_index',
               label: '會期',
-              type: 'number'
+              type: 'select',
+              directory: 'session',
+              determined_by: 'term_index'
             },
             {
               prop: 'committee_name',
@@ -838,10 +840,19 @@ export default {
             },
             {
               id: 'session_index',
-              uniqueID: 'number-' + uuid(),
+              uniqueID: 'sel-' + uuid(),
               label: '會期',
-              type: 'number',
-              determined_by: 'speech_date'
+              type: 'select',
+              directory: 'session',
+              determined_by: 'date'
+            },
+            {
+              id: 'temp_session_index',
+              uniqueID: 'sel-' + uuid(),
+              label: '臨時會會期',
+              type: 'select',
+              directory: 'temp_session',
+              determined_by: 'date'
             },
             {
               id: 'rep',
@@ -936,42 +947,21 @@ export default {
               directory: 'act'
             },
             {
-              id: 'date',
-              uniqueID: 'date-' + uuid(),
-              label: '日期',
-              type: 'date'
-            },
-            {
-              id: 'term_index',
-              uniqueID: 'sel-' + uuid(),
-              label: '屆期',
-              type: 'select',
-              directory: 'term',
-              determined_by: 'date'
-            },
-            {
-              id: 'session_index',
-              uniqueID: 'number-' + uuid(),
-              label: '會期',
-              type: 'number',
-              determined_by: 'date'
-            },
-            {
               id: 'is_law',
               uniqueID: 'switch-' + uuid(),
-              label: '是否為現行法律',
+              label: '是否為法律',
               type: 'switch'
             }
           ],
           options: {
-            labelWidth: labelWidth(7)
+            labelWidth: labelWidth(5)
           }
         }
       },
       {
         id: 'law',
-        title: '現行法律',
-        description: '現行法律詳細資訊',
+        title: '法律',
+        description: '法律詳細資訊',
         condition: {
           is_law: true
         },
@@ -981,7 +971,7 @@ export default {
             {
               id: 'law_version_no',
               uniqueID: 'text-' + uuid(),
-              label: '法律版本',
+              label: '版本',
               type: 'text'
             }
           ],
@@ -1000,6 +990,36 @@ export default {
         interface: {
           type: 'form',
           fields: [
+            {
+              id: 'date',
+              uniqueID: 'date-' + uuid(),
+              label: '日期',
+              type: 'date'
+            },
+            {
+              id: 'term_index',
+              uniqueID: 'sel-' + uuid(),
+              label: '屆期',
+              type: 'select',
+              directory: 'term',
+              determined_by: 'date'
+            },
+            {
+              id: 'session_index',
+              uniqueID: 'sel-' + uuid(),
+              label: '會期',
+              type: 'select',
+              directory: 'session',
+              determined_by: 'date'
+            },
+            {
+              id: 'temp_session_index',
+              uniqueID: 'sel-' + uuid(),
+              label: '臨時會期',
+              type: 'select',
+              directory: 'temp_session',
+              determined_by: 'date'
+            },
             {
               id: 'proposal_no',
               uniqueID: 'text-' + uuid(),
@@ -1115,7 +1135,7 @@ export default {
       {
         id: 'act_features',
         title: '法案比較',
-        description: '與本提案相關聯的法案比較',
+        description: '與本提案關聯的法案比較',
         interface: {
           type: 'table',
           name: '法案比較',
@@ -1185,9 +1205,18 @@ export default {
             },
             {
               id: 'session_index',
-              uniqueID: 'number-' + uuid(),
+              uniqueID: 'sel-' + uuid(),
               label: '會期',
-              type: 'number',
+              type: 'select',
+              directory: 'session',
+              determined_by: 'date'
+            },
+            {
+              id: 'temp_session_index',
+              uniqueID: 'sel-' + uuid(),
+              label: '臨時會期',
+              type: 'select',
+              directory: 'temp_session',
               determined_by: 'date'
             },
             {
