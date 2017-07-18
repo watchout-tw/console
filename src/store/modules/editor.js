@@ -1,6 +1,7 @@
+import { Message } from 'element-ui'
+import router from '../../router'
 import * as types from '../mutation-types'
 import * as api from '@/util/api'
-import { Message } from 'element-ui'
 
 const errorMsg = '編輯失敗'
 const successMsg = '編輯成功'
@@ -15,7 +16,8 @@ const getters = {
 
 const actions = {
   submitForm ({ commit, dispatch }, reqObj) {
-    api.postMockForm(reqObj).then(response => {
+    api.postMockForm(reqObj.formData).then(response => {
+      router.push({name: reqObj.routeTo.routes.edit.name, params: {id: response.data[reqObj.routeTo.routingIndex]}})
       dispatch('showSuccessAlert')
     }).catch(error => {
       commit(types.POST_FAIL, error)

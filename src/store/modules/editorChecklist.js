@@ -28,7 +28,6 @@ const actions = {
     api.getDirectory(reqObj).then(response => {
       var valueCol = directories[reqObj.directoryID].value
       var labelCol = directories[reqObj.directoryID].label
-      console.log('updateChecklist', response.data.rows, valueCol, labelCol)
       var respObj = {
         data: response.data.rows.map(row => {
           return {
@@ -48,7 +47,6 @@ const actions = {
 
 const mutations = {
   [types.UPDATE_CHECKLIST] (state, mutateObj) {
-    console.log('mutation: UPDATE_CHECKLIST', mutateObj)
     state[checklistOptions[mutateObj.checklistID]] = mutateObj.data
   },
   [types.FETCH_FAIL] (state, error) {

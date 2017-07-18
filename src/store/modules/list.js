@@ -53,7 +53,6 @@ const actions = {
   },
   getFilteredList ({ commit }, reqObj) {
     api.getListByFilter(reqObj).then(response => {
-      console.log('response.daata', response.data)
       commit(types.GET_FILTERED_LIST, response.data)
     }).catch(error => {
       commit(types.FETCH_FAIL, error)

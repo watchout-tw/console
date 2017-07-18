@@ -40,10 +40,17 @@ export function getListByFilter (reqObj) {
   return axios.get(url)
 }
 
+export function getItem (reqObj) {
+  let url = `/console/lab/${reqObj.pageID}/${reqObj.id}`
+  return axios.get(url)
+}
+
 export function postMockForm (reqObj) {
   // let url = `/console/lab/${reqObj.pageID}`
   // return axios.post(url, reqObj.content)
   return new Promise((resolve, reject) => {
-    resolve(reqObj.content)
+    resolve({
+      data: reqObj
+    })
   })
 }
