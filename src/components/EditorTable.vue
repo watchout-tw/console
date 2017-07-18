@@ -40,7 +40,7 @@ export default {
   },
   watch: {
     'isInitialized'(now) {
-      this.flags = this.rows.map(row => ({isEditing: false}))
+      this.flags = this.rows ? this.rows.map(row => ({isEditing: false})) : []
     }
   },
   methods: {
