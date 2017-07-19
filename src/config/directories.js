@@ -75,8 +75,8 @@ export default {
       all: true
     }
   },
-  sponsor_type: {
-    id: 'sponsor_type',
+  principle_sponsor_type: {
+    id: 'principle_sponsor_type',
     options: [
       {
         value: 'gov_agency',

@@ -135,4 +135,8 @@ export default {
   padding-right: 10px;
 }
 
+.abstract-multi-select > .el-select {
+  width: 100%;
+}
+
 </style>

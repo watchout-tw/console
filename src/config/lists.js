@@ -55,14 +55,7 @@ export default {
     ]
   },
   committees: {
-    filters: [
-      {
-        id: 'name',
-        uniqueID: uuid(),
-        mapToColumn: 'name',
-        compare: stringCompare
-      }
-    ],
+    filters: [],
     key: 'name',
     paged: false,
     columns: [
@@ -86,6 +79,7 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '全名',
         mapToColumn: 'name',
         compare: stringCompare
       },
@@ -122,51 +116,12 @@ export default {
       }
     ]
   },
-  districts: {
-    filters: [
-      {
-        id: 'name',
-        uniqueID: uuid(),
-        mapToColumn: 'name',
-        compare: stringCompare
-      },
-      {
-        id: 'zone',
-        uniqueID: uuid(),
-        mapToColumn: 'zone_name',
-        compare: stringCompare
-      }
-    ],
-    paged: false,
-    columns: [
-      {
-        prop: 'name',
-        label: '全名'
-      },
-      {
-        prop: 'abbreviation',
-        label: '短名'
-      },
-      {
-        prop: 'zone_name',
-        label: '區域'
-      },
-      {
-        prop: 'index',
-        label: '編號',
-        width: columnWidth(2)
-      },
-      {
-        prop: 'neighborhoods',
-        label: '選區內行政區'
-      }
-    ]
-  },
   parties: {
     filters: [
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '全名',
         mapToColumn: 'name',
         compare: stringCompare
       }
@@ -196,6 +151,7 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '全名',
         mapToColumn: 'name',
         compare: stringCompare
       }
@@ -225,6 +181,7 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '標題',
         mapToColumn: 'title',
         compare: stringCompare
       }
@@ -255,12 +212,14 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '標題',
         mapToColumn: 'title',
         compare: stringCompare
       },
       {
         id: 'general_topic',
         uniqueID: uuid(),
+        customLabel: '關聯大議題',
         mapToColumn: 'general_topic',
         compare: stringCompare
       }
@@ -301,12 +260,14 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
+        customLabel: '標題',
         mapToColumn: 'title',
         compare: stringCompare
       },
       {
         id: 'specific_topic',
         uniqueID: uuid(),
+        customLabel: '關聯小議題',
         mapToColumn: 'specific_topics',
         compare: idFromList
       }
@@ -332,18 +293,21 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
+        customLabel: '關聯小議題',
         mapToColumn: 'specific_topic',
         compare: idPropCompare
       },
       {
         id: 'act',
         uniqueID: uuid(),
+        customLabel: '關聯法案',
         mapToColumn: 'act',
         compare: idPropCompare
       },
       {
         id: 'act_dir',
         uniqueID: uuid(),
+        customLabel: '關聯修法方向',
         mapToColumn: 'act_dir',
         compare: idPropCompare
       }
@@ -379,6 +343,7 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
+        customLabel: '關聯小議題',
         mapToColumn: 'st_id'
       },
       {
@@ -404,8 +369,9 @@ export default {
     ],
     columns: [
       {
-        prop: 'st_id',
-        label: '關聯小議題'
+        prop: 'specific_topic',
+        label: '關聯小議題',
+        formatter: formatter.title
       },
       {
         prop: 'term_index',
@@ -439,11 +405,13 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
+        customLabel: '關聯小議題',
         mapToColumn: 'specific_topics'
       },
       {
         id: 'act',
         uniqueID: uuid(),
+        customLabel: '關聯法案',
         mapToColumn: 'act_id'
       },
       {
@@ -452,19 +420,20 @@ export default {
         mapToColumn: 'term_index'
       },
       {
-        id: 'sponsor_type',
+        id: 'principle_sponsor_type',
         uniqueID: uuid(),
-        cascadeUpdate: 'sponsor',
+        cascadeUpdate: 'principle_sponsor',
         mapToColumn: 'principle_sponsor_type'
       },
       {
-        id: 'sponsor',
+        id: 'principle_sponsor',
         uniqueID: uuid(),
         mapToColumn: 'principle_sponsor_value'
       },
       {
         id: 'party',
         uniqueID: uuid(),
+        customLabel: '第一提案者政黨',
         mapToColumn: 'principle_sponsor_party',
         compare: idFromList
       }
@@ -506,6 +475,7 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
+        customLabel: '關聯小議題',
         mapToColumn: 'st_id'
       },
       {

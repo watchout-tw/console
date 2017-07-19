@@ -70,15 +70,15 @@ export default {
     label: '立法委員',
     type: 'select'
   },
-  sponsor_type: {
-    id: 'sponsor_type',
-    directory: 'sponsor_type',
-    label: '提案者類別',
+  principle_sponsor_type: {
+    id: 'principle_sponsor_type',
+    directory: 'principle_sponsor_type',
+    label: '第一提案者類別',
     type: 'select'
   },
-  sponsor: {
-    id: 'sponsor',
-    label: '提案者',
+  principle_sponsor: {
+    id: 'principle_sponsor',
+    label: '第一提案者',
     type: 'select'
   },
   rs_position: {

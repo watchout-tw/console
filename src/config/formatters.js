@@ -21,6 +21,7 @@ export default {
       .join(punct.separator)
   },
   title(row, col) {
+    console.log(row, col)
     return row[col.property] ? row[col.property].title : ''
   },
   name(row, col) {
@@ -56,5 +57,8 @@ export default {
       .filter(option => option.value === value)
       .pop()
       .label
+  },
+  st(row, col) {
+    return row.st.title
   }
 }
