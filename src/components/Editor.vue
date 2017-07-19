@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as api from '@/util/api'
 import editors from '@/config/editors'
 import editorChecklists from '@/config/editorChecklists'
 import EditorForm from '@/components/EditorForm'
@@ -24,6 +24,11 @@ import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 
 Vue.use(Vuex)
+
+function scroll2Top () {
+  document.documentElement.scrollTop = 0
+  document.body.scrollTop = 0
+}
 
 export default {
   props: ['page'],
@@ -38,7 +43,11 @@ export default {
     this.update()
   },
   watch: {
-    'page.id'() { // watch page.id to detect switching between pages
+    // watch page.id to detect switching between pages
+    'page.id'() {
+      this.update()
+    },
+    '$route' (to, from) {
       this.update()
     }
   },
@@ -80,10 +89,11 @@ export default {
         }
         this.isInitialized = true
       } else {
-        // this is temporary until /list/:id is ready
-        let path = this.$route.fullPath.split('/')
-        axios.get('https://c0re.watchout.tw/console/lab/' + path[1]).then(response => {
-          this.model = response.data.rows[key]
+        api.getItem({
+          pageID: this.page.id,
+          id: this.$route.params.id
+        }).then(response => {
+          this.model = response.data.object
           this.isInitialized = true
         })
       }
@@ -92,7 +102,11 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     submit() {
-      this.$store.dispatch('submitForm', this.model)
+      this.$store.dispatch('submitForm', {
+        formData: this.model,
+        routeTo: this.page
+      })
+      scroll2Top()
     }
   },
   components: {

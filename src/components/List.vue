@@ -17,7 +17,7 @@
     <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
     <el-table-column width="48">
       <template scope="scope">
-        <router-link :scope="scope" :to="editItemLink(scope.$index, scope.row)"><el-button type="text" size="small" icon="edit"></el-button></router-link>
+        <el-button type="text" size="small" icon="edit" @click="editItem(scope.row)"></el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -118,9 +118,8 @@ export default {
         })
       }
     },
-    editItemLink($index, row) {
-      return this.$route.fullPath + '/' + $index // row[this.config.key]
-      // this is temporary until /list/:id is ready
+    editItem(row) {
+      this.$router.push({name: this.page.routes.edit.name, params: {id: row[this.page.routingIndex]}})
     },
     generateFilteredList: debounce(function () {
       if (this.config.paged) {
