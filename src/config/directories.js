@@ -92,6 +92,12 @@ export default {
       }
     ]
   },
+  gov_agency: {
+    id: 'gov_agency',
+    api: 'gov_agencies',
+    value: 'id',
+    label: 'name'
+  },
   committee_category: {
     id: 'committee_category',
     options: [

@@ -1,5 +1,5 @@
 import uuid from 'uuid/v4'
-import formatter from '@/config/formatters'
+import formatters from '@/config/formatters'
 import { columnWidth } from '@/util/element'
 
 function stringCompare (haystack, needle) {
@@ -13,6 +13,13 @@ function idPropCompare (haystack, needle) {
 function idFromList (haystack, needle) {
   return haystack.filter(item => item.id === needle).length > 0
 }
+
+/**
+編輯器設定檔
+
+- columns的prop要跟API return object的欄位名稱相符
+
+*/
 
 export default {
   terms: {
@@ -29,28 +36,28 @@ export default {
         prop: 'start_date',
         label: '起',
         width: columnWidth(5),
-        formatter: formatter.date
+        formatter: formatters.date
       },
       {
         prop: 'end_date',
         label: '訖',
         width: columnWidth(5),
-        formatter: formatter.date
+        formatter: formatters.date
       },
       {
         prop: 'sessions',
         label: '會期',
-        formatter: formatter.sessions
+        formatter: formatters.sessions
       },
       {
         prop: 'parties',
         label: '政黨',
-        formatter: formatter.list_abbreviations
+        formatter: formatters.list_abbreviations
       },
       {
         prop: 'caucuses',
         label: '黨團或政團',
-        formatter: formatter.list_abbreviations
+        formatter: formatters.list_abbreviations
       }
     ]
   },
@@ -70,7 +77,7 @@ export default {
       {
         prop: 'category',
         label: '分類',
-        formatter: formatter.committee_category
+        formatter: formatters.committee_category
       }
     ]
   },
@@ -112,7 +119,7 @@ export default {
       {
         prop: 'history',
         label: '任職歷史',
-        formatter: formatter.rep_history
+        formatter: formatters.rep_history
       }
     ]
   },
@@ -203,7 +210,7 @@ export default {
       {
         prop: 'specific_topics',
         label: '關聯小議題',
-        formatter: formatter.list_titles
+        formatter: formatters.list_titles
       }
     ]
   },
@@ -241,17 +248,17 @@ export default {
       {
         prop: 'general_topic',
         label: '關聯大議題',
-        formatter: formatter.list_titles
+        formatter: formatters.list_titles
       },
       {
         prop: 'act_dirs',
         label: '修法方向',
-        formatter: formatter.list_names
+        formatter: formatters.list_names
       },
       {
         prop: 'st_questions',
         label: '爭點',
-        formatter: formatter.list_questions
+        formatter: formatters.list_questions
       }
     ]
   },
@@ -284,7 +291,7 @@ export default {
       {
         prop: 'specific_topics',
         label: '關聯小議題',
-        formatter: formatter.list_titles
+        formatter: formatters.list_titles
       }
     ]
   },
@@ -314,19 +321,19 @@ export default {
     ],
     columns: [
       {
-        prop: 'specific_topic',
+        prop: 'st',
         label: '關聯小議題',
-        formatter: formatter.title
+        formatter: formatters.title
       },
       {
         prop: 'act',
         label: '關聯法案',
-        formatter: formatter.title
+        formatter: formatters.title
       },
       {
         prop: 'act_dir',
         label: '關聯修法方向',
-        formatter: formatter.name
+        formatter: formatters.name
       },
       {
         prop: 'feature',
@@ -369,9 +376,9 @@ export default {
     ],
     columns: [
       {
-        prop: 'specific_topic',
+        prop: 'st',
         label: '關聯小議題',
-        formatter: formatter.title
+        formatter: formatters.title
       },
       {
         prop: 'term_index',
@@ -379,11 +386,11 @@ export default {
         width: columnWidth(2)
       },
       {
-        prop: 'rep_id',
+        prop: 'rep',
         label: '立法委員'
       },
       {
-        prop: 'rep_party_id',
+        prop: 'rep_party',
         label: '政黨'
       },
       {
@@ -422,7 +429,7 @@ export default {
       {
         id: 'principle_sponsor_type',
         uniqueID: uuid(),
-        cascadeUpdate: 'principle_sponsor',
+        cascadeUpdate: ['principle_sponsor'],
         mapToColumn: 'principle_sponsor_type'
       },
       {
@@ -441,11 +448,13 @@ export default {
     columns: [
       {
         prop: 'specific_topics',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatters.list_titles
       },
       {
-        prop: 'act_id',
-        label: '關聯法案'
+        prop: 'act',
+        label: '關聯法案',
+        formatter: formatters.title
       },
       {
         prop: 'term_index',
@@ -458,11 +467,13 @@ export default {
       },
       {
         prop: 'principle_sponsor_value',
-        label: '第一提案者'
+        label: '第一提案者',
+        formatter: formatters.name
       },
       {
         prop: 'principle_sponsor_parties',
-        label: '第一提案者政黨'
+        label: '第一提案者政黨',
+        formatter: formatters.list_names
       },
       {
         prop: 'content',
@@ -486,8 +497,9 @@ export default {
     ],
     columns: [
       {
-        prop: 'st_id',
-        label: '關聯小議題'
+        prop: 'st',
+        label: '關聯小議題',
+        formatter: formatters.title
       },
       {
         prop: 'term_index',

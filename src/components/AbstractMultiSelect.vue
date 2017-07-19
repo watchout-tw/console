@@ -53,13 +53,15 @@ export default {
     },
     handleChange() {
       this.$emit('update:value', this.tmp)
-      if (!this.config.cascadeUpdate) {
+      if(!this.config.cascadeUpdate) {
         return
       }
-      this.$emit('update:cascade', {
-        target: this.config.cascadeUpdate,
-        directoryID: this.tmp
-      })
+      for(let updateTarget of this.config.cascadeUpdate) {
+        this.$emit('update:cascade', {
+          target: updateTarget,
+          directoryID: this.tmp
+        })
+      }
     }
   }
 }
