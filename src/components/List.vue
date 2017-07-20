@@ -8,7 +8,7 @@
     <template v-for="filter in filters" >
       <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :cascade.sync="cascadeSelect" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
-        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.customLabel ? filter.customLabel : filter.label" @change="generateFilteredList"></el-input>
+        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
       </div>
     </template>
   </div>

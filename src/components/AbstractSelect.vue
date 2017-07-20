@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.customLabel ? config.customLabel : config.label" v-model="tmp" @change="handleChange" clearable filterable>
+  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable>
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>

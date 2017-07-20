@@ -478,7 +478,6 @@ export default {
       {
         id: 'principle_sponsor',
         uniqueID: uuid(),
-        directory: 'principle_sponsor',
         label: '第一提案者',
         type: 'select',
         mapToColumn: 'principle_sponsor_value',
@@ -506,6 +505,15 @@ export default {
         formatter: formatters.title
       },
       {
+        prop: 'is_law',
+        label: '法律？',
+        width: columnWidth(3)
+      },
+      {
+        prop: 'law_version_no',
+        label: '版本'
+      },
+      {
         prop: 'term_index',
         label: '屆期',
         width: columnWidth(2)
@@ -523,10 +531,6 @@ export default {
         prop: 'principle_sponsor_parties',
         label: '第一提案者政黨',
         formatter: formatters.list_names
-      },
-      {
-        prop: 'content',
-        label: '內容'
       }
     ]
   },

@@ -5,6 +5,12 @@ export default {
     value: 'index',
     label: 'index'
   },
+  term_district: {
+    id: 'term_district',
+    api: 'term_districts',
+    value: 'district_name',
+    label: 'abbreviation'
+  },
   party: {
     id: 'party',
     api: 'parties',
@@ -31,9 +37,9 @@ export default {
   },
   district: {
     id: 'district',
-    api: 'districts',
-    value: 'district_name',
-    label: 'district_name'
+    api: 'district_unique_names',
+    value: 'name',
+    label: 'name'
   },
   general_topic: {
     id: 'general_topic',

@@ -189,48 +189,6 @@ export default {
       }
     ]
   },
-  district: {
-    sections: [
-      {
-        id: 'base',
-        title: '基本資料',
-        description: '選區基本資料',
-        interface: {
-          type: 'form',
-          fields: [
-            {
-              id: 'name',
-              uniqueID: uuid(),
-              label: '全名',
-              type: 'text'
-            },
-            {
-              id: 'abbreviation',
-              uniqueID: uuid(),
-              label: '短名',
-              type: 'text'
-            },
-            {
-              id: 'zone_name',
-              uniqueID: uuid(),
-              label: '區域',
-              type: 'select',
-              directory: 'zone'
-            },
-            {
-              id: 'index',
-              uniqueID: uuid(),
-              label: '編號',
-              type: 'number'
-            }
-          ],
-          options: {
-            labelWidth: labelWidth(3)
-          }
-        }
-      }
-    ]
-  },
   party: {
     sections: [
       {
@@ -521,7 +479,7 @@ export default {
               uniqueID: uuid(),
               label: '選區',
               type: 'select',
-              directory: 'district'
+              directory: 'term_district'
             },
             {
               prop: 'duty',
@@ -1014,6 +972,12 @@ export default {
               uniqueID: uuid(),
               label: '版本',
               type: 'text'
+            },
+            {
+              id: 'data_source_link',
+              uniqueID: uuid(),
+              label: '資料來源連結',
+              type: 'text'
             }
           ],
           options: {
@@ -1078,8 +1042,7 @@ export default {
               id: 'principle_sponsor_value',
               uniqueID: uuid(),
               label: '第一提案人',
-              type: 'select',
-              directory: 'principle_sponsor'
+              type: 'select'
             },
             {
               id: 'sponsors',
