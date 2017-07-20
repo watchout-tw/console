@@ -1072,14 +1072,14 @@ export default {
               uniqueID: uuid(),
               label: '第一提案人類別',
               type: 'select',
-              directory: 'sponsor_type'
+              directory: 'principle_sponsor_type'
             },
             {
               id: 'principle_sponsor_value',
               uniqueID: uuid(),
               label: '第一提案人',
               type: 'select',
-              directory: 'sponsor'
+              directory: 'principle_sponsor'
             },
             {
               id: 'sponsors',
