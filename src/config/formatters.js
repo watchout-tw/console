@@ -21,7 +21,6 @@ export default {
       .join(punct.separator)
   },
   title(row, col) {
-    console.log(row, col)
     return row[col.property] ? row[col.property].title : ''
   },
   name(row, col) {

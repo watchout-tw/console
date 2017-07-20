@@ -46,7 +46,7 @@ const mutations = {
     })
   },
   [types.POST_FAIL] (state, error) {
-    console.log('error', error)
+    console.error('error', error)
   }
 }
 

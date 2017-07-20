@@ -1,23 +1,13 @@
 import uuid from 'uuid/v4'
 import formatters from '@/config/formatters'
+import comparators from '@/config/comparators'
 import { columnWidth } from '@/util/element'
-
-function stringCompare (haystack, needle) {
-  return haystack.indexOf(needle) > -1
-}
-
-function idPropCompare (haystack, needle) {
-  return haystack.id === needle
-}
-
-function idFromList (haystack, needle) {
-  return haystack.filter(item => item.id === needle).length > 0
-}
 
 /**
 編輯器設定檔
 
-- columns的prop要跟API return object的欄位名稱相符
+- 每個 column 的 prop 要跟 API return object 的欄位名稱相符
+- 加入 formatter 指定如何將該 col 的值 format 成純文字
 
 */
 
@@ -86,27 +76,37 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
-        customLabel: '全名',
+        label: '全名',
+        type: 'input',
         mapToColumn: 'name',
-        compare: stringCompare
+        comparator: comparators.string
       },
       {
         id: 'term',
         uniqueID: uuid(),
-        mapToColumn: 'history',
-        compare: stringCompare
+        directory: 'term',
+        label: '屆期',
+        type: 'select',
+        mapToColumn: 'history'
       },
       {
         id: 'district',
         uniqueID: uuid(),
-        mapToColumn: 'history',
-        compare: stringCompare
+        directory: 'district',
+        label: '選區',
+        type: 'select',
+        feature: {
+          grouped: true
+        },
+        mapToColumn: 'history'
       },
       {
         id: 'party',
         uniqueID: uuid(),
-        mapToColumn: 'history',
-        compare: stringCompare
+        directory: 'party',
+        label: '政黨',
+        type: 'select',
+        mapToColumn: 'history'
       }
     ],
     paged: true,
@@ -128,9 +128,10 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
-        customLabel: '全名',
+        label: '全名',
+        type: 'input',
         mapToColumn: 'name',
-        compare: stringCompare
+        comparator: comparators.string
       }
     ],
     paged: false,
@@ -158,9 +159,10 @@ export default {
       {
         id: 'name',
         uniqueID: uuid(),
-        customLabel: '全名',
+        label: '全名',
+        type: 'input',
         mapToColumn: 'name',
-        compare: stringCompare
+        comparator: comparators.string
       }
     ],
     paged: false,
@@ -186,11 +188,12 @@ export default {
   general_topics: {
     filters: [
       {
-        id: 'name',
+        id: 'title',
         uniqueID: uuid(),
-        customLabel: '標題',
+        label: '標題',
+        type: 'input',
         mapToColumn: 'title',
-        compare: stringCompare
+        comparator: comparators.string
       }
     ],
     columns: [
@@ -217,18 +220,21 @@ export default {
   specific_topics: {
     filters: [
       {
-        id: 'name',
+        id: 'title',
         uniqueID: uuid(),
-        customLabel: '標題',
+        label: '標題',
+        type: 'input',
         mapToColumn: 'title',
-        compare: stringCompare
+        comparator: comparators.string
       },
       {
         id: 'general_topic',
         uniqueID: uuid(),
-        customLabel: '關聯大議題',
-        mapToColumn: 'general_topic',
-        compare: stringCompare
+        directory: 'general_topic',
+        label: '關聯大議題',
+        type: 'select',
+        mapToColumn: 'general_topics',
+        comparator: comparators.idFromList
       }
     ],
     columns: [
@@ -265,18 +271,21 @@ export default {
   acts: {
     filters: [
       {
-        id: 'name',
+        id: 'title',
         uniqueID: uuid(),
-        customLabel: '標題',
+        label: '標題',
+        type: 'input',
         mapToColumn: 'title',
-        compare: stringCompare
+        comparator: comparators.string
       },
       {
         id: 'specific_topic',
         uniqueID: uuid(),
-        customLabel: '關聯小議題',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
         mapToColumn: 'specific_topics',
-        compare: idFromList
+        comparator: comparators.idFromList
       }
     ],
     columns: [
@@ -300,23 +309,29 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
-        customLabel: '關聯小議題',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
         mapToColumn: 'specific_topic',
-        compare: idPropCompare
+        comparator: comparators.id
       },
       {
         id: 'act',
         uniqueID: uuid(),
-        customLabel: '關聯法案',
+        directory: 'act',
+        label: '關聯法案',
+        type: 'select',
         mapToColumn: 'act',
-        compare: idPropCompare
+        comparator: comparators.id
       },
       {
         id: 'act_dir',
         uniqueID: uuid(),
-        customLabel: '關聯修法方向',
+        directory: 'act_dir',
+        label: '關聯修法方向',
+        type: 'select',
         mapToColumn: 'act_dir',
-        compare: idPropCompare
+        comparator: comparators.id
       }
     ],
     columns: [
@@ -350,27 +365,41 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
-        customLabel: '關聯小議題',
-        mapToColumn: 'st_id'
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st'
       },
       {
         id: 'term',
         uniqueID: uuid(),
+        directory: 'term',
+        label: '屆期',
+        type: 'select',
         mapToColumn: 'term_index'
       },
       {
         id: 'rep',
         uniqueID: uuid(),
-        mapToColumn: 'rep_id'
+        directory: 'rep',
+        label: '立法委員',
+        type: 'select',
+        mapToColumn: 'rep'
       },
       {
         id: 'party',
         uniqueID: uuid(),
-        mapToColumn: 'rep_party_id'
+        directory: 'party',
+        label: '政黨',
+        type: 'select',
+        mapToColumn: 'rep_party'
       },
       {
         id: 'rs_position',
         uniqueID: uuid(),
+        directory: 'rs_position',
+        label: '立場',
+        type: 'select',
         mapToColumn: 'position'
       }
     ],
@@ -412,37 +441,57 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
-        customLabel: '關聯小議題',
-        mapToColumn: 'specific_topics'
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'specific_topics',
+        comparator: comparators.idFromList
       },
       {
         id: 'act',
         uniqueID: uuid(),
-        customLabel: '關聯法案',
-        mapToColumn: 'act_id'
+        directory: 'act',
+        label: '關聯法案',
+        type: 'select',
+        mapToColumn: 'act',
+        comparator: comparators.id
       },
       {
         id: 'term',
         uniqueID: uuid(),
-        mapToColumn: 'term_index'
+        directory: 'term',
+        label: '屆期',
+        type: 'select',
+        mapToColumn: 'term_index',
+        comparator: comparators.equal
       },
       {
         id: 'principle_sponsor_type',
         uniqueID: uuid(),
+        directory: 'principle_sponsor_type',
+        label: '第一提案者類別',
+        type: 'select',
         cascadeUpdate: ['principle_sponsor'],
-        mapToColumn: 'principle_sponsor_type'
+        mapToColumn: 'principle_sponsor_type',
+        comparator: comparators.equal
       },
       {
         id: 'principle_sponsor',
         uniqueID: uuid(),
-        mapToColumn: 'principle_sponsor_value'
+        directory: 'principle_sponsor',
+        label: '第一提案者',
+        type: 'select',
+        mapToColumn: 'principle_sponsor_value',
+        comparator: comparators.id
       },
       {
         id: 'party',
         uniqueID: uuid(),
-        customLabel: '第一提案者政黨',
-        mapToColumn: 'principle_sponsor_party',
-        compare: idFromList
+        directory: 'party',
+        label: '第一提案者政黨',
+        type: 'select',
+        mapToColumn: 'principle_sponsor_parties',
+        comparator: comparators.idFromList
       }
     ],
     columns: [
@@ -486,13 +535,20 @@ export default {
       {
         id: 'specific_topic',
         uniqueID: uuid(),
-        customLabel: '關聯小議題',
-        mapToColumn: 'st_id'
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
       },
       {
         id: 'term',
         uniqueID: uuid(),
-        mapToColumn: 'term_index'
+        directory: 'term',
+        label: '屆期',
+        type: 'select',
+        mapToColumn: 'term_index',
+        comparator: comparators.equal
       }
     ],
     columns: [

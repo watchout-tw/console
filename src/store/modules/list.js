@@ -43,7 +43,7 @@ const actions = {
         return fil.id === key
       })
       filteredRows = filteredRows.filter(row => {
-        return currentFilter.compare(row[currentFilter.mapToColumn], reqObj.queryParameters[key])
+        return currentFilter.comparator(row[currentFilter.mapToColumn], reqObj.queryParameters[key])
       })
     }
     var data = {
@@ -79,7 +79,7 @@ const mutations = {
     state.filteredRows = data.rows
   },
   [types.FETCH_FAIL] (state, error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

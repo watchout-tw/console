@@ -1,26 +1,14 @@
 import * as types from '../mutation-types'
 import * as api from '@/util/api'
+import Vue from 'vue'
 import directories from '@/config/directories'
-import editorChecklists from '@/config/editorChecklists'
 
-// Compose checklistOptions = { xxx: xxxOptions, yyy: yyyOptions}
-var checklistOptions = {}
-for (let checklist in editorChecklists) {
-  var checklistID = editorChecklists[checklist].id
-  checklistOptions[checklistID] = checklistID + '_options'
-}
+const state = {
 
-// Compose state = { xxxOptions: [], yyyOptions: [] }
-var stateBuilder = {}
-for (let options in checklistOptions) {
-  stateBuilder[checklistOptions[options]] = []
 }
-const state = stateBuilder
 
 const getters = {
-  checklistOptions: state => (checklistID) => {
-    return state[checklistID + '_options']
-  }
+
 }
 
 const actions = {
@@ -35,8 +23,8 @@ const actions = {
             label: row[labelCol]
           }
         }),
-        checklistID: reqObj.checklistID,
-        directoryID: reqObj.directoryID
+        directoryID: reqObj.directoryID,
+        uniqueID: reqObj.uniqueID
       }
       commit(types.UPDATE_CHECKLIST, respObj)
     }).catch(error => {
@@ -47,10 +35,10 @@ const actions = {
 
 const mutations = {
   [types.UPDATE_CHECKLIST] (state, mutateObj) {
-    state[checklistOptions[mutateObj.checklistID]] = mutateObj.data
+    Vue.set(state, mutateObj.uniqueID, mutateObj.data)
   },
   [types.FETCH_FAIL] (state, error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

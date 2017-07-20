@@ -79,7 +79,9 @@ export default {
         description: '這個屆期所有曾經有席次的政黨',
         interface: {
           type: 'checklist',
-          id: 'party'
+          id: 'party',
+          uniqueID: uuid(),
+          directory: 'party'
         }
       },
       {
@@ -623,7 +625,9 @@ export default {
         description: '與這個大議題相關的小議題',
         interface: {
           type: 'checklist',
-          id: 'specific_topic'
+          id: 'specific_topic',
+          uniqueID: uuid(),
+          directory: 'specific_topic'
         }
       }
     ]
@@ -673,7 +677,9 @@ export default {
         description: '與這個小議題相關的大議題',
         interface: {
           type: 'checklist',
-          id: 'general_topic'
+          id: 'general_topic',
+          uniqueID: uuid(),
+          directory: 'general_topic'
         }
       },
       {
@@ -757,7 +763,9 @@ export default {
         description: '與這個法案相關的小議題',
         interface: {
           type: 'checklist',
-          id: 'specific_topic'
+          id: 'specific_topic',
+          uniqueID: uuid(),
+          directory: 'specific_topic'
         }
       }
     ]
@@ -822,7 +830,7 @@ export default {
         description: '法案比較的評分量尺',
         interface: {
           type: 'table',
-          name: '分數',
+          name: '刻度',
           columns: [
             {
               prop: 'score',

@@ -31,7 +31,7 @@ export default {
   },
   district: {
     id: 'district',
-    api: 'term_districts',
+    api: 'districts',
     value: 'district_name',
     label: 'district_name'
   },

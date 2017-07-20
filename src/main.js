@@ -5,11 +5,12 @@ import App from './App'
 import store from './store'
 import router from './router'
 import ElementUI from 'element-ui'
+import ElementLocale from 'element-ui/lib/locale/lang/zh-TW'
 import 'element-ui/lib/theme-default/index.css'
 
 Vue.config.productionTip = false
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, { locale: ElementLocale })
 
 /* eslint-disable no-new */
 new Vue({

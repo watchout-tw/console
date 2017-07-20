@@ -18,7 +18,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import * as api from '@/util/api'
 import editors from '@/config/editors'
-import editorChecklists from '@/config/editorChecklists'
 import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
@@ -68,12 +67,7 @@ export default {
     },
     update() {
       console.log('Editor:', this.page.id)
-      this.sections = editors[this.page.editor].sections.map(section => {
-        if(section.interface.type === 'checklist') {
-          section.interface = Object.assign(section.interface, editorChecklists[section.interface.id])
-        }
-        return section
-      })
+      this.sections = editors[this.page.editor].sections
 
       // try to get data and bind to editor
       let key = this.$route.params.id
@@ -147,6 +141,12 @@ export default {
 .el-table .cell, .el-table th>div {
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.el-tag .el-icon-close {
+  padding: 2px;
+  font-size: 10px;
+  line-height: 14px;
 }
 
 .abstract-multi-select > .el-select {

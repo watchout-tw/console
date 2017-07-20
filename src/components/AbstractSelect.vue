@@ -44,7 +44,7 @@ export default {
       return this.config.type === type
     },
     update() {
-      if (!this.config.directory) {
+      if(!this.config.directory) {
         return
       }
       this.$store.dispatch('updateSelect', {

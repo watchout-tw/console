@@ -30,7 +30,6 @@ import debounce from 'lodash.debounce'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
-import listFilters from '@/config/listFilters'
 import AbstractSelect from '@/components/AbstractSelect'
 import TableCell from '@/components/TableCell'
 
@@ -99,9 +98,7 @@ export default {
       })
 
       // update filters
-      this.filters = lists[this.page.id].filters.map(filter => {
-        return Object.assign({}, filter, listFilters[filter.id])
-      })
+      this.filters = lists[this.page.id].filters
 
       // update columns
       this.columns = lists[this.page.id].columns
