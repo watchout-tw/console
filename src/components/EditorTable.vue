@@ -59,7 +59,8 @@ export default {
     deleteRow($index) {
     },
     addRow() {
-      this.rows.push(
+      var tableRows = this.rows ? this.rows : []
+      tableRows.push(
         Object.assign(
           ...this.config.columns.map(column => ({[column.prop]: undefined}))
         )
@@ -67,6 +68,7 @@ export default {
       this.flags.push({
         isEditing: true
       })
+      this.$emit('update:rows', tableRows)
     }
   },
   components: {
