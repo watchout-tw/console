@@ -395,7 +395,7 @@ export default {
         }
       },
       {
-        id: 'party_history',
+        id: 'parties',
         title: '政黨歷史',
         description: '委員的政黨歷史紀錄',
         interface: {
@@ -446,7 +446,7 @@ export default {
         }
       },
       {
-        id: 'election_history',
+        id: 'terms',
         title: '選任歷史',
         description: '委員的選任歷史紀錄',
         interface: {
@@ -498,7 +498,7 @@ export default {
         }
       },
       {
-        id: 'committee_history',
+        id: 'sessions',
         title: '委員會歷史',
         description: '委員的委員會歷史紀錄',
         interface: {
