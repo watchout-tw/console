@@ -13,7 +13,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default {
-  props: ['size', 'value', 'config', 'page'],
+  props: ['size', 'value', 'uuid', 'config', 'page'],
   data() {
     return {
       tmp: []
@@ -24,18 +24,18 @@ export default {
       return this.config.type.indexOf('creative') > -1
     },
     options() {
-      return this.$store.state[this.config.uniqueID]
+      return this.$store.state[this.uuid]
     }
   },
   beforeMount() {
     this.update()
   },
   watch: {
-    'page.id'() {
+    '$route'() {
       this.update()
     },
     'value'(now, then) {
-      this.tmp = this.value
+      this.syncModel()
     }
   },
   methods: {
@@ -43,13 +43,16 @@ export default {
       return this.config.type === type
     },
     update() {
-      if (!this.config.directory) {
-        return
+      this.syncModel()
+      if(this.config.directory) {
+        this.$store.dispatch('updateSelect', {
+          directoryID: this.config.directory,
+          uniqueID: this.uuid
+        })
       }
-      this.$store.dispatch('updateSelect', {
-        directoryID: this.config.directory,
-        uniqueID: this.config.uniqueID
-      })
+    },
+    syncModel() {
+      this.tmp = this.value
     },
     handleChange() {
       this.$emit('update:value', this.tmp)

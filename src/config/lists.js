@@ -1,7 +1,7 @@
-import uuid from 'uuid/v4'
 import formatters from '@/config/formatters'
 import comparators from '@/config/comparators'
 import { columnWidth } from '@/util/element'
+import cascade from '@/util/cascade'
 
 /**
 編輯器設定檔
@@ -75,7 +75,6 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: uuid(),
         label: '全名',
         type: 'input',
         mapToColumn: 'name',
@@ -83,7 +82,6 @@ export default {
       },
       {
         id: 'term',
-        uniqueID: uuid(),
         directory: 'term',
         label: '屆期',
         type: 'select',
@@ -91,7 +89,6 @@ export default {
       },
       {
         id: 'district',
-        uniqueID: uuid(),
         directory: 'district',
         label: '選區',
         type: 'select',
@@ -102,7 +99,6 @@ export default {
       },
       {
         id: 'party',
-        uniqueID: uuid(),
         directory: 'party',
         label: '政黨',
         type: 'select',
@@ -127,7 +123,6 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: uuid(),
         label: '全名',
         type: 'input',
         mapToColumn: 'name',
@@ -158,7 +153,6 @@ export default {
     filters: [
       {
         id: 'name',
-        uniqueID: uuid(),
         label: '全名',
         type: 'input',
         mapToColumn: 'name',
@@ -189,7 +183,6 @@ export default {
     filters: [
       {
         id: 'title',
-        uniqueID: uuid(),
         label: '標題',
         type: 'input',
         mapToColumn: 'title',
@@ -221,7 +214,6 @@ export default {
     filters: [
       {
         id: 'title',
-        uniqueID: uuid(),
         label: '標題',
         type: 'input',
         mapToColumn: 'title',
@@ -229,7 +221,6 @@ export default {
       },
       {
         id: 'general_topic',
-        uniqueID: uuid(),
         directory: 'general_topic',
         label: '關聯大議題',
         type: 'select',
@@ -252,7 +243,7 @@ export default {
         label: '圖像'
       },
       {
-        prop: 'general_topic',
+        prop: 'general_topics',
         label: '關聯大議題',
         formatter: formatters.list_titles
       },
@@ -272,7 +263,6 @@ export default {
     filters: [
       {
         id: 'title',
-        uniqueID: uuid(),
         label: '標題',
         type: 'input',
         mapToColumn: 'title',
@@ -280,7 +270,6 @@ export default {
       },
       {
         id: 'specific_topic',
-        uniqueID: uuid(),
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
@@ -308,7 +297,6 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: uuid(),
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
@@ -317,7 +305,6 @@ export default {
       },
       {
         id: 'act',
-        uniqueID: uuid(),
         directory: 'act',
         label: '關聯法案',
         type: 'select',
@@ -326,7 +313,6 @@ export default {
       },
       {
         id: 'act_dir',
-        uniqueID: uuid(),
         directory: 'act_dir',
         label: '關聯修法方向',
         type: 'select',
@@ -364,31 +350,30 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: uuid(),
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
-        mapToColumn: 'st'
+        mapToColumn: 'st',
+        comparator: comparators.id
       },
       {
         id: 'term',
-        uniqueID: uuid(),
         directory: 'term',
         label: '屆期',
         type: 'select',
-        mapToColumn: 'term_index'
+        mapToColumn: 'term_index',
+        comparator: comparators.equal
       },
       {
         id: 'rep',
-        uniqueID: uuid(),
         directory: 'rep',
         label: '立法委員',
         type: 'select',
-        mapToColumn: 'rep'
+        mapToColumn: 'rep',
+        comparator: comparators.id
       },
       {
         id: 'party',
-        uniqueID: uuid(),
         directory: 'party',
         label: '政黨',
         type: 'select',
@@ -396,11 +381,11 @@ export default {
       },
       {
         id: 'rs_position',
-        uniqueID: uuid(),
         directory: 'rs_position',
         label: '立場',
         type: 'select',
-        mapToColumn: 'position'
+        mapToColumn: 'position',
+        comparator: comparators.equal
       }
     ],
     columns: [
@@ -416,7 +401,8 @@ export default {
       },
       {
         prop: 'rep',
-        label: '立法委員'
+        label: '立法委員',
+        formatter: formatters.name
       },
       {
         prop: 'rep_party',
@@ -440,7 +426,6 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: uuid(),
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
@@ -449,7 +434,6 @@ export default {
       },
       {
         id: 'act',
-        uniqueID: uuid(),
         directory: 'act',
         label: '關聯法案',
         type: 'select',
@@ -458,7 +442,6 @@ export default {
       },
       {
         id: 'term',
-        uniqueID: uuid(),
         directory: 'term',
         label: '屆期',
         type: 'select',
@@ -467,17 +450,17 @@ export default {
       },
       {
         id: 'principle_sponsor_type',
-        uniqueID: uuid(),
         directory: 'principle_sponsor_type',
         label: '第一提案者類別',
         type: 'select',
-        cascadeUpdate: ['principle_sponsor'],
         mapToColumn: 'principle_sponsor_type',
-        comparator: comparators.equal
+        comparator: comparators.equal,
+        cascadeUpdate: [
+          cascade.appointDirectory(['principle_sponsor'])
+        ]
       },
       {
         id: 'principle_sponsor',
-        uniqueID: uuid(),
         label: '第一提案者',
         type: 'select',
         mapToColumn: 'principle_sponsor_value',
@@ -485,7 +468,6 @@ export default {
       },
       {
         id: 'party',
-        uniqueID: uuid(),
         directory: 'party',
         label: '第一提案者政黨',
         type: 'select',
@@ -538,7 +520,6 @@ export default {
     filters: [
       {
         id: 'specific_topic',
-        uniqueID: uuid(),
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
@@ -547,7 +528,6 @@ export default {
       },
       {
         id: 'term',
-        uniqueID: uuid(),
         directory: 'term',
         label: '屆期',
         type: 'select',

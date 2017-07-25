@@ -212,7 +212,7 @@ export default {
         label: '模糊'
       },
       {
-        value: 'con',
+        value: 'against',
         label: '反對'
       }
     ]

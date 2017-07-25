@@ -2,8 +2,6 @@ import directories from '@/config/directories'
 import axios from 'axios'
 import queryString from 'query-string'
 
-axios.defaults.baseURL = 'https://c0re.watchout.tw'
-
 function trimQueryString (query) {
   var temp = {}
   for (var key in query) {
@@ -15,7 +13,15 @@ function trimQueryString (query) {
 export function getDirectory (reqObj) {
   let directory = directories[reqObj.directoryID]
   let all = directory.paging ? directory.paging.all : false
-  let url = '/console/lab/' + directory.api + (all ? '?all' : '')
+
+  let parameters = reqObj.parameters ? reqObj.parameters : {}
+  let queryString = Object.keys(parameters)
+    .reduce((a, k) => {
+      a.push(k + '=' + encodeURIComponent(parameters[k]))
+      return a
+    }, [])
+    .join('&')
+  let url = '/console/lab/' + directory.api + '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
   return axios.get(url)
 }
 

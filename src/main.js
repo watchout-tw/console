@@ -8,6 +8,9 @@ import ElementUI from 'element-ui'
 import ElementLocale from 'element-ui/lib/locale/lang/zh-TW'
 import 'element-ui/lib/theme-default/index.css'
 
+import axios from 'axios'
+axios.defaults.baseURL = 'https://c0re.watchout.tw'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI, { locale: ElementLocale })

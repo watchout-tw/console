@@ -24,7 +24,7 @@ import EditorChecklist from '@/components/EditorChecklist'
 
 Vue.use(Vuex)
 
-function scroll2Top () {
+function scrollToTop() {
   document.documentElement.scrollTop = 0
   document.body.scrollTop = 0
 }
@@ -38,15 +38,11 @@ export default {
       model: {}
     }
   },
-  mounted() {
+  beforeMount() {
     this.update()
   },
   watch: {
-    // watch page.id to detect switching between pages
-    'page.id'() {
-      this.update()
-    },
-    '$route' (to, from) {
+    '$route'(to, from) {
       this.update()
     }
   },
@@ -74,7 +70,7 @@ export default {
         for(let section of this.sections) {
           if(section.interface.type === 'form') {
             for(let field of section.interface.fields) {
-              this.$set(this.model, field.id, undefined)
+              this.$set(this.model, field.id, field.defaultValue) // if field.defaultValue is not defined then it is undefined
             }
           } else {
             this.$set(this.model, section.id, [])
@@ -99,7 +95,7 @@ export default {
         formData: this.model,
         routeTo: this.page
       })
-      scroll2Top()
+      scrollToTop()
     }
   },
   components: {
@@ -137,7 +133,7 @@ export default {
     width: 100px;
   }
 }
-.el-table .cell, .el-table th>div {
+.el-table .cell, .el-table th > div {
   padding-left: 10px;
   padding-right: 10px;
 }

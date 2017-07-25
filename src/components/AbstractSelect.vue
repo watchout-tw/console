@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable>
+  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable :disabled="config.disabled">
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>
@@ -13,7 +13,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 
 export default {
-  props: ['size', 'value', 'config', 'page'],
+  props: ['size', 'value', 'uuid', 'cascadeThis', 'config', 'page'],
   data() {
     return {
       tmp: undefined
@@ -21,22 +21,26 @@ export default {
   },
   computed: {
     options() {
-      return this.$store.state[this.config.uniqueID]
+      return this.$store.state[this.uuid]
     }
   },
   beforeMount() {
     this.update()
   },
+  beforeDestroy() { // Remove data from store?
+  },
   watch: {
-    'page.id'() {
+    '$route'() {
+      this.update()
+    },
+    'config.directory'() {
+      this.update()
+    },
+    'config.parameters'() {
       this.update()
     },
     'value'() {
-      if(typeof this.value === 'object') {
-        this.tmp = this.value.id
-      } else {
-        this.tmp = this.value
-      }
+      this.syncModel()
     }
   },
   methods: {
@@ -44,24 +48,27 @@ export default {
       return this.config.type === type
     },
     update() {
-      if(!this.config.directory) {
-        return
-      }
+      this.syncModel()
       this.$store.dispatch('updateSelect', {
+        parameters: this.config.parameters,
         directoryID: this.config.directory,
-        uniqueID: this.config.uniqueID
+        uniqueID: this.uuid
       })
+    },
+    syncModel() {
+      this.tmp = (typeof this.value === 'object') ? this.value.id : this.value
     },
     handleChange() {
       this.$emit('update:value', this.tmp)
-      if(!this.config.cascadeUpdate) {
-        return
-      }
-      for(let updateTarget of this.config.cascadeUpdate) {
-        this.$emit('update:cascade', {
-          target: updateTarget,
-          directoryID: this.tmp
-        })
+
+      if(this.config.cascadeUpdate) {
+        let uploadObj = {
+          fromID: this.uuid
+        }
+        if(this.tmp) {
+          uploadObj.value = this.tmp
+        }
+        this.$emit('update:cascadeThis', uploadObj)
       }
     }
   }

@@ -35,9 +35,14 @@ export default {
           }
           commit(types.UPDATE_SELECT, respObj)
         } else {
-          commit(types.FETCH_FAIL, 'Values not defined in directories.js')
+          commit(types.FETCH_FAIL, 'Options not found among directories')
         }
       }
+    } else {
+      commit(types.UPDATE_SELECT, {
+        data: [],
+        uniqueID: reqObj.uniqueID
+      })
     }
   }
 }

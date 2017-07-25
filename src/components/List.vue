@@ -6,7 +6,7 @@
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <template v-for="filter in filters" >
-      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :cascade.sync="cascadeSelect" :config="filter" :page="page"></abstract-select>
+      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :uuid="uuids[filter.id]" :cascade-this.sync="cascadeThis" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
         <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
       </div>
@@ -26,12 +26,14 @@
 </template>
 
 <script>
+import uuid from 'uuid/v4'
 import debounce from 'lodash.debounce'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
 import TableCell from '@/components/TableCell'
+import * as cascadeTypes from '@/util/cascade-types'
 
 Vue.use(Vuex)
 
@@ -39,11 +41,13 @@ export default {
   props: ['page'],
   data() {
     return {
+      uuids: {},
+      queryParameters: {},
       filters: [],
       columns: [],
-      queryParameters: {},
       config: undefined,
-      cascadeSelect: {}
+      cascadeVectors: {}, // {uuid: [cascadeObj]}
+      cascadeThis: {} // {uuid, value, alias}
     }
   },
   computed: {
@@ -78,8 +82,8 @@ export default {
       },
       deep: true
     },
-    'cascadeSelect'(newVal) {
-      this.updateCascadeSelect(newVal)
+    'cascadeThis'() {
+      this.cascade()
     }
   },
   methods: {
@@ -99,6 +103,34 @@ export default {
 
       // update filters
       this.filters = lists[this.page.id].filters
+
+      // set UUIDs
+      this.filters.forEach(filter => {
+        this.$set(this.uuids, filter.id, uuid()) // generate UUID for each filter
+      })
+
+      // prepare cascadeVectors
+      this.cascadeVectors = {} // need to reset during development?
+      this.filters.forEach(filter => {
+        if(filter.cascadeUpdate) {
+          let filterUUID = this.uuids[filter.id]
+          if(!this.cascadeVectors[filterUUID]) {
+            this.$set(this.cascadeVectors, filterUUID, [])
+          }
+          this.cascadeVectors[filterUUID].push(
+            ...filter.cascadeUpdate.map(vector => {
+              return Object.assign(vector, {
+                targets: vector.targets.map(target => {
+                  return {
+                    id: target,
+                    uuid: this.uuids[target]
+                  }
+                })
+              }) // this updates config.cascadeUpdate of children element as well
+            })
+          )
+        }
+      })
 
       // update columns
       this.columns = lists[this.page.id].columns
@@ -131,15 +163,29 @@ export default {
           filterInfo: lists[this.page.id].filters
         })
       }
-    }, 300),
-    updateCascadeSelect (updateObj) {
-      var cascadeSelect = this.filters.find(fil => {
-        return fil.id === updateObj.target
-      })
-      this.$store.dispatch('updateSelect', {
-        directoryID: updateObj.directoryID,
-        uniqueID: cascadeSelect.uniqueID
-      })
+    }, 350),
+    cascade() {
+      let vectors = this.cascadeVectors[this.cascadeThis.fromID]
+      if(vectors) {
+        vectors.forEach(vector => {
+          if(vector.action === cascadeTypes.APPOINT_DIRECTORY) {
+            vector.targets.forEach(target => {
+              /*
+              this.$store.dispatch('updateSelect', {
+                uniqueID: target.uuid,
+                directoryID: this.cascadeThis.value
+              })
+              */ // this is changing data in store without informing child component
+              // change config instead
+              this.filters.forEach(filter => {
+                if(filter.id === target.id) {
+                  this.$set(filter, 'directory', this.cascadeThis.value) // use $set to trigger update in case directory is not set
+                }
+              })
+            })
+          }
+        })
+      }
     }
   },
   components: {

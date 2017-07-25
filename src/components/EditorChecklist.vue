@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import uuid from 'uuid/v4'
 import Vue from 'vue'
 import Vuex from 'vuex'
 
@@ -17,19 +18,22 @@ export default {
   data() {
     return {
       initialized: false,
+      uuid: uuid(),
       tmp: []
     }
   },
   computed: {
     options() {
-      return this.$store.state.editorChecklist[this.config.uniqueID]
+      return this.$store.state.editorChecklist[this.uuid]
     }
   },
   beforeMount() {
     this.update()
   },
+  beforeDestroy() { // Remove data from store?
+  },
   watch: {
-    'page.id'() {
+    '$route'() {
       this.update()
     },
     'model'() {
@@ -45,7 +49,7 @@ export default {
     update() {
       this.$store.dispatch('updateChecklist', {
         directoryID: this.config.directory,
-        uniqueID: this.config.uniqueID
+        uniqueID: this.uuid
       })
       this.initialized = false
     },
