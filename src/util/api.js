@@ -51,6 +51,11 @@ export function getItem (reqObj) {
   return axios.get(url)
 }
 
+export function lookupTerm (reqObj) {
+  let url = `/console/lab/date_to_term?date=${reqObj.timestamp}`
+  return axios.get(url)
+}
+
 export function postMockForm (reqObj) {
   // let url = `/console/lab/${reqObj.pageID}`
   // return axios.post(url, reqObj.content)

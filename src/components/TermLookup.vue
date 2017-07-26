@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import * as api from '@/util/api'
 
 export default {
   props: ['value', 'uuid', 'cascadeThis', 'config', 'page'],
@@ -32,7 +32,9 @@ export default {
         }
         if(this.tmp.constructor.name === 'Date') {
           let timestamp = this.tmp.getTime()
-          axios.get('/console/lab/date_to_term?date=' + timestamp).then(response => {
+          api.lookupTerm({
+            timestamp
+          }).then(response => {
             if(response.data.term_index) {
               uploadObj.value = response.data
             } else {
