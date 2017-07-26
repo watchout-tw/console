@@ -82,7 +82,7 @@ export default {
           pageID: this.page.id,
           id: this.$route.params.id
         }).then(response => {
-          this.model = response.data.object
+          this.model = response.data
           this.isInitialized = true
         })
       }

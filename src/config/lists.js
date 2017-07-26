@@ -407,7 +407,8 @@ export default {
       },
       {
         prop: 'rep_party',
-        label: '政黨'
+        label: '政黨',
+        formatter: formatters.abbreviation
       },
       {
         prop: 'content',

@@ -26,6 +26,9 @@ export default {
   name(row, col) {
     return row[col.property] ? row[col.property].name : ''
   },
+  abbreviation(row, col) {
+    return row[col.property] ? row[col.property].abbreviation : ''
+  },
   list_abbreviations(row, col) {
     return row[col.property] ? arrayJoinAtIndex(row[col.property], 'abbreviation') : ''
   },
