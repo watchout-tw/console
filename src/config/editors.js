@@ -906,28 +906,34 @@ export default {
             {
               id: 'date',
               label: '日期',
-              type: 'date'
+              type: 'date',
+              cascadeUpdate: [
+                cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
+              ]
             },
             {
               id: 'term_index',
               label: '屆期',
               type: 'select',
               directory: 'term',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'session_index',
               label: '會期',
               type: 'select',
               directory: 'session',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
               type: 'select',
               directory: 'temp_session',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'proposal_no',
@@ -1091,28 +1097,34 @@ export default {
             {
               id: 'date',
               label: '日期',
-              type: 'date'
+              type: 'date',
+              cascadeUpdate: [
+                cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
+              ]
             },
             {
               id: 'term_index',
               label: '屆期',
               type: 'select',
               directory: 'term',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'session_index',
               label: '會期',
               type: 'select',
               directory: 'session',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
               type: 'select',
               directory: 'temp_session',
-              determined_by: 'date'
+              determined_by: 'date',
+              disabled: true
             },
             {
               id: 'title',

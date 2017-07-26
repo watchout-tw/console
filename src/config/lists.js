@@ -377,7 +377,8 @@ export default {
         directory: 'party',
         label: '政黨',
         type: 'select',
-        mapToColumn: 'rep_party'
+        mapToColumn: 'rep_party',
+        comparator: comparators.id
       },
       {
         id: 'rs_position',

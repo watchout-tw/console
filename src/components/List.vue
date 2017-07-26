@@ -26,28 +26,30 @@
 </template>
 
 <script>
-import uuid from 'uuid/v4'
 import debounce from 'lodash.debounce'
 import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
 import TableCell from '@/components/TableCell'
-import * as cascadeTypes from '@/util/cascade-types'
+import cascadeController from '@/interfaces/cascadeController'
 
 Vue.use(Vuex)
 
+Array.prototype.objectArrayClone = function() {
+  return this.map(item => Object.assign({}, item))
+}
+
 export default {
+  mixins: [cascadeController],
   props: ['page'],
   data() {
     return {
-      uuids: {},
       queryParameters: {},
       filters: [],
       columns: [],
       config: undefined,
-      cascadeVectors: {}, // {uuid: [cascadeObj]}
-      cascadeThis: {} // {uuid, value, alias}
+      cascadeList: undefined // mendatory for cascadeController to work
     }
   },
   computed: {
@@ -65,11 +67,13 @@ export default {
     }
   },
   beforeMount() {
+    this.init()
     this.update()
   },
   watch: {
     // watch page.id to detect switching between pages
-    'page.id'() {
+    '$route'() {
+      this.init()
       this.update()
     },
     'paging.page'() {
@@ -81,16 +85,13 @@ export default {
         this.generateFilteredList()
       },
       deep: true
-    },
-    'cascadeThis'() {
-      this.cascade()
     }
   },
   methods: {
     filterIs(filter, type) {
       return filter.type === type
     },
-    update() {
+    init() {
       console.log('List:', this.page.id)
       this.config = lists[this.page.id]
       this.config.key = this.config.key ? this.config.key : 'id'
@@ -101,40 +102,13 @@ export default {
         this.$set(this.queryParameters, filter.id, undefined)
       })
 
-      // update filters
-      this.filters = lists[this.page.id].filters
+      this.filters = lists[this.page.id].filters.objectArrayClone()
+      this.columns = lists[this.page.id].columns.objectArrayClone()
 
-      // set UUIDs
-      this.filters.forEach(filter => {
-        this.$set(this.uuids, filter.id, uuid()) // generate UUID for each filter
-      })
-
-      // prepare cascadeVectors
-      this.cascadeVectors = {} // need to reset during development?
-      this.filters.forEach(filter => {
-        if(filter.cascadeUpdate) {
-          let filterUUID = this.uuids[filter.id]
-          if(!this.cascadeVectors[filterUUID]) {
-            this.$set(this.cascadeVectors, filterUUID, [])
-          }
-          this.cascadeVectors[filterUUID].push(
-            ...filter.cascadeUpdate.map(vector => {
-              return Object.assign(vector, {
-                targets: vector.targets.map(target => {
-                  return {
-                    id: target,
-                    uuid: this.uuids[target]
-                  }
-                })
-              }) // this updates config.cascadeUpdate of children element as well
-            })
-          )
-        }
-      })
-
-      // update columns
-      this.columns = lists[this.page.id].columns
-
+      this.cascadeList = this.filters
+      this.cascadeInit()
+    },
+    update() {
       // dispatch action to get data
       if(this.config.paged) {
         this.$store.dispatch('updateList', {
@@ -163,30 +137,7 @@ export default {
           filterInfo: lists[this.page.id].filters
         })
       }
-    }, 350),
-    cascade() {
-      let vectors = this.cascadeVectors[this.cascadeThis.fromID]
-      if(vectors) {
-        vectors.forEach(vector => {
-          if(vector.action === cascadeTypes.APPOINT_DIRECTORY) {
-            vector.targets.forEach(target => {
-              /*
-              this.$store.dispatch('updateSelect', {
-                uniqueID: target.uuid,
-                directoryID: this.cascadeThis.value
-              })
-              */ // this is changing data in store without informing child component
-              // change config instead
-              this.filters.forEach(filter => {
-                if(filter.id === target.id) {
-                  this.$set(filter, 'directory', this.cascadeThis.value) // use $set to trigger update in case directory is not set
-                }
-              })
-            })
-          }
-        })
-      }
-    }
+    }, 350)
   },
   components: {
     AbstractSelect,

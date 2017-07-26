@@ -3,7 +3,7 @@ import * as api from '@/util/api'
 import directories from '@/config/directories'
 
 export default {
-  updateSelect ({ commit }, reqObj) {
+  updateSelect({ commit }, reqObj) {
     const directory = directories[reqObj.directoryID]
     if(directory) {
       if(directory.api) {
@@ -44,5 +44,10 @@ export default {
         uniqueID: reqObj.uniqueID
       })
     }
+  },
+  deleteSelect({ commit }, reqObj) {
+    commit(types.DELETE_SELECT, {
+      uniqueID: reqObj.uniqueID
+    })
   }
 }
