@@ -38,7 +38,11 @@ export default {
               // console.log(term_index, session_index, temp_session_index)
               uploadObj.value = response.data.object
             } else {
-              console.log('Congress is in recess on ' + this.tmp.toLocaleDateString())
+              this.$message({
+                message: this.tmp.toLocaleDateString() + '是休會期間',
+                type: 'error'
+              })
+              this.tmp = undefined
             }
             this.$emit('update:cascadeThis', uploadObj)
           })
