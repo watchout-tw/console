@@ -33,10 +33,8 @@ export default {
         if(this.tmp.constructor.name === 'Date') {
           let timestamp = this.tmp.getTime()
           axios.get('/console/lab/date_to_term?date=' + timestamp).then(response => {
-            if(response.data.object.term_index) {
-              // let {term_index, session_index, temp_session_index} = response.data.object
-              // console.log(term_index, session_index, temp_session_index)
-              uploadObj.value = response.data.object
+            if(response.data.term_index) {
+              uploadObj.value = response.data
             } else {
               this.$message({
                 message: this.tmp.toLocaleDateString() + '是休會期間',
