@@ -26,5 +26,6 @@ module.exports = {
     'space-before-function-paren': 0, // allow paren-less functions
     'keyword-spacing': 0,
     'no-new': 0,
+    'no-extend-native': ["error", { "exceptions": ["Array"] }]
   }
 }
