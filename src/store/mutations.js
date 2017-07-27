@@ -10,5 +10,8 @@ export default {
   },
   [types.FETCH_FAIL] (state, error) {
     console.error(error)
+  },
+  [types.DIRECTORY_NOT_FOUND](state) {
+    console.error('Directory not found')
   }
 }

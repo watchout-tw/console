@@ -42,7 +42,7 @@ export default {
       {
         prop: 'parties',
         label: '政黨',
-        formatter: formatters.list_abbreviations
+        formatter: formatters.party_flags
       },
       {
         prop: 'caucuses',
@@ -145,7 +145,8 @@ export default {
       },
       {
         prop: 'color',
-        label: '代表色'
+        label: '代表色',
+        formatter: formatters.party_flag
       }
     ]
   },
@@ -201,7 +202,8 @@ export default {
       },
       {
         prop: 'image',
-        label: '圖像'
+        label: '圖像',
+        width: columnWidth(3)
       },
       {
         prop: 'specific_topics',
@@ -240,7 +242,8 @@ export default {
       },
       {
         prop: 'image',
-        label: '圖像'
+        label: '圖像',
+        width: columnWidth(3)
       },
       {
         prop: 'general_topics',
@@ -255,7 +258,7 @@ export default {
       {
         prop: 'st_questions',
         label: '爭點',
-        formatter: formatters.list_questions
+        formatter: formatters.bullet_point_questions
       }
     ]
   },
@@ -408,7 +411,8 @@ export default {
       {
         prop: 'rep_party',
         label: '政黨',
-        formatter: formatters.abbreviation
+        formatter: formatters.party_flag_from_color,
+        width: columnWidth(2)
       },
       {
         prop: 'content',
@@ -416,7 +420,9 @@ export default {
       },
       {
         prop: 'position',
-        label: '立場'
+        label: '立場',
+        directory: 'rs_position',
+        width: columnWidth(2)
       },
       {
         prop: 'position_summary',
@@ -504,7 +510,8 @@ export default {
       },
       {
         prop: 'principle_sponsor_type',
-        label: '第一提案者類別'
+        label: '第一提案者類別',
+        directory: 'principle_sponsor_type'
       },
       {
         prop: 'principle_sponsor_value',
@@ -514,7 +521,7 @@ export default {
       {
         prop: 'principle_sponsor_parties',
         label: '第一提案者政黨',
-        formatter: formatters.list_names
+        formatter: formatters.party_flags
       }
     ]
   },
@@ -554,27 +561,35 @@ export default {
       },
       {
         prop: 'aye_count',
-        label: '贊成人數'
+        label: '贊成人數',
+        width: columnWidth(4)
       },
       {
         prop: 'nay_count',
-        label: '反對人數'
+        label: '反對人數',
+        width: columnWidth(4)
       },
       {
         prop: 'abstain_count',
-        label: '棄權人數'
+        label: '棄權人數',
+        width: columnWidth(4)
       },
       {
         prop: 'absence_count',
-        label: '缺席人數'
+        label: '缺席人數',
+        width: columnWidth(4)
       },
       {
         prop: 'g0v_link',
-        label: 'g0v'
+        label: 'g0v',
+        formatter: formatters.link,
+        width: columnWidth(2)
       },
       {
         prop: 'source_link',
-        label: '原始資料'
+        label: '原始資料',
+        formatter: formatters.link,
+        width: columnWidth(4)
       }
     ]
   }

@@ -14,7 +14,11 @@
   </div>
   <div class="filters" v-else>沒什麼好過濾的。</div>
   <el-table :data="filteredRows">
-    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter"></el-table-column>
+    <el-table-column v-for="column in columns" :key="column.prop" :prop="column.prop" :label="column.label" :width="column.width" :formatter="column.formatter">
+      <template scope="scope">
+        <div class="formatted-content" v-html="cellFormatter(column, scope)"></div>
+      </template>
+    </el-table-column>
     <el-table-column width="48">
       <template scope="scope">
         <el-button type="text" size="small" icon="edit" @click="editItem(scope.row)"></el-button>
@@ -33,6 +37,7 @@ import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
 import TableCell from '@/components/TableCell'
 import cascadeController from '@/interfaces/cascadeController'
+import * as factory from '@/util/factory'
 
 Vue.use(Vuex)
 
@@ -137,7 +142,28 @@ export default {
           filterInfo: lists[this.page.id].filters
         })
       }
-    }, 350)
+    }, 350),
+    cellFormatter(column, scope) {
+      function nothing(val) {
+        return '<span class="null">' + val + '</span>'
+      }
+      let val = scope.row[scope.column.property]
+      let result = val
+      if(val === undefined) {
+        result = nothing('?')
+      } else if(val === null) {
+        result = nothing('null')
+      } else if(val === '') {
+        result = nothing('empty')
+      } else if(val.length < 1) {
+        result = nothing('empty')
+      } else if(column.directory) {
+        result = factory.assembleOfflineDirectoryList(column.directory).filter(item => item.value === val).pop().label
+      } else if(column.formatter) {
+        result = column.formatter(scope.row, scope.column)
+      }
+      return result
+    }
   },
   components: {
     AbstractSelect,
@@ -147,6 +173,28 @@ export default {
 </script>
 
 <style lang="scss">
+.cell > .formatted-content {
+  .link {
+    text-decoration: none;
+    font-size: 1.25rem;
+  }
+  .null {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+  .party-flag {
+    width: 2rem;
+    height: 1.75rem;
+    display: block;
+    border: none;
+  	transform: skew(0, -20deg) scale(0.65);
+  }
+  ul {
+    padding-left: 1.25rem;
+    margin: 0.25rem 0;
+  }
+}
 .list {
   margin: 0 1rem;
   > .title {

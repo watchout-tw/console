@@ -7,6 +7,7 @@ import mutations from './mutations'
 import list from './modules/list'
 import editor from './modules/editor'
 import editorChecklist from './modules/editorChecklist'
+import directory from './modules/directory'
 import createLogger from 'vuex/dist/logger'
 
 Vue.use(Vuex)
@@ -21,7 +22,8 @@ export default new Vuex.Store({
   modules: {
     list,
     editor,
-    editorChecklist
+    editorChecklist,
+    directory
   },
   strict: debug,
   plugins: debug ? [createLogger()] : []

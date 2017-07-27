@@ -370,16 +370,18 @@ export default {
               ]
             },
             {
-              prop: 'party_id',
+              prop: 'party',
               label: '政黨',
               type: 'select',
-              directory: 'party'
+              directory: 'party',
+              formatter: formatters.name
             },
             {
-              prop: 'caucus_id',
+              prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
-              directory: 'caucus'
+              directory: 'caucus',
+              formatter: formatters.name
             },
             {
               prop: 'start_date',
@@ -427,7 +429,7 @@ export default {
               directory: 'rep_term_change_type'
             },
             {
-              prop: 'district',
+              prop: 'district_name',
               label: '選區',
               type: 'select',
               directory: 'term_district'
@@ -476,7 +478,8 @@ export default {
             {
               prop: 'is_convener',
               label: '召委',
-              type: 'switch'
+              type: 'switch',
+              formatter: formatters.boolean
             }
           ]
         }

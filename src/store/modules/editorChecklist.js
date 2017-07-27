@@ -1,28 +1,19 @@
 import * as types from '../mutation-types'
 import * as api from '@/util/api'
+import * as factory from '@/util/factory'
 import Vue from 'vue'
-import directories from '@/config/directories'
 
 const state = {
-
 }
 
 const getters = {
-
 }
 
 const actions = {
   updateChecklist ({ commit }, reqObj) {
     api.getDirectory(reqObj).then(response => {
-      var valueCol = directories[reqObj.directoryID].value
-      var labelCol = directories[reqObj.directoryID].label
       var respObj = {
-        data: response.data.rows.map(row => {
-          return {
-            value: row[valueCol],
-            label: row[labelCol]
-          }
-        }),
+        data: factory.assembleDirectoryList(reqObj.directoryID, response.data.rows),
         directoryID: reqObj.directoryID,
         uniqueID: reqObj.uniqueID
       }

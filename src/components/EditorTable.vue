@@ -14,7 +14,7 @@
           <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :uuid="uuids[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
         </template>
         <template v-else>
-          {{ column.formatter ? column.formatter(scope.row, scope.column) : scope.row[scope.column.property] }}
+          <div class="formatted-content" v-html="cellFormatter(column, scope)"></div>
         </template>
       </template>
     </el-table-column>
@@ -30,9 +30,13 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import Vuex from 'vuex'
 import uuid from 'uuid/v4'
 import AbstractSelect from '@/components/AbstractSelect'
 import AbstractMultiSelect from '@/components/AbstractMultiSelect'
+
+Vue.use(Vuex)
 
 export default {
   props: ['rows', 'config', 'page', 'isInitialized'],
@@ -43,6 +47,9 @@ export default {
       uuids: []
     }
   },
+  beforeMount() {
+    this.init()
+  },
   watch: {
     'isInitialized'(now) {
       if(this.rows) {
@@ -52,6 +59,15 @@ export default {
     }
   },
   methods: {
+    init() {
+      this.config.columns
+        .filter(column => !!column.directory)
+        .forEach(column => {
+          this.$store.dispatch('cacheDirectory', {
+            directoryID: column.directory
+          })
+        })
+    },
     columnIs(column, type) {
       return column.type.split('-').shift() === type
     },
@@ -80,6 +96,23 @@ export default {
       return Object.assign(
         ...this.config.columns.map(column => ({[column.prop]: uuid()}))
       )
+    },
+    cellFormatter(column, scope) {
+      let val = scope.row[scope.column.property]
+      let result = val
+      let cachedDirectory = column.directory ? this.$store.state.directory[column.directory] : undefined
+      if(val === null) {
+        result = `<span class="null">${val}</span>`
+      } else if(cachedDirectory) {
+        if(typeof val === 'object') {
+          val = val.id // FIXME: this assumes key prop of all obj are `id`
+        }
+        let directoryItem = cachedDirectory.filter(item => item.value === val).pop()
+        result = directoryItem ? directoryItem.label : result
+      } else if(column.formatter) {
+        result = column.formatter(scope.row, scope.column)
+      }
+      return result
     }
   },
   components: {
@@ -90,6 +123,13 @@ export default {
 </script>
 
 <style lang="scss">
+.cell > .formatted-content {
+  .null {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    opacity: 0.5;
+  }
+}
 .editor-table {
   position: relative;
   > .add {

@@ -1,5 +1,6 @@
 import * as types from './mutation-types'
 import * as api from '@/util/api'
+import * as factory from '@/util/factory'
 import directories from '@/config/directories'
 
 export default {
@@ -9,15 +10,8 @@ export default {
       if(directory.api) {
         // fetch values from API
         api.getDirectory(reqObj).then(response => {
-          var valueCol = directories[reqObj.directoryID].value
-          var labelCol = directories[reqObj.directoryID].label
-          var respObj = {
-            data: response.data.rows.map(row => {
-              return {
-                value: row[valueCol],
-                label: row[labelCol]
-              }
-            }),
+          let respObj = {
+            data: factory.assembleDirectoryList(reqObj.directoryID, response.data.rows),
             directoryID: reqObj.directoryID,
             uniqueID: reqObj.uniqueID
           }
@@ -35,7 +29,7 @@ export default {
           }
           commit(types.UPDATE_SELECT, respObj)
         } else {
-          commit(types.FETCH_FAIL, 'Options not found among directories')
+          commit(types.DIRECTORY_NOT_FOUND)
         }
       }
     } else {

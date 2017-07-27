@@ -21,7 +21,7 @@ export default {
     id: 'caucus',
     api: 'caucuses',
     value: 'id',
-    label: 'name'
+    label: 'abbreviation'
   },
   committee: {
     id: 'committee',
@@ -167,7 +167,7 @@ export default {
       },
       {
         value: 'end_of_term',
-        label: '屆期結束'
+        label: '任期屆滿'
       },
       {
         value: 'leave_office',

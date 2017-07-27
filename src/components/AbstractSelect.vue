@@ -56,10 +56,10 @@ export default {
       })
     },
     syncModel() {
-      this.tmp = (typeof this.value === 'object') ? this.value.id : this.value
+      this.tmp = typeof this.value === 'object' ? this.value.id : this.value
     },
     handleChange() {
-      this.$emit('update:value', this.tmp)
+      this.$emit('update:value', this.tmp) // FIXME: This is too simple
 
       if(this.config.cascadeUpdate) {
         let uploadObj = {
