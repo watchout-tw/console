@@ -1,17 +1,17 @@
 import { Message } from 'element-ui'
-import router from '../../router'
-import * as types from '../mutation-types'
+import router from '@/router'
 import * as api from '@/util/api'
+import * as types from '../mutation-types'
 
-const errorMsg = '編輯失敗'
-const successMsg = '編輯成功'
+const messages = {
+  failure: '編輯失敗',
+  success: '編輯成功'
+}
 
 const state = {
-
 }
 
 const getters = {
-
 }
 
 const actions = {
@@ -35,13 +35,13 @@ const actions = {
 const mutations = {
   [types.SHOW_SUCCESS_ALERT] (state) {
     Message({
-      message: successMsg,
+      message: messages.success,
       type: 'success'
     })
   },
   [types.SHOW_FAIL_ALERT] (state) {
     Message({
-      message: errorMsg,
+      message: messages.failure,
       type: 'error'
     })
   },
