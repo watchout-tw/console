@@ -1,11 +1,13 @@
 <template>
 <div id="app">
-  <navigation :menu="menu"></navigation>
+  <navigation :menu="menu" :modalAuthIsShown.sync="modalAuthIsShown"></navigation>
+  <ModalAuth v-if="modalAuthIsShown" :modalAuthIsShown.sync="modalAuthIsShown" :isAuthenticated.sync="isAuthenticated"></ModalAuth>
   <router-view></router-view>
 </div>
 </template>
 
 <script>
+import ModalAuth from 'common/src/components/Modal/Auth'
 import Navigation from '@/components/Navigation'
 import menu from '@/menu'
 
@@ -13,10 +15,13 @@ export default {
   name: 'app',
   data() {
     return {
-      menu
+      menu,
+      modalAuthIsShown: false,
+      isAuthenticated: false
     }
   },
   components: {
+    ModalAuth,
     Navigation
   }
 }

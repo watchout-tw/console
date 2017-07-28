@@ -8,16 +8,19 @@
         <router-link :to="{ name: page.routes.list.name }">{{ page.title }}</router-link>
       </el-menu-item>
     </el-submenu>
+    <el-menu-item :index="login" @click="toggleModalAuth">草民王登入</el-menu-item>
   </el-menu>
 </nav>
 </template>
 
 <script>
 export default {
-  props: ['menu'],
+  props: ['menu', 'modalAuthIsShown'],
   data() {
     return {
-      root: '/'
+      root: '/',
+      // FIXME: this modal should be a button instead of a menu with routing
+      login: '/login'
     }
   },
   created() {
@@ -26,6 +29,9 @@ export default {
   methods: {
     handleSelect(key, keyPath) {
       this.activeIndex = this.root + key
+    },
+    toggleModalAuth() {
+      this.$emit('update:modalAuthIsShown', !this.modalAuthIsShown)
     }
   }
 }
