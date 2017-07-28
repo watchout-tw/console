@@ -1,6 +1,6 @@
 <template>
 <div class="term-lookup">
-  <el-date-picker :placeholder="config.label" v-model="tmp" @change="handleChange()"></el-date-picker>
+  <el-date-picker :placeholder="config.label" v-model="model" @change="push"></el-date-picker>
 </div>
 </template>
 
@@ -11,27 +11,27 @@ export default {
   props: ['value', 'uuid', 'cascadeThis', 'config', 'page'],
   data() {
     return {
-      tmp: undefined
+      model: undefined
     }
   },
   watch: {
     'value'() {
-      this.syncModel()
+      this.pull()
     }
   },
   methods: {
-    syncModel() {
-      this.tmp = this.value
+    pull() {
+      this.model = this.value
     },
-    handleChange() {
-      this.$emit('update:value', this.tmp)
+    push() {
+      this.$emit('update:value', this.model)
 
       if(this.config.cascadeUpdate) {
         let uploadObj = {
           fromID: this.uuid
         }
-        if(this.tmp.constructor.name === 'Date') {
-          let timestamp = this.tmp.getTime()
+        if(this.model.constructor.name === 'Date') {
+          let timestamp = this.model.getTime()
           api.lookupTerm({
             timestamp
           }).then(response => {
@@ -39,10 +39,10 @@ export default {
               uploadObj.value = response.data
             } else {
               this.$message({
-                message: this.tmp.toLocaleDateString() + '是休會期間',
+                message: this.model.toLocaleDateString() + '是休會期間',
                 type: 'error'
               })
-              this.tmp = undefined
+              this.model = undefined
             }
             this.$emit('update:cascadeThis', uploadObj)
           })

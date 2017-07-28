@@ -1,6 +1,6 @@
 <template>
 <div class="gender-slider">
-  <el-slider v-model="tmp" @change="handleChange" :show-tooltip="false"></el-slider>
+  <el-slider v-model="model" @change="push" :show-tooltip="false"></el-slider>
   <p class="status">{{ status }}</p>
 </div>
 </template>
@@ -10,13 +10,22 @@ export default {
   props: ['value', 'config', 'page'],
   data() {
     return {
-      tmp: undefined
+      initialized: false,
+      model: undefined
     }
   },
   computed: {
     status() {
-      let percentage = (this.tmp - 50) * 2
+      let percentage = (this.model - 50) * 2
       return percentage === 0 ? '酷兒' : `${Math.abs(percentage)}% ${(percentage < 0 ? '女性' : '男性')}`
+    }
+  },
+  watch: {
+    'value'() {
+      if(!this.initialized) {
+        this.pull() // pull only once at initialization
+        this.initialized = true
+      }
     }
   },
   methods: {
@@ -25,8 +34,11 @@ export default {
       let percentage = Math.abs(val - 50) * 2
       return state === 0 ? '酷兒' : `${percentage}% ${(state < 0 ? '女性' : '男性')}`
     },
-    handleChange() {
-      this.$emit('update:value', (this.tmp - 50) * 2)
+    pull() { // pull data from parent
+      this.model = this.value
+    },
+    push() {
+      this.$emit('update:value', (this.model - 50) * 2)
     }
   }
 }

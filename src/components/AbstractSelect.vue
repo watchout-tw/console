@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable :disabled="config.disabled">
+  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable filterable :disabled="config.disabled">
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>
@@ -16,7 +16,7 @@ export default {
   props: ['size', 'value', 'uuid', 'cascadeThis', 'config', 'page'],
   data() {
     return {
-      tmp: undefined
+      model: undefined
     }
   },
   computed: {
@@ -40,7 +40,7 @@ export default {
       this.update()
     },
     'value'() {
-      this.syncModel()
+      this.pull()
     }
   },
   methods: {
@@ -48,25 +48,25 @@ export default {
       return this.config.type === type
     },
     update() {
-      this.syncModel()
+      this.pull()
       this.$store.dispatch('updateSelect', {
         parameters: this.config.parameters,
         directoryID: this.config.directory,
         uniqueID: this.uuid
       })
     },
-    syncModel() {
-      this.tmp = typeof this.value === 'object' ? this.value.id : this.value
+    pull() {
+      this.model = typeof this.value === 'object' ? this.value.id : this.value
     },
-    handleChange() {
-      this.$emit('update:value', this.tmp) // FIXME: This is too simple
+    push() {
+      this.$emit('update:value', this.model) // FIXME: This is too simple
 
       if(this.config.cascadeUpdate) {
         let uploadObj = {
           fromID: this.uuid
         }
-        if(this.tmp) {
-          uploadObj.value = this.tmp
+        if(this.model) {
+          uploadObj.value = this.model
         }
         this.$emit('update:cascadeThis', uploadObj)
       }

@@ -5,7 +5,7 @@
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
-    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :isInitialized="isInitialized"></editor-table>
+    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
@@ -33,7 +33,7 @@ export default {
   props: ['page'],
   data() {
     return {
-      isInitialized: false,
+      initialized: false,
       sections: [],
       model: {}
     }
@@ -76,14 +76,14 @@ export default {
             this.$set(this.model, section.id, [])
           }
         }
-        this.isInitialized = true
+        this.initialized = true
       } else {
         api.getItem({
           pageID: this.page.id,
           id: this.$route.params.id
         }).then(response => {
           this.model = response.data
-          this.isInitialized = true
+          this.initialized = true
         })
       }
     },

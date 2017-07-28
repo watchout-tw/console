@@ -120,7 +120,7 @@ for(let submenu of menu) {
     page.routes = {
       list: {
         name: page.id + '_list',
-        title: '所有' + page.name
+        title: page.name
       },
       edit: {
         name: page.id + '_edit',

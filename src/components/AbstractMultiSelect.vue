@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-multi-select">
-  <el-select :size="size" :placeholder="config.label" v-model="tmp" @change="handleChange" clearable filterable multiple :allow-create="isCreative">
+  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable filterable multiple :allow-create="isCreative">
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>
@@ -16,7 +16,7 @@ export default {
   props: ['size', 'value', 'uuid', 'config', 'page'],
   data() {
     return {
-      tmp: []
+      model: []
     }
   },
   computed: {
@@ -35,7 +35,7 @@ export default {
       this.update()
     },
     'value'(now, then) {
-      this.syncModel()
+      this.pull()
     }
   },
   methods: {
@@ -43,7 +43,7 @@ export default {
       return this.config.type === type
     },
     update() {
-      this.syncModel()
+      this.pull()
       if(this.config.directory) {
         this.$store.dispatch('updateSelect', {
           directoryID: this.config.directory,
@@ -51,20 +51,11 @@ export default {
         })
       }
     },
-    syncModel() {
-      this.tmp = this.value
+    pull() {
+      this.model = this.value
     },
-    handleChange() {
-      this.$emit('update:value', this.tmp)
-      if(!this.config.cascadeUpdate) {
-        return
-      }
-      for(let updateTarget of this.config.cascadeUpdate) {
-        this.$emit('update:cascade', {
-          target: updateTarget,
-          directoryID: this.tmp
-        })
-      }
+    push() {
+      this.$emit('update:value', this.model)
     }
   }
 }

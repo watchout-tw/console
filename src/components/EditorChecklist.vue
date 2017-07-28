@@ -1,6 +1,6 @@
 <template>
 <div class="editor-checklist">
-  <el-checkbox-group v-model="tmp" @change="handleChange">
+  <el-checkbox-group v-model="localModel" @change="handleChange">
     <el-checkbox-button v-for="item in options" :label="item.value" :key="item.value">{{ item.label }}</el-checkbox-button>
   </el-checkbox-group>
 </div>
@@ -19,7 +19,7 @@ export default {
     return {
       initialized: false,
       uuid: uuid(),
-      tmp: []
+      localModel: []
     }
   },
   computed: {
@@ -39,7 +39,7 @@ export default {
     'model'() {
       if(!this.initialized) {
         for(let item of this.model) {
-          this.tmp.push(item.id)
+          this.localModel.push(item.id)
         }
         this.initialized = true
       }

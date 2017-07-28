@@ -561,23 +561,23 @@ export default {
       },
       {
         prop: 'aye_count',
-        label: '贊成人數',
-        width: columnWidth(4)
+        label: '贊成',
+        width: columnWidth(2)
       },
       {
         prop: 'nay_count',
-        label: '反對人數',
-        width: columnWidth(4)
+        label: '反對',
+        width: columnWidth(2)
       },
       {
         prop: 'abstain_count',
-        label: '棄權人數',
-        width: columnWidth(4)
+        label: '棄權',
+        width: columnWidth(2)
       },
       {
         prop: 'absence_count',
-        label: '缺席人數',
-        width: columnWidth(4)
+        label: '缺席',
+        width: columnWidth(2)
       },
       {
         prop: 'g0v_link',

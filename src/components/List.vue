@@ -35,7 +35,6 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
-import TableCell from '@/components/TableCell'
 import cascadeController from '@/interfaces/cascadeController'
 import * as factory from '@/util/factory'
 
@@ -166,8 +165,7 @@ export default {
     }
   },
   components: {
-    AbstractSelect,
-    TableCell
+    AbstractSelect
   }
 }
 </script>

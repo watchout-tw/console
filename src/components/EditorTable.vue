@@ -39,9 +39,10 @@ import AbstractMultiSelect from '@/components/AbstractMultiSelect'
 Vue.use(Vuex)
 
 export default {
-  props: ['rows', 'config', 'page', 'isInitialized'],
+  props: ['rows', 'config', 'page', 'parentInitialized'],
   data() {
     return {
+      initialized: false,
       componentSize: 'small',
       flags: [],
       uuids: []
@@ -51,10 +52,13 @@ export default {
     this.init()
   },
   watch: {
-    'isInitialized'(now) {
-      if(this.rows) {
-        this.flags = this.rows.map(row => ({isEditing: false}))
+    'parentInitialized'() {
+      if(!this.initialized && this.rows) {
+        this.flags = this.rows.map(row => ({
+          isEditing: false
+        }))
         this.uuids = this.rows.map(row => this.generateUUIDForRow())
+        this.initialized = true
       }
     }
   },

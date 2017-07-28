@@ -30,3 +30,17 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.el-menu {
+  border-radius: 0;
+}
+// FIXME: This is temporary.
+.el-menu--dark {
+  background-color: #333;
+}
+.el-menu--horizontal.el-menu--dark .el-menu-item:hover,
+.el-menu--horizontal.el-menu--dark .el-submenu__title:hover {
+  background-color: #505050;
+}
+</style>
