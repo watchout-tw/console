@@ -56,16 +56,6 @@ export function lookupTerm (reqObj) {
   return axios.get(url)
 }
 
-export function postMockForm (reqObj) {
-  // let url = `/console/lab/${reqObj.pageID}`
-  // return axios.post(url, reqObj.content)
-  return new Promise((resolve, reject) => {
-    resolve({
-      data: reqObj
-    })
-  })
-}
-
 export function postForm (reqObj) {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
   let url = `/console/lab/${reqObj.pageID}`
