@@ -65,3 +65,9 @@ export function postMockForm (reqObj) {
     })
   })
 }
+
+export function postForm (reqObj) {
+  axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
+  let url = `/console/lab/${reqObj.pageID}`
+  return axios.post(url, reqObj.content)
+}

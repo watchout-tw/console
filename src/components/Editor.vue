@@ -91,10 +91,16 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     submit() {
-      this.$store.dispatch('submitForm', {
-        formData: this.model,
-        routeTo: this.page
-      })
+      if (this.$route.params.id === 'create') {
+        this.$store.dispatch('submitForm', {
+          content: this.model,
+          page: this.page,
+          pageID: this.page.id
+        })
+      } else {
+        // For Patch
+        alert('patch is not done yet')
+      }
       scrollToTop()
     }
   },

@@ -16,8 +16,8 @@ const getters = {
 
 const actions = {
   submitForm ({ commit, dispatch }, reqObj) {
-    api.postMockForm(reqObj.formData).then(response => {
-      router.push({name: reqObj.routeTo.routes.edit.name, params: {id: response.data[reqObj.routeTo.routingIndex]}})
+    api.postForm(reqObj).then(response => {
+      router.push({name: reqObj.page.routes.edit.name, params: {id: response.data[reqObj.page.routingIndex]}})
       dispatch('showSuccessAlert')
     }).catch(error => {
       commit(types.POST_FAIL, error)
