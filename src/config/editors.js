@@ -947,7 +947,10 @@ export default {
               id: 'principle_sponsor_type',
               label: '第一提案人類別',
               type: 'select',
-              directory: 'principle_sponsor_type'
+              directory: 'principle_sponsor_type',
+              cascadeUpdate: [
+                cascade.appointDirectory(['principle_sponsor_value'])
+              ]
             },
             {
               id: 'principle_sponsor_value',
