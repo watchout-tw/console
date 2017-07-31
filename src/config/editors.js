@@ -675,16 +675,16 @@ export default {
               directory: 'specific_topic'
             },
             {
-              id: 'act_dir',
-              label: '修法方向',
-              type: 'select',
-              directory: 'act_dir'
-            },
-            {
               id: 'act',
               label: '法案',
               type: 'select',
               directory: 'act'
+            },
+            {
+              id: 'act_dir',
+              label: '修法方向',
+              type: 'select',
+              directory: 'act_dir'
             },
             {
               id: 'feature',

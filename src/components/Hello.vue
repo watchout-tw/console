@@ -22,10 +22,12 @@ export default {
 .hello {
   margin: 0 1rem;
   > blockquote {
-    @include font-serif;
+    font-family: "leitura-news", serif;
+    font-weight: bold;
     font-style: italic;
-    font-size: 2rem;
-
+    font-size: 1.25rem;
+    line-height: 1.5;
+    margin: 1rem 0;
   }
 }
 </style>
