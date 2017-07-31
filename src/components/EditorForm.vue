@@ -6,7 +6,7 @@
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]"></el-input>
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
-      <el-color-picker v-if="fieldIs(field, 'color')" v-model="model[field.id]" show-alpha></el-color-picker>
+      <abstract-color-picker v-if="fieldIs(field, 'color')" :value.sync="model[field.id]"></abstract-color-picker>
       <term-lookup v-if="fieldIs(field, 'date')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :cascade-this.sync="cascadeThis" :config="field" :page="page"></term-lookup>
       <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :cascade-this.sync="cascadeThis" :config="field" :page="page"></abstract-select>
       <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :config="field" :page="page"></abstract-multi-select>
@@ -19,6 +19,7 @@
 <script>
 import AbstractSelect from '@/components/AbstractSelect'
 import AbstractMultiSelect from '@/components/AbstractMultiSelect'
+import AbstractColorPicker from '@/components/AbstractColorPicker'
 import TermLookup from '@/components/TermLookup'
 import GenderSlider from '@/components/GenderSlider'
 import cascadeController from '@/interfaces/cascadeController'
@@ -51,6 +52,7 @@ export default {
     }
   },
   components: {
+    AbstractColorPicker,
     AbstractSelect,
     AbstractMultiSelect,
     TermLookup,
