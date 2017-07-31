@@ -79,7 +79,8 @@ const mutations = {
     state.filteredRows = data.rows
   },
   [types.FETCH_FAIL] (state, error) {
-    console.error(error)
+    console.error('Status Code', error.response.status)
+    console.error('Messages', error.response.data)
   }
 }
 
