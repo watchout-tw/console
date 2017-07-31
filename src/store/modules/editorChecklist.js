@@ -29,7 +29,8 @@ const mutations = {
     Vue.set(state, mutateObj.uniqueID, mutateObj.data)
   },
   [types.FETCH_FAIL] (state, error) {
-    console.error(error)
+    console.error('Status Code', error.response.status)
+    console.error('Messages', error.response.data)
   }
 }
 

@@ -44,7 +44,8 @@ const mutations = {
     Vue.set(state, mutateObj.directoryID, mutateObj.data)
   },
   [types.FETCH_FAIL](state, error) {
-    console.error(error)
+    console.error('Status Code', error.response.status)
+    console.error('Messages', error.response.data)
   },
   [types.DIRECTORY_NOT_FOUND](state) {
     console.error('Directory not found')
