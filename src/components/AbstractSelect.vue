@@ -56,7 +56,7 @@ export default {
       })
     },
     pull() {
-      this.model = typeof this.value === 'object' ? this.value.id : this.value
+      this.model = this.value ? this.value.id : this.value
     },
     push() {
       this.$emit('update:value', this.model) // FIXME: This is too simple
