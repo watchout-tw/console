@@ -1,20 +1,22 @@
 <template>
 <div id="app">
-  <navigation :menu="menu" :modalAuthIsShown.sync="modalAuthIsShown"></navigation>
+  <NavigationWithIdentity :channel="channel" :isAuthenticated.sync="isAuthenticated" :modalAuthIsShown.sync="modalAuthIsShown" :menu="menu"></NavigationWithIdentity>
   <ModalAuth v-if="modalAuthIsShown" :modalAuthIsShown.sync="modalAuthIsShown" :isAuthenticated.sync="isAuthenticated"></ModalAuth>
   <router-view></router-view>
 </div>
 </template>
 
 <script>
+import dataStore from 'common/src/lib/dataStore'
+import NavigationWithIdentity from 'common/src/components/Navigation/Identity'
 import ModalAuth from 'common/src/components/Modal/Auth'
-import Navigation from '@/components/Navigation'
 import menu from '@/menu'
 
 export default {
   name: 'app',
   data() {
     return {
+      channel: dataStore.channels.park,
       menu,
       modalAuthIsShown: false,
       isAuthenticated: false
@@ -22,7 +24,7 @@ export default {
   },
   components: {
     ModalAuth,
-    Navigation
+    NavigationWithIdentity
   }
 }
 </script>
@@ -31,5 +33,4 @@ export default {
 @import '~element-ui/lib/theme-default/index.css';
 @import '~common/src/styles/resources';
 @import '~common/src/styles/main';
-
 </style>
