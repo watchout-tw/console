@@ -16,7 +16,8 @@ export default {
   props: ['size', 'value', 'uuid', 'cascadeThis', 'config', 'page'],
   data() {
     return {
-      model: undefined
+      model: undefined,
+      initialized: false
     }
   },
   computed: {
@@ -40,7 +41,10 @@ export default {
       this.update()
     },
     'value'() {
-      this.pull()
+      if(!this.initialized) {
+        this.pull() // pull only once at initialization
+        this.initialized = true
+      }
     }
   },
   methods: {
@@ -56,7 +60,12 @@ export default {
       })
     },
     pull() {
-      this.model = this.value ? this.value.id : this.value
+      if(typeof this.value === 'object') {
+        console.log(this.value, 'is object')
+      }
+      this.model = typeof this.value === 'object'
+        ? (this.value.id ? this.value.id : this.value.name) // FIXME: This is also too simple
+        : this.value
     },
     push() {
       this.$emit('update:value', this.model) // FIXME: This is too simple
