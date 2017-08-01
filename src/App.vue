@@ -16,7 +16,7 @@ export default {
   name: 'app',
   data() {
     return {
-      channel: dataStore.channels.park,
+      channel: dataStore.channels.console,
       menu,
       modalAuthIsShown: false,
       isAuthenticated: false
@@ -33,4 +33,8 @@ export default {
 @import '~element-ui/lib/theme-default/index.css';
 @import '~common/src/styles/resources';
 @import '~common/src/styles/main';
+
+#app {
+  padding-bottom: 4rem;
+}
 </style>
