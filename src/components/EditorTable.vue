@@ -82,11 +82,13 @@ export default {
       this.flags[$index].isEditing = true
     },
     deleteRow($index) {
+      var tableRows = this.rows ? this.rows : []
+      tableRows.splice($index, 1)
+      this.$emit('update:rows', tableRows)
     },
     addRow() {
       var tableRows = this.rows ? this.rows : []
       tableRows.push(this.generateModelForRow())
-
       this.flags.push({isEditing: true})
       this.uuids.push(this.generateUUIDForRow())
       this.$emit('update:rows', tableRows)

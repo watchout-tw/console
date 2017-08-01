@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import * as util from 'common/src/lib/util'
 import dataStore from 'common/src/lib/dataStore'
 import NavigationWithIdentity from 'common/src/components/Navigation/Identity'
 import ModalAuth from 'common/src/components/Modal/Auth'
@@ -19,7 +20,7 @@ export default {
       channel: dataStore.channels.console,
       menu,
       modalAuthIsShown: false,
-      isAuthenticated: false
+      isAuthenticated: util.jwtTokenIsExist()
     }
   },
   components: {
