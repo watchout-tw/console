@@ -1,7 +1,7 @@
 <template>
-<div class="editor-color-label">
-  <el-color-picker v-model="model" @change="rgbToHex" show-alpha ></el-color-picker>
-  <el-input v-model="model" placeholder="請輸入hex色碼" @change="push" ></el-input>
+<div class="abstract-color-picker d-flex flex-row">
+  <el-color-picker v-model="model" @change="rgbToHex" show-alpha></el-color-picker>
+  <el-input v-model="model" placeholder="#000000" @change="push"></el-input>
 </div>
 </template>
 
@@ -23,7 +23,12 @@ export default {
   props: ['value'],
   data() {
     return {
-      model: ''
+      model: undefined
+    }
+  },
+  watch: {
+    'value'() {
+      this.pull()
     }
   },
   methods: {
@@ -36,6 +41,9 @@ export default {
         this.push()
       }
     },
+    pull() {
+      this.model = this.value
+    },
     push() {
       this.$emit('update:value', this.model)
     }
@@ -44,16 +52,15 @@ export default {
 </script>
 
 <style  lang="scss">
-  .editor-color-label {
-    width: 100%;
-    
-    .el-color-picker {
-      display: initial;
-      float: left;
-    }
-    
-    .el-input {
-      max-width: 180px;
-    }
+.abstract-color-picker {
+  width: 100%;
+
+  .el-color-picker {
+    margin-right: 0.5rem;
   }
+  .el-input {
+    max-width: 10rem;
+    margin-right: 0.5rem;
+  }
+}
 </style>
