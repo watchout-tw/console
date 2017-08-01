@@ -305,18 +305,21 @@ export default {
               id: 'edu_record',
               label: '學歷',
               type: 'textarea',
+              formatter: formatters.longtext,
               postPreparer: preparers.text2Array
             },
             {
               id: 'experience',
               label: '經歷',
               type: 'textarea',
+              formatter: formatters.longtext,
               postPreparer: preparers.text2Array
             },
             {
               id: 'policy_proposal',
               label: '政見',
               type: 'textarea',
+              formatter: formatters.longtext,
               postPreparer: preparers.text2Array
             }
           ],

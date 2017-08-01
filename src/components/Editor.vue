@@ -83,6 +83,16 @@ export default {
           id: this.$route.params.id
         }).then(response => {
           this.model = response.data
+          // format certain property before render
+          for(let section of this.sections) {
+            if(section.interface.type === 'form') {
+              for(let field of section.interface.fields) {
+                if (field.formatter && this.model[field.id]) {
+                  this.model[field.id] = field.formatter(this.model[field.id])
+                }
+              }
+            }
+          }
           this.initialized = true
         })
       }

@@ -17,6 +17,10 @@ function partyFlag(hex) {
   return `<div class="party-flag" style="background-color: ${hex}"></div>`
 }
 
+function array2Text (text) {
+  return text.join('\n')
+}
+
 export default {
   date(row, col) {
     return row[col.property] ? new Date(row[col.property]).toLocaleDateString('zh-Hans-TW') : ''
@@ -92,5 +96,8 @@ export default {
   bullet_point_questions(row, col) {
     let questions = row[col.property]
     return '<ul>' + questions.map(questionObj => `<li>${questionObj.question}</li>`).join('') + '</ul>'
+  },
+  longtext(str) {
+    return array2Text(str)
   }
 }
