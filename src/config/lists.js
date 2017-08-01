@@ -11,6 +11,8 @@ import cascade from '@/util/cascade'
 
 */
 
+let singleTopicColumnWidth = columnWidth(6)
+
 export default {
   terms: {
     filters: [],
@@ -193,7 +195,8 @@ export default {
     columns: [
       {
         prop: 'title',
-        label: '標題'
+        label: '標題',
+        width: singleTopicColumnWidth
       },
       {
         prop: 'index',
@@ -233,7 +236,8 @@ export default {
     columns: [
       {
         prop: 'title',
-        label: '標題'
+        label: '標題',
+        width: singleTopicColumnWidth
       },
       {
         prop: 'index',
@@ -327,7 +331,8 @@ export default {
       {
         prop: 'st',
         label: '關聯小議題',
-        formatter: formatters.title
+        formatter: formatters.title,
+        width: singleTopicColumnWidth
       },
       {
         prop: 'act',
@@ -396,7 +401,8 @@ export default {
       {
         prop: 'st',
         label: '關聯小議題',
-        formatter: formatters.title
+        formatter: formatters.title,
+        width: singleTopicColumnWidth
       },
       {
         prop: 'term_index',
@@ -548,7 +554,8 @@ export default {
       {
         prop: 'st',
         label: '關聯小議題',
-        formatter: formatters.title
+        formatter: formatters.title,
+        width: singleTopicColumnWidth
       },
       {
         prop: 'term_index',
