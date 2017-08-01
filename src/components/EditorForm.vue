@@ -63,6 +63,8 @@ export default {
 
 <style lang="scss">
 .editor-form {
+  max-width: 36rem;
+
   .el-form-item.has-dependency {
     position: relative;
 

@@ -669,7 +669,7 @@ export default {
           type: 'form',
           fields: [
             {
-              id: 'specific_topic',
+              id: 'st',
               label: '小議題',
               type: 'select',
               directory: 'specific_topic'
