@@ -60,12 +60,14 @@ export default {
       })
     },
     pull() {
-      if(typeof this.value === 'object') {
-        console.log(this.value, 'is object')
+      // FIXME: This is buggy here, this.value could be null or an object
+      if (!this.value) {
+        this.model = this.value
+      } else {
+        this.model = typeof this.value === 'object'
+          ? (this.value.id ? this.value.id : this.value.name)
+          : this.value
       }
-      this.model = typeof this.value === 'object'
-        ? (this.value.id ? this.value.id : this.value.name) // FIXME: This is also too simple
-        : this.value
     },
     push() {
       this.$emit('update:value', this.model) // FIXME: This is too simple
