@@ -1,5 +1,6 @@
 import { labelWidth } from '@/util/element'
 import formatters from '@/config/formatters'
+import * as preparers from '@/config/preparers'
 import cascade from '@/util/cascade'
 
 export default {
@@ -20,12 +21,14 @@ export default {
             {
               id: 'start_date',
               label: '起始日',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'end_date',
               label: '終止日',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             }
           ],
           options: {
@@ -55,13 +58,15 @@ export default {
               prop: 'start_date',
               label: '起',
               type: 'date',
-              formatter: formatters.date
+              formatter: formatters.date,
+              postPreparer: preparers.date2Timestamp
             },
             {
               prop: 'end_date',
               label: '訖',
               type: 'date',
-              formatter: formatters.date
+              formatter: formatters.date,
+              postPreparer: preparers.date2Timestamp
             }
           ]
         }
@@ -282,7 +287,8 @@ export default {
             {
               id: 'birth_date',
               label: '出生日期',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'gender',
@@ -298,17 +304,20 @@ export default {
             {
               id: 'edu_record',
               label: '學歷',
-              type: 'textarea'
+              type: 'textarea',
+              postPreparer: preparers.text2Array
             },
             {
               id: 'experience',
               label: '經歷',
-              type: 'textarea'
+              type: 'textarea',
+              postPreparer: preparers.text2Array
             },
             {
               id: 'policy_proposal',
               label: '政見',
-              type: 'textarea'
+              type: 'textarea',
+              postPreparer: preparers.text2Array
             }
           ],
           options: {
@@ -387,7 +396,8 @@ export default {
               prop: 'start_date',
               label: '起始日期',
               type: 'date',
-              formatter: formatters.date
+              formatter: formatters.date,
+              postPreparer: preparers.date2Timestamp
             },
             {
               prop: 'officer_title',
@@ -420,7 +430,8 @@ export default {
               prop: 'change_date',
               label: '變更日期',
               type: 'date',
-              formatter: formatters.date
+              formatter: formatters.date,
+              postPreparer: preparers.date2Timestamp
             },
             {
               prop: 'change_type',
@@ -749,6 +760,7 @@ export default {
               id: 'date',
               label: '日期',
               type: 'date',
+              postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
                 cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
               ]
@@ -910,6 +922,7 @@ export default {
               id: 'date',
               label: '日期',
               type: 'date',
+              postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
                 cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
               ]
@@ -1004,7 +1017,8 @@ export default {
             {
               prop: 'date',
               label: '日期',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             },
             {
               prop: 'progress',
@@ -1104,6 +1118,7 @@ export default {
               id: 'date',
               label: '日期',
               type: 'date',
+              postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
                 cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
               ]

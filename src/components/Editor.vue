@@ -95,8 +95,8 @@ export default {
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
-            if (!!this.model[field.id] && field.type === 'date') {
-              this.model[field.id] = new Date(this.model[field.id]).getTime()
+            if (field.postPreparer && this.model[field.id]) {
+              this.model[field.id] = field.postPreparer(this.model[field.id])
             }
           }
         }
