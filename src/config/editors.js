@@ -542,7 +542,8 @@ export default {
         interface: {
           type: 'checklist',
           id: 'specific_topic',
-          directory: 'specific_topic'
+          directory: 'specific_topic',
+          postPreparer: preparers.mapChecklist
         }
       }
     ]
@@ -589,7 +590,8 @@ export default {
         interface: {
           type: 'checklist',
           id: 'general_topic',
-          directory: 'general_topic'
+          directory: 'general_topic',
+          postPreparer: preparers.mapChecklist
         }
       },
       {
@@ -668,7 +670,8 @@ export default {
         interface: {
           type: 'checklist',
           id: 'specific_topic',
-          directory: 'specific_topic'
+          directory: 'specific_topic',
+          postPreparer: preparers.mapChecklist
         }
       }
     ]

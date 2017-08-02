@@ -5,3 +5,7 @@ export function text2Array (text) {
 export function date2Timestamp (date) {
   return new Date(date).getTime()
 }
+
+export function mapChecklist (cklist) {
+  return cklist.map(item => item.id)
+}

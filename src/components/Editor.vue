@@ -109,6 +109,10 @@ export default {
               this.model[field.id] = field.postPreparer(this.model[field.id])
             }
           }
+        } else if (section.interface.type === 'checklist') {
+          if (section.interface.postPreparer && this.model[section.id]) {
+            this.model[section.id] = section.interface.postPreparer(this.model[section.id])
+          }
         }
       }
     },
