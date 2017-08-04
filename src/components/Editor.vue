@@ -125,8 +125,11 @@ export default {
           pageID: this.page.id
         })
       } else {
-        // For Patch
-        alert('patch is not done yet')
+        this.$store.dispatch('patchForm', {
+          content: this.model,
+          page: this.page,
+          pageID: this.page.id
+        })
       }
       scrollToTop()
     }

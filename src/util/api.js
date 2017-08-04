@@ -2,12 +2,36 @@ import directories from '@/config/directories'
 import axios from 'axios'
 import queryString from 'query-string'
 
+const queryBase = {
+  'name': ['committees'],
+  'id': ['caucuses', 'parties']
+}
+
 function trimQueryString (query) {
   var temp = {}
   for (var key in query) {
     temp[key] = query[key] ? query[key] : undefined
   }
   return temp
+}
+
+function trimPatchQuery (query) {
+  var temp = {}
+  for (var key in query) {
+    if(key !== 'id') {
+      temp[key] = query[key] ? query[key] : undefined
+    }
+  }
+  return temp
+}
+
+function getQueryBase (pageID) {
+  for (var key in queryBase) {
+    if(queryBase[key].indexOf(pageID) > -1) {
+      return key
+    }
+  }
+  return ''
 }
 
 export function getDirectory (reqObj) {
@@ -60,4 +84,11 @@ export function postForm (reqObj) {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
   let url = `/console/lab/${reqObj.pageID}`
   return axios.post(url, reqObj.content)
+}
+
+export function patchForm (reqObj) {
+  axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
+  let content = trimPatchQuery(reqObj.content)
+  let url = `/console/lab/${reqObj.pageID}/` + reqObj.content[getQueryBase(reqObj.pageID)]
+  return axios.patch(url, content)
 }
