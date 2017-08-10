@@ -2,6 +2,13 @@ import directories from '@/config/directories'
 import axios from 'axios'
 import queryString from 'query-string'
 
+const token = localStorage.getItem('watchout-token')
+if(token) {
+  axios.defaults.headers.common['Authorization'] = token
+} else {
+  console.error('Token not found')
+}
+
 function trimQueryString (query) {
   var temp = {}
   for (var key in query) {
@@ -57,7 +64,6 @@ export function lookupTerm (reqObj) {
 }
 
 export function postForm (reqObj) {
-  axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
   let url = `/console/lab/${reqObj.pageID}`
   return axios.post(url, reqObj.content)
 }
