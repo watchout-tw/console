@@ -121,7 +121,21 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     prepare() {
-      return deepClone(this.model)
+      var tempModel = deepClone(this.model)
+      for(let section of this.sections) {
+        if(section.interface.type === 'form') {
+          for(let field of section.interface.fields) {
+            if (field.postPreparer && tempModel[field.id]) {
+              tempModel[field.id] = field.postPreparer(tempModel[field.id])
+            }
+          }
+        } else if (section.interface.type === 'checklist') {
+          if (section.interface.postPreparer && tempModel[section.id]) {
+            tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
+          }
+        }
+      }
+      return tempModel
     },
     submit() {
       let content = this.prepare()
