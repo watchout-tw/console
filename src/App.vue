@@ -1,10 +1,11 @@
 <template>
 <div id="app">
   <NavigationWithIdentity :channel="channel" :menu="menu"></NavigationWithIdentity>
-  <ModalAuth v-if="modalAuthIsShown"></ModalAuth>
-  <ModalResetPassword v-if="modalResetPasswordIsShown"></ModalResetPassword>
-  <ModalIdentity v-if="modalIdentityIsShown"></ModalIdentity>
   <router-view></router-view>
+  <ModalAuth v-if="modalAuthIsShown"></ModalAuth>
+  <ModalLostPwd v-if="modalLostPwdIsShown"></ModalLostPwd>
+  <ModalResetPwd v-if="modalResetPwdIsShown"></ModalResetPwd>
+  <ModalIdentity v-if="modalIdentityIsShown"></ModalIdentity>
 </div>
 </template>
 
@@ -13,7 +14,8 @@ import * as util from 'common/src/lib/util'
 import dataStore from 'common/src/lib/dataStore'
 import NavigationWithIdentity from 'common/src/components/Navigation/Identity'
 import ModalAuth from 'common/src/components/Modal/Auth'
-import ModalResetPassword from 'common/src/components/Modal/ResetPassword'
+import ModalLostPwd from 'common/src/components/Modal/LostPwd'
+import ModalResetPwd from 'common/src/components/Modal/ResetPwd'
 import ModalIdentity from 'common/src/components/Modal/Identity'
 import menu from '@/menu'
 
@@ -31,8 +33,11 @@ export default {
     modalAuthIsShown() {
       return this.$store.state.modalAuthIsShown
     },
-    modalResetPasswordIsShown() {
-      return this.$store.state.modalResetPasswordIsShown
+    modalLostPwdIsShown() {
+      return this.$store.state.modalLostPwdIsShown
+    },
+    modalResetPwdIsShown() {
+      return this.$store.state.modalResetPwdIsShown
     },
     modalIdentityIsShown() {
       return this.$store.state.modalIdentityIsShown
@@ -47,7 +52,8 @@ export default {
   components: {
     NavigationWithIdentity,
     ModalAuth,
-    ModalResetPassword,
+    ModalLostPwd,
+    ModalResetPwd,
     ModalIdentity
   }
 }
