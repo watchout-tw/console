@@ -31,14 +31,10 @@
 
 <script>
 import debounce from 'lodash.debounce'
-import Vue from 'vue'
-import Vuex from 'vuex'
 import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
 import cascadeController from '@/interfaces/cascadeController'
 import * as factory from '@/util/factory'
-
-Vue.use(Vuex)
 
 Array.prototype.objectArrayClone = function() {
   return this.map(item => Object.assign({}, item))
@@ -57,6 +53,9 @@ export default {
     }
   },
   computed: {
+    isAuthenticated() {
+      return this.$store.state.isAuthenticated
+    },
     rows() {
       return this.$store.state.list.rows
     },
@@ -81,6 +80,9 @@ export default {
       this.update()
     },
     'paging.page'() {
+      this.update()
+    },
+    'isAuthenticated'() {
       this.update()
     },
     // FIXME: Should find a better approach for this

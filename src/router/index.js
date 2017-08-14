@@ -4,8 +4,19 @@ import Hello from '@/components/Hello'
 import List from '@/components/List'
 import Editor from '@/components/Editor'
 import menu from '@/menu'
+import * as util from 'common/src/lib/util'
 
 Vue.use(Router)
+
+const checkAuth = (from, to, next) => {
+  if(!util.jwtTokenIsHere()) {
+    next({
+      path: '/'
+    })
+  } else {
+    next()
+  }
+}
 
 var routes = [
   {
@@ -22,7 +33,8 @@ for(let group of menu) {
       component: List,
       props: {
         page
-      }
+      },
+      beforeEnter: checkAuth
     })
     routes.push({
       path: '/' + page.id + '/:id',
@@ -30,7 +42,8 @@ for(let group of menu) {
       component: Editor,
       props: {
         page
-      }
+      },
+      beforeEnter: checkAuth
     })
   }
 }
