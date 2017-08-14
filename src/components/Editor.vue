@@ -29,6 +29,26 @@ function scrollToTop() {
   document.body.scrollTop = 0
 }
 
+function deepClone(obj) {
+  if(obj === null || typeof (obj) !== 'object' || 'isActiveClone' in obj) {
+    return obj
+  }
+  let temp
+  if(obj instanceof Date) {
+    temp = new obj.constructor()
+  }else {
+    temp = obj.constructor()
+  }
+  for(let key in obj) {
+    if(Object.prototype.hasOwnProperty.call(obj, key)) {
+      obj['isActiveClone'] = null
+      temp[key] = deepClone(obj[key])
+      delete obj['isActiveClone']
+    }
+  }
+  return temp
+}
+
 export default {
   props: ['page'],
   data() {
@@ -101,27 +121,27 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     prepare() {
-      // prepare post body before actually post
-      // FIXME: clone model first
+      var tempModel = deepClone(this.model)
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
-            if (field.postPreparer && this.model[field.id]) {
-              this.model[field.id] = field.postPreparer(this.model[field.id])
+            if (field.postPreparer && tempModel[field.id]) {
+              tempModel[field.id] = field.postPreparer(tempModel[field.id])
             }
           }
         } else if (section.interface.type === 'checklist') {
-          if (section.interface.postPreparer && this.model[section.id]) {
-            this.model[section.id] = section.interface.postPreparer(this.model[section.id])
+          if (section.interface.postPreparer && tempModel[section.id]) {
+            tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
           }
         }
       }
+      return tempModel
     },
     submit() {
-      this.prepare()
+      let content = this.prepare()
       if (this.$route.params.id === 'create') {
         this.$store.dispatch('submitForm', {
-          content: this.model,
+          content: content,
           page: this.page,
           pageID: this.page.id
         })
