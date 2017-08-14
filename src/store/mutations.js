@@ -1,7 +1,8 @@
+import globalMutations from 'common/src/store/mutations'
 import * as types from './mutation-types'
 import Vue from 'vue'
 
-export default {
+const localMutations = {
   [types.UPDATE_SELECT] (state, mutateObj) {
     Vue.set(state, mutateObj.uniqueID, mutateObj.data)
   },
@@ -15,3 +16,5 @@ export default {
     console.error('Directory not found')
   }
 }
+
+export default Object.assign(globalMutations, localMutations)
