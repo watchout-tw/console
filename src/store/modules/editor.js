@@ -24,6 +24,15 @@ const actions = {
       dispatch('showFailAlert', error)
     })
   },
+  patchForm ({ commit, dispatch }, reqObj) {
+    api.patchForm(reqObj).then(response => {
+      router.push({name: reqObj.page.routes.edit.name, params: {id: response.data[reqObj.page.routingIndex]}})
+      dispatch('showSuccessAlert')
+    }).catch(error => {
+      commit(types.POST_FAIL, error)
+      dispatch('showFailAlert', error)
+    })
+  },
   showSuccessAlert ({ commit }, reqObj) {
     commit(types.SHOW_SUCCESS_ALERT)
   },
