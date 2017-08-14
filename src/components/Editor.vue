@@ -36,7 +36,7 @@ function deepClone(obj) {
   let temp
   if(obj instanceof Date) {
     temp = new obj.constructor()
-  }else {
+  } else {
     temp = obj.constructor()
   }
   for(let key in obj) {
