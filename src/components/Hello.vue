@@ -34,8 +34,6 @@ export default {
         this.$store.dispatch('toggleModalAuth', {
           value: true
         })
-      } else {
-        alert('歡迎回到沃草共有地')
       }
     }
   }
