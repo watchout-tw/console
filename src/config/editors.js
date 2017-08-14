@@ -655,7 +655,7 @@ export default {
             {
               id: 'official_seq_no',
               label: '院總字號',
-              type: 'text'
+              type: 'number'
             }
           ],
           options: {

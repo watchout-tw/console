@@ -102,6 +102,7 @@ export default {
     },
     prepare() {
       // prepare post body before actually post
+      // FIXME: clone model first
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {

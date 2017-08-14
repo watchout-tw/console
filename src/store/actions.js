@@ -1,9 +1,10 @@
+import commonActions from 'common/src/store/actions'
 import * as types from './mutation-types'
 import * as api from '@/util/api'
 import * as factory from '@/util/factory'
 import directories from '@/config/directories'
 
-export default {
+const localActions = {
   updateSelect({ commit }, reqObj) {
     const directory = directories[reqObj.directoryID]
     if(directory) {
@@ -45,3 +46,5 @@ export default {
     })
   }
 }
+
+export default Object.assign(commonActions, localActions)
