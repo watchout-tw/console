@@ -599,5 +599,198 @@ export default {
         width: columnWidth(4)
       }
     ]
+  },
+  timelines: {
+    filters: [
+      {
+        id: 'title',
+        label: '標題',
+        type: 'input',
+        mapToColumn: 'title',
+        comparator: comparators.string
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      }
+    ]
+  },
+  figures: {
+    filters: [
+      {
+        id: 'title',
+        label: '標題',
+        type: 'input',
+        mapToColumn: 'title',
+        comparator: comparators.string
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      }
+    ]
+  },
+  docs: {
+    filters: [
+      {
+        id: 'title',
+        label: '標題',
+        type: 'input',
+        mapToColumn: 'title',
+        comparator: comparators.string
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      }
+    ]
+  },
+  lab_topic_overviews: {
+    filters: [
+      {
+        id: 'specific_topic',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'st',
+        label: '關聯小議題'
+      },
+      {
+        prop: 'intro',
+        label: '簡介'
+      },
+      {
+        prop: 'description',
+        label: '敘述'
+      }
+    ]
+  },
+  lab_bill_data_sets: {
+    filters: [
+      {
+        id: 'specific_topic',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'name',
+        label: '名稱'
+      },
+      {
+        prop: 'version_no',
+        label: '版本號'
+      },
+      {
+        prop: 'st',
+        label: '關聯小議題'
+      }
+    ]
+  },
+  lab_statement_data_sets: {
+    filters: [
+      {
+        id: 'specific_topic',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'name',
+        label: '名稱'
+      },
+      {
+        prop: 'version_no',
+        label: '版本號'
+      },
+      {
+        prop: 'st',
+        label: '關聯小議題'
+      }
+    ]
+  },
+  lab_data_reports: {
+    filters: [
+      {
+        id: 'specific_topic',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'st',
+        label: '關聯小議題'
+      },
+      {
+        prop: 'data_set',
+        label: '資料源'
+      },
+      {
+        prop: 'figures',
+        label: '圖表清單'
+      }
+    ]
   }
 }

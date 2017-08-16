@@ -234,5 +234,33 @@ export default {
     api: 'term_sessions',
     value: 'temp_session_index',
     label: 'temp_session_index'
+  },
+  composition_status: {
+    id: 'composition_status',
+    options: [
+      {
+        value: 'active',
+        label: 'Active'
+      },
+      {
+        value: 'inactive',
+        label: 'Inactive'
+      }
+    ]
+  },
+  timeline_type: {
+    id: 'timeline_type',
+    options: [
+      {
+        value: 'basic',
+        label: '基本'
+      }
+    ]
+  },
+  timeline: {
+    id: 'timeline',
+    api: 'timelines',
+    value: 'id',
+    label: 'title'
   }
 }

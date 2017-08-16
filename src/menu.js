@@ -112,6 +112,74 @@ var menu = [
         title: '表決'
       }
     ]
+  },
+  {
+    id: 'compositions',
+    name: '內容組成',
+    pages: [
+      {
+        id: 'timelines',
+        directory: 'timelines',
+        editor: 'timeline',
+        routingIndex: 'id',
+        name: '大事紀',
+        title: '大事紀'
+      },
+      {
+        id: 'figures',
+        directory: 'figures',
+        editor: 'figure',
+        routingIndex: 'id',
+        name: '圖表',
+        title: '圖表'
+      },
+      {
+        id: 'docs',
+        directory: 'docs',
+        editor: 'doc',
+        routingIndex: 'id',
+        name: '文件',
+        title: '文件'
+      }
+    ]
+  },
+  {
+    id: 'lab',
+    name: '議題實驗室',
+    pages: [
+      {
+        id: 'lab_topic_overviews',
+        directory: 'lab_topic_overviews',
+        editor: 'lab_topic_overview',
+        routingIndex: 'id',
+        name: '議題綜覽',
+        title: '議題綜覽'
+      },
+      {
+        id: 'lab_bill_data_sets',
+        directory: 'lab_bill_data_sets',
+        editor: 'lab_bill_data_set',
+        routingIndex: 'id',
+        name: '提案資料集',
+        title: '提案資料集'
+      },
+      {
+        id: 'lab_statement_data_sets',
+        directory: 'lab_statement_data_sets',
+        editor: 'lab_statement_data_set',
+        routingIndex: 'id',
+        name: '發言資料集',
+        title: '發言資料集'
+      },
+      {
+        id: 'lab_data_reports',
+        directory: 'lab_data_reports',
+        editor: 'lab_data_report',
+        routingIndex: 'id',
+        name: '數據分析報告',
+        title: '數據分析報告'
+      }
+    ]
   }
 ]
 

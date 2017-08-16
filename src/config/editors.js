@@ -1210,5 +1210,168 @@ export default {
         }
       }
     ]
-  }
+  },
+  timeline: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個大事紀的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'select',
+              directory: 'timeline_type'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(4)
+          }
+        }
+      },
+      {
+        id: 'events',
+        title: '事件',
+        description: '這個大事紀中包含的事件',
+        interface: {
+          type: 'events'
+        }
+      }
+    ]
+  },
+  figure: {
+  },
+  doc: {
+  },
+  lab_topic_overview: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個議題綜覽的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'st',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              id: 'intro',
+              label: '簡介',
+              type: 'textarea'
+            },
+            {
+              id: 'intro',
+              label: '敘述',
+              type: 'textarea'
+            },
+            {
+              id: 'timeline',
+              label: '關聯大事紀',
+              type: 'select',
+              directory: 'timeline'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
+  },
+  lab_bill_data_sets: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個提案資料集的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '名稱',
+              type: 'text'
+            },
+            {
+              id: 'version_no',
+              label: '版本號',
+              type: 'text'
+            },
+            {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
+  },
+  lab_statement_data_sets: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個發言資料集的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'name',
+              label: '名稱',
+              type: 'text'
+            },
+            {
+              id: 'version_no',
+              label: '版本號',
+              type: 'text'
+            },
+            {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
+  },
+  lab_data_report: {}
 }
