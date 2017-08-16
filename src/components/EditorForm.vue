@@ -2,7 +2,7 @@
 <div class="editor-form">
   <el-form :label-width="labelWidth" label-position="left">
     <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
-      <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]"></el-input>
+      <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]" :disabled="field.updateForbidden && !isCreateMode()"></el-input>
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]"></el-input>
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
@@ -55,6 +55,9 @@ export default {
     init() {
       this.cascadeList = this.config.fields
       this.cascadeInit()
+    },
+    isCreateMode() {
+      return this.$route.params.id === 'create'
     }
   },
   components: {

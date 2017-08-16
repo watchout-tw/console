@@ -155,7 +155,8 @@ export default {
             {
               id: 'name',
               label: '全名',
-              type: 'text'
+              type: 'text',
+              updateForbidden: true
             },
             {
               id: 'abbreviation',
