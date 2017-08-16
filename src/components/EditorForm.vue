@@ -1,6 +1,6 @@
 <template>
 <div class="editor-form">
-  <el-form :label-width="config.options.labelWidth" label-position="left">
+  <el-form :label-width="labelWidth" label-position="left">
     <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
       <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]"></el-input>
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]"></el-input>
@@ -23,10 +23,16 @@ import AbstractColorPicker from '@/components/AbstractColorPicker'
 import TermLookup from '@/components/TermLookup'
 import GenderSlider from '@/components/GenderSlider'
 import cascadeController from '@/interfaces/cascadeController'
+import { labelWidth } from '@/util/element'
 
 export default {
   mixins: [cascadeController],
   props: ['model', 'config', 'page'],
+  computed: {
+    labelWidth() {
+      return this.config.options ? this.config.options.labelWidth : labelWidth(4)
+    }
+  },
   data() {
     return {
       cascadeList: undefined
