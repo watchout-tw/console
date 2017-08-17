@@ -262,5 +262,14 @@ export default {
     api: 'timelines',
     value: 'id',
     label: 'title'
+  },
+  timeline_event_type: {
+    id: 'timeline_event_type',
+    options: [
+      {
+        value: 'custom',
+        label: '自定'
+      }
+    ]
   }
 }
