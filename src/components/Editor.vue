@@ -134,6 +134,15 @@ export default {
             tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
           }
         }
+        if (section.interface.prepareArray) {
+          for(let obj of tempModel[section.id]) {
+            for(let setting of section.interface[section.interface.prepareArray]) {
+              if(setting.postPreparer) {
+                obj[setting.prop] = setting.postPreparer(obj[setting.prop])
+              }
+            }
+          }
+        }
       }
       return tempModel
     },
@@ -147,7 +156,7 @@ export default {
         })
       } else {
         this.$store.dispatch('patchForm', {
-          content: this.model,
+          content: content,
           page: this.page,
           pageID: this.page.id
         })

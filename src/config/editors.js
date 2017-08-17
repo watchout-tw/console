@@ -372,6 +372,7 @@ export default {
         interface: {
           type: 'table',
           name: '政黨歷史紀錄',
+          prepareArray: 'columns',
           columns: [
             {
               prop: 'term_index',
@@ -387,6 +388,7 @@ export default {
               label: '政黨',
               type: 'select',
               directory: 'party',
+              postPreparer: preparers.replaceById,
               formatter: formatters.name
             },
             {
@@ -394,6 +396,7 @@ export default {
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus',
+              postPreparer: preparers.replaceById,
               formatter: formatters.name
             },
             {
@@ -423,6 +426,7 @@ export default {
         interface: {
           type: 'table',
           name: '選任歷史紀錄',
+          prepareArray: 'columns',
           columns: [
             {
               prop: 'term_index',
@@ -470,6 +474,7 @@ export default {
         interface: {
           type: 'table',
           name: '委員會歷史紀錄',
+          prepareArray: 'columns',
           columns: [
             {
               prop: 'term_index',
@@ -494,7 +499,8 @@ export default {
               prop: 'is_convener',
               label: '召委',
               type: 'switch',
-              formatter: formatters.boolean
+              formatter: formatters.boolean,
+              postPreparer: preparers.boolean2Int
             }
           ]
         }

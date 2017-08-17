@@ -38,7 +38,7 @@ function getQueryBase (pageID) {
       return key
     }
   }
-  return ''
+  return 'id'
 }
 
 export function getDirectory (reqObj) {
