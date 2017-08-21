@@ -267,8 +267,36 @@ export default {
     id: 'timeline_event_type',
     options: [
       {
-        value: 'custom',
-        label: '自定'
+        value: 'external',
+        label: '外部事件'
+      },
+      {
+        value: 'term_start_date',
+        label: '屆期起始日'
+      },
+      {
+        value: 'session_start_date',
+        label: '會期起始日'
+      },
+      {
+        value: 'rep_assume_office',
+        label: '委員就職日'
+      },
+      {
+        value: 'rs_statement',
+        label: '發言'
+      },
+      {
+        value: 'rs_bill',
+        label: '提案'
+      },
+      {
+        value: 'bill_legislative_step',
+        label: '提案審議進度'
+      },
+      {
+        value: 'rs_vote',
+        label: '表決'
       }
     ]
   }
