@@ -696,6 +696,10 @@ export default {
     paged: false,
     columns: [
       {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
         prop: 'st',
         label: '關聯小議題'
       },
@@ -732,8 +736,20 @@ export default {
         label: '版本號'
       },
       {
+        prop: 'term',
+        label: '屆期'
+      },
+      {
         prop: 'st',
         label: '關聯小議題'
+      },
+      {
+        prop: 'act',
+        label: '關聯法案'
+      },
+      {
+        prop: 'act_dir',
+        label: '關聯修法方向'
       }
     ]
   },
@@ -760,8 +776,20 @@ export default {
         label: '版本號'
       },
       {
+        prop: 'term',
+        label: '屆期'
+      },
+      {
         prop: 'st',
         label: '關聯小議題'
+      },
+      {
+        prop: 'st_question',
+        label: '爭點'
+      },
+      {
+        prop: 'acts',
+        label: '法案'
       }
     ]
   },
@@ -780,6 +808,10 @@ export default {
     paged: false,
     columns: [
       {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
         prop: 'st',
         label: '關聯小議題'
       },
@@ -789,7 +821,7 @@ export default {
       },
       {
         prop: 'figures',
-        label: '圖表清單'
+        label: '圖表'
       }
     ]
   }
