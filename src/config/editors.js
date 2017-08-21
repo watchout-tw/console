@@ -1290,25 +1290,58 @@ export default {
               type: 'textarea'
             },
             {
-              id: 'intro',
+              id: 'description',
               label: '敘述',
               type: 'textarea'
-            },
-            {
-              id: 'timeline',
-              label: '關聯大事紀',
-              type: 'select',
-              directory: 'timeline'
             }
           ],
           options: {
             labelWidth: labelWidth(6)
           }
         }
+      },
+      {
+        id: 'content',
+        title: '內容',
+        description: '這個議題綜覽的內容',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'timeline_id',
+              label: '大事紀',
+              type: 'select',
+              directory: 'timeline'
+            },
+            {
+              id: 'data_report_ids',
+              label: '數據分析報告',
+              type: 'multiselect',
+              directory: 'lab_data_report'
+            },
+            {
+              id: 'insight_ids',
+              label: '分析評論',
+              type: 'multiselect',
+              directory: 'lab_insight'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'related_links',
+        title: '相關連結',
+        description: '這個議題綜覽的相關連結',
+        interface: {
+          type: 'links'
+        }
       }
     ]
   },
-  lab_bill_data_sets: {
+  lab_bill_data_set: {
     sections: [
       {
         id: 'base',
@@ -1328,20 +1361,84 @@ export default {
               type: 'text'
             },
             {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term'
+            },
+            {
+              id: 'start_date',
+              label: '起始日',
+              type: 'date'
+            },
+            {
+              id: 'end_date',
+              label: '終止日',
+              type: 'date'
+            },
+            {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['act_dir_id', 'act_feature_ids'], 'st')
+              ]
             }
           ],
           options: {
             labelWidth: labelWidth(6)
           }
         }
+      },
+      {
+        id: 'data_select',
+        title: '資料選擇',
+        description: '選擇這個資料集的提案及法案比較',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'act_id',
+              label: '關聯法案',
+              type: 'select',
+              directory: 'act'
+            },
+            {
+              id: 'bill_ids',
+              label: '提案',
+              type: 'multiselect',
+              directory: 'rs_bill'
+            },
+            {
+              id: 'act_dir_id',
+              label: '關聯修法方向',
+              type: 'select',
+              directory: 'act_dir'
+            },
+            {
+              id: 'act_feature_ids',
+              label: '法案比較',
+              type: 'multiselect',
+              directory: 'act_feature'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'score_board',
+        title: '提案評分',
+        description: '針對各項提案在各項法案比較的表現評分',
+        interface: {
+          type: 'score_board'
+        }
       }
     ]
   },
-  lab_statement_data_sets: {
+  lab_statement_data_set: {
     sections: [
       {
         id: 'base',
@@ -1361,18 +1458,151 @@ export default {
               type: 'text'
             },
             {
+              id: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term'
+            },
+            {
+              id: 'start_date',
+              label: '起始日',
+              type: 'date'
+            },
+            {
+              id: 'end_date',
+              label: '終止日',
+              type: 'date'
+            },
+            {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['st_question_id', 'act_ids'], 'st')
+              ]
             }
           ],
           options: {
             labelWidth: labelWidth(6)
           }
         }
+      },
+      {
+        id: 'data_filter',
+        title: '資料過濾',
+        description: '設定這個資料集資料過濾的條件',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'st_question_id',
+              label: '爭點',
+              type: 'select',
+              directory: 'st_question'
+            },
+            {
+              id: 'act_ids',
+              label: '法案',
+              type: 'multiselect',
+              directory: 'act'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(3)
+          }
+        }
+      },
+      {
+        id: 'should_have_spoken_condition',
+        title: '「應發言」條件',
+        description: '設定這個發言資料集的「應發言」條件',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'should_have_spoken_committees',
+              label: '委員會',
+              type: 'multiselect',
+              directory: 'committee'
+            },
+            {
+              id: 'should_have_spoken_sessions',
+              label: '會期',
+              type: 'multiselect',
+              directory: 'session'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(4)
+          }
+        }
       }
     ]
   },
-  lab_data_report: {}
+  lab_data_report: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個數據分析報告的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'type',
+              label: '類別',
+              type: 'select',
+              directory: 'lab_data_report_type'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            },
+            {
+              id: 'data_set_entity',
+              label: '資料集類別',
+              type: 'select',
+              directory: 'lab_data_set_type'
+            },
+            {
+              id: 'data_set_id',
+              label: '資料集',
+              type: 'select',
+              directory: 'lab_data_set'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'figures',
+        title: '圖表',
+        description: '這個數據分析報告的圖表',
+        interface: {
+          type: 'figures'
+        }
+      }
+    ]
+  }
 }
