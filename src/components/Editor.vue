@@ -5,8 +5,9 @@
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
-    <editor-table v-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
-    <editor-checklist v-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
+    <editor-table v-else-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
+    <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
+    <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :value.sync="model[section.id]" :page="page"></editor-events>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
@@ -21,6 +22,7 @@ import editors from '@/config/editors'
 import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
+import EditorEvents from '@/components/EditorEvents'
 
 Vue.use(Vuex)
 
@@ -92,7 +94,7 @@ export default {
               this.$set(this.model, field.id, field.defaultValue) // if field.defaultValue is not defined then it is undefined
             }
           } else {
-            this.$set(this.model, section.id, [])
+            this.$set(this.model, section.id, []) // FIXME: assuming everything else other than form is array
           }
         }
         this.initialized = true
@@ -191,7 +193,8 @@ export default {
   components: {
     EditorForm,
     EditorTable,
-    EditorChecklist
+    EditorChecklist,
+    EditorEvents
   }
 }
 </script>
