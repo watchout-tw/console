@@ -1228,20 +1228,25 @@ export default {
               directory: 'composition_status'
             },
             {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
               id: 'type',
               label: '類型',
               type: 'select',
               directory: 'timeline_type'
             },
             {
-              id: 'slug',
-              label: '短網址',
-              type: 'text'
-            },
-            {
               id: 'title',
               label: '標題',
               type: 'text'
+            },
+            {
+              id: 'description',
+              label: '敘述',
+              type: 'textarea'
             }
           ],
           options: {
@@ -1254,12 +1259,122 @@ export default {
         title: '事件',
         description: '這個大事紀中包含的事件',
         interface: {
-          type: 'events'
+          type: 'events',
+          attributes: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'select',
+              directory: 'timeline_event_type'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              label: '敘述',
+              type: 'textarea'
+            },
+            {
+              id: 'link',
+              label: '連結',
+              type: 'text'
+            }
+          ]
         }
       }
     ]
   },
   figure: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個圖表的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'select',
+              directory: 'figure_type'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              label: '敘述',
+              type: 'textarea'
+            },
+            {
+              id: 'summary',
+              label: '摘要',
+              type: 'textarea'
+            }
+          ]
+        }
+      },
+      {
+        id: 'data_set',
+        title: '資料集',
+        description: '這個圖表的資料集',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'data_set_type',
+              label: '資料集型別',
+              type: 'select',
+              directory: 'figure_data_set_type'
+            },
+            {
+              id: 'data_set_id',
+              label: '資料集',
+              type: 'select'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'preview',
+        title: '預覽',
+        description: '這個圖表的預覽',
+        interface: {
+          type: 'd3'
+        }
+      }
+    ]
   },
   doc: {
   },
@@ -1556,15 +1671,15 @@ export default {
               directory: 'composition_status'
             },
             {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
               id: 'type',
               label: '類別',
               type: 'select',
               directory: 'lab_data_report_type'
-            },
-            {
-              id: 'slug',
-              label: '短網址',
-              type: 'text'
             },
             {
               id: 'title',
@@ -1576,18 +1691,6 @@ export default {
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
-            },
-            {
-              id: 'data_set_entity',
-              label: '資料集類別',
-              type: 'select',
-              directory: 'lab_data_set_type'
-            },
-            {
-              id: 'data_set_id',
-              label: '資料集',
-              type: 'select',
-              directory: 'lab_data_set'
             }
           ],
           options: {
