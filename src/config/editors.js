@@ -44,7 +44,8 @@ export default {
         interface: {
           type: 'table',
           name: '會期',
-          prepareArray: 'columns',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'session_index',
@@ -93,15 +94,14 @@ export default {
         interface: {
           type: 'table',
           name: '黨團或政團',
-          prepareArray: 'columns',
-          needInitArray: 'columns',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus',
-              postPreparerName: 'caucus',
               postPreparer: preparers.replaceById
             },
             {
@@ -109,11 +109,10 @@ export default {
               label: '關聯政黨',
               type: 'multiselect',
               directory: 'party',
-              postPreparerName: 'parties',
-              formatter: formatters.replaceElementInArrayById,
-              postPreparer: preparers.replaceElementInArrayById
+              getTransformer: preparers.replaceElementInArrayById
             }
-          ]
+          ],
+          initRequired: true
         }
       },
       {
@@ -123,6 +122,8 @@ export default {
         interface: {
           type: 'table',
           name: '選區',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'name',
@@ -144,8 +145,7 @@ export default {
             {
               prop: 'index',
               label: '編號',
-              type: 'number',
-              updateForbidden: true
+              type: 'number'
             },
             {
               prop: 'neighborhoods',
@@ -320,21 +320,21 @@ export default {
               id: 'edu_record',
               label: '學歷',
               type: 'textarea',
-              formatter: formatters.longtext,
+              getTransformer: formatters.longtext,
               postPreparer: preparers.text2Array
             },
             {
               id: 'experience',
               label: '經歷',
               type: 'textarea',
-              formatter: formatters.longtext,
+              getTransformer: formatters.longtext,
               postPreparer: preparers.text2Array
             },
             {
               id: 'policy_proposal',
               label: '政見',
               type: 'textarea',
-              formatter: formatters.longtext,
+              getTransformer: formatters.longtext,
               postPreparer: preparers.text2Array
             }
           ],
@@ -350,8 +350,9 @@ export default {
         interface: {
           type: 'table',
           name: '實體聯絡資訊',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           prepareIndex: 'seq_no',
-          prepareArray: 'columns',
           columns: [
             {
               prop: 'seq_no',
@@ -363,6 +364,8 @@ export default {
               prop: 'is_active',
               label: '最新',
               type: 'switch',
+              formatter: formatters.boolean,
+              getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
             },
             {
@@ -395,8 +398,17 @@ export default {
         interface: {
           type: 'table',
           name: '政黨歷史紀錄',
-          prepareArray: 'columns',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
+            {
+              prop: 'start_date',
+              label: '起始日期',
+              type: 'date',
+              updateForbidden: true,
+              formatter: formatters.date,
+              postPreparer: preparers.date2Timestamp
+            },
             {
               prop: 'term_index',
               label: '屆期',
@@ -411,23 +423,16 @@ export default {
               label: '政黨',
               type: 'select',
               directory: 'party',
-              postPreparer: preparers.replaceById,
-              formatter: formatters.name
+              formatter: formatters.name,
+              postPreparer: preparers.replaceById
             },
             {
               prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus',
-              postPreparer: preparers.replaceById,
-              formatter: formatters.name
-            },
-            {
-              prop: 'start_date',
-              label: '起始日期',
-              type: 'date',
-              formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp
+              formatter: formatters.name,
+              postPreparer: preparers.replaceById
             },
             {
               prop: 'officer_title',
@@ -449,14 +454,9 @@ export default {
         interface: {
           type: 'table',
           name: '選任歷史紀錄',
-          prepareArray: 'columns',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
-            {
-              prop: 'term_index',
-              label: '屆期',
-              type: 'select',
-              directory: 'term'
-            },
             {
               prop: 'change_date',
               label: '變更日期',
@@ -465,10 +465,18 @@ export default {
               postPreparer: preparers.date2Timestamp
             },
             {
+              prop: 'term_index',
+              label: '屆期',
+              type: 'select',
+              directory: 'term',
+              updateForbidden: true
+            },
+            {
               prop: 'change_type',
               label: '變更類型',
               type: 'select',
-              directory: 'rep_term_change_type'
+              directory: 'rep_term_change_type',
+              updateForbidden: true
             },
             {
               prop: 'district_name',
@@ -497,32 +505,37 @@ export default {
         interface: {
           type: 'table',
           name: '委員會歷史紀錄',
-          prepareArray: 'columns',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'term_index',
               label: '屆期',
               type: 'select',
-              directory: 'term'
+              directory: 'term',
+              updateForbidden: true
             },
             {
               prop: 'session_index',
               label: '會期',
               type: 'select',
               directory: 'session',
-              determined_by: 'term_index'
+              determined_by: 'term_index',
+              updateForbidden: true
             },
             {
               prop: 'committee_name',
               label: '委員會',
               type: 'select',
-              directory: 'committee'
+              directory: 'committee',
+              updateForbidden: true
             },
             {
               prop: 'is_convener',
               label: '召委',
               type: 'switch',
               formatter: formatters.boolean,
+              getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
             }
           ]
@@ -631,6 +644,8 @@ export default {
         interface: {
           type: 'table',
           name: '修法方向',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'name',
@@ -652,6 +667,8 @@ export default {
         interface: {
           type: 'table',
           name: '爭點',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'question',
@@ -761,6 +778,8 @@ export default {
         interface: {
           type: 'table',
           name: '刻度',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'score',
@@ -1049,6 +1068,8 @@ export default {
         interface: {
           type: 'table',
           name: '審議進度',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'date',
@@ -1072,6 +1093,8 @@ export default {
         interface: {
           type: 'table',
           name: '爭點立場判斷',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'specific_topic',
@@ -1101,6 +1124,8 @@ export default {
         interface: {
           type: 'table',
           name: '法案比較',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
           columns: [
             {
               prop: 'specific_topic',
