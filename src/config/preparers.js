@@ -17,9 +17,29 @@ export function replaceById (element) {
   return element
 }
 
+export function replaceElementInArrayById (targetArray) {
+  let result = []
+  for(let element of targetArray) {
+    if(element.id) {
+      result.push(element.id)
+    }else {
+      result.push(element)
+    }
+  }
+  return result
+}
+
 export function boolean2Int (bool) {
   if(bool) {
     return 1
   }
   return 0
+}
+
+export function prepareIndexId (targetArray) {
+  let result = []
+  for(let element of targetArray) {
+    result.push(element.id)
+  }
+  return result
 }

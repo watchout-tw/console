@@ -82,7 +82,6 @@ export default {
       return true
     },
     update() {
-      console.log('Editor:', this.page.id)
       this.sections = editors[this.page.editor].sections
 
       // try to get data and bind to editor
@@ -112,6 +111,15 @@ export default {
                 }
               }
             }
+            if(section.interface.needInitArray) {
+              for(let field of section.interface[section.interface.needInitArray]) {
+                for(let element of this.model[section.id]) {
+                  if (field.formatter && element) {
+                    element[field.prop] = field.formatter(element[field.prop])
+                  }
+                }
+              }
+            }
           }
           this.initialized = true
         })
@@ -134,15 +142,31 @@ export default {
             tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
           }
         }
-        if (section.interface.prepareArray) {
+        if (section.interface.prepareArray && tempModel[section.id]) {
           for(let obj of tempModel[section.id]) {
             for(let setting of section.interface[section.interface.prepareArray]) {
               if(setting.postPreparer) {
-                obj[setting.prop] = setting.postPreparer(obj[setting.prop])
+                if(setting.postPreparerName) {
+                  if(obj[setting.postPreparerName]) {
+                    obj[setting.postPreparerName] = setting.postPreparer(obj[setting.postPreparerName])
+                  }else if(obj[setting.prop]) {
+                    obj[setting.postPreparerName] = setting.postPreparer(obj[setting.prop])
+                  }
+                }else if(setting.directory) {
+                  obj[setting.directory] = setting.postPreparer(obj[setting.directory])
+                }else if(setting.prop) {
+                  obj[setting.prop] = setting.postPreparer(obj[setting.prop])
+                }
+              }
+              if(setting.postPreparerDeleteName) {
+                delete obj[setting.postPreparerDeleteName]
               }
             }
           }
         }
+      }
+      if(!tempModel.id && (this.$route.params.id && this.$route.params.id !== 'create')) {
+        tempModel.id = this.$route.params.id
       }
       return tempModel
     },

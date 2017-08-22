@@ -16,7 +16,8 @@ export default {
             {
               id: 'index',
               label: '屆期',
-              type: 'number'
+              type: 'number',
+              updateForbidden: true
             },
             {
               id: 'start_date',
@@ -43,16 +44,19 @@ export default {
         interface: {
           type: 'table',
           name: '會期',
+          prepareArray: 'columns',
           columns: [
             {
               prop: 'session_index',
               label: '會期',
-              type: 'number'
+              type: 'number',
+              updateForbidden: true
             },
             {
               prop: 'temp_session_index',
               label: '臨時會期',
-              type: 'number'
+              type: 'number',
+              updateForbidden: true
             },
             {
               prop: 'start_date',
@@ -78,7 +82,8 @@ export default {
         interface: {
           type: 'checklist',
           id: 'party',
-          directory: 'party'
+          directory: 'party',
+          postPreparer: preparers.replaceElementInArrayById
         }
       },
       {
@@ -88,18 +93,25 @@ export default {
         interface: {
           type: 'table',
           name: '黨團或政團',
+          prepareArray: 'columns',
+          needInitArray: 'columns',
           columns: [
             {
-              prop: 'caucus_id',
+              prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
-              directory: 'caucus'
+              directory: 'caucus',
+              postPreparerName: 'caucus',
+              postPreparer: preparers.replaceById
             },
             {
-              prop: 'party_id_array',
+              prop: 'parties',
               label: '關聯政黨',
               type: 'multiselect',
-              directory: 'party'
+              directory: 'party',
+              postPreparerName: 'parties',
+              formatter: formatters.replaceElementInArrayById,
+              postPreparer: preparers.replaceElementInArrayById
             }
           ]
         }
@@ -115,7 +127,8 @@ export default {
             {
               prop: 'name',
               label: '全名',
-              type: 'text'
+              type: 'text',
+              updateForbidden: true
             },
             {
               prop: 'abbreviation',
@@ -131,7 +144,8 @@ export default {
             {
               prop: 'index',
               label: '編號',
-              type: 'number'
+              type: 'number',
+              updateForbidden: true
             },
             {
               prop: 'neighborhoods',
@@ -336,11 +350,20 @@ export default {
         interface: {
           type: 'table',
           name: '實體聯絡資訊',
+          prepareIndex: 'seq_no',
+          prepareArray: 'columns',
           columns: [
+            {
+              prop: 'seq_no',
+              label: '編號',
+              type: 'text',
+              hide: true
+            },
             {
               prop: 'is_active',
               label: '最新',
-              type: 'switch'
+              type: 'switch',
+              postPreparer: preparers.boolean2Int
             },
             {
               prop: 'name',

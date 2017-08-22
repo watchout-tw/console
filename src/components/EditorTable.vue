@@ -2,11 +2,11 @@
 <div class="editor-table">
   <el-button class="add" @click="addRow">新增{{ config.name }}</el-button>
   <el-table :data="rows">
-    <el-table-column v-for="column in config.columns" :key="column.prop" :prop="column.prop" :label="column.label">
+    <el-table-column v-for="column in config.columns" v-if="!column.hide" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
         <template v-if="flags[scope.$index].isEditing">
-          <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
-          <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]"></el-input-number>
+          <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]" :disabled="column.updateForbidden && !isCreateMode(scope.row)"></el-input>
+          <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]" :disabled="column.updateForbidden && !isCreateMode(scope.row)"></el-input-number>
           <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
           <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
@@ -94,9 +94,25 @@ export default {
       this.$emit('update:rows', tableRows)
     },
     generateModelForRow() {
-      return Object.assign(
+      var newRow = Object.assign(
         ...this.config.columns.map(column => ({[column.prop]: undefined}))
       )
+      if(this.config.prepareIndex) {
+        newRow[this.config.prepareIndex] = this.getIndex(this.rows, this.config.prepareIndex)
+      }
+      return newRow
+    },
+    getIndex(data, columnName) {
+      if(!data) {
+        return 1
+      }
+      var temp = 0
+      for(let item of data) {
+        if(item[columnName] && item[columnName] >= temp) {
+          temp = item[columnName]
+        }
+      }
+      return temp + 1
     },
     generateUUIDForRow() {
       return Object.assign(
@@ -119,6 +135,9 @@ export default {
         result = column.formatter(scope.row, scope.column)
       }
       return result
+    },
+    isCreateMode(row) {
+      return !row.name
     }
   },
   components: {

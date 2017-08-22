@@ -99,5 +99,16 @@ export default {
   },
   longtext(str) {
     return array2Text(str)
+  },
+  replaceElementInArrayById (targetArray) {
+    let result = []
+    for(let element of targetArray) {
+      if(element.id) {
+        result.push(element.id)
+      }else {
+        result.push(element)
+      }
+    }
+    return result
   }
 }
