@@ -43,6 +43,13 @@ export default {
       return this.$store.state.modalIdentityIsShown
     }
   },
+  watch: {
+    'isAuthenticated'() {
+      if(!this.isAuthenticated) {
+        this.$router.push({name: 'hello'})
+      }
+    }
+  },
   data() {
     return {
       channel: dataStore.channels.console,
