@@ -240,11 +240,11 @@ export default {
     options: [
       {
         value: 'active',
-        label: 'Active'
+        label: '😎'
       },
       {
         value: 'inactive',
-        label: 'Inactive'
+        label: '👻'
       }
     ]
   },
@@ -267,8 +267,123 @@ export default {
     id: 'timeline_event_type',
     options: [
       {
-        value: 'custom',
-        label: '自定'
+        value: 'external',
+        label: '外部事件'
+      },
+      {
+        value: 'term_start_date',
+        label: '屆期起始日'
+      },
+      {
+        value: 'session_start_date',
+        label: '會期起始日'
+      },
+      {
+        value: 'rep_assume_office',
+        label: '委員就職日'
+      },
+      {
+        value: 'rs_statement',
+        label: '發言'
+      },
+      {
+        value: 'rs_bill',
+        label: '提案'
+      },
+      {
+        value: 'bill_legislative_step',
+        label: '提案審議進度'
+      },
+      {
+        value: 'rs_vote',
+        label: '表決'
+      }
+    ]
+  },
+  figure_type: {
+    id: 'figure_type',
+    options: [
+      {
+        value: 'bill_comparison_score_by_feature',
+        label: '提案比較：法案比較得分'
+      },
+      {
+        value: 'bill_comparison_radar',
+        label: '提案比較：雷達'
+      },
+      {
+        value: 'bill_comparison_compact_table',
+        label: '提案比較：精簡列表'
+      },
+      {
+        value: 'bill_comparison_full_table',
+        label: '提案比較：詳細列表'
+      },
+      {
+        value: 'sponsorship_count_by_party',
+        label: '提案連署統計：政黨分組計數'
+      },
+      {
+        value: 'sponsorship_mesh_by_rep',
+        label: '提案連署統計：委員網絡'
+      },
+      {
+        value: 'statement_count_by_party',
+        label: '發言統計：政黨分組計數'
+      },
+      {
+        value: 'statement_position_count_by_party',
+        label: '發言統計：政黨分組立場分群計數'
+      },
+      {
+        value: 'statement_position_timeline_by_party',
+        label: '發言統計：政黨分組立場分群時間軸'
+      },
+      {
+        value: 'statement_word_cloud_by_party',
+        label: '發言統計：政黨分組文字雲'
+      },
+      {
+        value: 'statement_bubble_by_rep',
+        label: '發言統計：委員氣泡'
+      },
+      {
+        value: 'statement_timeline_by_rep',
+        label: '發言統計：委員時間軸'
+      }
+    ]
+  },
+  figure_data_set_type: {
+    id: 'figure_data_set_type',
+    options: [
+      {
+        value: 'LAB_Bill_Data_Set',
+        label: '《議題實驗室》提案資料集'
+      },
+      {
+        value: 'LAB_Statement_Data_Set',
+        label: '《議題實驗室》發言資料集'
+      }
+    ]
+  },
+  lab_data_report_type: {
+    id: 'lab_data_report_type',
+    options: [
+      {
+        value: 'bill_comparison',
+        label: '提案比較'
+      },
+      {
+        value: 'sponsorship_stats',
+        label: '提案連署統計'
+      },
+      {
+        value: 'statement_stats_by_party',
+        label: '政黨發言統計'
+      },
+      {
+        value: 'statement_stats_by_rep',
+        label: '委員發言統計'
       }
     ]
   }

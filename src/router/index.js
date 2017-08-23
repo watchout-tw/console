@@ -9,9 +9,9 @@ import * as util from 'common/src/lib/util'
 Vue.use(Router)
 
 const checkAuth = (from, to, next) => {
-  if(!util.jwtTokenIsHere()) {
+  if(!(util.jwtTokenIsHere() && util.isAdmin())) {
     next({
-      path: '/'
+      name: 'hello'
     })
   } else {
     next()
