@@ -816,7 +816,7 @@ export default {
               directory: 'committee'
             },
             {
-              id: 'joint_committee',
+              id: 'joint_committees',
               label: '聯席委員會',
               type: 'multiselect',
               directory: 'committee'
