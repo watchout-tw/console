@@ -7,7 +7,7 @@
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
     <editor-table v-else-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
-    <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :value.sync="model[section.id]" :page="page"></editor-events>
+    <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-events>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
