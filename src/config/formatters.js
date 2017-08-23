@@ -75,7 +75,7 @@ export default {
     return row.st.title
   },
   boolean(row, col) {
-    return row[col.property] ? '⚫️' : '⚪️'
+    return row[col.property] ? '<span class="yes">Yes</span>' : '<span class="null">No</span>'
   },
   party_flag(row, col) {
     let color = row[col.property]

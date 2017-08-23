@@ -4,7 +4,7 @@
     <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
       <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]" :disabled="field.updateForbidden && !isCreateMode()" :placeholder="field.label"></el-input>
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]" :placeholder="field.label"></el-input>
-      <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]"></el-input-number>
+      <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]" :disabled="field.updateForbidden && !isCreateMode()"></el-input-number>
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
       <abstract-color-picker v-if="fieldIs(field, 'color')" :value.sync="model[field.id]"></abstract-color-picker>
       <term-lookup v-if="fieldIs(field, 'date')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :cascade-this.sync="cascadeThis" :config="field" :page="page"></term-lookup>
