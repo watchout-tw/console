@@ -35,7 +35,7 @@ export default {
       return state === 0 ? '酷兒' : `${percentage}% ${(state < 0 ? '女性' : '男性')}`
     },
     pull() { // pull data from parent
-      this.model = this.value
+      this.model = this.value / 2 + 50
     },
     push() {
       this.$emit('update:value', (this.model - 50) * 2)
