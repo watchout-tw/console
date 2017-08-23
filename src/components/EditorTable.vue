@@ -4,9 +4,9 @@
   <el-table :data="rows">
     <el-table-column v-for="column in config.columns" v-if="!column.hide" :key="column.prop" :prop="column.prop" :label="column.label">
       <template scope="scope">
-        <template v-if="flags[scope.$index].isEditing">
-          <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]" :disabled="column.updateForbidden && !isCreateMode(scope.row)"></el-input>
-          <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]" :disabled="column.updateForbidden && !isCreateMode(scope.row)"></el-input-number>
+        <template v-if="flags[scope.$index].isEditing && (flags[scope.$index].isLocal || !column.updateForbidden)">
+          <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
+          <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]" ></el-input-number>
           <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
           <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
@@ -37,6 +37,18 @@ import AbstractSelect from '@/components/AbstractSelect'
 import AbstractMultiSelect from '@/components/AbstractMultiSelect'
 
 Vue.use(Vuex)
+
+const punct = {
+  separator: '、',
+  colon: '：'
+}
+function directoryValueToLabel(directory, val) {
+  if(typeof val === 'object') { // replace val if is object
+    val = val.id // FIXME: this assumes key prop of all obj are `id`
+  }
+  let directoryItem = directory.filter(item => item.value === val).pop()
+  return directoryItem ? directoryItem.label : val
+}
 
 export default {
   props: ['rows', 'config', 'page', 'parentInitialized'],
@@ -89,7 +101,10 @@ export default {
     addRow() {
       var tableRows = this.rows ? this.rows : []
       tableRows.push(this.generateModelForRow())
-      this.flags.push({isEditing: true})
+      this.flags.push({
+        isEditing: true,
+        isLocal: true
+      })
       this.uuids.push(this.generateUUIDForRow())
       this.$emit('update:rows', tableRows)
     },
@@ -126,18 +141,18 @@ export default {
       if(val === null) {
         result = `<span class="null">${val}</span>`
       } else if(cachedDirectory) {
-        if(typeof val === 'object') {
-          val = val.id // FIXME: this assumes key prop of all obj are `id`
+        if(val instanceof Array) {
+          result = val.map(item => directoryValueToLabel(cachedDirectory, item)).join(punct.separator)
+        } else {
+          result = directoryValueToLabel(cachedDirectory, val)
         }
-        let directoryItem = cachedDirectory.filter(item => item.value === val).pop()
-        result = directoryItem ? directoryItem.label : result
       } else if(column.formatter) {
         result = column.formatter(scope.row, scope.column)
       }
       return result
     },
-    isCreateMode(row) {
-      return !row.name
+    rowIsLocal(row) {
+      return row.local
     }
   },
   components: {
@@ -163,6 +178,12 @@ export default {
     margin-top: -1rem;
     transform: translateY(-100%);
   }
+}
+
+.cell > .formatted-content .yes {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: bold;
 }
 
 </style>

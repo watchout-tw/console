@@ -104,20 +104,26 @@ export default {
           id: this.$route.params.id
         }).then(response => {
           this.model = response.data
-          // format certain property before render
+          // put data through transformer
           for(let section of this.sections) {
             if(section.interface.type === 'form') {
               for(let field of section.interface.fields) {
-                if (field.formatter && this.model[field.id]) {
-                  this.model[field.id] = field.formatter(this.model[field.id])
+                if(field.getTransformer && this.model[field.id]) {
+                  this.model[field.id] = field.getTransformer(this.model[field.id])
                 }
               }
-            }
-            if(section.interface.needInitArray) {
-              for(let field of section.interface[section.interface.needInitArray]) {
-                for(let element of this.model[section.id]) {
-                  if (field.formatter && element) {
-                    element[field.prop] = field.formatter(element[field.prop])
+            } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1) {
+              const propListKey = section.interface.propListIsCalled
+              const preparerKey = section.interface.preparerKeyIsAt
+
+              var arrayToTransform = this.model[section.id]
+              if(arrayToTransform) {
+                for(let obj of arrayToTransform) {
+                  for(let propObj of section.interface[propListKey]) {
+                    if(propObj.getTransformer) {
+                      const key = propObj[preparerKey]
+                      obj[key] = propObj.getTransformer(obj[key])
+                    }
                   }
                 }
               }
@@ -135,33 +141,27 @@ export default {
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
-            if (field.postPreparer && tempModel[field.id]) {
+            if(field.postPreparer && tempModel[field.id]) {
               tempModel[field.id] = field.postPreparer(tempModel[field.id])
             }
           }
-        } else if (section.interface.type === 'checklist') {
-          if (section.interface.postPreparer && tempModel[section.id]) {
+        } else if(section.interface.type === 'checklist') {
+          if(section.interface.postPreparer && tempModel[section.id]) {
             tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
           }
-        }
-        if (section.interface.prepareArray && tempModel[section.id]) {
-          for(let obj of tempModel[section.id]) {
-            for(let setting of section.interface[section.interface.prepareArray]) {
-              if(setting.postPreparer) {
-                if(setting.postPreparerName) {
-                  if(obj[setting.postPreparerName]) {
-                    obj[setting.postPreparerName] = setting.postPreparer(obj[setting.postPreparerName])
-                  }else if(obj[setting.prop]) {
-                    obj[setting.postPreparerName] = setting.postPreparer(obj[setting.prop])
-                  }
-                }else if(setting.directory) {
-                  obj[setting.directory] = setting.postPreparer(obj[setting.directory])
-                }else if(setting.prop) {
-                  obj[setting.prop] = setting.postPreparer(obj[setting.prop])
-                }
+        } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1 && tempModel[section.id]) {
+          const propListKey = section.interface.propListIsCalled
+          const preparerKey = section.interface.preparerKeyIsAt
+
+          var arrayToPrepare = tempModel[section.id]
+          for(let obj of arrayToPrepare) {
+            for(let propObj of section.interface[propListKey]) {
+              if(propObj.postPreparer) {
+                const key = propObj[preparerKey]
+                obj[key] = propObj.postPreparer(obj[key])
               }
-              if(setting.postPreparerDeleteName) {
-                delete obj[setting.postPreparerDeleteName]
+              if(propObj.postPreparerDeleteName) {
+                delete obj[propObj.postPreparerDeleteName]
               }
             }
           }
@@ -174,6 +174,7 @@ export default {
     },
     submit() {
       let content = this.prepare()
+      console.log('PATCH payload', content)
       if (this.$route.params.id === 'create') {
         this.$store.dispatch('submitForm', {
           content: content,
