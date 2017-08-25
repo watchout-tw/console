@@ -9,15 +9,17 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cascadeSource from '@/interfaces/cascadeSource'
 
 Vue.use(Vuex)
 
 export default {
-  props: ['size', 'value', 'uuid', 'cascadeThis', 'config', 'page'],
+  mixins: [cascadeSource],
+  props: ['size', 'value', 'config', 'page'],
   data() {
     return {
-      model: undefined,
-      initialized: false
+      initialized: false,
+      model: undefined
     }
   },
   computed: {
@@ -34,17 +36,15 @@ export default {
     '$route'() {
       this.update()
     },
-    'config.directory'() {
+    'directory'() {
       this.update()
     },
-    'config.parameters'() {
+    'parameters'() {
       this.update()
     },
     'value'() {
-      if(!this.initialized) {
-        this.pull() // pull only once at initialization
-        this.initialized = true
-      }
+      this.pull()
+      this.initialized = true
     }
   },
   methods: {
@@ -54,8 +54,8 @@ export default {
     update() {
       this.pull()
       this.$store.dispatch('updateSelect', {
-        parameters: this.config.parameters,
-        directoryID: this.config.directory,
+        parameters: this.parameters,
+        directoryID: this.directory,
         uniqueID: this.uuid
       })
     },
@@ -71,15 +71,8 @@ export default {
     },
     push() {
       this.$emit('update:value', this.model) // FIXME: This is too simple
-
       if(this.config.cascadeUpdate) {
-        let uploadObj = {
-          fromID: this.uuid
-        }
-        if(this.model) {
-          uploadObj.value = this.model
-        }
-        this.$emit('update:cascadeThis', uploadObj)
+        this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate, this.model)
       }
     }
   }

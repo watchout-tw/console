@@ -40,7 +40,9 @@ editorID: {
   id              // REQ
   label           // REQ
   type            // REQ
-  directory       // OPT - when type is 'select',
+  directory       // OPT - when type is 'select'
+  defaultValue    // OPT
+  disabled        // OPT
   updateForbidden // OPT - no update after create
   getTransformer  // OPT - GET → transformer → data
   postPreparer    // OPT - data → preparer → POST
@@ -62,7 +64,8 @@ editorID: {
 #### Column
 ```
 {
-  prop            // REQ
+  id              // REQ
+  prop            // REQ - same as id
   label           // REQ
   type            // REQ
   directory       // OPT - when type is 'select'

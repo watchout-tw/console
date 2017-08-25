@@ -7,7 +7,7 @@
     <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
     <editor-table v-else-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
-    <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-events>
+    <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :events.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-events>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
@@ -213,6 +213,13 @@ export default {
   }
 }
 
+// override element
+.el-textarea__inner {
+  padding: 5px 10px;
+}
+.el-form-item {
+  margin-bottom: 1rem;
+}
 .el-date-editor.el-input {
   width: 160px;
 
@@ -231,15 +238,9 @@ export default {
   padding-left: 10px;
   padding-right: 10px;
 }
-
 .el-tag .el-icon-close {
   padding: 2px;
   font-size: 10px;
   line-height: 14px;
 }
-
-.abstract-multi-select > .el-select {
-  width: 100%;
-}
-
 </style>

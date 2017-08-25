@@ -11,6 +11,18 @@ export default {
     value: 'district_name',
     label: 'abbreviation'
   },
+  term_party: {
+    id: 'term_party',
+    api: 'term_parties',
+    value: 'parties.id',
+    label: 'parties.abbreviation'
+  },
+  term_caucus: {
+    id: 'term_caucus',
+    api: 'term_caucuses',
+    value: 'caucus.id',
+    label: 'caucus.abbreviation'
+  },
   party: {
     id: 'party',
     api: 'parties',

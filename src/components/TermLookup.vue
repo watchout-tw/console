@@ -1,14 +1,16 @@
 <template>
 <div class="term-lookup">
-  <el-date-picker :placeholder="config.label" v-model="model" @change="push"></el-date-picker>
+  <el-date-picker :size="size" :placeholder="config.label" v-model="model" @change="push"></el-date-picker>
 </div>
 </template>
 
 <script>
 import * as api from '@/util/api'
+import cascadeSource from '@/interfaces/cascadeSource'
 
 export default {
-  props: ['value', 'uuid', 'cascadeThis', 'config', 'page'],
+  mixins: [cascadeSource],
+  props: ['size', 'value', 'config', 'page'],
   data() {
     return {
       model: undefined
@@ -39,15 +41,15 @@ export default {
               uploadObj.value = response.data
             } else {
               this.$message({
-                message: this.model.toLocaleDateString() + '是休會期間',
+                message: this.model.toLocaleDateString('zh-Hans-TW') + '是休會期間',
                 type: 'error'
               })
               this.model = undefined
             }
-            this.$emit('update:cascadeThis', uploadObj)
+            this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate, response.data)
           })
         } else {
-          this.$emit('update:cascadeThis', uploadObj)
+          this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate)
         }
       }
     }

@@ -7,11 +7,11 @@
         <template v-if="flags[scope.$index].isEditing && (flags[scope.$index].isLocal || !column.updateForbidden)">
           <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
           <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]" ></el-input-number>
-          <el-date-picker v-if="columnIs(column, 'date')" :size="componentSize" v-model="scope.row[column.prop]"></el-date-picker>
           <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
-          <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :uuid="uuids[scope.$index][column.prop]" :config="column" :page="page"></abstract-select>
-          <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :uuid="uuids[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
+          <term-lookup v-if="columnIs(column, 'date')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page"></term-lookup>
+          <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page"></abstract-select>
+          <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
         </template>
         <template v-else>
           <div class="formatted-content" v-html="cellFormatter(column, scope)"></div>
@@ -32,9 +32,10 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
-import uuid from 'uuid/v4'
 import AbstractSelect from '@/components/AbstractSelect'
 import AbstractMultiSelect from '@/components/AbstractMultiSelect'
+import TermLookup from '@/components/TermLookup'
+import cascadeController from '@/interfaces/cascadeController'
 
 Vue.use(Vuex)
 
@@ -51,27 +52,22 @@ function directoryValueToLabel(directory, val) {
 }
 
 export default {
+  mixins: [cascadeController],
   props: ['rows', 'config', 'page', 'parentInitialized'],
   data() {
     return {
       initialized: false,
       componentSize: 'small',
-      flags: [],
-      uuids: []
+      flags: []
     }
   },
   beforeMount() {
     this.init()
+    this.asyncInit()
   },
   watch: {
     'parentInitialized'() {
-      if(!this.initialized && this.rows) {
-        this.flags = this.rows.map(row => ({
-          isEditing: false
-        }))
-        this.uuids = this.rows.map(row => this.generateUUIDForRow())
-        this.initialized = true
-      }
+      this.asyncInit()
     }
   },
   methods: {
@@ -84,8 +80,20 @@ export default {
           })
         })
     },
+    asyncInit() {
+      if(this.parentInitialized && !this.initialized && this.rows) {
+        this.makeFlags()
+        this.cascadeInit(this.rows, true, this.config.columns)
+        this.initialized = true
+      }
+    },
     columnIs(column, type) {
       return column.type.split('-').shift() === type
+    },
+    makeFlags() {
+      this.flags = this.rows.map(row => ({
+        isEditing: false
+      }))
     },
     confirmRow($index) {
       this.flags[$index].isEditing = false
@@ -96,19 +104,20 @@ export default {
     deleteRow($index) {
       var tableRows = this.rows ? this.rows : []
       tableRows.splice($index, 1)
+      this.deleteCascadeSector($index)
       this.$emit('update:rows', tableRows)
     },
     addRow() {
       var tableRows = this.rows ? this.rows : []
-      tableRows.push(this.generateModelForRow())
+      tableRows.push(this.makeRow())
       this.flags.push({
         isEditing: true,
         isLocal: true
       })
-      this.uuids.push(this.generateUUIDForRow())
+      this.addCascadeSector()
       this.$emit('update:rows', tableRows)
     },
-    generateModelForRow() {
+    makeRow() {
       var newRow = Object.assign(
         ...this.config.columns.map(column => ({[column.prop]: undefined}))
       )
@@ -128,11 +137,6 @@ export default {
         }
       }
       return temp + 1
-    },
-    generateUUIDForRow() {
-      return Object.assign(
-        ...this.config.columns.map(column => ({[column.prop]: uuid()}))
-      )
     },
     cellFormatter(column, scope) {
       let val = scope.row[scope.column.property]
@@ -157,7 +161,8 @@ export default {
   },
   components: {
     AbstractSelect,
-    AbstractMultiSelect
+    AbstractMultiSelect,
+    TermLookup
   }
 }
 </script>

@@ -6,7 +6,7 @@
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
     <template v-for="filter in filters" >
-      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :uuid="uuids[filter.id]" :cascade-this.sync="cascadeThis" :config="filter" :page="page"></abstract-select>
+      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :cascadeConfig="cascadeMap[0][filter.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
         <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
       </div>
@@ -48,8 +48,7 @@ export default {
       queryParameters: {},
       filters: [],
       columns: [],
-      config: undefined,
-      cascadeList: undefined // mendatory for cascadeController to work
+      config: undefined
     }
   },
   computed: {
@@ -112,7 +111,7 @@ export default {
       this.columns = lists[this.page.id].columns.objectArrayClone()
 
       this.cascadeList = this.filters
-      this.cascadeInit()
+      this.cascadeInit(this.queryParameters, false, this.config.filters)
     },
     update() {
       // dispatch action to get data

@@ -48,18 +48,21 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'session_index',
               prop: 'session_index',
               label: '會期',
               type: 'number',
               updateForbidden: true
             },
             {
+              id: 'temp_session_index',
               prop: 'temp_session_index',
               label: '臨時會期',
               type: 'number',
               updateForbidden: true
             },
             {
+              id: 'start_date',
               prop: 'start_date',
               label: '起',
               type: 'date',
@@ -67,6 +70,7 @@ export default {
               postPreparer: preparers.date2Timestamp
             },
             {
+              id: 'end_date',
               prop: 'end_date',
               label: '訖',
               type: 'date',
@@ -98,6 +102,7 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'caucus',
               prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
@@ -105,6 +110,7 @@ export default {
               postPreparer: preparers.replaceById
             },
             {
+              id: 'parties',
               prop: 'parties',
               label: '關聯政黨',
               type: 'multiselect',
@@ -126,28 +132,33 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'name',
               prop: 'name',
               label: '全名',
               type: 'text',
               updateForbidden: true
             },
             {
+              id: 'abbreviation',
               prop: 'abbreviation',
               label: '短名',
               type: 'text'
             },
             {
+              id: 'zone_name',
               prop: 'zone_name',
               label: '區域',
               type: 'select',
               directory: 'zone'
             },
             {
+              id: 'index',
               prop: 'index',
               label: '編號',
               type: 'number'
             },
             {
+              id: 'neighborhoods',
               prop: 'neighborhoods',
               label: '選區內行政區',
               type: 'text'
@@ -355,12 +366,14 @@ export default {
           prepareIndex: 'seq_no',
           columns: [
             {
+              id: 'seq_no',
               prop: 'seq_no',
               label: '編號',
               type: 'text',
               hide: true
             },
             {
+              id: 'is_active',
               prop: 'is_active',
               label: '最新',
               type: 'switch',
@@ -369,21 +382,25 @@ export default {
               postPreparer: preparers.boolean2Int
             },
             {
+              id: 'name',
               prop: 'name',
               label: '名稱',
               type: 'text'
             },
             {
+              id: 'phone',
               prop: 'phone',
               label: '電話',
               type: 'text'
             },
             {
+              id: 'fax',
               prop: 'fax',
               label: '傳真',
               type: 'text'
             },
             {
+              id: 'address',
               prop: 'address',
               label: '地址',
               type: 'text'
@@ -402,44 +419,53 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'start_date',
               prop: 'start_date',
               label: '起始日期',
               type: 'date',
               updateForbidden: true,
               formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp
+              postPreparer: preparers.date2Timestamp,
+              cascadeUpdate: [
+                cascade.lookupTerm(['term_index'])
+              ]
             },
             {
+              id: 'term_index',
               prop: 'term_index',
               label: '屆期',
               type: 'select',
               directory: 'term',
               cascadeUpdate: [
-                cascade.applyConstraint(['party_id', 'caucus_id'], 'term')
+                cascade.applyConstraint(['party', 'caucus'], 'term')
               ]
             },
             {
+              id: 'party',
               prop: 'party',
               label: '政黨',
               type: 'select',
-              directory: 'party',
+              directory: 'term_party',
               formatter: formatters.name,
               postPreparer: preparers.replaceById
             },
             {
+              id: 'caucus',
               prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
-              directory: 'caucus',
+              directory: 'term_caucus',
               formatter: formatters.name,
               postPreparer: preparers.replaceById
             },
             {
+              id: 'officier_title',
               prop: 'officer_title',
               label: '幹部職稱',
               type: 'text'
             },
             {
+              id: 'note',
               prop: 'note',
               label: '備註',
               type: 'text'
@@ -458,13 +484,18 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'change_date',
               prop: 'change_date',
               label: '變更日期',
               type: 'date',
               formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp
+              postPreparer: preparers.date2Timestamp,
+              cascadeUpdate: [
+                cascade.lookupTerm(['term_index'])
+              ]
             },
             {
+              id: 'term_index',
               prop: 'term_index',
               label: '屆期',
               type: 'select',
@@ -472,6 +503,7 @@ export default {
               updateForbidden: true
             },
             {
+              id: 'change_type',
               prop: 'change_type',
               label: '變更類型',
               type: 'select',
@@ -479,18 +511,21 @@ export default {
               updateForbidden: true
             },
             {
+              id: 'district_name',
               prop: 'district_name',
               label: '選區',
               type: 'select',
               directory: 'term_district'
             },
             {
+              id: 'duty',
               prop: 'duty',
               label: '院內職務',
               type: 'select',
               directory: 'rep_term_duty'
             },
             {
+              id: 'note',
               prop: 'note',
               label: '備註',
               type: 'text'
@@ -509,13 +544,18 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'term_index',
               prop: 'term_index',
               label: '屆期',
               type: 'select',
               directory: 'term',
-              updateForbidden: true
+              updateForbidden: true,
+              cascadeUpdate: [
+                cascade.applyConstraint(['session_index'], 'term')
+              ]
             },
             {
+              id: 'session_index',
               prop: 'session_index',
               label: '會期',
               type: 'select',
@@ -524,6 +564,7 @@ export default {
               updateForbidden: true
             },
             {
+              id: 'committee_name',
               prop: 'committee_name',
               label: '委員會',
               type: 'select',
@@ -531,6 +572,7 @@ export default {
               updateForbidden: true
             },
             {
+              id: 'is_convener',
               prop: 'is_convener',
               label: '召委',
               type: 'switch',
@@ -648,11 +690,13 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'name',
               prop: 'name',
               label: '名稱',
               type: 'text'
             },
             {
+              id: 'index',
               prop: 'index',
               label: '排序',
               type: 'number'
@@ -671,11 +715,13 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'question',
               prop: 'question',
               label: '爭點',
               type: 'text'
             },
             {
+              id: 'index',
               prop: 'index',
               label: '排序',
               type: 'number'
@@ -736,7 +782,10 @@ export default {
               id: 'st',
               label: '小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['act', 'act_dir'], 'st')
+              ]
             },
             {
               id: 'act',
@@ -782,11 +831,13 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'score',
               prop: 'score',
               label: '分數',
               type: 'number'
             },
             {
+              id: 'description',
               prop: 'description',
               label: '分數敘述',
               type: 'text'
@@ -809,7 +860,10 @@ export default {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['st_question_id'], 'st')
+              ]
             },
             {
               id: 'date',
@@ -823,24 +877,21 @@ export default {
             {
               id: 'term_index',
               label: '屆期',
-              type: 'select',
-              directory: 'term',
-              determined_by: 'speech_date',
+              type: 'number',
+              determined_by: 'date',
               disabled: true
             },
             {
               id: 'session_index',
               label: '會期',
-              type: 'select',
-              directory: 'session',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
             {
               id: 'temp_session_index',
-              label: '臨時會會期',
-              type: 'select',
-              directory: 'temp_session',
+              label: '臨時會期',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
@@ -929,7 +980,9 @@ export default {
               id: 'is_law',
               label: '是否為法律',
               type: 'switch',
-              defaultValue: false
+              defaultValue: false,
+              getTransformer: preparers.int2Boolean,
+              postPreparer: preparers.boolean2Int
             }
           ],
           options: {
@@ -985,24 +1038,21 @@ export default {
             {
               id: 'term_index',
               label: '屆期',
-              type: 'select',
-              directory: 'term',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
             {
               id: 'session_index',
               label: '會期',
-              type: 'select',
-              directory: 'session',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
-              type: 'select',
-              directory: 'temp_session',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
@@ -1072,12 +1122,14 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'date',
               prop: 'date',
               label: '日期',
               type: 'date',
               postPreparer: preparers.date2Timestamp
             },
             {
+              id: 'progress',
               prop: 'progress',
               label: '審議進度',
               type: 'select',
@@ -1097,18 +1149,24 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'specific_topic',
               prop: 'specific_topic',
               label: '小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['st_question_id'], 'st')
+              ]
             },
             {
+              id: 'st_question_id',
               prop: 'st_question_id',
               label: '爭點',
               type: 'select',
               directory: 'st_question'
             },
             {
+              id: 'position',
               prop: 'position',
               label: '立場',
               type: 'select',
@@ -1128,29 +1186,40 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
+              id: 'specific_topic',
               prop: 'specific_topic',
               label: '小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['act_dir'], 'st')
+              ]
             },
             {
+              id: 'act_dir',
               prop: 'act_dir',
               label: '修法方向',
               type: 'select',
-              directory: 'act_dir'
+              directory: 'act_dir',
+              cascadeUpdate: [
+                cascade.applyConstraint(['act_feature'], 'act_dir')
+              ]
             },
             {
+              id: 'act_feature',
               prop: 'act_feature',
               label: '法案比較',
               type: 'select',
               directory: 'act_feature'
             },
             {
+              id: 'short_content',
               prop: 'short_content',
               label: '簡短內容',
               type: 'text'
             },
             {
+              id: 'content',
               prop: 'content',
               label: '完整內容',
               type: 'text'
@@ -1187,24 +1256,21 @@ export default {
             {
               id: 'term_index',
               label: '屆期',
-              type: 'select',
-              directory: 'term',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
             {
               id: 'session_index',
               label: '會期',
-              type: 'select',
-              directory: 'session',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
-              type: 'select',
-              directory: 'temp_session',
+              type: 'number',
               determined_by: 'date',
               disabled: true
             },
@@ -1331,6 +1397,16 @@ export default {
               label: '類型',
               type: 'select',
               directory: 'timeline_event_type'
+            },
+            {
+              id: 'source',
+              label: '資料來源',
+              type: 'select'
+            },
+            {
+              id: 'date',
+              label: '日期',
+              type: 'date'
             },
             {
               id: 'title',

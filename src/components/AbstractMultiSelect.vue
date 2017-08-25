@@ -9,11 +9,13 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
+import cascadeSource from '@/interfaces/cascadeSource'
 
 Vue.use(Vuex)
 
 export default {
-  props: ['size', 'value', 'uuid', 'config', 'page'],
+  mixins: [cascadeSource],
+  props: ['size', 'value', 'config', 'page'],
   data() {
     return {
       model: []
@@ -60,3 +62,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+.abstract-multi-select > .el-select {
+  width: 100%;
+}
+</style>

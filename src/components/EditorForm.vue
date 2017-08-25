@@ -2,14 +2,14 @@
 <div class="editor-form">
   <el-form :label-width="labelWidth" label-position="left">
     <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
-      <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]" :disabled="field.updateForbidden && !isCreateMode()" :placeholder="field.label"></el-input>
-      <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]" :placeholder="field.label"></el-input>
-      <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]" :disabled="field.updateForbidden && !isCreateMode()"></el-input-number>
+      <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]" :disabled="fieldIsDisabled(field)" :placeholder="field.label"></el-input>
+      <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]" :disabled="fieldIsDisabled(field)" :placeholder="field.label"></el-input>
+      <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]" :disabled="fieldIsDisabled(field)"></el-input-number>
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO"></el-switch>
+      <term-lookup v-if="fieldIs(field, 'date')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></term-lookup>
+      <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></abstract-select>
+      <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></abstract-multi-select>
       <abstract-color-picker v-if="fieldIs(field, 'color')" :value.sync="model[field.id]"></abstract-color-picker>
-      <term-lookup v-if="fieldIs(field, 'date')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :cascade-this.sync="cascadeThis" :config="field" :page="page"></term-lookup>
-      <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :cascade-this.sync="cascadeThis" :config="field" :page="page"></abstract-select>
-      <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :uuid="uuids[field.id]" :config="field" :page="page"></abstract-multi-select>
       <gender-slider v-if="fieldIs(field, 'gender')" :value.sync="model[field.id]" :config="field" :page="page"></gender-slider>
     </el-form-item>
   </el-form>
@@ -33,17 +33,15 @@ export default {
       return this.config.options ? this.config.options.labelWidth : labelWidth(4)
     }
   },
-  data() {
-    return {
-      cascadeList: undefined
-    }
-  },
   beforeMount() {
     this.init()
   },
   methods: {
     fieldIs(field, type) {
       return field.type.split('-').shift() === type
+    },
+    fieldIsDisabled(field) {
+      return field.disabled || (field.updateForbidden && !this.isCreateMode())
     },
     formItemClasses(field) {
       var classes = []
@@ -53,8 +51,7 @@ export default {
       return classes
     },
     init() {
-      this.cascadeList = this.config.fields
-      this.cascadeInit()
+      this.cascadeInit(this.model, false, this.config.fields)
     },
     isCreateMode() {
       return this.$route.params.id === 'create'
