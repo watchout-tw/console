@@ -29,15 +29,18 @@ export default {
       }
     },
     makeCascadeSectorForRow() {
-      return Object.assign(
-        ...this.cascadeSectorProps.map(propObj => ({
-          [propObj.id]: {
-            uuid: uuid(),
-            directory: undefined,
-            parameters: {}
-          }
-        }))
-      )
+      let sector = {}
+      let props = this.cascadeSectorProps.map(propObj => ({
+        [propObj.id]: {
+          uuid: uuid(),
+          directory: undefined,
+          parameters: {}
+        }
+      }))
+      if(props.length > 0) {
+        sector = Object.assign(...props)
+      }
+      return sector
     },
     addCascadeSector() {
       this.cascadeMap.push(this.makeCascadeSectorForRow())
