@@ -688,6 +688,7 @@ export default {
           name: '修法方向',
           propListIsCalled: 'columns',
           preparerKeyIsAt: 'prop',
+          postPreparer: preparers.removeId,
           columns: [
             {
               id: 'name',
@@ -713,6 +714,7 @@ export default {
           name: '爭點',
           propListIsCalled: 'columns',
           preparerKeyIsAt: 'prop',
+          postPreparer: preparers.removeId,
           columns: [
             {
               id: 'question',

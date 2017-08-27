@@ -152,9 +152,11 @@ export default {
         } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1 && tempModel[section.id]) {
           const propListKey = section.interface.propListIsCalled
           const preparerKey = section.interface.preparerKeyIsAt
-
           var arrayToPrepare = tempModel[section.id]
           for(let obj of arrayToPrepare) {
+            if(section.interface.postPreparer) {
+              obj = section.interface.postPreparer(obj)
+            }
             for(let propObj of section.interface[propListKey]) {
               if(propObj.postPreparer) {
                 const key = propObj[preparerKey]
