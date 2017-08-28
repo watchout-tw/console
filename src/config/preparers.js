@@ -49,10 +49,3 @@ export function prepareIndexId(targetArray) {
   }
   return result
 }
-
-export function removeId(obj) {
-  if(obj.id) {
-    delete obj.id
-  }
-  return obj
-}

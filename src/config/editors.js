@@ -713,7 +713,6 @@ export default {
           name: '爭點',
           propListIsCalled: 'columns',
           preparerKeyIsAt: 'prop',
-          postPreparer: preparers.removeId,
           columns: [
             {
               id: 'question',
