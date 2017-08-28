@@ -9,7 +9,7 @@
     "dev": "node build/dev-server.js",
     "dev+": "npm uninstall common; npm i; node build/dev-server.js",
     "start": "node build/dev-server.js",
-    "build": "node build/build.js",
+    "build": "rm -rf ./docs; node build/build.js; firebase deploy",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
     "test": "npm run unit",
     "lint": "eslint --ext .js,.vue src test/unit/specs"
