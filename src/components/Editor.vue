@@ -174,7 +174,7 @@ export default {
     },
     submit() {
       let content = this.prepare()
-      console.log('PATCH payload', content)
+      console.log('Payload:', content)
       if (this.$route.params.id === 'create') {
         this.$store.dispatch('submitForm', {
           content: content,
