@@ -688,7 +688,6 @@ export default {
           name: '修法方向',
           propListIsCalled: 'columns',
           preparerKeyIsAt: 'prop',
-          postPreparer: preparers.removeId,
           columns: [
             {
               id: 'name',
