@@ -1530,6 +1530,11 @@ export default {
               directory: 'specific_topic'
             },
             {
+              id: 'tagline',
+              label: '標語',
+              type: 'text'
+            },
+            {
               id: 'intro',
               label: '簡介',
               type: 'textarea'
@@ -1821,10 +1826,21 @@ export default {
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
+            },
+            {
+              id: 'figure_data_set_type',
+              label: '圖表資料集型別',
+              type: 'select',
+              directory: 'figure_data_set_type'
+            },
+            {
+              id: 'figure_data_set_id',
+              label: '圖表資料集',
+              type: 'select'
             }
           ],
           options: {
-            labelWidth: labelWidth(6)
+            labelWidth: labelWidth(7)
           }
         }
       },
