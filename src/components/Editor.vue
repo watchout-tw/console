@@ -108,7 +108,7 @@ export default {
           for(let section of this.sections) {
             if(section.interface.type === 'form') {
               for(let field of section.interface.fields) {
-                if(field.getTransformer && (typeof this.model[field.id] === 'number' || this.model[field.id])) {
+                if(field.getTransformer && this.model.hasOwnProperty(field.id)) {
                   this.model[field.id] = field.getTransformer(this.model[field.id])
                 }
               }
@@ -141,12 +141,12 @@ export default {
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
-            if(field.postPreparer && tempModel[field.id]) {
+            if(field.postPreparer && tempModel.hasOwnProperty(field.id)) {
               tempModel[field.id] = field.postPreparer(tempModel[field.id])
             }
           }
         } else if(section.interface.type === 'checklist') {
-          if(section.interface.postPreparer && tempModel[section.id]) {
+          if(section.interface.postPreparer && tempModel.hasOwnProperty(section.id)) {
             tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
           }
         } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1 && tempModel[section.id]) {
