@@ -17,7 +17,7 @@ if(token) {
 function trimQueryString (query) {
   var temp = {}
   for (var key in query) {
-    temp[key] = query[key] ? query[key] : undefined
+    temp[key] = query[key]
   }
   return temp
 }
@@ -26,7 +26,7 @@ function trimPatchQuery (query) {
   var temp = {}
   for (var key in query) {
     if(key !== 'id') {
-      temp[key] = query[key] ? query[key] : undefined
+      temp[key] = query[key]
     }
   }
   return temp
