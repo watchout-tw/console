@@ -22,16 +22,6 @@ function trimQueryString (query) {
   return temp
 }
 
-function trimPatchQuery (query) {
-  var temp = {}
-  for (var key in query) {
-    if(key !== 'id') {
-      temp[key] = query[key]
-    }
-  }
-  return temp
-}
-
 function getQueryBase (pageID) {
   for (var key in queryBase) {
     if(queryBase[key].indexOf(pageID) > -1) {
@@ -94,7 +84,9 @@ export function postForm (reqObj) {
 
 export function patchForm (reqObj) {
   axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
-  let content = trimPatchQuery(reqObj.content)
   let url = `/console/lab/${reqObj.pageID}/` + reqObj.content[getQueryBase(reqObj.pageID)]
-  return axios.patch(url, content)
+  if(reqObj.content.hasOwnProperty('id')) {
+    delete reqObj.content.id
+  }
+  return axios.patch(url, reqObj.content)
 }
