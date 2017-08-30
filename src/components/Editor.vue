@@ -108,7 +108,7 @@ export default {
           for(let section of this.sections) {
             if(section.interface.type === 'form') {
               for(let field of section.interface.fields) {
-                if(field.getTransformer && this.model[field.id]) {
+                if(field.getTransformer && (typeof this.model[field.id] === 'number' || this.model[field.id])) {
                   this.model[field.id] = field.getTransformer(this.model[field.id])
                 }
               }
