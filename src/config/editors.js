@@ -1009,6 +1009,12 @@ export default {
               id: 'data_source_link',
               label: '資料來源連結',
               type: 'text'
+            },
+            {
+              id: 'tags',
+              label: '標籤',
+              type: 'multiselect-creative',
+              directory: 'rs_tag'
             }
           ],
           options: {
@@ -1101,6 +1107,12 @@ export default {
               id: 'progress_source_link',
               label: '進程來源連結',
               type: 'text'
+            },
+            {
+              id: 'tags',
+              label: '標籤',
+              type: 'multiselect-creative',
+              directory: 'rs_tag'
             }
           ],
           options: {
