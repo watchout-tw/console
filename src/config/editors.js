@@ -1057,7 +1057,7 @@ export default {
               disabled: true
             },
             {
-              id: 'proposal_no',
+              id: 'version_no',
               label: '字號',
               type: 'text'
             },
@@ -1319,7 +1319,7 @@ export default {
               type: 'text'
             },
             {
-              id: 'tag',
+              id: 'tags',
               label: '標籤',
               type: 'multiselect-creative',
               directory: 'rs_tag'
