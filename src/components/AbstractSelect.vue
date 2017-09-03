@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable filterable :disabled="config.disabled">
+  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable @clear="onClear" filterable :disabled="config.disabled">
     <el-option v-for="option in options" :label="option.label" :value="option.value" :key="option.value"></el-option>
   </el-select>
 </div>
@@ -74,6 +74,9 @@ export default {
       if(this.config.cascadeUpdate) {
         this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate, this.model)
       }
+    },
+    onClear() {
+      this.model = undefined
     }
   }
 }
