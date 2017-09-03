@@ -83,7 +83,6 @@ export function postForm (reqObj) {
 }
 
 export function patchForm (reqObj) {
-  axios.defaults.headers.common['Authorization'] = localStorage.getItem('watchout-token')
   let url = `/console/lab/${reqObj.pageID}/` + reqObj.content[getQueryBase(reqObj.pageID)]
   if(reqObj.content.hasOwnProperty('id')) {
     delete reqObj.content.id
