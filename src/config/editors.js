@@ -377,6 +377,7 @@ export default {
               prop: 'is_active',
               label: '最新',
               type: 'switch',
+              defaultValue: true,
               formatter: formatters.boolean,
               getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
@@ -576,6 +577,7 @@ export default {
               prop: 'is_convener',
               label: '召委',
               type: 'switch',
+              defaultValue: false,
               formatter: formatters.boolean,
               getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
