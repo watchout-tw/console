@@ -1,6 +1,6 @@
 import directories from '@/config/directories'
 import axios from 'axios'
-import queryString from 'query-string'
+import QueryString from 'query-string'
 
 const queryBase = {
   'name': ['committees'],
@@ -12,14 +12,6 @@ if(token) {
   axios.defaults.headers.common['Authorization'] = token
 } else {
   console.error('Token not found')
-}
-
-function trimQueryString (query) {
-  var temp = {}
-  for (var key in query) {
-    temp[key] = query[key]
-  }
-  return temp
 }
 
 function getQueryBase (pageID) {
@@ -62,8 +54,8 @@ export function getListByNameNoPaging (reqObj) {
 }
 
 export function getListByFilter (reqObj) {
-  var query = queryString.stringify(trimQueryString(reqObj.queryParameters))
-  let url = `/console/lab/${reqObj.pageID}?${query}`
+  var queryString = QueryString.stringify(reqObj.query)
+  let url = `/console/lab/${reqObj.pageID}?${queryString}`
   return axios.get(url)
 }
 

@@ -34,8 +34,8 @@ const actions = {
   },
   filterList ({ commit }, reqObj) {
     var filteredRows = reqObj.rows
-    for (var key in reqObj.queryParameters) {
-      if (!reqObj.queryParameters[key]) {
+    for (var key in reqObj.query) {
+      if (!reqObj.query[key]) {
         // Skipped if corresponding filter is empty
         continue
       }
@@ -43,7 +43,7 @@ const actions = {
         return fil.id === key
       })
       filteredRows = filteredRows.filter(row => {
-        return currentFilter.comparator(row[currentFilter.mapToColumn], reqObj.queryParameters[key])
+        return currentFilter.comparator(row[currentFilter.mapToColumn], reqObj.query[key])
       })
     }
     var data = {
