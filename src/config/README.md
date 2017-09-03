@@ -68,6 +68,7 @@ editorID: {
   prop            // REQ - same as id
   label           // REQ
   type            // REQ
+  defaultValue    // OPT
   directory       // OPT - when type is 'select'
   updateForbidden // OPT
   formatter       // OPT - data → formatter → cell
