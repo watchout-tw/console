@@ -503,10 +503,11 @@ export default {
       {
         prop: 'is_law',
         label: '法律？',
-        width: columnWidth(3)
+        width: columnWidth(3),
+        formatter: formatters.boolean
       },
       {
-        prop: 'law_version_no',
+        prop: 'version_no',
         label: '版本'
       },
       {
