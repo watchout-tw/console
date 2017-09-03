@@ -1,4 +1,7 @@
 export function text2Array(text) {
+  if(!text) {
+    return []
+  }
   return text.split('\n')
 }
 

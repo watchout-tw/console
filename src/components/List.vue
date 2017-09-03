@@ -5,10 +5,10 @@
     <router-link :to="{name: page.routes.edit.name, params: {id: 'create'}}"><el-button type="primary">新增{{ page.name }}</el-button></router-link>
   </div>
   <div class="filters d-flex flex-row" v-if="filters.length > 0">
-    <template v-for="filter in filters" >
-      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="queryParameters[filter.id]" :cascadeConfig="cascadeMap[0][filter.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="filter" :page="page"></abstract-select>
+    <template v-for="filter in filters">
+      <abstract-select v-if="filterIs(filter, 'select')" :value.sync="query[filter.id]" :cascadeConfig="cascadeMap[0][filter.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="filter" :page="page"></abstract-select>
       <div v-else class="list-filter-input">
-        <el-input v-model="queryParameters[filter.id]" :placeholder="filter.label" @change="generateFilteredList"></el-input>
+        <el-input v-model="query[filter.id]" :placeholder="filter.label"></el-input>
       </div>
     </template>
   </div>
@@ -45,7 +45,7 @@ export default {
   props: ['page'],
   data() {
     return {
-      queryParameters: {},
+      query: {},
       filters: [],
       columns: [],
       config: undefined
@@ -85,7 +85,7 @@ export default {
       this.update()
     },
     // FIXME: Should find a better approach for this
-    queryParameters: {
+    query: {
       handler(now) {
         this.generateFilteredList()
       },
@@ -102,16 +102,16 @@ export default {
       this.config.key = this.config.key ? this.config.key : 'id'
 
       // construct query parameter
-      this.queryParameters = {}
+      this.query = {}
       lists[this.page.id].filters.forEach(filter => {
-        this.$set(this.queryParameters, filter.id, undefined)
+        this.$set(this.query, filter.id, undefined)
       })
 
       this.filters = lists[this.page.id].filters.objectArrayClone()
       this.columns = lists[this.page.id].columns.objectArrayClone()
 
       this.cascadeList = this.filters
-      this.cascadeInit(this.queryParameters, false, this.config.filters)
+      this.cascadeInit(this.query, false, this.config.filters)
     },
     update() {
       // dispatch action to get data
@@ -129,16 +129,21 @@ export default {
     editItem(row) {
       this.$router.push({name: this.page.routes.edit.name, params: {id: row[this.page.routingIndex]}})
     },
-    generateFilteredList: debounce(function () {
-      if (this.config.paged) {
+    generateFilteredList: debounce(function() {
+      for(let key in this.query) {
+        if(this.query[key] === '' || this.query[key] === null) {
+          this.query[key] = undefined
+        }
+      }
+      if(this.config.paged) {
         this.$store.dispatch('getFilteredList', {
           pageID: this.page.id,
-          queryParameters: this.queryParameters
+          query: this.query
         })
       } else {
         this.$store.dispatch('filterList', {
           rows: this.rows,
-          queryParameters: this.queryParameters,
+          query: this.query,
           filterInfo: lists[this.page.id].filters
         })
       }
