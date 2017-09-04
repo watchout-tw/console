@@ -16,6 +16,9 @@ export default {
       model: undefined
     }
   },
+  beforeMount() {
+    this.pull()
+  },
   watch: {
     'value'() {
       this.pull()
