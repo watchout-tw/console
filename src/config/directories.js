@@ -251,12 +251,20 @@ export default {
     id: 'composition_status',
     options: [
       {
+        value: 'new',
+        label: '🎉'
+      },
+      {
         value: 'active',
-        label: '😎'
+        label: '😀'
       },
       {
         value: 'inactive',
-        label: '👻'
+        label: '😑'
+      },
+      {
+        value: 'archived',
+        label: '🗄'
       }
     ]
   },
