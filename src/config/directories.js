@@ -252,19 +252,19 @@ export default {
     options: [
       {
         value: 'new',
-        label: '🎉'
+        label: '最新'
       },
       {
-        value: 'active',
-        label: '😀'
+        value: 'regular',
+        label: '普通'
       },
       {
         value: 'inactive',
-        label: '😑'
+        label: '待退'
       },
       {
         value: 'archived',
-        label: '🗄'
+        label: '封存'
       }
     ]
   },
