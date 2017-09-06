@@ -40,7 +40,7 @@ export default {
       this.update()
     },
     'parameters': {
-      handler(now) {
+      handler() {
         this.update()
       },
       deep: true
