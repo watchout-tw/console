@@ -18,7 +18,7 @@ function partyFlag(hex) {
 }
 
 function array2Text (text) {
-  return text.join('\n')
+  return Array.isArray(text) ? text.join('\n') : text
 }
 
 export default {
