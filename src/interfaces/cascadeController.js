@@ -1,10 +1,7 @@
 import Vue from 'vue'
 import uuid from 'uuid/v4'
 import * as cascadeTypes from '@/util/cascade-types'
-
-function isValid(val) {
-  return val !== undefined && val !== null && val !== ''
-}
+import { isValid } from '@/util/validators'
 
 export default {
   data() {

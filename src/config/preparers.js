@@ -1,3 +1,5 @@
+import { isValid } from '@/util/validators'
+
 export function text2Array(text) {
   if(!text) {
     return []
@@ -6,7 +8,7 @@ export function text2Array(text) {
 }
 
 export function date2Timestamp(date) {
-  return new Date(date).getTime()
+  return isValid(date) ? new Date(date).getTime() : undefined
 }
 
 export function mapChecklist(cklist) {
