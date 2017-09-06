@@ -1003,7 +1003,7 @@ export default {
           type: 'form',
           fields: [
             {
-              id: 'law_version_no',
+              id: 'version_no',
               label: '版本',
               type: 'text'
             },
@@ -1123,7 +1123,7 @@ export default {
         }
       },
       {
-        id: 'progress',
+        id: 'legislative_steps',
         title: '審議進度',
         description: '本提案的審議進度',
         condition: {
@@ -1140,11 +1140,12 @@ export default {
               prop: 'date',
               label: '日期',
               type: 'date',
+              formatter: formatters.date,
               postPreparer: preparers.date2Timestamp
             },
             {
-              id: 'progress',
-              prop: 'progress',
+              id: 'legislative_step_id',
+              prop: 'legislative_step_id',
               label: '審議進度',
               type: 'select',
               directory: 'legislative_step'
@@ -1170,7 +1171,8 @@ export default {
               directory: 'specific_topic',
               cascadeUpdate: [
                 cascade.applyConstraint(['st_question_id'], 'st')
-              ]
+              ],
+              deleteThisBeforePost: true
             },
             {
               id: 'st_question_id',
@@ -1206,22 +1208,23 @@ export default {
               type: 'select',
               directory: 'specific_topic',
               cascadeUpdate: [
-                cascade.applyConstraint(['act_dir'], 'st')
-              ]
+                cascade.applyConstraint(['act_dir_id'], 'st')
+              ],
+              deleteThisBeforePost: true
             },
             {
-              id: 'act_dir',
-              prop: 'act_dir',
+              id: 'act_dir_id',
+              prop: 'act_dir_id',
               label: '修法方向',
               type: 'select',
               directory: 'act_dir',
               cascadeUpdate: [
-                cascade.applyConstraint(['act_feature'], 'act_dir')
+                cascade.applyConstraint(['act_feature_id'], 'act_dir')
               ]
             },
             {
-              id: 'act_feature',
-              prop: 'act_feature',
+              id: 'act_feature_id',
+              prop: 'act_feature_id',
               label: '法案比較',
               type: 'select',
               directory: 'act_feature'
@@ -1373,6 +1376,11 @@ export default {
               directory: 'timeline_type'
             },
             {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
               id: 'title',
               label: '標題',
               type: 'text'
@@ -1469,6 +1477,11 @@ export default {
               directory: 'figure_type'
             },
             {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
               id: 'title',
               label: '標題',
               type: 'text'
@@ -1538,7 +1551,17 @@ export default {
               directory: 'composition_status'
             },
             {
-              id: 'st',
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'st_id',
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic'
@@ -1600,7 +1623,30 @@ export default {
         title: '相關連結',
         description: '這個議題綜覽的相關連結',
         interface: {
-          type: 'links'
+          type: 'table',
+          name: '連結',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
+          columns: [
+            {
+              id: 'type',
+              prop: 'type',
+              label: '類型',
+              type: 'select'
+            },
+            {
+              id: 'url',
+              prop: 'url',
+              label: 'URL',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              prop: 'title',
+              label: '標題',
+              type: 'text'
+            }
+          ]
         }
       }
     ]
@@ -1622,6 +1668,11 @@ export default {
             {
               id: 'version_no',
               label: '版本號',
+              type: 'text'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
               type: 'text'
             },
             {
@@ -1669,12 +1720,6 @@ export default {
               directory: 'act'
             },
             {
-              id: 'bill_ids',
-              label: '提案',
-              type: 'multiselect',
-              directory: 'rs_bill'
-            },
-            {
               id: 'act_dir_id',
               label: '關聯修法方向',
               type: 'select',
@@ -1685,6 +1730,12 @@ export default {
               label: '法案比較',
               type: 'multiselect',
               directory: 'act_feature'
+            },
+            {
+              id: 'bill_ids',
+              label: '提案',
+              type: 'multiselect',
+              directory: 'rs_bill'
             }
           ],
           options: {
@@ -1719,6 +1770,11 @@ export default {
             {
               id: 'version_no',
               label: '版本號',
+              type: 'text'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
               type: 'text'
             },
             {
@@ -1831,6 +1887,11 @@ export default {
               directory: 'lab_data_report_type'
             },
             {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
               id: 'title',
               label: '標題',
               type: 'text'
@@ -1863,7 +1924,25 @@ export default {
         title: '圖表',
         description: '這個數據分析報告的圖表',
         interface: {
-          type: 'figures'
+          type: 'table',
+          name: '圖表',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
+          columns: [
+            {
+              id: 'figure_id',
+              prop: 'figure_id',
+              label: '圖表',
+              type: 'select',
+              directory: 'figure'
+            },
+            {
+              id: 'index',
+              prop: 'index',
+              label: '排序',
+              type: 'number'
+            }
+          ]
         }
       }
     ]

@@ -156,12 +156,11 @@ export default {
           var arrayToPrepare = tempModel[section.id]
           for(let obj of arrayToPrepare) {
             for(let propObj of section.interface[propListKey]) {
-              if(propObj.postPreparer) {
-                const key = propObj[preparerKey]
+              const key = propObj[preparerKey]
+              if(propObj.deleteThisBeforePost) {
+                delete obj[key]
+              } else if(propObj.postPreparer) {
                 obj[key] = propObj.postPreparer(obj[key])
-              }
-              if(propObj.postPreparerDeleteName) {
-                delete obj[propObj.postPreparerDeleteName]
               }
             }
           }

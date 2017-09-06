@@ -144,6 +144,8 @@ export default {
       let cachedDirectory = column.directory ? this.$store.state.directory[column.directory] : undefined
       if(val === null) {
         result = `<span class="null">${val}</span>`
+      } else if (val === undefined) {
+        result = `<span class="null">${val}</span>`
       } else if(cachedDirectory) {
         if(val instanceof Array) {
           result = val.map(item => directoryValueToLabel(cachedDirectory, item)).join(punct.separator)

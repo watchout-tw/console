@@ -373,6 +373,12 @@ export default {
       }
     ]
   },
+  figure: {
+    id: 'figure',
+    api: 'figures',
+    value: 'id',
+    label: 'title'
+  },
   figure_data_set_type: {
     id: 'figure_data_set_type',
     options: [
