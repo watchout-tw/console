@@ -39,8 +39,11 @@ export default {
     'directory'() {
       this.update()
     },
-    'parameters'() {
-      this.update()
+    'parameters': {
+      handler(now) {
+        this.update()
+      },
+      deep: true
     },
     'value'() {
       this.pull()

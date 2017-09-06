@@ -76,18 +76,16 @@ export default {
                 if(rule.action === cascadeTypes.LOOKUP_TERM) {
                   correspondingModel[targetID] = trigger.payload ? trigger.payload[targetID] : undefined
                 } else if(rule.action === cascadeTypes.APPLY_CONSTRAINT) {
-                  let constraintName = rule.constraintName
-                  let parameters = sector[targetID].parameters
-                  if(!parameters) {
-                    parameters = {}
+                  if(!sector[targetID].hasOwnProperty('parameters')) {
+                    Vue.set(sector[targetID], 'parameters', {})
                   }
                   if(isValid(trigger.payload)) {
-                    Vue.set(parameters, constraintName, trigger.payload)
+                    Vue.set(sector[targetID].parameters, rule.constraintName, trigger.payload)
                   } else {
-                    Vue.delete(parameters, constraintName)
+                    Vue.delete(sector[targetID].parameters, rule.constraintName)
                   }
                 } else if(rule.action === cascadeTypes.APPOINT_DIRECTORY) {
-                  sector[targetID].directory = trigger.payload ? trigger.payload : undefined
+                  Vue.set(sector[targetID], 'directory', trigger.payload ? trigger.payload : undefined)
                 }
                 // FIXME: remove these when payload is empty (or something)
               }
