@@ -983,6 +983,7 @@ export default {
               label: '是否為法律',
               type: 'switch',
               defaultValue: false,
+              updateForbidden: true,
               getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
             }
