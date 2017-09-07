@@ -397,6 +397,7 @@ export default {
         comparator: comparators.equal
       }
     ],
+    paged: true,
     columns: [
       {
         prop: 'st',
@@ -489,6 +490,7 @@ export default {
         comparator: comparators.idFromList
       }
     ],
+    paged: true,
     columns: [
       {
         prop: 'specific_topics',
@@ -551,6 +553,7 @@ export default {
         comparator: comparators.equal
       }
     ],
+    paged: true,
     columns: [
       {
         prop: 'st',
