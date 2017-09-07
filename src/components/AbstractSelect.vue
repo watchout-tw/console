@@ -72,6 +72,9 @@ export default {
           ? (this.value.id ? this.value.id : this.value.name)
           : this.value
       }
+      if(this.config.cascadeUpdate) {
+        this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate, this.model)
+      }
     },
     push() {
       this.$emit('update:value', this.model) // FIXME: This is too simple
