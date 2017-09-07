@@ -54,3 +54,7 @@ export function prepareIndexId(targetArray) {
   }
   return result
 }
+
+export function tryToParseInt(val) {
+  return isNaN(val) ? val : +val
+}

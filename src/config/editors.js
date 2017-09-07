@@ -1081,7 +1081,8 @@ export default {
             {
               id: 'principle_sponsor_value',
               label: '第一提案人',
-              type: 'select'
+              type: 'select',
+              getTransformer: preparers.tryToParseInt
             },
             {
               id: 'sponsors',
