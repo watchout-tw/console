@@ -206,6 +206,12 @@ export default {
     value: 'id',
     label: 'question'
   },
+  rs_bill: {
+    id: 'rs_bill',
+    api: 'rs_bills',
+    value: 'id',
+    label: 'version_no' // FIXME: Need to combine multiple fields into label
+  },
   rs_tag: {
     id: 'rs_tag',
     api: 'rs_tags',
