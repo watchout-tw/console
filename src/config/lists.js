@@ -573,28 +573,28 @@ export default {
       {
         prop: 'aye_count',
         label: '贊成',
-        width: columnWidth(2)
+        width: columnWidth(3)
       },
       {
         prop: 'nay_count',
         label: '反對',
-        width: columnWidth(2)
+        width: columnWidth(3)
       },
       {
         prop: 'abstain_count',
         label: '棄權',
-        width: columnWidth(2)
+        width: columnWidth(3)
       },
       {
         prop: 'absence_count',
         label: '缺席',
-        width: columnWidth(2)
+        width: columnWidth(3)
       },
       {
         prop: 'g0v_link',
         label: 'g0v',
         formatter: formatters.link,
-        width: columnWidth(2)
+        width: columnWidth(3)
       },
       {
         prop: 'source_link',
