@@ -828,5 +828,33 @@ export default {
         label: '圖表'
       }
     ]
+  },
+  lab_insights: {
+    filters: [
+      {
+        id: 'specific_topic',
+        directory: 'specific_topic',
+        label: '關聯小議題',
+        type: 'select',
+        mapToColumn: 'st',
+        comparator: comparators.id
+      }
+    ],
+    key: 'id',
+    paged: false,
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'st',
+        label: '關聯小議題'
+      }
+    ]
   }
 }

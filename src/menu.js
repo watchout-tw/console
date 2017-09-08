@@ -156,6 +156,14 @@ var menu = [
         title: '議題綜覽'
       },
       {
+        id: 'lab_insights',
+        directory: 'lab_insights',
+        editor: 'lab_insight',
+        routingIndex: 'id',
+        name: '分析評論',
+        title: '分析評論'
+      },
+      {
         id: 'lab_bill_data_sets',
         directory: 'lab_bill_data_sets',
         editor: 'lab_bill_data_set',

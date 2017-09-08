@@ -1948,5 +1948,49 @@ export default {
         }
       }
     ]
+  },
+  lab_insight: {
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個分析評論的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      }
+    ]
   }
 }
