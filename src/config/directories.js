@@ -330,7 +330,7 @@ export default {
     id: 'figure_type',
     options: [
       {
-        value: 'bill_comparison_score_by_feature',
+        value: 'bill_comparison_bars',
         label: '提案比較：法案比較得分'
       },
       {
