@@ -6,6 +6,7 @@
       <template scope="scope">
         <template v-if="flags[scope.$index].isEditing && (flags[scope.$index].isLocal || !column.updateForbidden)">
           <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
+          <el-input v-if="columnIs(column, 'textarea')" type="textarea" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
           <el-input-number v-if="columnIs(column, 'number')" :size="componentSize" v-model="scope.row[column.prop]" ></el-input-number>
           <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
@@ -170,11 +171,30 @@ export default {
 </script>
 
 <style lang="scss">
+.cell {
+  .el-textarea {
+    margin: 0.5rem 0;
+  }
+}
 .cell > .formatted-content {
   .null {
     text-transform: uppercase;
     font-size: 0.75rem;
     opacity: 0.5;
+  }
+  .yes {
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    font-weight: bold;
+  }
+
+  // handle markdown
+  p:last-child {
+    margin-bottom: 0;
+  }
+  ul {
+    padding-left: 1rem;
+    margin-bottom: 0;
   }
 }
 .editor-table {
@@ -185,12 +205,6 @@ export default {
     margin-top: -1rem;
     transform: translateY(-100%);
   }
-}
-
-.cell > .formatted-content .yes {
-  text-transform: uppercase;
-  font-size: 0.75rem;
-  font-weight: bold;
 }
 
 </style>

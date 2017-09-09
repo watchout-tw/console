@@ -1247,7 +1247,8 @@ export default {
               id: 'content',
               prop: 'content',
               label: '完整內容',
-              type: 'text'
+              type: 'textarea',
+              formatter: formatters.markdown
             }
           ]
         }

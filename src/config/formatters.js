@@ -1,4 +1,5 @@
 import directories from './directories'
+import marked from 'marked'
 
 const punct = {
   separator: '、',
@@ -96,6 +97,9 @@ export default {
   bullet_point_questions(row, col) {
     let questions = row[col.property]
     return '<ul>' + questions.map(questionObj => `<li>${questionObj.question}</li>`).join('') + '</ul>'
+  },
+  markdown(row, col) {
+    return marked(row[col.property])
   },
   longtext(str) {
     return array2Text(str)
