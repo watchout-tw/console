@@ -1009,6 +1009,12 @@ export default {
               type: 'text'
             },
             {
+              id: 'date',
+              label: '日期',
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
+            },
+            {
               id: 'data_source_link',
               label: '資料來源連結',
               type: 'text'
