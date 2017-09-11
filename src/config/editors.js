@@ -1172,8 +1172,8 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
-              id: 'specific_topic',
-              prop: 'specific_topic',
+              id: 'st_id',
+              prop: 'st_id',
               label: '小議題',
               type: 'select',
               directory: 'specific_topic',
@@ -1210,8 +1210,8 @@ export default {
           preparerKeyIsAt: 'prop',
           columns: [
             {
-              id: 'specific_topic',
-              prop: 'specific_topic',
+              id: 'st_id',
+              prop: 'st_id',
               label: '小議題',
               type: 'select',
               directory: 'specific_topic',
