@@ -346,11 +346,23 @@ export default {
         label: '提案比較：詳細列表'
       },
       {
-        value: 'sponsorship_count_by_party',
+        value: 'sponsorship_partisan_count',
         label: '提案連署統計：政黨分組計數'
       },
       {
-        value: 'sponsorship_mesh_by_rep',
+        value: 'sponsorship_total_percentage',
+        label: '提案連署統計：全體委員比例'
+      },
+      {
+        value: 'sponsorship_partisan_percentage',
+        label: '提案連署統計：政黨比例'
+      },
+      {
+        value: 'sponsorship_most_stats',
+        label: '提案連署統計：最多連署'
+      },
+      {
+        value: 'sponsorship_mesh',
         label: '提案連署統計：委員網絡'
       },
       {
