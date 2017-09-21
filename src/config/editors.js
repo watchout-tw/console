@@ -1692,15 +1692,6 @@ export default {
               id: 'end_date',
               label: '終止日',
               type: 'date'
-            },
-            {
-              id: 'st_id',
-              label: '關聯小議題',
-              type: 'select',
-              directory: 'specific_topic',
-              cascadeUpdate: [
-                cascade.applyConstraint(['act_dir_id', 'act_feature_ids'], 'st')
-              ]
             }
           ],
           options: {
@@ -1716,6 +1707,15 @@ export default {
           type: 'form',
           fields: [
             {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['act_dir_id', 'act_features'], 'st')
+              ]
+            },
+            {
               id: 'act_id',
               label: '關聯法案',
               type: 'select',
@@ -1728,13 +1728,13 @@ export default {
               directory: 'act_dir'
             },
             {
-              id: 'act_feature_ids',
+              id: 'act_features',
               label: '法案比較',
               type: 'multiselect',
               directory: 'act_feature'
             },
             {
-              id: 'bill_ids',
+              id: 'bills',
               label: '提案',
               type: 'multiselect',
               directory: 'rs_bill'
@@ -1746,7 +1746,7 @@ export default {
         }
       },
       {
-        id: 'score_board',
+        id: 'scores',
         title: '提案評分',
         description: '針對各項提案在各項法案比較的表現評分',
         interface: {

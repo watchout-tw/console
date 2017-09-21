@@ -735,11 +735,41 @@ export default {
   lab_bill_data_sets: {
     filters: [
       {
+        id: 'name',
+        label: '名稱',
+        type: 'input',
+        mapToColumn: 'name',
+        comparator: comparators.string
+      },
+      {
+        id: 'term',
+        directory: 'term',
+        label: '屆期',
+        type: 'select',
+        mapToColumn: 'term_index'
+      },
+      {
         id: 'specific_topic',
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
         mapToColumn: 'st',
+        comparator: comparators.id
+      },
+      {
+        id: 'act',
+        directory: 'act',
+        label: '關聯法案',
+        type: 'select',
+        mapToColumn: 'act',
+        comparator: comparators.id
+      },
+      {
+        id: 'act_dir',
+        directory: 'act_dir',
+        label: '關聯修法方向',
+        type: 'select',
+        mapToColumn: 'act_dir',
         comparator: comparators.id
       }
     ],
@@ -755,7 +785,7 @@ export default {
         label: '版本號'
       },
       {
-        prop: 'term',
+        prop: 'term_index',
         label: '屆期'
       },
       {
