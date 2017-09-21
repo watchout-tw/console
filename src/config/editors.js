@@ -1728,13 +1728,13 @@ export default {
               directory: 'act_dir'
             },
             {
-              id: 'act_features',
+              id: 'act_feature_ids',
               label: '法案比較',
               type: 'multiselect',
               directory: 'act_feature'
             },
             {
-              id: 'bills',
+              id: 'bill_ids',
               label: '提案',
               type: 'multiselect',
               directory: 'rs_bill'
