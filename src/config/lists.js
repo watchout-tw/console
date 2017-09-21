@@ -708,6 +708,14 @@ export default {
         label: '關聯小議題'
       },
       {
+        prop: 'tagline',
+        label: '標語'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
         prop: 'intro',
         label: '簡介'
       },

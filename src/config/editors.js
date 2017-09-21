@@ -1581,6 +1581,11 @@ export default {
               type: 'text'
             },
             {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
               id: 'intro',
               label: '簡介',
               type: 'textarea'
@@ -1608,18 +1613,6 @@ export default {
               label: '大事紀',
               type: 'select',
               directory: 'timeline'
-            },
-            {
-              id: 'data_report_ids',
-              label: '數據分析報告',
-              type: 'multiselect',
-              directory: 'lab_data_report'
-            },
-            {
-              id: 'insight_ids',
-              label: '分析評論',
-              type: 'multiselect',
-              directory: 'lab_insight'
             }
           ],
           options: {
