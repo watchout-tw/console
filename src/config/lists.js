@@ -891,11 +891,19 @@ export default {
         label: '狀態'
       },
       {
+        prop: 'title',
+        label: '標題'
+      },
+      {
         prop: 'st',
         label: '關聯小議題'
       },
       {
-        prop: 'data_set',
+        prop: 'figure_data_set_type',
+        label: '資料源類型'
+      },
+      {
+        prop: 'figure_data_set',
         label: '資料源'
       },
       {
