@@ -694,6 +694,13 @@ export default {
         type: 'select',
         mapToColumn: 'st',
         comparator: comparators.id
+      },
+      {
+        id: 'title',
+        label: '標題',
+        type: 'input',
+        mapToColumn: 'title',
+        comparator: comparators.string
       }
     ],
     key: 'id',
