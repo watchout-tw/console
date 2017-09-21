@@ -1794,15 +1794,6 @@ export default {
               id: 'end_date',
               label: '終止日',
               type: 'date'
-            },
-            {
-              id: 'st_id',
-              label: '關聯小議題',
-              type: 'select',
-              directory: 'specific_topic',
-              cascadeUpdate: [
-                cascade.applyConstraint(['st_question_id', 'act_ids'], 'st')
-              ]
             }
           ],
           options: {
@@ -1818,6 +1809,15 @@ export default {
           type: 'form',
           fields: [
             {
+              id: 'st_id',
+              label: '關聯小議題',
+              type: 'select',
+              directory: 'specific_topic',
+              cascadeUpdate: [
+                cascade.applyConstraint(['st_question_id', 'act_ids'], 'st')
+              ]
+            },
+            {
               id: 'st_question_id',
               label: '爭點',
               type: 'select',
@@ -1831,7 +1831,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(3)
+            labelWidth: labelWidth(6)
           }
         }
       },
