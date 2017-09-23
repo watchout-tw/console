@@ -1424,20 +1424,25 @@ export default {
               type: 'text'
             },
             {
+              id: 'date',
+              label: '日期',
+              type: 'date'
+            },
+            {
               id: 'type',
               label: '類型',
               type: 'select',
               directory: 'timeline_event_type'
             },
             {
-              id: 'source',
-              label: '資料來源',
-              type: 'select'
+              id: 'image',
+              label: '圖像',
+              type: 'text'
             },
             {
-              id: 'date',
-              label: '日期',
-              type: 'date'
+              id: 'tagline',
+              label: '標語',
+              type: 'text'
             },
             {
               id: 'title',
@@ -1445,14 +1450,19 @@ export default {
               type: 'text'
             },
             {
-              id: 'description',
-              label: '敘述',
+              id: 'content',
+              label: '內容',
               type: 'textarea'
             },
             {
               id: 'link',
               label: '連結',
               type: 'text'
+            },
+            {
+              id: 'data',
+              label: '資料',
+              type: 'textarea'
             }
           ]
         }

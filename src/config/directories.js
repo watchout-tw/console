@@ -293,27 +293,23 @@ export default {
     id: 'timeline_event_type',
     options: [
       {
-        value: 'external',
-        label: '外部事件'
+        value: 'term_start',
+        label: '屆期起始'
       },
       {
-        value: 'term_start_date',
-        label: '屆期起始日'
+        value: 'session_start',
+        label: '會期起始'
       },
       {
-        value: 'session_start_date',
-        label: '會期起始日'
+        value: 'reps_assume_office',
+        label: '委員就職'
       },
       {
-        value: 'rep_assume_office',
-        label: '委員就職日'
-      },
-      {
-        value: 'rs_statement',
+        value: 'rs_statements',
         label: '發言'
       },
       {
-        value: 'rs_bill',
+        value: 'rs_bills',
         label: '提案'
       },
       {
@@ -321,8 +317,24 @@ export default {
         label: '提案審議進度'
       },
       {
-        value: 'rs_vote',
+        value: 'rs_votes',
         label: '表決'
+      },
+      {
+        value: 'data_reports',
+        label: '數據分析報告'
+      },
+      {
+        value: 'insights',
+        label: '分析評論'
+      },
+      {
+        value: 'social_event',
+        label: '社會事件'
+      },
+      {
+        value: 'general_update',
+        label: '一般更新'
       }
     ]
   },
