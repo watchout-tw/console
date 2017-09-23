@@ -343,63 +343,78 @@ export default {
     options: [
       {
         value: 'bill_comparison_bars',
-        label: '提案比較：法案比較得分'
+        group: '提案比較',
+        label: '法案比較得分'
       },
       {
         value: 'bill_comparison_radar',
-        label: '提案比較：雷達'
+        group: '提案比較',
+        label: '雷達'
       },
       {
         value: 'bill_comparison_compact_table',
-        label: '提案比較：精簡列表'
+        group: '提案比較',
+        label: '精簡列表'
       },
       {
         value: 'bill_comparison_full_table',
-        label: '提案比較：詳細列表'
+        group: '提案比較',
+        label: '詳細列表'
       },
       {
         value: 'sponsorship_partisan_count',
-        label: '提案連署統計：政黨分組計數'
+        group: '提案連署統計',
+        label: '政黨分組計數'
       },
       {
         value: 'sponsorship_total_percentage',
-        label: '提案連署統計：全體委員比例'
+        group: '提案連署統計',
+        label: '全體委員比例'
       },
       {
         value: 'sponsorship_partisan_percentage',
-        label: '提案連署統計：政黨比例'
+        group: '提案連署統計',
+        label: '政黨比例'
       },
       {
         value: 'sponsorship_most_stats',
-        label: '提案連署統計：最多連署'
+        group: '提案連署統計',
+        label: '最多連署'
       },
       {
         value: 'sponsorship_mesh',
-        label: '提案連署統計：委員網絡'
+        group: '提案連署統計',
+        label: '委員網絡'
       },
       {
         value: 'statement_count_by_party',
-        label: '發言統計：政黨分組計數'
+        group: '發言統計',
+        label: '政黨分組計數'
       },
       {
         value: 'statement_position_count_by_party',
-        label: '發言統計：政黨分組立場分群計數'
+        group: '發言統計',
+        label: '政黨分組立場分群計數'
       },
       {
         value: 'statement_position_timeline_by_party',
-        label: '發言統計：政黨分組立場分群時間軸'
+        group: '發言統計',
+        label: '政黨分組立場分群時間軸'
       },
       {
         value: 'statement_word_cloud_by_party',
-        label: '發言統計：政黨分組文字雲'
+        group: '發言統計',
+        label: '政黨分組文字雲'
       },
       {
         value: 'statement_bubble_by_rep',
-        label: '發言統計：委員氣泡'
+        group: '發言統計',
+        label: '委員氣泡'
       },
       {
         value: 'statement_timeline_by_rep',
-        label: '發言統計：委員時間軸'
+        group: '發言統計',
+        label: '委員時間軸'
       }
     ]
   },
@@ -414,11 +429,13 @@ export default {
     options: [
       {
         value: 'LAB_Bill_Data_Set',
-        label: '《議題實驗室》提案資料集'
+        group: '議題實驗室',
+        label: '提案資料集'
       },
       {
         value: 'LAB_Statement_Data_Set',
-        label: '《議題實驗室》發言資料集'
+        group: '議題實驗室',
+        label: '發言資料集'
       }
     ]
   },

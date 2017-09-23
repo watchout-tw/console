@@ -1,7 +1,14 @@
 <template>
 <div class="abstract-select">
   <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable @clear="onClear" filterable :disabled="config.disabled">
-    <el-option v-for="option in options" :label="option.label" :value="option.value" :key="optionUID()"></el-option>
+    <template v-if="isGrouped">
+      <el-option-group v-for="group in groups" :key="group.label" :label="group.label">
+        <el-option v-for="option in group.options" :label="option.label" :value="option.value" :key="optionUID()"></el-option>
+      </el-option-group>
+    </template>
+    <template v-else>
+      <el-option v-for="option in options" :label="option.label" :value="option.value" :key="optionUID()"></el-option>
+    </template>
   </el-select>
 </div>
 </template>
@@ -26,6 +33,18 @@ export default {
   computed: {
     options() {
       return this.$store.state[this.uuid]
+    },
+    groupLabels() {
+      return [...new Set(this.options.filter(option => option.hasOwnProperty('group')).map(option => option.group))]
+    },
+    isGrouped() {
+      return this.groupLabels.length > 0
+    },
+    groups() {
+      return this.groupLabels.map(groupLabel => ({
+        label: groupLabel,
+        options: this.options.filter(option => option.group === groupLabel)
+      }))
     }
   },
   beforeMount() {
