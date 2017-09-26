@@ -8,6 +8,7 @@
     <editor-table v-else-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
     <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :events.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-events>
+    <editor-score-board v-else-if="sectionIs(section, 'score_board')" :config="section.interface" :scores.sync="model[section.id]" :columnIds="model[section.interface.column_name]" :rowIds="model[section.interface.row_name]"></editor-score-board>
   </section>
   <el-button @click="submit()" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
@@ -23,6 +24,7 @@ import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 import EditorEvents from '@/components/EditorEvents'
+import EditorScoreBoard from '@/components/EditorScoreBoard'
 
 Vue.use(Vuex)
 
@@ -194,7 +196,8 @@ export default {
     EditorForm,
     EditorTable,
     EditorChecklist,
-    EditorEvents
+    EditorEvents,
+    EditorScoreBoard
   }
 }
 </script>
