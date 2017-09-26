@@ -39,10 +39,12 @@ export default {
       return api.getDirectory({ directoryID: this.config.row_directory })
     }).then(response => {
       this.candidateRows = response.data.rows
-      this.generateTableColumn()
+      this.initiateTableColumn()
     })
   },
   methods: {
+    // 增加、減少 act feature 時，score board 並不會知道哪個 element 增加、減少
+    // 所以在每次 watch 到 columnIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
     updateColumnDiff () {
       if (this.columns.length > this.columnIds.length) {
         var removeIndex = this.columns.findIndex(col => {
@@ -73,6 +75,8 @@ export default {
       }
       this.$emit('update:scores', this.rows)
     },
+    // 增加、減少 bill 時，score board 並不會知道哪個 element 增加、減少
+    // 所以在每次 watch 到 rowIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
     updateRowDiff () {
       if (this.rows.length > this.rowIds.length) {
         var removeIndex = this.rows.findIndex(row => {
@@ -103,7 +107,7 @@ export default {
       }
       this.$emit('update:scores', this.rows)
     },
-    generateTableColumn () {
+    initiateTableColumn () {
       if (!this.columnIds) {
         return
       }
