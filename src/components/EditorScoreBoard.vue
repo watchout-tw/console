@@ -5,6 +5,7 @@
     <el-table-column v-for="(column, index) in columns" prop="feature" :label="column.feature" key="id">
       <template scope="scope">
         <el-input-number size="small" v-model="scope.row.score_per_act_feature[index].score"></el-input-number>
+        <div>{{scope.row.score_per_act_feature[index].short_content}}</div>
       </template>
     </el-table-column>
   </el-table>
@@ -21,7 +22,8 @@ export default {
       rows: [],
       columns: [],
       candidateRows: [],
-      candidateColumns: []
+      candidateColumns: [],
+      bills: []
     }
   },
   watch: {
@@ -67,9 +69,17 @@ export default {
         })
         this.columns.splice(newIndex, 0, newObj)
         this.rows.forEach(row => {
+          // 要為每個新增的 column 補上相對應的 bill->act_feature->short_content
+          // 在新增 rows 已經有把相對應該 bill 放在 this.bills，到裡面找
+          var curActFeature = this.bills.find(bill => {
+            return bill.id === row.bill_id
+          }).act_features.find(af => {
+            return af.act_feature_id === newObj.id
+          })
           row.score_per_act_feature.splice(newIndex, 0, {
             score: 0,
-            act_feature_id: newObj.id
+            act_feature_id: newObj.id,
+            short_content: curActFeature ? curActFeature.short_content : ''
           })
         })
       }
@@ -94,14 +104,25 @@ export default {
         var newObj = this.candidateRows.find(row => {
           return row.id === this.rowIds[newIndex]
         })
-        this.rows.splice(newIndex, 0, {
-          bill_id: newObj.id,
-          version_no: newObj.version_no,
-          score_per_act_feature: this.columns.map(col => {
-            return {
-              score: 0,
-              act_feature_id: col.id
-            }
+        // 因為要在每個 score 底下顯示此法案在此法案比較的項目 Ex: 投票門檻 0.5%
+        // 所以動態地去拿 rs_bills
+        api.getItem({ pageID: 'rs_bills', id: newObj.id })
+        .then(response => {
+          var curBill = response.data
+          this.bills.push(curBill)
+          this.rows.splice(newIndex, 0, {
+            bill_id: newObj.id,
+            version_no: newObj.version_no,
+            score_per_act_feature: this.columns.map(col => {
+              var curActFeature = curBill.act_features.find(af => {
+                return af.act_feature_id === col.id
+              })
+              return {
+                score: 0,
+                act_feature_id: col.id,
+                short_content: curActFeature ? curActFeature.short_content : ''
+              }
+            })
           })
         })
       }
