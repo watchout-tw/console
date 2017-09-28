@@ -45,7 +45,8 @@ export default {
     id: 'zone',
     api: 'zones',
     value: 'name',
-    label: 'name'
+    label: 'name',
+    isOpen: true
   },
   district: {
     id: 'district',

@@ -34,7 +34,7 @@ export function getDirectory (reqObj) {
       return a
     }, [])
     .join('&')
-  let url = '/console/lab/' + directory.api
+  let url = (directory.isOpen ? '/c0ngress/' : '/console/lab/') + directory.api
   if(all || queryString) {
     url += '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
   }
