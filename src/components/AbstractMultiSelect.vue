@@ -26,7 +26,7 @@ export default {
       return this.config.type.indexOf('creative') > -1
     },
     options() {
-      return this.$store.state[this.uuid]
+      return this.$store.state[this.uuid] || []
     }
   },
   beforeMount() {

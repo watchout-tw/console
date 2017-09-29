@@ -1410,61 +1410,7 @@ export default {
         title: '事件',
         description: '這個大事紀中包含的事件',
         interface: {
-          type: 'events',
-          attributes: [
-            {
-              id: 'status',
-              label: '狀態',
-              type: 'select',
-              directory: 'composition_status'
-            },
-            {
-              id: 'slug',
-              label: '短網址',
-              type: 'text'
-            },
-            {
-              id: 'date',
-              label: '日期',
-              type: 'date'
-            },
-            {
-              id: 'type',
-              label: '類型',
-              type: 'select',
-              directory: 'timeline_event_type'
-            },
-            {
-              id: 'image',
-              label: '圖像',
-              type: 'text'
-            },
-            {
-              id: 'tagline',
-              label: '標語',
-              type: 'text'
-            },
-            {
-              id: 'title',
-              label: '標題',
-              type: 'text'
-            },
-            {
-              id: 'content',
-              label: '內容',
-              type: 'textarea'
-            },
-            {
-              id: 'link',
-              label: '連結',
-              type: 'text'
-            },
-            {
-              id: 'data',
-              label: '資料',
-              type: 'textarea'
-            }
-          ]
+          type: 'events'
         }
       }
     ]

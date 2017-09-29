@@ -2,13 +2,15 @@ export default {
   props: ['cascadeConfig', 'queueCascadeUpdate'],
   computed: {
     uuid() {
-      return this.cascadeConfig.uuid
+      // use directory name as uuid to share options among components which cascadeUpdate are not enabled
+      return this.cascadeConfig ? this.cascadeConfig.uuid : this.config.directory
     },
     parameters() {
-      return this.cascadeConfig.parameters
+      return this.cascadeConfig ? this.cascadeConfig.parameters : {}
     },
     directory() {
-      return this.cascadeConfig.directory || this.config.directory
+      // cascadeConfig.directory will override config.directory if exists
+      return this.cascadeConfig && this.cascadeConfig.directory ? this.cascadeConfig.directory : this.config.directory
     }
   },
   methods: {

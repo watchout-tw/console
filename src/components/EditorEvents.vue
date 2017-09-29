@@ -1,55 +1,69 @@
 <template>
 <div class="editor-events">
-  <el-button type="primary" @click="addEvent">新增事件</el-button>
+  <div class="new-event event-editor">
+    <div class="section event-id">{{ newEvent.uuid }}</div>
+    <div class="section event-properties d-flex">
+      <abstract-select :value.sync="newEvent.status" :config="eventProps.status" :page="page"></abstract-select>
+      <el-input v-model="newEvent.slug" :placeholder="eventProps.slug.label" style="width:auto"></el-input>
+      <el-date-picker v-model="newEvent.date" :placeholder="eventProps.date.label" type="date"></el-date-picker>
+      <abstract-select :value.sync="newEvent.type" :config="eventProps.type" :page="page"></abstract-select>
+    </div>
+    <div class="section event-content">
+      <el-input v-model="newEvent.image" :placeholder="eventProps.image.label"></el-input>
+      <el-input v-model="newEvent.tagline" :placeholder="eventProps.tagline.label"></el-input>
+      <el-input v-model="newEvent.title" :placeholder="eventProps.title.label"></el-input>
+      <el-input v-model="newEvent.content" :placeholder="eventProps.content.label" type="textarea"></el-input>
+    </div>
+    <div class="section actions">
+      <el-button type="primary" @click="submitNewEvent">新增事件</el-button>
+    </div>
+  </div>
   <div class="events">
-    <div class="event" v-for="(event, $index) in events" key="event.uuid">
-      <label>{{ event.uuid }}</label>
-      <div v-for="attribute in config.attributes" :key="attribute.id" :class="attribute.id">
-        <el-input v-if="attributeIs(attribute, 'text')" v-model="event[attribute.id]" :placeholder="attribute.label"></el-input>
-        <el-input v-if="attributeIs(attribute, 'textarea')" type="textarea" v-model="event[attribute.id]" :placeholder="attribute.label"></el-input>
-        <el-date-picker v-if="attributeIs(attribute, 'date')" type="date" v-model="event[attribute.id]" :placeholder="attribute.label"></el-date-picker>
-        <abstract-select v-if="attributeIs(attribute, 'select')" :value.sync="event[attribute.id]" :cascadeConfig="cascadeMap[$index][attribute.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="attribute" :page="page"></abstract-select>
-      </div>
+    <div class="event" v-for="(event, $index) in events" :key="event.uuid">
+      {{ event.uuid }}
     </div>
   </div>
 </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import uuid from 'uuid/v4'
 import AbstractSelect from '@/components/AbstractSelect'
-import cascadeController from '@/interfaces/cascadeController'
 
 export default {
-  mixins: [cascadeController],
   props: ['events', 'config', 'page', 'parentInitialized'],
   data() {
     return {
-      initialized: false
+      initialized: false,
+      eventProps: require('@/config/eventProps').default,
+      newEvent: {},
+      flags: []
     }
   },
   beforeMount() {
     this.init()
     // FIXME: might need something like EditorTable--asyncInit & parentInitialized watcher
+    Vue.set(this, 'newEvent', this.makeEvent())
   },
   methods: {
     attributeIs(attribute, type) {
       return attribute.type === type
     },
     init() {
-      this.cascadeInit(this.events, true, this.config.attributes)
       this.initialized = true // FIXME: might have to move this to asyncInit like EditorTable
     },
-    addEvent() {
-      let eventID = uuid()
+    makeEvent() {
       let event = {
-        uuid: eventID
+        uuid: uuid()
       }
-      this.events.push(Object.assign(
-        event,
-        ...this.config.attributes.map(attribute => ({[attribute.id]: undefined})))
+      return Object.assign(event,
+        ...Object.keys(this.eventProps).map(key => ({[this.eventProps[key].id]: undefined}))
       )
-      this.addCascadeSector()
+    },
+    submitNewEvent() {
+      // add newEvent to the list of events
+      // make a newEvent
     }
   },
   components: {
@@ -59,7 +73,27 @@ export default {
 </script>
 
 <style lang="scss">
-.events > .event {
-  max-width: 16rem;
+@import '~common/src/styles/resources';
+
+.event-editor {
+  max-width: 36rem;
+  > .section + .section {
+    margin-top: 0.5rem;
+  }
+  > .event-id {
+    font-size: 0.625rem;
+    color: $color-secondary-text-grey;
+  }
+
+  > .event-properties {
+    > * + * {
+      margin-left: 0.5rem;
+    }
+  }
+  > .event-content {
+    > * + * {
+      margin-top: 0.5rem;
+    }
+  }
 }
 </style>

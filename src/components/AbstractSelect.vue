@@ -32,7 +32,7 @@ export default {
   },
   computed: {
     options() {
-      return this.$store.state[this.uuid]
+      return this.$store.state[this.uuid] || []
     },
     groupLabels() {
       return [...new Set(this.options.filter(option => option.hasOwnProperty('group')).map(option => option.group))]
