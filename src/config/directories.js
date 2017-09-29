@@ -45,13 +45,15 @@ export default {
     id: 'zone',
     api: 'zones',
     value: 'name',
-    label: 'name'
+    label: 'name',
+    parentModule: 'c0ngress'
   },
   district: {
     id: 'district',
-    api: 'district_unique_names',
+    api: 'unique_districts',
     value: 'name',
-    label: 'name'
+    label: 'name',
+    parentModule: 'c0ngress'
   },
   general_topic: {
     id: 'general_topic',
@@ -114,7 +116,8 @@ export default {
     id: 'gov_agency',
     api: 'gov_agencies',
     value: 'id',
-    label: 'name'
+    label: 'name',
+    parentModule: 'c0ngress'
   },
   committee_category: {
     id: 'committee_category',
@@ -239,7 +242,8 @@ export default {
     id: 'legislative_step',
     api: 'legislative_steps',
     value: 'id',
-    label: 'name'
+    label: 'name',
+    parentModule: 'c0ngress'
   },
   session: {
     id: 'session',

@@ -34,7 +34,7 @@ export function getDirectory (reqObj) {
       return a
     }, [])
     .join('&')
-  let url = '/console/lab/' + directory.api + '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
+  let url = '/' + (directory.parentModule ? directory.parentModule : 'console/lab') + '/' + directory.api + '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
   return axios.get(url)
 }
 
@@ -64,8 +64,9 @@ export function getItem (reqObj) {
   return axios.get(url)
 }
 
+// c0ngress!
 export function lookupTerm (reqObj) {
-  let url = `/console/lab/date_to_term?date=${reqObj.timestamp}`
+  let url = `/c0ngress/date_to_term?date=${reqObj.timestamp}`
   return axios.get(url)
 }
 
