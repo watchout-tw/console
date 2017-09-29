@@ -1,93 +1,93 @@
 export default {
   term: {
     id: 'term',
-    api: 'terms',
+    api: '/console/lab/terms',
     value: 'index',
     label: 'index'
   },
   term_district: {
     id: 'term_district',
-    api: 'term_districts',
+    api: '/console/lab/term_districts',
     value: 'district_name',
     label: 'abbreviation'
   },
   term_party: {
     id: 'term_party',
-    api: 'term_parties',
+    api: '/console/lab/term_parties',
     value: 'parties.id',
     label: 'parties.abbreviation'
   },
   term_caucus: {
     id: 'term_caucus',
-    api: 'term_caucuses',
+    api: '/console/lab/term_caucuses',
     value: 'caucus.id',
     label: 'caucus.abbreviation'
   },
   party: {
     id: 'party',
-    api: 'parties',
+    api: '/console/lab/parties',
     value: 'id',
     label: 'name'
   },
   caucus: {
     id: 'caucus',
-    api: 'caucuses',
+    api: '/console/lab/caucuses',
     value: 'id',
     label: 'abbreviation'
   },
   committee: {
     id: 'committee',
-    api: 'committees',
+    api: '/console/lab/committees',
     value: 'name',
     label: 'name'
   },
   zone: {
     id: 'zone',
-    api: 'zones',
+    api: '/c0ngress/zones',
     value: 'name',
     label: 'name',
     parentModule: 'c0ngress'
   },
   district: {
     id: 'district',
-    api: 'unique_districts',
+    api: '/console/lab/unique_districts',
     value: 'name',
     label: 'name',
     parentModule: 'c0ngress'
   },
   general_topic: {
     id: 'general_topic',
-    api: 'general_topics',
+    api: '/console/lab/general_topics',
     value: 'id',
     label: 'title'
   },
   specific_topic: {
     id: 'specific_topc',
-    api: 'specific_topics',
+    api: '/console/lab/specific_topics',
     value: 'id',
     label: 'title'
   },
   act: {
     id: 'act',
-    api: 'acts',
+    api: '/console/lab/acts',
     value: 'id',
     label: 'title'
   },
   act_dir: {
     id: 'act_dir',
-    api: 'act_dirs',
+    api: '/console/lab/act_dirs',
     value: 'id',
     label: 'name'
   },
   act_feature: {
     id: 'act_feature',
-    api: 'act_features',
+    api: '/console/lab/act_features',
     value: 'id',
     label: 'feature'
   },
   rep: {
     id: 'rep',
-    api: 'reps',
+    api: '/console/lab/reps',
     value: 'id',
     label: 'name',
     paging: {
@@ -114,7 +114,7 @@ export default {
   },
   gov_agency: {
     id: 'gov_agency',
-    api: 'gov_agencies',
+    api: '/c0ngress/gov_agencies',
     value: 'id',
     label: 'name',
     parentModule: 'c0ngress'
@@ -205,19 +205,19 @@ export default {
   },
   st_question: {
     id: 'st_question',
-    api: 'st_questions',
+    api: '/console/lab/st_questions',
     value: 'id',
     label: 'question'
   },
   rs_bill: {
     id: 'rs_bill',
-    api: 'rs_bills',
+    api: '/console/lab/rs_bills',
     value: 'id',
     label: 'version_no' // FIXME: Need to combine multiple fields into label
   },
   rs_tag: {
     id: 'rs_tag',
-    api: 'rs_tags',
+    api: '/console/lab/rs_tags',
     value: 'id',
     label: 'name'
   },
@@ -240,20 +240,20 @@ export default {
   },
   legislative_step: {
     id: 'legislative_step',
-    api: 'legislative_steps',
+    api: '/console/lab/legislative_steps',
     value: 'id',
     label: 'name',
     parentModule: 'c0ngress'
   },
   session: {
     id: 'session',
-    api: 'term_sessions',
+    api: '/console/lab/term_sessions',
     value: 'session_index',
     label: 'session_index'
   },
   temp_session: {
     id: 'temp_session',
-    api: 'term_sessions',
+    api: '/console/lab/term_sessions',
     value: 'temp_session_index',
     label: 'temp_session_index'
   },
@@ -289,7 +289,7 @@ export default {
   },
   timeline: {
     id: 'timeline',
-    api: 'timelines',
+    api: '/console/lab/timelines',
     value: 'id',
     label: 'title'
   },
@@ -424,7 +424,7 @@ export default {
   },
   figure: {
     id: 'figure',
-    api: 'figures',
+    api: '/console/lab/figures',
     value: 'id',
     label: 'title'
   },

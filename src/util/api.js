@@ -34,7 +34,7 @@ export function getDirectory (reqObj) {
       return a
     }, [])
     .join('&')
-  let url = '/' + (directory.parentModule ? directory.parentModule : 'console/lab') + '/' + directory.api + '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
+  let url = directory.api + '?' + (all ? 'all' : '') + (all && queryString ? '&' : '') + queryString
   return axios.get(url)
 }
 
