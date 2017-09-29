@@ -1706,7 +1706,12 @@ export default {
         title: '提案評分',
         description: '針對各項提案在各項法案比較的表現評分',
         interface: {
-          type: 'score_board'
+          type: 'score_board',
+          name: '提案比較',
+          column_name: 'act_feature_ids',
+          column_directory: 'act_feature',
+          row_name: 'bill_ids',
+          row_directory: 'rs_bill'
         }
       }
     ]
