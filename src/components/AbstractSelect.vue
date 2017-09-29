@@ -35,16 +35,22 @@ export default {
       return this.$store.state[this.uuid] || []
     },
     groupLabels() {
-      return [...new Set(this.options.filter(option => option.hasOwnProperty('group')).map(option => option.group))]
+      if(this.options) {
+        return [...new Set(this.options.filter(option => option.hasOwnProperty('group')).map(option => option.group))]
+      }
     },
     isGrouped() {
-      return this.groupLabels.length > 0
+      if(this.groupLabels) {
+        return this.groupLabels.length > 0
+      }
     },
     groups() {
-      return this.groupLabels.map(groupLabel => ({
-        label: groupLabel,
-        options: this.options.filter(option => option.group === groupLabel)
-      }))
+      if(this.options) {
+        return this.groupLabels.map(groupLabel => ({
+          label: groupLabel,
+          options: this.options.filter(option => option.group === groupLabel)
+        }))
+      }
     }
   },
   beforeMount() {
