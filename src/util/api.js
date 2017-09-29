@@ -24,6 +24,7 @@ function getQueryBase (pageID) {
 }
 
 export function getDirectory (reqObj) {
+  console.log('getDirectory', reqObj)
   let directory = directories[reqObj.directoryID]
   let all = directory.paging ? directory.paging.all : false
 
@@ -68,7 +69,7 @@ export function getItem (reqObj) {
 }
 
 export function lookupTerm (reqObj) {
-  let url = `/console/lab/date_to_term?date=${reqObj.timestamp}`
+  let url = `/c0ngress/date_to_term?date=${reqObj.timestamp}`
   return axios.get(url)
 }
 
