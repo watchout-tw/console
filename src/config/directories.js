@@ -50,7 +50,7 @@ export default {
   },
   district: {
     id: 'district',
-    api: '/console/lab/unique_districts',
+    api: '/c0ngress/unique_districts',
     value: 'name',
     label: 'name',
     parentModule: 'c0ngress'
@@ -240,7 +240,7 @@ export default {
   },
   legislative_step: {
     id: 'legislative_step',
-    api: '/console/lab/legislative_steps',
+    api: '/c0ngress/legislative_steps',
     value: 'id',
     label: 'name',
     parentModule: 'c0ngress'
