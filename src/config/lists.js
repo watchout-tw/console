@@ -833,14 +833,6 @@ export default {
         type: 'select',
         mapToColumn: 'st_question',
         comparator: comparators.id
-      },
-      {
-        id: 'act',
-        directory: 'act',
-        label: '關聯法案',
-        type: 'select',
-        mapToColumn: 'acts',
-        comparator: comparators.idFromList
       }
     ],
     key: 'id',
@@ -865,10 +857,6 @@ export default {
       {
         prop: 'st_question',
         label: '爭點'
-      },
-      {
-        prop: 'acts',
-        label: '法案'
       }
     ]
   },
