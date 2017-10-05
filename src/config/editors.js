@@ -1783,12 +1783,6 @@ export default {
               label: '爭點',
               type: 'select',
               directory: 'st_question'
-            },
-            {
-              id: 'act_ids',
-              label: '法案',
-              type: 'multiselect',
-              directory: 'act'
             }
           ],
           options: {
