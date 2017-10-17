@@ -455,12 +455,8 @@ export default {
         label: '提案連署統計'
       },
       {
-        value: 'statement_stats_by_party',
-        label: '政黨發言統計'
-      },
-      {
-        value: 'statement_stats_by_rep',
-        label: '委員發言統計'
+        value: 'statement_stats',
+        label: '發言統計'
       }
     ]
   }
