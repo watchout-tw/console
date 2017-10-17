@@ -148,20 +148,20 @@ export default {
         label: '碩士'
       },
       {
-        value: 'bachelor',
-        label: '學士'
+        value: 'university_graduate',
+        label: '大學'
       },
       {
-        value: 'high_school',
-        label: '高中、高職'
+        value: 'vocational_college_graduate',
+        label: '大專'
       },
       {
-        value: 'middle_school',
-        label: '中學'
+        value: 'vocational_high_school_graduate',
+        label: '專科'
       },
       {
-        value: 'primary_school',
-        label: '小學'
+        value: 'high_school_graduate',
+        label: '高中'
       },
       {
         value: 'other',
