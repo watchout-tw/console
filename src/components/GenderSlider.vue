@@ -38,9 +38,9 @@ export default {
       return state === 0 ? '酷兒' : `${percentage}% ${(state < 0 ? '女性' : '男性')}`
     },
     pull() { // pull data from parent
-      if(typeof this.value === 'number' && this.value <= 100 && this.value >= -100) {
+      if (typeof this.value === 'number' && this.value <= 100 && this.value >= -100) {
         this.model = this.value / 2 + 50
-      }else {
+      } else {
         this.model = 0
       }
     },
