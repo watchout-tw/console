@@ -22,9 +22,20 @@ function array2Text (text) {
   return Array.isArray(text) ? text.join('\n') : text
 }
 
+const mysqlTimestampRex = /^\d{4}-\d{2}-\d{2}\s\d{2}:\d{2}:\d{2}\.\d{6}$/
+function mysqlTimestamp2DateObj (mysqlTS) {
+  var t = mysqlTS.split(/[- :]/)
+  return new Date(t[0], t[1] - 1, t[2], t[3], t[4], t[5])
+}
+
 export default {
   date(row, col) {
-    return row[col.property] ? new Date(row[col.property]).toLocaleDateString('zh-Hans-TW') : ''
+    if (!row[col.property]) return ''
+    if (typeof row[col.property] === 'string' && row[col.property].match(mysqlTimestampRex)) {
+      return mysqlTimestamp2DateObj(row[col.property]).toLocaleDateString('zh-Hans-TW')
+    } else {
+      return new Date(row[col.property]).toLocaleDateString('zh-Hans-TW')
+    }
   },
   sessions(row, col) {
     const sessions = row.sessions ? row.sessions : []

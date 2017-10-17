@@ -143,17 +143,17 @@ export default {
       let val = scope.row[scope.column.property]
       let result = val
       let cachedDirectory = column.directory ? this.$store.state.directory[column.directory] : undefined
-      if(val === null) {
+      if (val === null) {
         result = `<span class="null">${val}</span>`
       } else if (val === undefined) {
         result = `<span class="null">${val}</span>`
-      } else if(cachedDirectory) {
+      } else if (cachedDirectory) {
         if(val instanceof Array) {
           result = val.map(item => directoryValueToLabel(cachedDirectory, item)).join(punct.separator)
         } else {
           result = directoryValueToLabel(cachedDirectory, val)
         }
-      } else if(column.formatter) {
+      } else if (column.formatter) {
         result = column.formatter(scope.row, scope.column)
       }
       return result
