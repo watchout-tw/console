@@ -35,6 +35,7 @@ import lists from '@/config/lists'
 import AbstractSelect from '@/components/AbstractSelect'
 import cascadeController from '@/interfaces/cascadeController'
 import * as factory from '@/util/factory'
+import * as clone from '@/util/clone'
 
 Array.prototype.objectArrayClone = function() {
   return this.map(item => Object.assign({}, item))
@@ -48,7 +49,8 @@ export default {
       query: {},
       filters: [],
       columns: [],
-      config: undefined
+      config: undefined,
+      pagingInfo: clone.deepClone(this.$store.state.list.paging)
     }
   },
   computed: {
@@ -59,7 +61,7 @@ export default {
       return this.$store.state.list.rows
     },
     paging() {
-      return this.$store.state.list.paging
+      return this.pagingInfo
     },
     totalRowCount() {
       return this.$store.state.list.totalRowCount

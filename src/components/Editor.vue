@@ -25,32 +25,13 @@ import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 import EditorEvents from '@/components/EditorEvents'
 import EditorScoreBoard from '@/components/EditorScoreBoard'
+import * as clone from '@/util/clone'
 
 Vue.use(Vuex)
 
 function scrollToTop() {
   document.documentElement.scrollTop = 0
   document.body.scrollTop = 0
-}
-
-function deepClone(obj) {
-  if(obj === null || typeof (obj) !== 'object' || 'isActiveClone' in obj) {
-    return obj
-  }
-  let temp
-  if(obj instanceof Date) {
-    temp = new Date(obj)
-  } else {
-    temp = obj.constructor()
-  }
-  for(let key in obj) {
-    if(Object.prototype.hasOwnProperty.call(obj, key)) {
-      obj['isActiveClone'] = null
-      temp[key] = deepClone(obj[key])
-      delete obj['isActiveClone']
-    }
-  }
-  return temp
 }
 
 export default {
@@ -139,7 +120,7 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     prepare() {
-      var tempModel = deepClone(this.model)
+      var tempModel = clone.deepClone(this.model)
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
