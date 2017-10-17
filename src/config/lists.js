@@ -888,11 +888,17 @@ export default {
       },
       {
         prop: 'figure_data_set_type',
-        label: '資料源類型'
+        label: '資料集類型'
       },
       {
-        prop: 'figure_data_set',
-        label: '資料源'
+        prop: 'figure_data_set_id',
+        label: '資料集'
+        // FIXME: use formatter to get id from figure_data_set
+      },
+      {
+        prop: 'figure_data_set_version_no',
+        label: '資料集版本'
+        // FIXME: use formatter to get version_no from figure_data_set
       },
       {
         prop: 'figures',
