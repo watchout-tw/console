@@ -18,7 +18,8 @@ export default {
               id: 'index',
               label: '屆期',
               type: 'number',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'start_date',
@@ -53,14 +54,16 @@ export default {
               prop: 'session_index',
               label: '會期',
               type: 'number',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'temp_session_index',
               prop: 'temp_session_index',
               label: '臨時會期',
               type: 'number',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'start_date',
@@ -108,7 +111,8 @@ export default {
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus',
-              postPreparer: preparers.replaceById
+              postPreparer: preparers.replaceById,
+              required: true
             },
             {
               id: 'parties',
@@ -137,26 +141,30 @@ export default {
               prop: 'name',
               label: '全名',
               type: 'text',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'abbreviation',
               prop: 'abbreviation',
               label: '短名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'zone_name',
               prop: 'zone_name',
               label: '區域',
               type: 'select',
-              directory: 'zone'
+              directory: 'zone',
+              required: true
             },
             {
               id: 'index',
               prop: 'index',
               label: '編號',
-              type: 'number'
+              type: 'number',
+              required: true
             },
             {
               id: 'neighborhoods',
@@ -217,12 +225,14 @@ export default {
             {
               id: 'name',
               label: '全名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'abbreviation',
               label: '短名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'emblem',
@@ -313,7 +323,8 @@ export default {
             {
               id: 'name',
               label: '全名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'birth_date',
@@ -375,7 +386,8 @@ export default {
               prop: 'seq_no',
               label: '編號',
               type: 'text',
-              hide: true
+              hide: true,
+              required: true
             },
             {
               id: 'is_active',
@@ -444,7 +456,8 @@ export default {
               directory: 'term',
               cascadeUpdate: [
                 cascade.applyConstraint(['party', 'caucus'], 'term')
-              ]
+              ],
+              required: true
             },
             {
               id: 'party',
@@ -507,7 +520,8 @@ export default {
               label: '屆期',
               type: 'select',
               directory: 'term',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'change_type',
@@ -515,7 +529,8 @@ export default {
               label: '變更類型',
               type: 'select',
               directory: 'rep_term_change_type',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'district_name',
@@ -559,7 +574,8 @@ export default {
               updateForbidden: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['session_index'], 'term')
-              ]
+              ],
+              required: true
             },
             {
               id: 'session_index',
@@ -568,7 +584,8 @@ export default {
               type: 'select',
               directory: 'session',
               determined_by: 'term_index',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'committee_name',
@@ -576,7 +593,8 @@ export default {
               label: '委員會',
               type: 'select',
               directory: 'committee',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'is_convener',
@@ -606,7 +624,8 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'index',
@@ -616,12 +635,14 @@ export default {
             {
               id: 'image',
               label: '圖像',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'description',
               label: '敘述',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             }
           ],
           options: {
@@ -655,7 +676,8 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'index',
@@ -709,7 +731,8 @@ export default {
               id: 'index',
               prop: 'index',
               label: '排序',
-              type: 'number'
+              type: 'number',
+              required: true
             }
           ]
         }
@@ -734,7 +757,8 @@ export default {
               id: 'index',
               prop: 'index',
               label: '排序',
-              type: 'number'
+              type: 'number',
+              required: true
             }
           ]
         }
@@ -754,7 +778,8 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'official_seq_no',
@@ -797,7 +822,8 @@ export default {
               directory: 'specific_topic',
               cascadeUpdate: [
                 cascade.applyConstraint(['act', 'act_dir'], 'st')
-              ]
+              ],
+              required: true
             },
             {
               id: 'act',
@@ -814,17 +840,20 @@ export default {
             {
               id: 'feature',
               label: '法案比較',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'dir',
               label: '法案比較價值判斷',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'content',
               label: '法案比較內容說明',
-              type: 'text'
+              type: 'text',
+              required: true
             }
           ],
           options: {
@@ -852,7 +881,8 @@ export default {
               id: 'description',
               prop: 'description',
               label: '分數敘述',
-              type: 'text'
+              type: 'text',
+              required: true
             }
           ]
         }
@@ -876,7 +906,8 @@ export default {
               directory: 'specific_topic',
               cascadeUpdate: [
                 cascade.applyConstraint(['st_question_id'], 'st')
-              ]
+              ],
+              required: true
             },
             {
               id: 'date',
@@ -885,7 +916,8 @@ export default {
               postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
                 cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
-              ]
+              ],
+              required: true
             },
             {
               id: 'term_index',
@@ -912,14 +944,16 @@ export default {
               id: 'rep_id',
               label: '委員',
               type: 'select',
-              directory: 'rep'
+              directory: 'rep',
+              required: true
             },
             {
               id: 'rep_party_id',
               label: '當時所屬政黨',
               type: 'select',
               directory: 'party',
-              determined_by: 'speech_date'
+              determined_by: 'speech_date',
+              required: true
             },
             {
               id: 'principle_committee',
@@ -942,7 +976,8 @@ export default {
               id: 'st_question_id',
               label: '爭點',
               type: 'select',
-              directory: 'st_question'
+              directory: 'st_question',
+              required: true
             },
             {
               id: 'position',
@@ -1021,7 +1056,8 @@ export default {
             {
               id: 'version_no',
               label: '版本',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'date',
@@ -1209,7 +1245,8 @@ export default {
               prop: 'position',
               label: '立場',
               type: 'select',
-              directory: 'rs_position'
+              directory: 'rs_position',
+              required: true
             }
           ]
         }
@@ -1261,14 +1298,16 @@ export default {
               id: 'short_content',
               prop: 'short_content',
               label: '簡短內容',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'content',
               prop: 'content',
               label: '完整內容',
               type: 'textarea',
-              formatter: formatters.markdown
+              formatter: formatters.markdown,
+              required: true
             }
           ]
         }
@@ -1324,12 +1363,14 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'content',
               label: '內容',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             },
             {
               id: 'aye',
@@ -1358,12 +1399,14 @@ export default {
             {
               id: 'g0v_link',
               label: 'g0v連結',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'source_link',
               label: '原始資料連結',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'tags',

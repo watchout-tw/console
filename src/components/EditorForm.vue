@@ -1,7 +1,7 @@
 <template>
 <div class="editor-form">
   <el-form :label-width="labelWidth" label-position="left">
-    <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label" :class="formItemClasses(field)">
+    <el-form-item v-for="field in config.fields" :key="field.id" :label="field.label + (field.required ? ' *' : '')" :class="formItemClasses(field)">
       <el-input v-if="fieldIs(field, 'text')" v-model="model[field.id]" :disabled="fieldIsDisabled(field)" :placeholder="field.label"></el-input>
       <el-input v-if="fieldIs(field, 'textarea')" type="textarea" v-model="model[field.id]" :disabled="fieldIsDisabled(field)" :placeholder="field.label"></el-input>
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]" :disabled="fieldIsDisabled(field)"></el-input-number>
