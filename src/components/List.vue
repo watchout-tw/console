@@ -41,7 +41,14 @@ Array.prototype.objectArrayClone = function() {
   return this.map(item => Object.assign({}, item))
 }
 
+const SITE_TITLE = '→沃草←中控室'
+
 export default {
+  metaInfo() {
+    return {
+      title: this.page.routes.list.title + SITE_TITLE
+    }
+  },
   mixins: [cascadeController],
   props: ['page'],
   data() {

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import Meta from 'vue-meta'
 import Hello from '@/components/Hello'
 import List from '@/components/List'
 import Editor from '@/components/Editor'
@@ -7,6 +8,9 @@ import menu from '@/menu'
 import * as util from 'common/src/lib/util'
 
 Vue.use(Router)
+Vue.use(Meta, {
+  tagIDKeyName: 'vmid'
+})
 
 const checkAuth = (from, to, next) => {
   if(!(util.jwtTokenIsHere() && util.isAdmin())) {

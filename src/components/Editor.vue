@@ -34,7 +34,14 @@ function scrollToTop() {
   document.body.scrollTop = 0
 }
 
+const SITE_TITLE = '→沃草←中控室'
+
 export default {
+  metaInfo() {
+    return {
+      title: this.page.routes.edit.title + SITE_TITLE
+    }
+  },
   props: ['page'],
   data() {
     return {
