@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import uuid from 'uuid/v4'
+import * as api from '@/util/api'
 import * as cascadeTypes from '@/util/cascade-types'
 import { isValid } from '@/util/validators'
 
@@ -46,6 +47,7 @@ export default {
       this.cascadeMap.splice(index, 1)
     },
     queueCascadeUpdate(obj) {
+      console.log('push', obj)
       this.cascadeQueue.push(obj)
     },
     log(trigger, rule, sector, target) {
@@ -56,6 +58,18 @@ export default {
         console.log('sector\t', sector)
         console.log('target\t', target)
         console.log('payload\t', trigger.payload)
+      }
+    },
+    applyParty() {
+      if(isValid(this.modelAlias.date) && isValid(this.modelAlias.rep_id)) {
+        api.lookupParty({
+          timestamp: this.modelAlias.date.getTime(),
+          reps: [this.modelAlias.rep_id]
+        }).then(response => {
+          if(response.data && response.data.reps && response.data.reps.length === 1) {
+            this.modelAlias.rep_party_id = response.data.reps[0].party_id
+          }
+        })
       }
     }
   },
@@ -83,6 +97,8 @@ export default {
                   }
                 } else if(rule.action === cascadeTypes.APPOINT_DIRECTORY) {
                   Vue.set(sector[targetID], 'directory', trigger.payload ? trigger.payload : undefined)
+                } else if(rule.action === cascadeTypes.APPLY_PARTY) {
+                  this.applyParty()
                 }
                 // FIXME: remove these when payload is empty (or something)
               }

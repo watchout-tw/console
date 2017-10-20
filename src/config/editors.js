@@ -915,7 +915,8 @@ export default {
               type: 'date',
               postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
-                cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
+                cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index']),
+                cascade.applyParty(['rep_party_id'])
               ],
               required: true
             },
@@ -945,6 +946,9 @@ export default {
               label: '委員',
               type: 'select',
               directory: 'rep',
+              cascadeUpdate: [
+                cascade.applyParty(['rep_party_id'])
+              ],
               required: true
             },
             {

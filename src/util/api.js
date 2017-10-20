@@ -70,6 +70,21 @@ export function lookupTerm (reqObj) {
   return axios.get(url)
 }
 
+export function lookupParty (reqObj) {
+  let url = `/c0ngress/date_to_rep_info?date=${reqObj.timestamp}`
+  if(reqObj.reps && reqObj.reps.length > 0) {
+    url += '&reps=['
+    for(let i = 0; i < reqObj.reps.length; i++) {
+      url += reqObj.reps[i]
+      if(i !== reqObj.reps.length - 1) {
+        url += ','
+      }
+    }
+    url += ']'
+  }
+  return axios.get(url)
+}
+
 export function postForm (reqObj) {
   let url = reqObj.api
   return axios.post(url, reqObj.content)
