@@ -5,6 +5,7 @@ import cascade from '@/util/cascade'
 
 export default {
   term: {
+    api: '/console/lab/terms',
     sections: [
       {
         id: 'base',
@@ -169,6 +170,7 @@ export default {
     ]
   },
   committee: {
+    api: '/console/lab/committees',
     sections: [
       {
         id: 'base',
@@ -203,6 +205,7 @@ export default {
     ]
   },
   party: {
+    api: '/console/lab/parties',
     sections: [
       {
         id: 'base',
@@ -250,6 +253,7 @@ export default {
     ]
   },
   caucus: {
+    api: '/console/lab/caucuses',
     sections: [
       {
         id: 'base',
@@ -297,6 +301,7 @@ export default {
     ]
   },
   rep: {
+    api: '/console/lab/reps',
     sections: [
       {
         id: 'base',
@@ -588,6 +593,7 @@ export default {
     ]
   },
   general_topic: {
+    api: '/console/lab/general_topics',
     sections: [
       {
         id: 'base',
@@ -636,6 +642,7 @@ export default {
     ]
   },
   specific_topic: {
+    api: '/console/lab/specific_topics',
     sections: [
       {
         id: 'base',
@@ -734,6 +741,7 @@ export default {
     ]
   },
   act: {
+    api: '/console/lab/acts',
     sections: [
       {
         id: 'base',
@@ -772,6 +780,7 @@ export default {
     ]
   },
   act_feature: {
+    api: '/console/lab/act_features',
     sections: [
       {
         id: 'base',
@@ -850,6 +859,7 @@ export default {
     ]
   },
   rs_statement: {
+    api: '/console/lab/rs_statements',
     sections: [
       {
         id: 'base',
@@ -964,6 +974,7 @@ export default {
     ]
   },
   rs_bill: {
+    api: '/console/lab/rs_bills',
     sections: [
       {
         id: 'base',
@@ -1256,6 +1267,7 @@ export default {
     ]
   },
   rs_vote: {
+    api: '/console/lab/rs_votes',
     sections: [
       {
         id: 'base',
@@ -1359,6 +1371,7 @@ export default {
     ]
   },
   timeline: {
+    api: '/console/lab/timelines',
     sections: [
       {
         id: 'base',
@@ -1416,6 +1429,7 @@ export default {
     ]
   },
   figure: {
+    api: '/console/lab/figures',
     sections: [
       {
         id: 'base',
@@ -1499,8 +1513,10 @@ export default {
     ]
   },
   doc: {
+    api: '/console/lab/docs'
   },
   lab_topic_overview: {
+    api: '/console/lab/topic_overviews',
     sections: [
       {
         id: 'base',
@@ -1610,6 +1626,7 @@ export default {
     ]
   },
   lab_bill_data_set: {
+    api: '/console/lab/bill_data_sets',
     sections: [
       {
         id: 'base',
@@ -1717,6 +1734,7 @@ export default {
     ]
   },
   lab_statement_data_set: {
+    api: '/console/lab/statement_data_sets',
     sections: [
       {
         id: 'base',
@@ -1818,6 +1836,7 @@ export default {
     ]
   },
   lab_data_report: {
+    api: '/console/lab/data_reports',
     sections: [
       {
         id: 'base',
@@ -1905,6 +1924,7 @@ export default {
     ]
   },
   lab_insight: {
+    api: '/console/lab/insights',
     sections: [
       {
         id: 'base',

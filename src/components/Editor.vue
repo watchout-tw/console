@@ -90,7 +90,7 @@ export default {
         this.initialized = true
       } else {
         api.getItem({
-          pageID: this.page.id,
+          api: editors[this.page.editor].api,
           id: this.$route.params.id
         }).then(response => {
           this.model = response.data

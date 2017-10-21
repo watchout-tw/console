@@ -60,7 +60,7 @@ export function getListByFilter (reqObj) {
 }
 
 export function getItem (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}/${reqObj.id}`
+  let url = `${reqObj.api}/${reqObj.id}`
   return axios.get(url)
 }
 
