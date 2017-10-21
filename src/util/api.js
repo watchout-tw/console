@@ -39,17 +39,17 @@ export function getDirectory (reqObj) {
 }
 
 export function getListByName (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}?all`
+  let url = `${reqObj.api}?all`
   return axios.get(url)
 }
 
 export function getListByNameWithPaging (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}?page=${reqObj.page}`
+  let url = `${reqObj.api}?page=${reqObj.page}`
   return axios.get(url)
 }
 
 export function getListByNameNoPaging (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}`
+  let url = reqObj.api
   return axios.get(url)
 }
 

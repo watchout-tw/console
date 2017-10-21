@@ -15,9 +15,10 @@ let singleTopicColumnWidth = columnWidth(6)
 
 export default {
   terms: {
+    api: '/console/lab/terms',
+    paged: false,
     filters: [],
     key: 'index',
-    paged: false,
     columns: [
       {
         prop: 'index',
@@ -54,9 +55,10 @@ export default {
     ]
   },
   committees: {
+    api: '/console/lab/committees',
+    paged: false,
     filters: [],
     key: 'name',
-    paged: false,
     columns: [
       {
         prop: 'name',
@@ -74,6 +76,8 @@ export default {
     ]
   },
   reps: {
+    api: '/console/lab/reps',
+    paged: true,
     filters: [
       {
         id: 'name',
@@ -107,7 +111,6 @@ export default {
         mapToColumn: 'history'
       }
     ],
-    paged: true,
     columns: [
       {
         prop: 'name',
@@ -122,6 +125,8 @@ export default {
     ]
   },
   parties: {
+    api: '/console/lab/parties',
+    paged: false,
     filters: [
       {
         id: 'name',
@@ -131,7 +136,6 @@ export default {
         comparator: comparators.string
       }
     ],
-    paged: false,
     columns: [
       {
         prop: 'name',
@@ -153,6 +157,8 @@ export default {
     ]
   },
   caucuses: {
+    api: '/console/lab/caucuses',
+    paged: false,
     filters: [
       {
         id: 'name',
@@ -162,7 +168,6 @@ export default {
         comparator: comparators.string
       }
     ],
-    paged: false,
     columns: [
       {
         prop: 'name',
@@ -183,6 +188,8 @@ export default {
     ]
   },
   general_topics: {
+    api: '/console/lab/general_topics',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -216,6 +223,8 @@ export default {
     ]
   },
   specific_topics: {
+    api: '/console/lab/specific_topics',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -267,6 +276,8 @@ export default {
     ]
   },
   acts: {
+    api: '/console/lab/acts',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -301,6 +312,8 @@ export default {
     ]
   },
   act_features: {
+    api: '/console/lab/act_features',
+    paged: false,
     filters: [
       {
         id: 'specific_topic',
@@ -355,6 +368,8 @@ export default {
     ]
   },
   rs_statements: {
+    api: '/console/lab/rs_statements',
+    paged: true,
     filters: [
       {
         id: 'specific_topic',
@@ -397,7 +412,6 @@ export default {
         comparator: comparators.equal
       }
     ],
-    paged: true,
     columns: [
       {
         prop: 'st',
@@ -438,6 +452,8 @@ export default {
     ]
   },
   rs_bills: {
+    api: '/console/lab/rs_bills',
+    paged: true,
     filters: [
       {
         id: 'specific_topic',
@@ -490,7 +506,6 @@ export default {
         comparator: comparators.idFromList
       }
     ],
-    paged: true,
     columns: [
       {
         prop: 'specific_topics',
@@ -535,6 +550,8 @@ export default {
     ]
   },
   rs_votes: {
+    api: '/console/lab/rs_votes',
+    paged: true,
     filters: [
       {
         id: 'specific_topic',
@@ -553,7 +570,6 @@ export default {
         comparator: comparators.equal
       }
     ],
-    paged: true,
     columns: [
       {
         prop: 'st',
@@ -605,6 +621,8 @@ export default {
     ]
   },
   timelines: {
+    api: '/console/lab/timelines',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -615,7 +633,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',
@@ -632,6 +649,8 @@ export default {
     ]
   },
   figures: {
+    api: '/console/lab/figures',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -642,7 +661,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',
@@ -659,6 +677,8 @@ export default {
     ]
   },
   docs: {
+    api: '/console/lab/docs',
+    paged: false,
     filters: [
       {
         id: 'title',
@@ -669,7 +689,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',
@@ -686,6 +705,8 @@ export default {
     ]
   },
   lab_topic_overviews: {
+    api: '/console/lab/topic_overviews',
+    paged: false,
     filters: [
       {
         id: 'specific_topic',
@@ -704,7 +725,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',
@@ -733,6 +753,8 @@ export default {
     ]
   },
   lab_bill_data_sets: {
+    api: '/console/lab/bill_data_sets',
+    paged: false,
     filters: [
       {
         id: 'name',
@@ -774,7 +796,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'name',
@@ -803,6 +824,8 @@ export default {
     ]
   },
   lab_statement_data_sets: {
+    api: '/console/lab/statement_data_sets',
+    paged: false,
     filters: [
       {
         id: 'name',
@@ -836,7 +859,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'name',
@@ -861,6 +883,8 @@ export default {
     ]
   },
   lab_data_reports: {
+    api: '/console/lab/data_reports',
+    paged: false,
     filters: [
       {
         id: 'specific_topic',
@@ -872,7 +896,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',
@@ -907,6 +930,8 @@ export default {
     ]
   },
   lab_insights: {
+    api: '/console/lab/insights',
+    paged: false,
     filters: [
       {
         id: 'specific_topic',
@@ -918,7 +943,6 @@ export default {
       }
     ],
     key: 'id',
-    paged: false,
     columns: [
       {
         prop: 'status',

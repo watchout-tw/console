@@ -126,12 +126,12 @@ export default {
       // dispatch action to get data
       if(this.config.paged) {
         this.$store.dispatch('updateList', {
-          pageID: this.page.id,
+          api: lists[this.page.id].api,
           page: this.paging.page
         })
       } else {
         this.$store.dispatch('updateListNoPaging', {
-          pageID: this.page.id
+          api: lists[this.page.id].api
         })
       }
     },
