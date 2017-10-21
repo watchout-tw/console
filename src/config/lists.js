@@ -732,7 +732,8 @@ export default {
       },
       {
         prop: 'st',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatters.title
       },
       {
         prop: 'tagline',
@@ -907,25 +908,27 @@ export default {
       },
       {
         prop: 'st',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatters.title
       },
       {
         prop: 'figure_data_set_type',
         label: '資料集類型'
       },
       {
-        prop: 'figure_data_set_id',
-        label: '資料集'
-        // FIXME: use formatter to get id from figure_data_set
+        prop: 'figure_data_set',
+        label: '資料集',
+        formatter: formatters.name
       },
       {
-        prop: 'figure_data_set_version_no',
-        label: '資料集版本'
-        // FIXME: use formatter to get version_no from figure_data_set
+        prop: 'figure_data_set',
+        label: '資料集版本',
+        formatter: formatters.version_no
       },
       {
         prop: 'figures',
-        label: '圖表'
+        label: '圖表',
+        formatter: formatters.bullet_point_figures
       }
     ]
   },

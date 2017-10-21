@@ -52,6 +52,9 @@ export default {
   abbreviation(row, col) {
     return row[col.property] ? row[col.property].abbreviation : ''
   },
+  version_no(row, col) {
+    return row[col.property] ? row[col.property].version_no : ''
+  },
   list_abbreviations(row, col) {
     return row[col.property] ? arrayJoinAtIndex(row[col.property], 'abbreviation') : ''
   },
@@ -108,6 +111,10 @@ export default {
   bullet_point_questions(row, col) {
     let questions = row[col.property]
     return '<ul>' + questions.map(questionObj => `<li>${questionObj.question}</li>`).join('') + '</ul>'
+  },
+  bullet_point_figures(row, col) {
+    let figures = row[col.property]
+    return '<ul>' + figures.map(figure => `<li>${figure.title}</li>`).join('') + '</ul>'
   },
   markdown(row, col) {
     return marked(row[col.property])
