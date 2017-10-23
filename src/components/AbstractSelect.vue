@@ -41,9 +41,9 @@ export default {
         for(let op of this.options) {
           temp = temp > op.label.length ? temp : op.label.length
         }
-        return 2 * temp // 2 times to fix fullwidth forms
+        return (2 * temp).toString() // 2 times to fix fullwidth forms
       }else {
-        return 20
+        return '20'
       }
     },
     groupLabels() {
