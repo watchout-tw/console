@@ -460,7 +460,8 @@ export default {
               prop: 'caucus',
               label: '黨團或政團',
               type: 'select',
-              directory: 'term_caucus',
+              directory: 'caucus',
+              // FIXME: should be filter by term
               formatter: formatters.name,
               postPreparer: preparers.replaceById
             },
