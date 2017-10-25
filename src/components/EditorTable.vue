@@ -44,7 +44,7 @@ const punct = {
   separator: '、',
   colon: '：'
 }
-function directoryValueToLabel(directory, val) {
+function directoryValueToLabel (directory, val) {
   if(typeof val === 'object') { // replace val if is object
     val = val.id // FIXME: this assumes key prop of all obj are `id`
   }
@@ -148,7 +148,7 @@ export default {
       } else if (val === undefined) {
         result = `<span class="null">${val}</span>`
       } else if (cachedDirectory) {
-        if(val instanceof Array) {
+        if (val instanceof Array) {
           result = val.map(item => directoryValueToLabel(cachedDirectory, item)).join(punct.separator)
         } else {
           result = directoryValueToLabel(cachedDirectory, val)

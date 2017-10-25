@@ -424,7 +424,7 @@ export default {
   },
   figure: {
     id: 'figure',
-    api: '/console/lab/figures',
+    api: '/console/comp/figures',
     value: 'id',
     label: 'title'
   },

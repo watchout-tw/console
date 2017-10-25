@@ -649,7 +649,7 @@ export default {
     ]
   },
   figures: {
-    api: '/console/lab/figures',
+    api: '/console/comp/figures',
     paged: false,
     filters: [
       {

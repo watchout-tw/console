@@ -1430,7 +1430,7 @@ export default {
     ]
   },
   figure: {
-    api: '/console/lab/figures',
+    api: '/console/comp/figures',
     sections: [
       {
         id: 'base',
@@ -1908,7 +1908,7 @@ export default {
           columns: [
             {
               id: 'figure_id',
-              prop: 'figure_id',
+              prop: 'id',
               label: '圖表',
               type: 'select',
               directory: 'figure'
