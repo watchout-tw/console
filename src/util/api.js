@@ -71,13 +71,13 @@ export function lookupTerm (reqObj) {
 }
 
 export function postForm (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}`
+  let url = reqObj.api
   return axios.post(url, reqObj.content)
 }
 
 export function patchForm (reqObj) {
-  let url = `/console/lab/${reqObj.pageID}/` + reqObj.content[getQueryBase(reqObj.pageID)]
-  if(reqObj.content.hasOwnProperty('id')) {
+  let url = `${reqObj.api}/${reqObj.content[getQueryBase(reqObj.pageID)]}`
+  if (reqObj.content.hasOwnProperty('id')) {
     delete reqObj.content.id
   }
   return axios.patch(url, reqObj.content)

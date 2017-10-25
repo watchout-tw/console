@@ -168,13 +168,13 @@ export default {
         this.$store.dispatch('submitForm', {
           content: content,
           page: this.page,
-          pageID: this.page.id
+          api: editors[this.page.editor].api
         })
       } else {
         this.$store.dispatch('patchForm', {
           content: content,
           page: this.page,
-          pageID: this.page.id
+          api: editors[this.page.editor].api
         })
       }
       scrollToTop()
