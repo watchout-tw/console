@@ -4,8 +4,8 @@
   <section v-for="section in sections" :key="section.title" v-if="shouldSectionRender(section)">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
-    <editor-form v-if="sectionIs(section, 'form')" :config="section.interface" :model="model" :page="page"></editor-form>
-    <editor-table v-else-if="sectionIs(section, 'table')" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
+    <editor-form v-if="sectionIs(section, 'form')" :sectionId="section.id" :config="section.interface" :model="model" :page="page"></editor-form>
+    <editor-table v-else-if="sectionIs(section, 'table')" :sectionId="section.id" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
     <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :events.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-events>
     <editor-score-board v-else-if="sectionIs(section, 'score_board')" :config="section.interface" :scores.sync="model[section.id]" :columnIds="model[section.interface.column_name]" :rowIds="model[section.interface.row_name]"></editor-score-board>

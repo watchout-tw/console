@@ -11,7 +11,7 @@
           <el-switch v-if="columnIs(column, 'switch')" :size="componentSize" v-model="scope.row[column.prop]" on-text="YES" off-text="NO"></el-switch>
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
           <term-lookup v-if="columnIs(column, 'date')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page"></term-lookup>
-          <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page"></abstract-select>
+          <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :disabled="!scope.row[column.dependency]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page" :sectionId="sectionId"></abstract-select>
           <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
         </template>
         <template v-else>
@@ -32,7 +32,7 @@
 
 <script>
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { mapGetters } from 'vuex'
 import AbstractSelect from '@/components/AbstractSelect'
 import AbstractMultiSelect from '@/components/AbstractMultiSelect'
 import TermLookup from '@/components/TermLookup'
@@ -54,13 +54,18 @@ function directoryValueToLabel (directory, val) {
 
 export default {
   mixins: [cascadeController],
-  props: ['rows', 'config', 'page', 'parentInitialized'],
+  props: ['rows', 'config', 'page', 'parentInitialized', 'sectionId'],
   data() {
     return {
       initialized: false,
       componentSize: 'small',
       flags: []
     }
+  },
+  computed: {
+    ...mapGetters({
+      cascadeQue: 'cascadeQue'
+    })
   },
   beforeMount() {
     this.init()
@@ -70,6 +75,8 @@ export default {
     'parentInitialized'() {
       this.asyncInit()
     }
+    // 'cascadeQue'() {}
+    // TODO if need, general method of cascade
   },
   methods: {
     init() {

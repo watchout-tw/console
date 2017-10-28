@@ -988,7 +988,10 @@ export default {
               id: 'act_id',
               label: '關聯法案',
               type: 'select',
-              directory: 'act'
+              directory: 'act',
+              cascadeCrossSection: {
+                act_features: ['st_id']
+              }
             },
             {
               id: 'is_law',
@@ -1230,7 +1233,8 @@ export default {
               cascadeUpdate: [
                 cascade.applyConstraint(['act_dir_id'], 'st')
               ],
-              deleteThisBeforePost: true
+              deleteThisBeforePost: true,
+              disabled: true
             },
             {
               id: 'act_dir_id',
@@ -1240,14 +1244,18 @@ export default {
               directory: 'act_dir',
               cascadeUpdate: [
                 cascade.applyConstraint(['act_feature_id'], 'act_dir')
-              ]
+              ],
+              disabled: true,
+              dependency: 'st_id'
             },
             {
               id: 'act_feature_id',
               prop: 'act_feature_id',
               label: '法案比較',
               type: 'select',
-              directory: 'act_feature'
+              directory: 'act_feature',
+              disabled: true,
+              dependency: 'act_dir_id'
             },
             {
               id: 'short_content',

@@ -1,6 +1,6 @@
 <template>
 <div class="abstract-select">
-  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable @clear="onClear" filterable :disabled="config.disabled">
+  <el-select :size="size" :placeholder="config.label" v-model="model" @change="push" clearable @clear="onClear" filterable :disabled="config.disabled && this.disabled">
     <template v-if="isGrouped">
       <el-option-group v-for="group in groups" :key="group.label" :label="group.label">
         <el-option v-for="option in group.options" :label="option.label" :value="option.value" :key="optionUID()"></el-option>
@@ -16,14 +16,15 @@
 <script>
 import uuid from 'uuid/v4'
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { mapGetters } from 'vuex'
 import cascadeSource from '@/interfaces/cascadeSource'
+import editors from '@/config/editors'
 
 Vue.use(Vuex)
 
 export default {
   mixins: [cascadeSource],
-  props: ['size', 'value', 'config', 'page'],
+  props: ['size', 'value', 'config', 'page', 'sectionId', 'disabled'],
   data() {
     return {
       initialized: false,
@@ -45,7 +46,10 @@ export default {
         label: groupLabel,
         options: this.options.filter(option => option.group === groupLabel)
       }))
-    }
+    },
+    ...mapGetters({
+      cascadeQue: 'cascadeQue'
+    })
   },
   beforeMount() {
     this.update()
@@ -68,6 +72,33 @@ export default {
     'value'() {
       this.pull()
       this.initialized = true
+    },
+    'disabled'() {
+      if(this.disabled) {
+        this.model = undefined
+      }
+    },
+    'cascadeQue'() {
+      for(let cascade of this.cascadeQue) {
+        if(cascade.targetSection === this.sectionId) {
+          for(let id of cascade.column) {
+            if(id === this.config.id) {
+              if(cascade.value || cascade.value === 0) {
+                let cascadeInfo = {
+                  uniqueID: this.uuid,
+                  api: editors[cascade.directory].api,
+                  id: cascade.value
+                }
+                this.$store.dispatch('updateSelectCrossSection', cascadeInfo)
+                this.config.disabled = false
+              }else {
+                this.config.disabled = true
+              }
+              this.model = undefined
+            }
+          }
+        }
+      }
     }
   },
   methods: {
@@ -99,6 +130,18 @@ export default {
       this.$emit('update:value', this.model) // FIXME: This is too simple
       if(this.config.cascadeUpdate) {
         this.triggerCascade(this.uuid, this.config.id, this.config.cascadeUpdate, this.model)
+      }
+      if(this.config.cascadeCrossSection) {
+        for(let key in this.config.cascadeCrossSection) {
+          let cascadeInfo = {
+            targetSection: key,
+            column: this.config.cascadeCrossSection[key],
+            source: this.config.id,
+            directory: this.config.directory,
+            value: this.model
+          }
+          this.$store.dispatch('updateCascade', cascadeInfo)
+        }
       }
     },
     onClear() {

@@ -24,17 +24,25 @@ import TermLookup from '@/components/TermLookup'
 import GenderSlider from '@/components/GenderSlider'
 import cascadeController from '@/interfaces/cascadeController'
 import { labelWidth } from '@/util/element'
+import { mapGetters } from 'vuex'
 
 export default {
   mixins: [cascadeController],
-  props: ['model', 'config', 'page'],
+  props: ['model', 'config', 'page', 'sectionId'],
   computed: {
     labelWidth() {
       return this.config.options ? this.config.options.labelWidth : labelWidth(4)
-    }
+    },
+    ...mapGetters({
+      cascadeQue: 'cascadeQue'
+    })
   },
   beforeMount() {
     this.init()
+  },
+  watch: {
+    // 'cascadeQue'() {}
+    // TODO if need, general method of cascade
   },
   methods: {
     fieldIs(field, type) {

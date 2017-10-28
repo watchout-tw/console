@@ -40,6 +40,26 @@ const localActions = {
       })
     }
   },
+  updateSelectCrossSection({ commit }, reqObj) {
+    api.getItem({
+      api: reqObj.api,
+      id: reqObj.id
+    }).then(response => {
+      let options = []
+      for(let data of response.data.specific_topics) {
+        options.push({
+          'value': data.id,
+          'label': data.title
+        })
+      }
+      let respObj = {
+        data: options,
+        directoryID: reqObj.directoryID,
+        uniqueID: reqObj.uniqueID
+      }
+      commit(types.UPDATE_SELECT, respObj)
+    })
+  },
   deleteSelect({ commit }, reqObj) {
     commit(types.DELETE_SELECT, {
       uniqueID: reqObj.uniqueID
