@@ -261,16 +261,16 @@ export default {
     id: 'composition_status',
     options: [
       {
+        value: 'pending',
+        label: '待確認'
+      },
+      {
         value: 'new',
         label: '最新'
       },
       {
         value: 'regular',
         label: '普通'
-      },
-      {
-        value: 'inactive',
-        label: '待退'
       },
       {
         value: 'archived',
