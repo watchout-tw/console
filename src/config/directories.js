@@ -266,11 +266,15 @@ export default {
       },
       {
         value: 'new',
-        label: '最新'
+        label: '全新'
       },
       {
         value: 'regular',
         label: '普通'
+      },
+      {
+        value: 'updated',
+        label: '更新'
       },
       {
         value: 'archived',
