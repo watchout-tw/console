@@ -4,7 +4,6 @@ import state from './state'
 import getters from './getters'
 import actions from './actions'
 import mutations from './mutations'
-import list from './modules/list'
 import editor from './modules/editor'
 import editorChecklist from './modules/editorChecklist'
 import directory from './modules/directory'
@@ -20,7 +19,6 @@ export default new Vuex.Store({
   actions,
   mutations,
   modules: {
-    list,
     editor,
     editorChecklist,
     directory

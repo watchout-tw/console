@@ -36,6 +36,7 @@ import AbstractSelect from '@/components/AbstractSelect'
 import cascadeController from '@/interfaces/cascadeController'
 import * as factory from '@/util/factory'
 import * as clone from '@/util/clone'
+import * as api from '@/util/api'
 
 Array.prototype.objectArrayClone = function() {
   return this.map(item => Object.assign({}, item))
@@ -53,28 +54,23 @@ export default {
   props: ['page'],
   data() {
     return {
+      rows: [],
+      filteredRows: [],
+      totalRowCount: 0,
+      paging: {
+        page: 1,
+        pageSize: 20
+      },
       query: {},
       filters: [],
       columns: [],
       config: undefined,
-      pagingInfo: clone.deepClone(this.$store.state.list.paging)
+      pagingInfo: {}
     }
   },
   computed: {
     isAuthenticated() {
       return this.$store.state.isAuthenticated
-    },
-    rows() {
-      return this.$store.state.list.rows
-    },
-    paging() {
-      return this.pagingInfo
-    },
-    totalRowCount() {
-      return this.$store.state.list.totalRowCount
-    },
-    filteredRows() {
-      return this.$store.state.list.filteredRows
     }
   },
   beforeMount() {
@@ -121,17 +117,31 @@ export default {
 
       this.cascadeList = this.filters
       this.cascadeInit(this.query, false, this.config.filters)
+
+      this.pagingInfo = clone.deepClone(this.paging)
     },
     update() {
-      // dispatch action to get data
-      if(this.config.paged) {
-        this.$store.dispatch('updateList', {
+      if (this.config.paged) {
+        api.getListByNameWithPaging({
           api: lists[this.page.id].api,
           page: this.paging.page
+        }).then(response => {
+          this.rows = response.data.rows
+          this.filteredRows = response.data.rows
+          this.paging.pageSize = response.data.paging ? response.data.paging.pageSize : 0
+          this.totalRowCount = response.data.totalRowCount
+        }).catch(error => {
+          console.error('Status Code', error.response.status)
+          console.error('Messages', error.response.data)
         })
       } else {
-        this.$store.dispatch('updateListNoPaging', {
-          api: lists[this.page.id].api
+        api.getListByNameNoPaging({ api: lists[this.page.id].api }).then(response => {
+          this.rows = response.data.rows
+          this.filteredRows = response.data.rows
+          this.totalRowCount = response.data.totalRowCount
+        }).catch(error => {
+          console.error('Status Code', error.response.status)
+          console.error('Messages', error.response.data)
         })
       }
     },
@@ -139,22 +149,33 @@ export default {
       this.$router.push({name: this.page.routes.edit.name, params: {id: row[this.page.routingIndex]}})
     },
     generateFilteredList: debounce(function() {
-      for(let key in this.query) {
+      for (let key in this.query) {
         if(this.query[key] === '' || this.query[key] === null) {
           this.query[key] = undefined
         }
       }
-      if(this.config.paged) {
-        this.$store.dispatch('getFilteredList', {
+      if (this.config.paged) {
+        api.getListByFilter({
           pageID: this.page.id,
           query: this.query
+        }).then(response => {
+          this.filteredRows = response.data.rows
+        }).catch(error => {
+          console.error('Status Code', error.response.status)
+          console.error('Messages', error.response.data)
         })
       } else {
-        this.$store.dispatch('filterList', {
-          rows: this.rows,
-          query: this.query,
-          filterInfo: lists[this.page.id].filters
-        })
+        var filteredRows = this.rows
+        for (var key in this.query) {
+          if (!this.query[key]) continue // Skipped if corresponding filter is empty
+          var currentFilter = lists[this.page.id].filters.find(fil => {
+            return fil.id === key
+          })
+          filteredRows = filteredRows.filter(row => {
+            return currentFilter.comparator(row[currentFilter.mapToColumn], this.query[key])
+          })
+        }
+        this.filteredRows = filteredRows
       }
     }, 350),
     cellFormatter(column, scope) {
