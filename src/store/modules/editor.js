@@ -9,9 +9,11 @@ const messages = {
 }
 
 const state = {
+  cascadeQue: []
 }
 
 const getters = {
+  cascadeQue: state => state.cascadeQue
 }
 
 const actions = {
@@ -38,6 +40,9 @@ const actions = {
   },
   showFailAlert ({ commit }, reqObj) {
     commit(types.SHOW_FAIL_ALERT)
+  },
+  updateCascade ({ commit }, reqObj) {
+    commit(types.UPDATE_CASCADE, reqObj)
   }
 }
 
@@ -57,6 +62,10 @@ const mutations = {
   [types.POST_FAIL] (state, error) {
     console.error('Status Code', error.response.status)
     console.error('Messages', error.response.data)
+  },
+  [types.UPDATE_CASCADE] (state, cascadeInfo) {
+    state.cascadeQue = []
+    state.cascadeQue.push(cascadeInfo)
   }
 }
 
