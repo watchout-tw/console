@@ -18,13 +18,13 @@
 <script>
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as api from '@/util/api'
 import editors from '@/config/editors'
 import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 import EditorEvents from '@/components/EditorEvents'
 import EditorScoreBoard from '@/components/EditorScoreBoard'
+import * as api from '@/util/api'
 import * as clone from '@/util/clone'
 
 Vue.use(Vuex)
@@ -35,6 +35,10 @@ function scrollToTop() {
 }
 
 const SITE_TITLE = '→沃草←中控室'
+const messages = {
+  failure: '編輯失敗',
+  success: '編輯成功'
+}
 
 export default {
   metaInfo() {
@@ -165,16 +169,40 @@ export default {
       let content = this.prepare()
       console.log('Payload:', content)
       if (this.$route.params.id === 'create') {
-        this.$store.dispatch('submitForm', {
+        api.postForm({
           content: content,
           page: this.page,
           api: editors[this.page.editor].api
+        }).then(response => {
+          this.$router.push({name: this.page.routes.edit.name, params: {id: response.data[this.page.routingIndex]}})
+          this.$message({
+            message: messages.success,
+            type: 'success'
+          })
+        }).catch(error => {
+          this.$message({
+            message: messages.failure,
+            type: 'error'
+          })
+          console.error(error)
         })
       } else {
-        this.$store.dispatch('patchForm', {
+        api.patchForm({
           content: content,
           page: this.page,
           api: editors[this.page.editor].api
+        }).then(response => {
+          this.$router.push({name: this.page.routes.edit.name, params: {id: response.data[this.page.routingIndex]}})
+          this.$message({
+            message: messages.success,
+            type: 'success'
+          })
+        }).catch(error => {
+          this.$message({
+            message: messages.failure,
+            type: 'error'
+          })
+          console.error(error)
         })
       }
       scrollToTop()
