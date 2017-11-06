@@ -10,6 +10,8 @@
 </template>
 
 <script>
+import Vue from 'vue'
+import axios from 'axios'
 import * as util from 'common/src/lib/util'
 import dataStore from 'common/src/lib/dataStore'
 import NavigationWithIdentity from 'common/src/components/Navigation/Identity'
@@ -21,6 +23,16 @@ import menu from '@/menu'
 
 export default {
   name: 'app',
+  created() {
+    console.log(`This is the Lab App (${Vue.config.mode})`)
+    if(Vue.config.mode === 'production') {
+      axios.defaults.baseURL = 'https://core.watchout.tw'
+    } else if(Vue.config.mode === 'staging') {
+      axios.defaults.baseURL = 'https://staging.core.watchout.tw'
+    } else {
+      axios.defaults.baseURL = 'https://dev.core.watchout.tw'
+    }
+  },
   beforeMount() {
     this.$store.dispatch('toggleIsAuthenticated', {
       value: util.jwtTokenIsHere()
