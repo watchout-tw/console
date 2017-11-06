@@ -36,6 +36,9 @@ export default {
     '$route'() {
       this.update()
     },
+    'directory'() {
+      this.update()
+    },
     'value'(now, then) {
       this.pull()
     }

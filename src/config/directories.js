@@ -238,6 +238,12 @@ export default {
       }
     ]
   },
+  rs_vote: {
+    id: 'rs_vote',
+    api: '/console/lab/rs_votes',
+    value: 'id',
+    label: 'title'
+  },
   legislative_step: {
     id: 'legislative_step',
     api: '/c0ngress/legislative_steps',
@@ -345,6 +351,18 @@ export default {
         label: '一般更新'
       }
     ]
+  },
+  data_report: {
+    id: 'data_report',
+    api: '/console/lab/data_reports',
+    value: 'id',
+    label: 'title'
+  },
+  insight: {
+    id: 'insight',
+    api: '/console/lab/insights',
+    value: 'id',
+    label: 'title'
   },
   figure_type: {
     id: 'figure_type',

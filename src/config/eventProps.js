@@ -50,5 +50,44 @@ export default {
     id: 'data',
     label: '資料',
     type: 'textarea'
+  },
+  term_index: {
+    id: 'term_index',
+    label: '屆期',
+    type: 'number'
+  },
+  session_index: {
+    id: 'session_index',
+    label: '會期',
+    type: 'number'
+  },
+  temp_session_index: {
+    id: 'temp_session_index',
+    label: '臨時會期',
+    type: 'number'
+  },
+  reps: {
+    id: 'rep',
+    label: '就職立委',
+    type: 'multiselect',
+    directory: 'rep'
+  },
+  rs_votes: {
+    id: 'rs_vote',
+    label: '表決',
+    type: 'multiselect',
+    directory: 'rs_vote'
+  },
+  data_reports: {
+    id: 'data_report',
+    label: '數據分析報告',
+    type: 'multiselect',
+    directory: 'data_report'
+  },
+  insights: {
+    id: 'insight',
+    label: '分析評論',
+    type: 'multiselect',
+    directory: 'insight'
   }
 }
