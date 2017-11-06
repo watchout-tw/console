@@ -5,8 +5,6 @@ process.env.BUILD_MODE = process.argv.indexOf('production') > -1
   ? 'production'
   : 'staging'
 
-console.log(process.env.BUILD_MODE)
-
 var ora = require('ora')
 var rm = require('rimraf')
 var path = require('path')
@@ -16,8 +14,6 @@ var config = require('../config')
 var webpackConfig = process.env.BUILD_MODE === 'production'
   ? require('./webpack.prod.conf')
   : require('./webpack.staging.conf')
-
-console.log(webpackConfig)
 
 var spinner = ora(`building for ${process.env.BUILD_MODE}...`)
 spinner.start()
