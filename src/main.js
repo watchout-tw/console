@@ -8,9 +8,17 @@ import ElementUI from 'element-ui'
 import ElementLocale from 'element-ui/lib/locale/lang/zh-TW'
 
 import axios from 'axios'
-axios.defaults.baseURL = 'https://c0re.watchout.tw'
 
+Vue.config.mode = process.env.BUILD_MODE
 Vue.config.productionTip = false
+
+if(Vue.config.mode === 'production') {
+  axios.defaults.baseURL = 'https://core.watchout.tw'
+} else if(Vue.config.mode === 'staging') {
+  axios.defaults.baseURL = 'https://staging.core.watchout.tw'
+} else {
+  axios.defaults.baseURL = 'https://dev.core.watchout.tw'
+}
 
 Vue.use(ElementUI, { locale: ElementLocale })
 

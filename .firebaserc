@@ -1,5 +1,6 @@
 {
   "projects": {
-    "default": "console-edeca"
+    "staging": "console-edeca",
+    "production": "console-production-64af6"
   }
 }

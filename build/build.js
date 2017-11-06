@@ -1,6 +1,9 @@
 require('./check-versions')()
 
 process.env.NODE_ENV = 'production'
+process.env.BUILD_MODE = process.argv.indexOf('production') > -1
+  ? 'production'
+  : 'staging'
 
 var ora = require('ora')
 var rm = require('rimraf')
@@ -8,9 +11,11 @@ var path = require('path')
 var chalk = require('chalk')
 var webpack = require('webpack')
 var config = require('../config')
-var webpackConfig = require('./webpack.prod.conf')
+var webpackConfig = process.env.BUILD_MODE === 'production'
+  ? require('./webpack.prod.conf')
+  : require('./webpack.staging.conf')
 
-var spinner = ora('building for production...')
+var spinner = ora(`building for ${process.env.BUILD_MODE}...`)
 spinner.start()
 
 rm(path.join(config.build.assetsRoot, config.build.assetsSubDirectory), err => {
