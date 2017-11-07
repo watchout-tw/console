@@ -26,6 +26,7 @@ import EditorEvents from '@/components/EditorEvents'
 import EditorScoreBoard from '@/components/EditorScoreBoard'
 import * as api from '@/util/api'
 import * as clone from '@/util/clone'
+import * as sanitizer from '@/util/sanitizer'
 
 Vue.use(Vuex)
 
@@ -135,6 +136,7 @@ export default {
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
+            tempModel[field.id] = sanitizer.cleanField(tempModel[field.id])
             if(field.postPreparer && tempModel.hasOwnProperty(field.id)) {
               tempModel[field.id] = field.postPreparer(tempModel[field.id])
             }
@@ -151,6 +153,7 @@ export default {
           for(let obj of arrayToPrepare) {
             for(let propObj of section.interface[propListKey]) {
               const key = propObj[preparerKey]
+              obj[key] = sanitizer.cleanField(obj[key])
               if(propObj.deleteThisBeforePost) {
                 delete obj[key]
               } else if(propObj.postPreparer) {
