@@ -812,15 +812,18 @@ export default {
       },
       {
         prop: 'st',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatters.title
       },
       {
         prop: 'act',
-        label: '關聯法案'
+        label: '關聯法案',
+        formatter: formatters.title
       },
       {
         prop: 'act_dir',
-        label: '關聯修法方向'
+        label: '關聯修法方向',
+        formatter: formatters.name
       }
     ]
   },
@@ -875,11 +878,13 @@ export default {
       },
       {
         prop: 'st',
-        label: '關聯小議題'
+        label: '關聯小議題',
+        formatter: formatters.title
       },
       {
         prop: 'st_question',
-        label: '爭點'
+        label: '爭點',
+        formatter: formatters.title
       }
     ]
   },
