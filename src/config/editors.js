@@ -1891,7 +1891,10 @@ export default {
               id: 'figure_data_set_type',
               label: '圖表資料集型別',
               type: 'select',
-              directory: 'figure_data_set_type'
+              directory: 'figure_data_set_type',
+              cascadeUpdate: [
+                cascade.appointDirectory(['figure_data_set_id'])
+              ]
             },
             {
               id: 'figure_data_set_id',

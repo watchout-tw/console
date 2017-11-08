@@ -454,12 +454,12 @@ export default {
     id: 'figure_data_set_type',
     options: [
       {
-        value: 'LAB_Bill_Data_Set',
+        value: 'lab_bill_data_set',
         group: '議題實驗室',
         label: '提案資料集'
       },
       {
-        value: 'LAB_Statement_Data_Set',
+        value: 'lab_statement_data_set',
         group: '議題實驗室',
         label: '發言資料集'
       }
@@ -481,5 +481,17 @@ export default {
         label: '發言統計'
       }
     ]
+  },
+  lab_bill_data_set: {
+    id: 'lab_bill_data_set',
+    api: '/console/lab/bill_data_sets',
+    value: 'id',
+    label: 'name'
+  },
+  lab_statement_data_set: {
+    id: 'lab_statement_data_set',
+    api: '/console/lab/lab_statement_data_sets',
+    value: 'id',
+    label: 'name'
   }
 }
