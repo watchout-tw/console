@@ -1,4 +1,5 @@
 import { isValid } from '@/util/validators'
+import * as util from '@/util'
 
 export function text2Array(text) {
   if(!text) {
@@ -8,7 +9,12 @@ export function text2Array(text) {
 }
 
 export function date2Timestamp(date) {
-  return isValid(date) ? new Date(date).getTime() : undefined
+  if (!isValid(date)) return null
+  if (typeof date === 'string' && date.match(util.mysqlTimestampRex)) {
+    return util.mysqlTimestamp2DateObj(date).getTime()
+  } else {
+    return new Date(date).getTime()
+  }
 }
 
 export function mapChecklist(cklist) {
