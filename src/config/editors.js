@@ -1668,12 +1668,14 @@ export default {
             {
               id: 'start_date',
               label: '起始日',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'end_date',
               label: '終止日',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             }
           ],
           options: {
