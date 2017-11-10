@@ -1804,7 +1804,7 @@ export default {
               type: 'select',
               directory: 'specific_topic',
               cascadeUpdate: [
-                cascade.applyConstraint(['st_question_id', 'act_ids'], 'st')
+                cascade.applyConstraint(['st_question_id'], 'st')
               ]
             },
             {
