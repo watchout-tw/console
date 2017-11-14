@@ -127,7 +127,7 @@ export default {
     },
     makeRow() {
       var newRow = Object.assign(
-        ...this.config.columns.map(column => ({[column.prop]: column.defaultValue})) // if defaultValue is undefined then it is undefined
+        ...this.config.columns.map(column => ({[column.prop]: column.defaultValue ? column.defaultValue : null}))
       )
       if(this.config.prepareIndex) {
         newRow[this.config.prepareIndex] = this.getIndex(this.rows, this.config.prepareIndex)
