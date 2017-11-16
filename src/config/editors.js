@@ -1233,6 +1233,11 @@ export default {
               cascadeUpdate: [
                 cascade.applyConstraint(['act_dir_id'], 'st')
               ],
+              cascadeAction: {
+                keyName: 'specific_topics',
+                labelName: 'title',
+                valueName: 'id'
+              },
               deleteThisBeforePost: true,
               disabled: true
             },
@@ -1773,7 +1778,10 @@ export default {
               id: 'term_index',
               label: '屆期',
               type: 'select',
-              directory: 'term'
+              directory: 'term',
+              cascadeCrossSection: {
+                should_have_spoken_condition: ['should_have_spoken_sessions']
+              }
             },
             {
               id: 'start_date',
@@ -1836,7 +1844,13 @@ export default {
               id: 'should_have_spoken_sessions',
               label: '會期',
               type: 'multiselect',
-              directory: 'session'
+              directory: 'session',
+              disabled: true,
+              cascadeAction: {
+                keyName: 'sessions',
+                labelName: 'session_index',
+                valueName: 'session_index'
+              }
             }
           ],
           options: {

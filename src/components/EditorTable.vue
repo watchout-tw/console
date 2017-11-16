@@ -12,7 +12,7 @@
           <el-checkbox v-if="columnIs(column, 'checkbox')" :size="componentSize" v-model="scope.row[column.prop]"></el-checkbox>
           <term-lookup v-if="columnIs(column, 'date')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page"></term-lookup>
           <abstract-select v-if="columnIs(column, 'select')" :size="componentSize" :value.sync="scope.row[column.prop]" :disabled="!scope.row[column.dependency]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :queueCascadeUpdate="queueCascadeUpdate" :config="column" :page="page" :sectionId="sectionId"></abstract-select>
-          <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
+          <abstract-multi-select v-if="columnIs(column, 'multiselect')" :size="componentSize" :value.sync="scope.row[column.prop]" :disabled="!scope.row[column.dependency]" :cascadeConfig="cascadeMap[scope.$index][column.prop]" :config="column" :page="page"></abstract-multi-select>
         </template>
         <template v-else>
           <div class="formatted-content" v-html="cellFormatter(column, scope)"></div>
