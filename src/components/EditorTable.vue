@@ -2,7 +2,7 @@
 <div class="editor-table">
   <el-button class="add" @click="addRow">新增{{ config.name }}</el-button>
   <el-table :data="rows">
-    <el-table-column v-for="column in config.columns" v-if="!column.hide" :key="column.prop" :prop="column.prop" :label="column.label + (column.required ? ' *' : '')">
+    <el-table-column v-for="column in config.columns" v-if="!column.hide" :key="column.prop" :prop="column.prop" :label="column.label" :class-name="column.required ? 'mandatory' : ''">
       <template scope="scope">
         <template v-if="flags[scope.$index].isEditing && (flags[scope.$index].isLocal || !column.updateForbidden)">
           <el-input v-if="columnIs(column, 'text')" :size="componentSize" v-model="scope.row[column.prop]"></el-input>
@@ -205,6 +205,11 @@ export default {
   }
 }
 .editor-table {
+  th.mandatory > .cell:before{
+    content: '*';
+    color: red;
+    padding: 0.3em;
+  }
   position: relative;
   > .add {
     position: absolute;
