@@ -87,7 +87,10 @@ export default {
                 let cascadeInfo = {
                   uniqueID: this.uuid,
                   api: editors[cascade.directory].api,
-                  id: cascade.value
+                  id: cascade.value,
+                  keyName: this.config.cascadeAction.keyName,
+                  labelName: this.config.cascadeAction.labelName,
+                  valueName: this.config.cascadeAction.valueName
                 }
                 this.$store.dispatch('updateSelectCrossSection', cascadeInfo)
                 this.config.disabled = false

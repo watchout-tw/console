@@ -7,8 +7,8 @@
       <el-input-number v-if="fieldIs(field, 'number')" v-model="model[field.id]" :disabled="fieldIsDisabled(field)"></el-input-number>
       <el-switch v-if="fieldIs(field, 'switch')" v-model="model[field.id]" on-text="YES" off-text="NO" :disabled="fieldIsDisabled(field)"></el-switch>
       <term-lookup v-if="fieldIs(field, 'date')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></term-lookup>
-      <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></abstract-select>
-      <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page"></abstract-multi-select>
+      <abstract-select v-if="fieldIs(field, 'select')" :value.sync="model[field.id]" :disabled="field.disabled" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page" :sectionId="sectionId"></abstract-select>
+      <abstract-multi-select v-if="fieldIs(field, 'multiselect')" :value.sync="model[field.id]" :disabled="field.disabled" :cascadeConfig="cascadeMap[0][field.id]" :queueCascadeUpdate="queueCascadeUpdate" :config="field" :page="page" :sectionId="sectionId"></abstract-multi-select>
       <abstract-color-picker v-if="fieldIs(field, 'color')" :value.sync="model[field.id]"></abstract-color-picker>
       <gender-slider v-if="fieldIs(field, 'gender')" :value.sync="model[field.id]" :config="field" :page="page"></gender-slider>
     </el-form-item>

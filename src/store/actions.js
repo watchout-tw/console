@@ -46,15 +46,18 @@ const localActions = {
       id: reqObj.id
     }).then(response => {
       let options = []
-      for(let data of response.data.specific_topics) {
-        options.push({
-          'value': data.id,
-          'label': data.title
-        })
+      let values = []
+      for(let data of response.data[reqObj.keyName]) {
+        if(values.indexOf(data[reqObj.valueName]) === -1) {
+          values.push(data[reqObj.valueName])
+          options.push({
+            'value': data[reqObj.valueName],
+            'label': data[reqObj.labelName]
+          })
+        }
       }
       let respObj = {
         data: options,
-        directoryID: reqObj.directoryID,
         uniqueID: reqObj.uniqueID
       }
       commit(types.UPDATE_SELECT, respObj)
