@@ -56,6 +56,9 @@ export default {
       if(field.determined_by) {
         classes.push('has-dependency')
       }
+      if(field.required) {
+        classes.push('mandatory')
+      }
       return classes
     },
     init() {
@@ -78,7 +81,11 @@ export default {
 <style lang="scss">
 .editor-form {
   max-width: 36rem;
-
+  .mandatory label:after {
+    content: "*";
+    padding: 0.3em;
+    color: red;
+  }
   .el-form-item.has-dependency {
     position: relative;
 

@@ -19,5 +19,11 @@ export default {
       action: types.LOOKUP_TERM,
       targets
     }
+  },
+  applyParty(targets) {
+    return {
+      action: types.APPLY_PARTY,
+      targets
+    }
   }
 }

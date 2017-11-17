@@ -35,6 +35,17 @@ export default {
     options() {
       return this.$store.state[this.uuid] || []
     },
+    optionSize() {
+      if(this.options && this.options.length > 0) {
+        let temp = 0
+        for(let op of this.options) {
+          temp = temp > op.label.length ? temp : op.label.length
+        }
+        return (2 * temp).toString() // 2 times to fix fullwidth forms
+      }else {
+        return '20'
+      }
+    },
     groupLabels() {
       return [...new Set(this.options.filter(option => option.hasOwnProperty('group')).map(option => option.group))]
     },
