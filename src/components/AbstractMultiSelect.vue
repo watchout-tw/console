@@ -48,26 +48,24 @@ export default {
     },
     'cascadeQue'() {
       for(let cascade of this.cascadeQue) {
-        if(cascade.targetSection === this.sectionId) {
-          for(let id of cascade.column) {
-            if(id === this.config.id) {
-              if(cascade.value || cascade.value === 0) {
-                let cascadeInfo = {
-                  uniqueID: this.uuid,
-                  api: editors[cascade.directory].api,
-                  id: cascade.value,
-                  keyName: this.config.cascadeAction.keyName,
-                  labelName: this.config.cascadeAction.labelName,
-                  valueName: this.config.cascadeAction.valueName
-                }
-                this.$store.dispatch('updateSelectCrossSection', cascadeInfo)
-                this.config.disabled = false
-              }else {
-                this.config.disabled = true
-              }
-              this.model = []
+        if(cascade.targetSection !== this.sectionId) continue
+        for(let id of cascade.column) {
+          if(id !== this.config.id) continue
+          if(cascade.value || cascade.value === 0) {
+            let cascadeInfo = {
+              uniqueID: this.uuid,
+              api: editors[cascade.directory].api,
+              id: cascade.value,
+              keyName: this.config.cascadeAction.keyName,
+              labelName: this.config.cascadeAction.labelName,
+              valueName: this.config.cascadeAction.valueName
             }
+            this.$store.dispatch('updateSelectCrossSection', cascadeInfo)
+            this.config.disabled = false
+          } else {
+            this.config.disabled = true
           }
+          this.model = []
         }
       }
     }
