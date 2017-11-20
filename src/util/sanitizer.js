@@ -1,3 +1,3 @@
 export function cleanField (value) {
-  return value ? value : null
+  return (value || value === 0) ? value : null
 }
