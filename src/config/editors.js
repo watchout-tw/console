@@ -1431,8 +1431,78 @@ export default {
       }
     ]
   },
+  timeline_event: {
+    api: '/console/comp/timeline_events',
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個大事紀事件的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status'
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'date',
+              label: '日期',
+              type: 'date'
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'select',
+              directory: 'timeline_event_type'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'tagline',
+              label: '標語',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text'
+            },
+            {
+              id: 'content',
+              label: '內容',
+              type: 'textarea'
+            },
+            {
+              id: 'link',
+              label: '連結',
+              type: 'text'
+            }
+          ]
+        }
+      },
+      {
+        id: 'data',
+        title: '進階資料',
+        description: '這個大事紀事件的進階資料',
+        interface: {
+          type: 'form'
+        }
+      }
+    ]
+  },
   timeline: {
-    api: '/console/lab/timelines',
+    api: '/console/comp/timelines',
     sections: [
       {
         id: 'base',

@@ -24,7 +24,7 @@ import menu from '@/menu'
 export default {
   name: 'app',
   created() {
-    console.log(`This is the Lab App (${Vue.config.mode})`)
+    console.log(`This is the Console App (${Vue.config.mode})`)
     if(Vue.config.mode === 'production') {
       axios.defaults.baseURL = 'https://core.watchout.tw'
     } else if(Vue.config.mode === 'staging') {
@@ -85,5 +85,19 @@ export default {
 
 #app {
   padding-bottom: 4rem;
+}
+
+// ElementIO override
+.el-table {
+  thead > tr > th {
+    padding: 0.75rem 0;
+    > .cell {
+      line-height: 1.5;
+    }
+  }
+}
+.el-pagination {
+  margin: 1rem 0;
+  padding: 0;
 }
 </style>

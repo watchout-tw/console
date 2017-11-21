@@ -61,10 +61,24 @@ export default {
 </script>
 
 <style lang="scss">
-.el-checkbox + .el-checkbox {
-  margin-left: 0;
+.editor-checklist {
+  margin-top: -0.25rem;
+  margin-left: -0.25rem;
 }
-.el-checkbox {
-  margin-right: 1rem;
+// ElementIO override
+.el-checkbox-group {
+  > .el-checkbox-button {
+    margin: 0.25rem;
+    > .el-checkbox-button__inner {
+      border: 1px solid #bfcbd9;
+      border-radius: 0.25rem;
+      box-shadow: none;
+    }
+    &.is-checked > .el-checkbox-button__inner {
+      background-color: rgba(32, 160, 255, 0.1);
+      border-color: rgba(32, 160, 255, 0.2);
+      color: #20a0ff;
+    }
+  }
 }
 </style>

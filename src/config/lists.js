@@ -456,7 +456,7 @@ export default {
     paged: true,
     filters: [
       {
-        id: 'specific_topic',
+        id: 'st',
         directory: 'specific_topic',
         label: '關聯小議題',
         type: 'select',
@@ -620,8 +620,60 @@ export default {
       }
     ]
   },
+  timeline_events: {
+    api: '/console/comp/timeline_events',
+    paged: true,
+    filters: [
+      {
+        id: 'date',
+        label: '日期',
+        type: 'datepicker',
+        mapToColumn: 'date'
+      },
+      {
+        id: 'type',
+        label: '類型',
+        type: 'select',
+        directory: 'timeline_event_type',
+        mapToColumn: 'type'
+      },
+      {
+        id: 'q',
+        label: '關鍵字',
+        type: 'input'
+      }
+    ],
+    key: 'id',
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'date',
+        label: '日期',
+        formatter: formatters.date
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'tagline',
+        label: '標語'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'content',
+        label: '內容'
+      }
+    ]
+  },
   timelines: {
-    api: '/console/lab/timelines',
+    api: '/console/comp/timelines',
     paged: false,
     filters: [
       {

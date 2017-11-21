@@ -32,7 +32,7 @@ var routes = [
 for(let group of menu) {
   for(let page of group.pages) {
     routes.push({
-      path: '/' + page.id,
+      path: page.routes.list.path,
       name: page.routes.list.name,
       component: List,
       props: {
@@ -41,7 +41,7 @@ for(let group of menu) {
       beforeEnter: checkAuth
     })
     routes.push({
-      path: '/' + page.id + '/:id',
+      path: page.routes.edit.path,
       name: page.routes.edit.name,
       component: Editor,
       props: {

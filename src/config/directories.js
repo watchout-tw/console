@@ -297,9 +297,15 @@ export default {
       }
     ]
   },
+  timeline_event: {
+    id: 'timeline_event',
+    api: '/console/comp/timeline_events',
+    value: 'id',
+    label: 'title'
+  },
   timeline: {
     id: 'timeline',
-    api: '/console/lab/timelines',
+    api: '/console/comp/timelines',
     value: 'id',
     label: 'title'
   },

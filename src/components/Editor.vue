@@ -234,7 +234,7 @@ export default {
   }
 }
 
-// override element
+// ElementIO override
 .el-textarea__inner {
   padding: 5px 10px;
 }

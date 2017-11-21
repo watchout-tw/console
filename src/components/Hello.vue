@@ -46,7 +46,6 @@ export default {
 .hello {
   margin: 0 1rem;
   > blockquote {
-    font-family: "leitura-news", serif;
     font-weight: bold;
     font-style: italic;
     font-size: 1.25rem;

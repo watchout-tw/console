@@ -46,7 +46,7 @@ var menu = [
     ]
   },
   {
-    id: 'topics',
+    id: 'topical_data',
     name: '議題、法案',
     pages: [
       {
@@ -84,7 +84,7 @@ var menu = [
     ]
   },
   {
-    id: 'speeches',
+    id: 'rep_speech',
     name: '委員表態',
     pages: [
       {
@@ -114,9 +114,17 @@ var menu = [
     ]
   },
   {
-    id: 'compositions',
+    id: 'comp',
     name: '內容組成',
     pages: [
+      {
+        id: 'timeline_events',
+        directory: 'timeline_events',
+        editor: 'timeline_event',
+        routingIndex: 'id',
+        name: '大事紀事件',
+        title: '大事紀事件'
+      },
       {
         id: 'timelines',
         directory: 'timelines',
@@ -191,15 +199,18 @@ var menu = [
   }
 ]
 
-for(let submenu of menu) {
-  for(let page of submenu.pages) {
+for(let group of menu) {
+  for(let page of group.pages) {
+    page.basePath = `/${group.id}/${page.id}`
     page.routes = {
       list: {
-        name: page.id + '_list',
+        path: `${page.basePath}`,
+        name: `${group.id}_${page.id}_list`,
         title: page.name
       },
       edit: {
-        name: page.id + '_edit',
+        path: `${page.basePath}/:id`,
+        name: `${group.id}_${page.id}_edit`,
         title: '編輯' + page.name
       }
     }

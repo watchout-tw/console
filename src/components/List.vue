@@ -241,10 +241,6 @@ export default {
     }
   }
 }
-.el-pagination {
-  margin: 1rem 0;
-  padding: 0;
-}
 .list-filter-input {
   max-width: 16rem;
 }
