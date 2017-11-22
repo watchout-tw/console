@@ -443,10 +443,7 @@ export default {
               type: 'date',
               updateForbidden: true,
               formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp,
-              cascadeUpdate: [
-                cascade.lookupTerm(['term_index'])
-              ]
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'term_index',
@@ -509,10 +506,7 @@ export default {
               label: '變更日期',
               type: 'date',
               formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp,
-              cascadeUpdate: [
-                cascade.lookupTerm(['term_index'])
-              ]
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'term_index',
