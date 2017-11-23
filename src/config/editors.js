@@ -640,7 +640,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(3)
+            labelWidth: labelWidth(4)
           }
         }
       },
@@ -690,7 +690,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(3)
+            labelWidth: labelWidth(4)
           }
         }
       },
@@ -851,7 +851,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(9)
+            labelWidth: labelWidth(10)
           }
         }
       },
@@ -1001,7 +1001,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(6)
+            labelWidth: labelWidth(8)
           }
         }
       }
@@ -1419,7 +1419,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(6)
+            labelWidth: labelWidth(8)
           }
         }
       }
