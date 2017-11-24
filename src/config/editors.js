@@ -848,6 +848,12 @@ export default {
               label: '法案比較內容說明',
               type: 'text',
               required: true
+            },
+            {
+              id: 'scale_score_max',
+              label: '最大分數',
+              type: 'number',
+              required: true
             }
           ],
           options: {
