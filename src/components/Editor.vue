@@ -1,5 +1,6 @@
 <template>
 <div class="editor">
+  <div class="error">{{ errorMsg }}</div>
   <div class="title"><h1 class="small">{{ page.routes.edit.title }}</h1></div>
   <section v-for="section in sections" :key="section.title" v-if="shouldSectionRender(section)">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
@@ -24,6 +25,7 @@ import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
 import EditorEvents from '@/components/EditorEvents'
 import EditorScoreBoard from '@/components/EditorScoreBoard'
+import errorMsgService from '@/interfaces/errorMsgService'
 import * as api from '@/util/api'
 import * as clone from '@/util/clone'
 import * as sanitizer from '@/util/sanitizer'
@@ -42,12 +44,13 @@ const messages = {
 }
 
 export default {
+  mixins: [errorMsgService],
+  props: ['page'],
   metaInfo() {
     return {
       title: this.page.routes.edit.title + SITE_TITLE
     }
   },
-  props: ['page'],
   data() {
     return {
       initialized: false,
@@ -184,12 +187,14 @@ export default {
             message: messages.success,
             type: 'success'
           })
+          this.hideError()
           this.lockSave = false
         }).catch(error => {
           this.$message({
             message: messages.failure,
             type: 'error'
           })
+          this.showError(error)
           console.error(error)
           this.lockSave = false
         })
@@ -204,12 +209,14 @@ export default {
             message: messages.success,
             type: 'success'
           })
+          this.hideError()
           this.lockSave = false
         }).catch(error => {
           this.$message({
             message: messages.failure,
             type: 'error'
           })
+          this.showError(error)
           console.error(error)
           this.lockSave = false
         })
@@ -269,5 +276,8 @@ export default {
   padding: 2px;
   font-size: 10px;
   line-height: 14px;
+}
+.error {
+  color: red;
 }
 </style>
