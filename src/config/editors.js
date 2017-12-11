@@ -1492,11 +1492,128 @@ export default {
         }
       },
       {
-        id: 'data',
-        title: '進階資料',
+        id: 'term_start',
+        title: '屆期起始',
         description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'term_start'
+        },
         interface: {
-          type: 'form'
+          type: 'form',
+          fields: [
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'number'
+            }
+          ]
+        }
+      },
+      {
+        id: 'session_start',
+        title: '會期起始',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'session_start'
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'term_index',
+              label: '屆期',
+              type: 'number'
+            },
+            {
+              id: 'session_index',
+              label: '會期',
+              type: 'number'
+            },
+            {
+              id: 'temp_session_index',
+              label: '臨時會期',
+              type: 'number'
+            }
+          ]
+        }
+      },
+      {
+        id: 'reps_assume_office',
+        title: '委員就職',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'reps_assume_office'
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'rep',
+              label: '就職立委',
+              type: 'multiselect',
+              directory: 'rep'
+            }
+          ]
+        }
+      },
+      {
+        id: 'rs_votes',
+        title: '表決',
+        description: '大事紀事件的進階資料',
+        condition: {
+          type: 'rs_votes'
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'rs_vote',
+              label: '表決',
+              type: 'multiselect',
+              directory: 'rs_vote'
+            }
+          ]
+        }
+      },
+      {
+        id: 'data_reports',
+        title: '數據分析報告',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'data_reports'
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'data_report',
+              label: '數據分析報告',
+              type: 'multiselect',
+              directory: 'data_report'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'insights',
+        title: '分析評論',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'insights'
+        },
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'insight',
+              label: '分析評論',
+              type: 'multiselect',
+              directory: 'insight'
+            }
+          ]
         }
       }
     ]
@@ -1547,14 +1664,6 @@ export default {
           options: {
             labelWidth: labelWidth(4)
           }
-        }
-      },
-      {
-        id: 'events',
-        title: '事件',
-        description: '這個大事紀中包含的事件',
-        interface: {
-          type: 'events'
         }
       }
     ]
