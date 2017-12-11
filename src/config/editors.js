@@ -1557,6 +1557,42 @@ export default {
         }
       },
       {
+        id: 'rs_statements',
+        title: '發言',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'rs_statements'
+        },
+        interface: {
+          type: 'form',
+          fields: []
+        }
+      },
+      {
+        id: 'rs_bills',
+        title: '法案',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'rs_bills'
+        },
+        interface: {
+          type: 'form',
+          fields: []
+        }
+      },
+      {
+        id: 'bill_legislative_step',
+        title: '提案審議進度',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'bill_legislative_step'
+        },
+        interface: {
+          type: 'form',
+          fields: []
+        }
+      },
+      {
         id: 'rs_votes',
         title: '表決',
         description: '大事紀事件的進階資料',
@@ -1614,6 +1650,30 @@ export default {
               directory: 'insight'
             }
           ]
+        }
+      },
+      {
+        id: 'social_event',
+        title: '社會事件',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'social_event'
+        },
+        interface: {
+          type: 'form',
+          fields: []
+        }
+      },
+      {
+        id: 'general_update',
+        title: '一般更新',
+        description: '這個大事紀事件的進階資料',
+        condition: {
+          type: 'general_update'
+        },
+        interface: {
+          type: 'form',
+          fields: []
         }
       }
     ]
