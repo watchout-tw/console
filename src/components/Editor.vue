@@ -5,7 +5,8 @@
   <section v-for="section in sections" :key="section.title" v-if="shouldSectionRender(section)">
     <div class="title"><h2 class="small">{{ section.title }}</h2></div>
     <p>{{ section.description }}</p>
-    <editor-form v-if="sectionIs(section, 'form')" :sectionId="section.id" :config="section.interface" :model="model" :page="page"></editor-form>
+    <editor-form v-if="sectionIs(section, 'form') && !isReference(section)" :sectionId="section.id" :config="section.interface" :model="model" :page="page"></editor-form>
+    <editor-form v-if="sectionIs(section, 'form') && isReference(section)" :sectionId="section.id" :config="section.interface" :model.sync="model['data']" :page="page"></editor-form>
     <editor-table v-else-if="sectionIs(section, 'table')" :sectionId="section.id" :config="section.interface" :rows.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-table>
     <editor-checklist v-else-if="sectionIs(section, 'checklist')" :config="section.interface" :model.sync="model[section.id]" :page="page"></editor-checklist>
     <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :events.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-events>
@@ -71,12 +72,23 @@ export default {
     sectionIs(section, type) {
       return section.interface.type === type
     },
+    isReference(section) {
+      return section.interface.is_reference
+    },
     shouldSectionRender(section) {
       if(section.condition) {
         var result = true
         for(let key in section.condition) {
           let requiredValue = section.condition[key]
           result = result && (this.model[key] === requiredValue)
+        }
+        // for timeline event: create property for model.data while doing conditional rendering
+        if(result && section.interface.is_reference) {
+          for(let field of section.interface.fields) {
+            if(!this.model.data.hasOwnProperty(field.id)) {
+              this.$set(this.model.data, field.id, field.defaultValue)
+            }
+          }
         }
         return result
       }
@@ -89,8 +101,13 @@ export default {
       if(this.$route.params.id === 'create') {
         for(let section of this.sections) {
           if(section.interface.type === 'form') {
-            for(let field of section.interface.fields) {
-              this.$set(this.model, field.id, field.defaultValue) // if field.defaultValue is not defined then it is undefined
+            // now only for event data
+            if(section.interface.is_reference) {
+              this.$set(this.model, 'data', {})
+            } else {
+              for(let field of section.interface.fields) {
+                this.$set(this.model, field.id, field.defaultValue) // if field.defaultValue is not defined then it is undefined
+              }
             }
           } else {
             this.$set(this.model, section.id, []) // FIXME: assuming everything else other than form is array
@@ -106,9 +123,17 @@ export default {
           // put data through transformer
           for(let section of this.sections) {
             if(section.interface.type === 'form') {
-              for(let field of section.interface.fields) {
-                if(field.getTransformer && this.model.hasOwnProperty(field.id)) {
-                  this.model[field.id] = field.getTransformer(this.model[field.id])
+              if(section.interface.is_reference) {
+                for(let field of section.interface.fields) {
+                  if(field.getTransformer && this.model.data.hasOwnProperty(field.id)) {
+                    this.model.data[field.id] = field.getTransformer(this.model.data[field.id])
+                  }
+                }
+              } else {
+                for(let field of section.interface.fields) {
+                  if(field.getTransformer && this.model.hasOwnProperty(field.id)) {
+                    this.model[field.id] = field.getTransformer(this.model[field.id])
+                  }
                 }
               }
             } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1) {
@@ -140,6 +165,9 @@ export default {
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
+            if(section.interface.is_reference && !tempModel[field.id]) {
+              continue
+            }
             tempModel[field.id] = sanitizer.cleanField(tempModel[field.id])
             if(field.postPreparer && tempModel.hasOwnProperty(field.id)) {
               tempModel[field.id] = field.postPreparer(tempModel[field.id])
@@ -164,6 +192,16 @@ export default {
                 obj[key] = propObj.postPreparer(obj[key])
               }
             }
+          }
+        }
+        // ***dirty hack: 在把有 is_reference 的資料送出去前，把 model.data 裡的 null 給清乾淨
+        if(section.interface.is_reference && tempModel.type) {
+          if(tempModel.type === section.id) {
+            var newData = {}
+            for(let field of section.interface.fields) {
+              newData[field.id] = tempModel.data[field.id]
+            }
+            tempModel.data = newData
           }
         }
       }

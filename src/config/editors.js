@@ -1455,7 +1455,8 @@ export default {
             {
               id: 'date',
               label: '日期',
-              type: 'date'
+              type: 'date',
+              postPreparer: preparers.date2Timestamp
             },
             {
               id: 'type',
@@ -1500,6 +1501,8 @@ export default {
         },
         interface: {
           type: 'form',
+          // is_reference: will be save as json object in database
+          is_reference: true,
           fields: [
             {
               id: 'term_index',
@@ -1518,6 +1521,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: [
             {
               id: 'term_index',
@@ -1546,6 +1550,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: [
             {
               id: 'rep',
@@ -1565,6 +1570,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: []
         }
       },
@@ -1577,6 +1583,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: []
         }
       },
@@ -1589,6 +1596,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: []
         }
       },
@@ -1601,6 +1609,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: [
             {
               id: 'rs_vote',
@@ -1620,6 +1629,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: [
             {
               id: 'data_report',
@@ -1642,6 +1652,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: [
             {
               id: 'insight',
@@ -1661,6 +1672,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: []
         }
       },
@@ -1673,6 +1685,7 @@ export default {
         },
         interface: {
           type: 'form',
+          is_reference: true,
           fields: []
         }
       }
