@@ -1571,7 +1571,14 @@ export default {
         interface: {
           type: 'form',
           is_reference: true,
-          fields: []
+          fields: [
+            {
+              id: 'rs_statement',
+              label: '發言',
+              type: 'multiselect',
+              directory: 'rs_statement'
+            }
+          ]
         }
       },
       {
@@ -1584,7 +1591,14 @@ export default {
         interface: {
           type: 'form',
           is_reference: true,
-          fields: []
+          fields: [
+            {
+              id: 'rs_bill',
+              label: '提案',
+              type: 'multiselect',
+              directory: 'rs_bill'
+            }
+          ]
         }
       },
       {
@@ -1661,32 +1675,6 @@ export default {
               directory: 'insight'
             }
           ]
-        }
-      },
-      {
-        id: 'social_event',
-        title: '社會事件',
-        description: '這個大事紀事件的進階資料',
-        condition: {
-          type: 'social_event'
-        },
-        interface: {
-          type: 'form',
-          is_reference: true,
-          fields: []
-        }
-      },
-      {
-        id: 'general_update',
-        title: '一般更新',
-        description: '這個大事紀事件的進階資料',
-        condition: {
-          type: 'general_update'
-        },
-        interface: {
-          type: 'form',
-          is_reference: true,
-          fields: []
         }
       }
     ]

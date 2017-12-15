@@ -215,6 +215,12 @@ export default {
     value: 'id',
     label: 'version_no' // FIXME: Need to combine multiple fields into label
   },
+  rs_statement: {
+    id: 'rs_statement',
+    api: '/console/lab/rs_statements',
+    value: 'id',
+    label: 'position_summary'
+  },
   rs_tag: {
     id: 'rs_tag',
     api: '/console/lab/rs_tags',
