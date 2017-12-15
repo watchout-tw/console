@@ -362,7 +362,7 @@ export default {
     id: 'data_report',
     api: '/console/lab/data_reports',
     value: 'id',
-    label: 'title'
+    label: [ 'title', 'figure_data_set.name' ]
   },
   insight: {
     id: 'insight',

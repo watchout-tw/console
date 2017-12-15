@@ -7,10 +7,23 @@ export function nestedObjProp(obj, propStr) {
 export function assembleDirectoryList(directoryID, rows) {
   var valueCol = directories[directoryID].value
   var labelCol = directories[directoryID].label
-  var resultList = rows.map(row => ({
-    value: nestedObjProp(row, valueCol),
-    label: nestedObjProp(row, labelCol)
-  }))
+  var resultList
+  if (typeof labelCol === 'string') {
+    resultList = rows.map(row => ({
+      value: nestedObjProp(row, valueCol),
+      label: nestedObjProp(row, labelCol)
+    }))
+  } else { // else will be array
+    resultList = rows.map(row => {
+      var compoundLabel = labelCol.reduce((a, b) => {
+        return nestedObjProp(row, a) + ' - ' + nestedObjProp(row, b)
+      })
+      return {
+        value: nestedObjProp(row, valueCol),
+        label: compoundLabel
+      }
+    })
+  }
   var valueQue = []
   for(var i = 0; i < resultList.length; i++) {
     if(valueQue.indexOf(resultList[i].value) === -1) {

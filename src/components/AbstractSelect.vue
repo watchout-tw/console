@@ -42,7 +42,7 @@ export default {
           temp = temp > op.label.length ? temp : op.label.length
         }
         return (2 * temp).toString() // 2 times to fix fullwidth forms
-      }else {
+      } else {
         return '20'
       }
     },
