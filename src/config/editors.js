@@ -1576,7 +1576,7 @@ export default {
       },
       {
         id: 'rs_bills',
-        title: '法案',
+        title: '提案',
         description: '這個大事紀事件的進階資料',
         condition: {
           type: 'rs_bills'
