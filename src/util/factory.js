@@ -1,7 +1,9 @@
 import directories from '@/config/directories'
 
 export function nestedObjProp(obj, propStr) {
-  return propStr.split('.').reduce((o, i) => o[i], obj)
+  return propStr.split('.').reduce((o, i) => {
+    return o[i] ? o[i] : ''
+  }, obj)
 }
 
 export function assembleDirectoryList(directoryID, rows) {
