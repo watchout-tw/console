@@ -25,6 +25,7 @@ editorID: {
 ```
 {
   type: 'form'    // REQ
+  is_reference:   // OPT - will be save as json object in database
   fields: [...]   // REQ
   options: {      // REQ
     labelWidth    // REQ - default labelWidth(4)
