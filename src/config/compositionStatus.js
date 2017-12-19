@@ -1,7 +1,7 @@
 export default {
   pending: {
     value: 'pending',
-    label: '待確認'
+    label: '草稿'
   },
   new: {
     value: 'new',
@@ -9,7 +9,7 @@ export default {
   },
   regular: {
     value: 'regular',
-    label: '普通'
+    label: '已發佈'
   },
   updated: {
     value: 'updated',
