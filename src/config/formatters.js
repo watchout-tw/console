@@ -121,10 +121,10 @@ export default {
   },
   figure_type(row, col) {
     let type = row[col.property]
-    return figureTypes[type].label ? figureTypes[type].label : row[col.property]
+    return figureTypes[type] ? figureTypes[type].label : row[col.property]
   },
   composition_status(row, col) {
     let status = row[col.property]
-    return compositionStatus[status].label ? compositionStatus[status].label : row[col.property]
+    return compositionStatus[status] ? compositionStatus[status].label : row[col.property]
   }
 }
