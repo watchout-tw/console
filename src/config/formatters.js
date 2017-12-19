@@ -1,6 +1,5 @@
 import directories from './directories'
-import figureTypes from './figureTypes'
-import compositionStatus from './compositionStatus'
+import options from './options'
 import marked from 'marked'
 import * as util from '@/util'
 
@@ -121,10 +120,10 @@ export default {
   },
   figure_type(row, col) {
     let type = row[col.property]
-    return figureTypes[type] ? figureTypes[type].label : row[col.property]
+    return options.figure_type[type] ? options.figure_type[type].label : row[col.property]
   },
   composition_status(row, col) {
     let status = row[col.property]
-    return compositionStatus[status] ? compositionStatus[status].label : row[col.property]
+    return options.composition_status[status] ? options.composition_status[status].label : row[col.property]
   }
 }

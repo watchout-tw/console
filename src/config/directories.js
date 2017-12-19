@@ -1,5 +1,4 @@
-import figureTypes from './figureTypes'
-import compositionStatus from './compositionStatus'
+import options from './options'
 
 export default {
   term: {
@@ -274,7 +273,7 @@ export default {
   },
   composition_status: {
     id: 'composition_status',
-    options: Object.values(compositionStatus)
+    options: Object.values(options.composition_status)
   },
   timeline_type: {
     id: 'timeline_type',
@@ -360,7 +359,7 @@ export default {
   },
   figure_type: {
     id: 'figure_type',
-    options: Object.values(figureTypes)
+    options: Object.values(options.figure_type)
   },
   figure: {
     id: 'figure',
@@ -370,18 +369,7 @@ export default {
   },
   figure_data_set_type: {
     id: 'figure_data_set_type',
-    options: [
-      {
-        value: 'lab_bill_data_set',
-        group: '議題實驗室',
-        label: '提案資料集'
-      },
-      {
-        value: 'lab_statement_data_set',
-        group: '議題實驗室',
-        label: '發言資料集'
-      }
-    ]
+    options: Object.values(options.figure_data_set_type)
   },
   lab_data_report_type: {
     id: 'lab_data_report_type',
