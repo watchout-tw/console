@@ -24,7 +24,6 @@ import editors from '@/config/editors'
 import EditorForm from '@/components/EditorForm'
 import EditorTable from '@/components/EditorTable'
 import EditorChecklist from '@/components/EditorChecklist'
-import EditorEvents from '@/components/EditorEvents'
 import EditorScoreBoard from '@/components/EditorScoreBoard'
 import errorMsgService from '@/interfaces/errorMsgService'
 import * as api from '@/util/api'
@@ -266,7 +265,6 @@ export default {
     EditorForm,
     EditorTable,
     EditorChecklist,
-    EditorEvents,
     EditorScoreBoard
   }
 }
