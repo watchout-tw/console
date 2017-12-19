@@ -959,7 +959,8 @@ export default {
     columns: [
       {
         prop: 'status',
-        label: '狀態'
+        label: '狀態',
+        formatter: formatters.composition_status
       },
       {
         prop: 'title',
