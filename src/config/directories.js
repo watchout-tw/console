@@ -1,3 +1,6 @@
+import figureTypes from './figureTypes'
+import compositionStatus from './compositionStatus'
+
 export default {
   term: {
     id: 'term',
@@ -271,28 +274,7 @@ export default {
   },
   composition_status: {
     id: 'composition_status',
-    options: [
-      {
-        value: 'pending',
-        label: '待確認'
-      },
-      {
-        value: 'new',
-        label: '全新'
-      },
-      {
-        value: 'regular',
-        label: '普通'
-      },
-      {
-        value: 'updated',
-        label: '更新'
-      },
-      {
-        value: 'archived',
-        label: '封存'
-      }
-    ]
+    options: Object.values(compositionStatus)
   },
   timeline_type: {
     id: 'timeline_type',
@@ -378,83 +360,7 @@ export default {
   },
   figure_type: {
     id: 'figure_type',
-    options: [
-      {
-        value: 'bill_comparison_bars',
-        group: '提案比較',
-        label: '法案比較得分'
-      },
-      {
-        value: 'bill_comparison_radar',
-        group: '提案比較',
-        label: '雷達'
-      },
-      {
-        value: 'bill_comparison_compact_table',
-        group: '提案比較',
-        label: '精簡列表'
-      },
-      {
-        value: 'bill_comparison_full_table',
-        group: '提案比較',
-        label: '詳細列表'
-      },
-      {
-        value: 'sponsorship_partisan_count',
-        group: '提案連署統計',
-        label: '政黨分組計數'
-      },
-      {
-        value: 'sponsorship_total_percentage',
-        group: '提案連署統計',
-        label: '全體委員比例'
-      },
-      {
-        value: 'sponsorship_partisan_percentage',
-        group: '提案連署統計',
-        label: '政黨比例'
-      },
-      {
-        value: 'sponsorship_most_stats',
-        group: '提案連署統計',
-        label: '最多連署'
-      },
-      {
-        value: 'sponsorship_mesh',
-        group: '提案連署統計',
-        label: '委員網絡'
-      },
-      {
-        value: 'statement_count_by_party',
-        group: '發言統計',
-        label: '政黨分組計數'
-      },
-      {
-        value: 'statement_position_count_by_party',
-        group: '發言統計',
-        label: '政黨分組立場分群計數'
-      },
-      {
-        value: 'statement_position_timeline_by_party',
-        group: '發言統計',
-        label: '政黨分組立場分群時間軸'
-      },
-      {
-        value: 'statement_word_cloud_by_party',
-        group: '發言統計',
-        label: '政黨分組文字雲'
-      },
-      {
-        value: 'statement_bubble_by_rep',
-        group: '發言統計',
-        label: '委員氣泡'
-      },
-      {
-        value: 'statement_timeline_by_rep',
-        group: '發言統計',
-        label: '委員時間軸'
-      }
-    ]
+    options: Object.values(figureTypes)
   },
   figure: {
     id: 'figure',
