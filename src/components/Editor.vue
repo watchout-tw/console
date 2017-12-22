@@ -125,7 +125,7 @@ export default {
             if(section.interface.type === 'form') {
               if(section.interface.is_reference) {
                 for(let field of section.interface.fields) {
-                  if(field.getTransformer && this.model.data.hasOwnProperty(field.id)) {
+                  if(field.getTransformer && this.model.data && this.model.data.hasOwnProperty(field.id)) {
                     this.model.data[field.id] = field.getTransformer(this.model.data[field.id])
                   }
                 }
