@@ -2,7 +2,7 @@
 <div class="editor-score-board">
   <el-table :data="rows">
     <el-table-column prop="version_no" label="提案"></el-table-column>
-    <el-table-column v-for="(column, index) in columns" prop="feature" :label="column.feature" key="id">
+    <el-table-column v-for="(column, index) in columns" prop="feature" :label="column && column.feature" key="id">
       <template scope="scope">
         <el-input-number size="small" v-model="scope.row.score_per_act_feature[index].score"></el-input-number>
         <div>{{scope.row.score_per_act_feature[index].short_content}}</div>
@@ -23,15 +23,8 @@ export default {
       columns: [],
       candidateRows: [],
       candidateColumns: [],
-      bills: []
-    }
-  },
-  watch: {
-    'columnIds' () {
-      this.updateColumnDiff()
-    },
-    'rowIds' () {
-      this.updateRowDiff()
+      bills: [],
+      isInitial: false
     }
   },
   beforeMount () {
@@ -42,9 +35,42 @@ export default {
     }).then(response => {
       this.candidateRows = response.data.rows
       this.initiateTableColumn()
+      this.isInitial = true
+      this.updateRowDiff()
     })
   },
+  watch: {
+    'columnIds' () {
+      this.updateColumnDiff()
+    },
+    'rowIds' () {
+      if(this.isInitial) {
+        this.updateRowDiff()
+      }
+    }
+  },
   methods: {
+    queryRs_bill (newObj) {
+      api.getItem({ api: '/console/lab/rs_bills', id: newObj.id })
+      .then(response => {
+        var curBill = response.data
+        this.bills.push(curBill)
+        this.rows.push({
+          bill_id: newObj.id,
+          version_no: newObj.version_no,
+          score_per_act_feature: this.columns.map(col => {
+            var curActFeature = curBill.act_features.find(af => {
+              return af.act_feature_id === col.id
+            })
+            return {
+              score: 0,
+              act_feature_id: col.id,
+              short_content: curActFeature ? curActFeature.short_content : ''
+            }
+          })
+        })
+      })
+    },
     // 增加、減少 act feature 時，score board 並不會知道哪個 element 增加、減少
     // 所以在每次 watch 到 columnIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
     updateColumnDiff () {
@@ -88,43 +114,28 @@ export default {
     // 增加、減少 bill 時，score board 並不會知道哪個 element 增加、減少
     // 所以在每次 watch 到 rowIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
     updateRowDiff () {
-      if (this.rows.length > this.rowIds.length) {
-        var removeIndex = this.rows.findIndex(row => {
-          return !this.rowIds.find(rowId => {
-            return rowId === row.bill_id
+      for(let i = 0; i < this.rows.length; i++) {
+        for(let j = 0; j < this.rowIds.length; j++) {
+          if(this.rows[i].bill_id === this.rowIds[j]) {
+            break
+          }
+          if(j === this.rowIds.length - 1) {
+            this.rows.splice(i, 1)
+            i--
+          }
+        }
+      }
+      let currentIds = []
+      for(let i = 0; i < this.rows.length; i++) {
+        currentIds.push(this.rows[i].bill_id)
+      }
+      for(let i = 0; i < this.rowIds.length; i++) {
+        if(currentIds.indexOf(this.rowIds[i]) === -1) {
+          let newObj = this.candidateRows.find(row => {
+            return row.id === this.rowIds[i]
           })
-        })
-        this.rows.splice(removeIndex, 1)
-      } else if (this.rows.length < this.rowIds.length) {
-        var newIndex = this.rowIds.findIndex(rowId => {
-          return !this.rows.find(row => {
-            return row.bill_id === rowId
-          })
-        })
-        var newObj = this.candidateRows.find(row => {
-          return row.id === this.rowIds[newIndex]
-        })
-        // 因為要在每個 score 底下顯示此法案在此法案比較的項目 Ex: 投票門檻 0.5%
-        // 所以動態地去拿 rs_bills
-        api.getItem({ pageID: 'rs_bills', id: newObj.id })
-        .then(response => {
-          var curBill = response.data
-          this.bills.push(curBill)
-          this.rows.splice(newIndex, 0, {
-            bill_id: newObj.id,
-            version_no: newObj.version_no,
-            score_per_act_feature: this.columns.map(col => {
-              var curActFeature = curBill.act_features.find(af => {
-                return af.act_feature_id === col.id
-              })
-              return {
-                score: 0,
-                act_feature_id: col.id,
-                short_content: curActFeature ? curActFeature.short_content : ''
-              }
-            })
-          })
-        })
+          this.queryRs_bill(newObj)
+        }
       }
       this.$emit('update:scores', this.rows)
     },
