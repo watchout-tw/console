@@ -1790,11 +1790,18 @@ export default {
               id: 'data_set_type',
               label: '資料集型別',
               type: 'select',
-              directory: 'figure_data_set_type'
+              directory: 'figure_data_set_type',
+              cascadeUpdate: [
+                cascade.applyConstraint(['data_set_id'], 'api_switch')
+              ]
             },
             {
               id: 'data_set_id',
               label: '資料集',
+              directory: {
+                lab_bill_data_set: 'lab_bill_data_set',
+                lab_statement_data_set: 'lab_statement_data_set'
+              },
               type: 'select'
             }
           ],
@@ -1988,7 +1995,7 @@ export default {
               type: 'select',
               directory: 'specific_topic',
               cascadeUpdate: [
-                cascade.applyConstraint(['act_dir_id', 'act_features'], 'st')
+                cascade.applyConstraint(['act_dir_id', 'act_feature_ids'], 'st')
               ]
             },
             {

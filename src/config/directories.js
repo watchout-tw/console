@@ -408,7 +408,7 @@ export default {
   },
   lab_statement_data_set: {
     id: 'lab_statement_data_set',
-    api: '/console/lab/lab_statement_data_sets',
+    api: '/console/lab/statement_data_sets',
     value: 'id',
     label: 'name'
   }
