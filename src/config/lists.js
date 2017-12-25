@@ -313,7 +313,7 @@ export default {
   },
   act_features: {
     api: '/console/lab/act_features',
-    paged: false,
+    paged: true,
     filters: [
       {
         id: 'specific_topic',
