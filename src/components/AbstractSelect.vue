@@ -121,11 +121,18 @@ export default {
     },
     update() {
       this.pull()
-      this.$store.dispatch('updateSelect', {
-        parameters: this.parameters,
-        directoryID: this.directory,
-        uniqueID: this.uuid
-      })
+      if(typeof this.directory === 'string') {
+        this.$store.dispatch('updateSelect', {
+          parameters: this.parameters,
+          directoryID: this.directory,
+          uniqueID: this.uuid
+        })
+      }else {
+        this.$store.dispatch('updateSelect', {
+          directoryID: this.directory[this.parameters['api_switch']],
+          uniqueID: this.uuid
+        })
+      }
     },
     pull() {
       // FIXME: This is buggy here, this.value could be null or an object
