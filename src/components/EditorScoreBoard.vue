@@ -114,6 +114,7 @@ export default {
     // 增加、減少 bill 時，score board 並不會知道哪個 element 增加、減少
     // 所以在每次 watch 到 rowIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
     updateRowDiff () {
+      if (this.candidateRows.length === 0) return
       for(let i = 0; i < this.rows.length; i++) {
         for(let j = 0; j < this.rowIds.length; j++) {
           if(this.rows[i].bill_id === this.rowIds[j]) {
