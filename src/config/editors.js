@@ -1809,14 +1809,6 @@ export default {
             labelWidth: labelWidth(6)
           }
         }
-      },
-      {
-        id: 'preview',
-        title: '預覽',
-        description: '這個圖表的預覽',
-        interface: {
-          type: 'd3'
-        }
       }
     ]
   },
