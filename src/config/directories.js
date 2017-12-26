@@ -85,7 +85,11 @@ export default {
     id: 'act_feature',
     api: '/console/lab/act_features',
     value: 'id',
-    label: 'feature'
+    label: 'feature',
+    paging: {
+      page: true,
+      all: true
+    }
   },
   rep: {
     id: 'rep',
