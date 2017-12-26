@@ -219,7 +219,11 @@ export default {
     id: 'rs_bill',
     api: '/console/lab/rs_bills',
     value: 'id',
-    label: [ 'version_no', 'principle_sponsor_value.name' ]
+    label: [ 'version_no', 'principle_sponsor_value.name' ],
+    paging: {
+      page: true,
+      all: true
+    }
   },
   rs_statement: {
     id: 'rs_statement',
