@@ -40,12 +40,17 @@ export default {
     })
   },
   watch: {
-    'columnIds' () {
-      this.updateColumnDiff()
+    'columnIds' (newVal, oldVal) {
+      // diff 在 initialize 的時候不做
+      if (oldVal) {
+        this.updateColumnDiff()
+      }
     },
-    'rowIds' () {
-      if(this.isInitial) {
+    'rowIds' (newVal, oldVal) {
+      if(this.isInitial && oldVal) {
         this.updateRowDiff()
+      } else {
+        this.rows = this.scores
       }
     }
   },
