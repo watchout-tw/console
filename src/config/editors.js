@@ -1352,7 +1352,7 @@ export default {
               id: 'short_content',
               prop: 'short_content',
               label: '簡短內容',
-              type: 'text',
+              type: 'textarea',
               required: true
             },
             {
