@@ -1081,7 +1081,7 @@ export default {
             }
           ],
           options: {
-            labelWidth: labelWidth(5)
+            labelWidth: labelWidth(6)
           }
         }
       },
