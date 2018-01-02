@@ -25,12 +25,14 @@ export default {
               id: 'start_date',
               label: '起始日',
               type: 'date',
+              required: true,
               postPreparer: preparers.date2Timestamp
             },
             {
               id: 'end_date',
               label: '終止日',
               type: 'date',
+              required: true,
               postPreparer: preparers.date2Timestamp
             }
           ],
@@ -70,6 +72,7 @@ export default {
               prop: 'start_date',
               label: '起',
               type: 'date',
+              required: true,
               formatter: formatters.date,
               postPreparer: preparers.date2Timestamp
             },
@@ -78,6 +81,7 @@ export default {
               prop: 'end_date',
               label: '訖',
               type: 'date',
+              required: true,
               formatter: formatters.date,
               postPreparer: preparers.date2Timestamp
             }
@@ -92,6 +96,7 @@ export default {
           type: 'checklist',
           id: 'party',
           directory: 'party',
+          required: true,
           postPreparer: preparers.replaceElementInArrayById
         }
       },
@@ -120,6 +125,7 @@ export default {
               label: '關聯政黨',
               type: 'multiselect',
               directory: 'party',
+              required: true,
               getTransformer: preparers.replaceElementInArrayById
             }
           ],
@@ -191,18 +197,21 @@ export default {
               id: 'name',
               label: '全名',
               type: 'text',
-              updateForbidden: true
+              updateForbidden: true,
+              required: true
             },
             {
               id: 'abbreviation',
               label: '短名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'category',
               label: '分類',
               type: 'select',
-              directory: 'committee_category'
+              directory: 'committee_category',
+              required: true
             }
           ],
           options: {
@@ -275,12 +284,14 @@ export default {
             {
               id: 'name',
               label: '全名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'abbreviation',
               label: '短名',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'emblem',
@@ -335,13 +346,15 @@ export default {
             {
               id: 'gender',
               label: '性別',
-              type: 'gender'
+              type: 'gender',
+              required: true
             },
             {
               id: 'highest_edu_degree',
               label: '最高學歷',
               type: 'select',
-              directory: 'edu_degree'
+              directory: 'edu_degree',
+              required: true
             },
             {
               id: 'edu_record',
@@ -441,6 +454,7 @@ export default {
               prop: 'start_date',
               label: '起始日期',
               type: 'date',
+              required: true,
               updateForbidden: true,
               formatter: formatters.date,
               postPreparer: preparers.date2Timestamp
@@ -451,10 +465,10 @@ export default {
               label: '屆期',
               type: 'select',
               directory: 'term',
+              required: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['party', 'caucus'], 'term')
-              ],
-              required: true
+              ]
             },
             {
               id: 'party',
@@ -471,6 +485,7 @@ export default {
               label: '黨團或政團',
               type: 'select',
               directory: 'caucus',
+              required: true,
               // FIXME: should be filter by term
               formatter: formatters.name,
               postPreparer: preparers.replaceById
@@ -505,6 +520,7 @@ export default {
               prop: 'change_date',
               label: '變更日期',
               type: 'date',
+              required: true,
               formatter: formatters.date,
               postPreparer: preparers.date2Timestamp
             },
@@ -531,7 +547,8 @@ export default {
               prop: 'district_name',
               label: '選區',
               type: 'select',
-              directory: 'term_district'
+              directory: 'term_district',
+              required: true
             },
             {
               id: 'duty',
@@ -598,7 +615,8 @@ export default {
               defaultValue: false,
               formatter: formatters.boolean,
               getTransformer: preparers.int2Boolean,
-              postPreparer: preparers.boolean2Int
+              postPreparer: preparers.boolean2Int,
+              required: true
             }
           ]
         }
@@ -624,7 +642,8 @@ export default {
             {
               id: 'index',
               label: '排序',
-              type: 'number'
+              type: 'number',
+              required: true
             },
             {
               id: 'image',
@@ -676,7 +695,8 @@ export default {
             {
               id: 'index',
               label: '排序',
-              type: 'number'
+              type: 'number',
+              required: true
             },
             {
               id: 'image',
@@ -686,7 +706,8 @@ export default {
             {
               id: 'description',
               label: '敘述',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             }
           ],
           options: {
@@ -702,6 +723,7 @@ export default {
           type: 'checklist',
           id: 'general_topic',
           directory: 'general_topic',
+          required: true,
           postPreparer: preparers.mapChecklist
         }
       },
@@ -719,7 +741,8 @@ export default {
               id: 'name',
               prop: 'name',
               label: '名稱',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'index',
@@ -745,7 +768,8 @@ export default {
               id: 'question',
               prop: 'question',
               label: '爭點',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'index',
@@ -778,7 +802,8 @@ export default {
             {
               id: 'official_seq_no',
               label: '院總字號',
-              type: 'number'
+              type: 'number',
+              required: true
             }
           ],
           options: {
@@ -823,13 +848,15 @@ export default {
               id: 'act',
               label: '法案',
               type: 'select',
-              directory: 'act'
+              directory: 'act',
+              required: true
             },
             {
               id: 'act_dir',
               label: '修法方向',
               type: 'select',
-              directory: 'act_dir'
+              directory: 'act_dir',
+              required: true
             },
             {
               id: 'feature',
@@ -875,7 +902,8 @@ export default {
               id: 'score',
               prop: 'score',
               label: '分數',
-              type: 'number'
+              type: 'number',
+              required: true
             },
             {
               id: 'description',
@@ -925,21 +953,24 @@ export default {
               label: '屆期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'session_index',
               label: '會期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'rep_id',
@@ -963,7 +994,8 @@ export default {
               id: 'principle_committee',
               label: '主審委員會',
               type: 'select',
-              directory: 'committee'
+              directory: 'committee',
+              required: true
             },
             {
               id: 'joint_committees',
@@ -974,7 +1006,8 @@ export default {
             {
               id: 'content',
               label: '內容',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             },
             {
               id: 'st_question_id',
@@ -987,17 +1020,20 @@ export default {
               id: 'position',
               label: '立場',
               type: 'select',
-              directory: 'rs_position'
+              directory: 'rs_position',
+              required: true
             },
             {
               id: 'position_summary',
               label: '立場摘要',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             },
             {
               id: 'source_link',
               label: '原始資料連結',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'tags',
@@ -1028,6 +1064,7 @@ export default {
               label: '關聯法案',
               type: 'select',
               directory: 'act',
+              required: true,
               cascadeCrossSection: {
                 act_features: ['st_id']
               }
@@ -1038,6 +1075,7 @@ export default {
               type: 'switch',
               defaultValue: false,
               updateForbidden: true,
+              required: true,
               getTransformer: preparers.int2Boolean,
               postPreparer: preparers.boolean2Int
             }
@@ -1204,14 +1242,16 @@ export default {
               label: '日期',
               type: 'date',
               formatter: formatters.date,
-              postPreparer: preparers.date2Timestamp
+              postPreparer: preparers.date2Timestamp,
+              required: true
             },
             {
               id: 'legislative_step_id',
               prop: 'legislative_step_id',
               label: '審議進度',
               type: 'select',
-              directory: 'legislative_step'
+              directory: 'legislative_step',
+              required: true
             }
           ]
         }
@@ -1235,14 +1275,16 @@ export default {
               cascadeUpdate: [
                 cascade.applyConstraint(['st_question_id'], 'st')
               ],
-              deleteThisBeforePost: true
+              deleteThisBeforePost: true,
+              required: true
             },
             {
               id: 'st_question_id',
               prop: 'st_question_id',
               label: '爭點',
               type: 'select',
-              directory: 'st_question'
+              directory: 'st_question',
+              required: true
             },
             {
               id: 'position',
@@ -1280,7 +1322,8 @@ export default {
                 valueName: 'id'
               },
               deleteThisBeforePost: true,
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'act_dir_id',
@@ -1292,6 +1335,7 @@ export default {
                 cascade.applyConstraint(['act_feature_id'], 'act_dir')
               ],
               disabled: true,
+              required: true,
               dependency: 'st_id'
             },
             {
@@ -1301,6 +1345,7 @@ export default {
               type: 'select',
               directory: 'act_feature',
               disabled: true,
+              required: true,
               dependency: 'act_dir_id'
             },
             {
@@ -1337,12 +1382,14 @@ export default {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              required: true
             },
             {
               id: 'date',
               label: '日期',
               type: 'date',
+              required: true,
               postPreparer: preparers.date2Timestamp,
               cascadeUpdate: [
                 cascade.lookupTerm(['term_index', 'session_index', 'temp_session_index'])
@@ -1353,21 +1400,24 @@ export default {
               label: '屆期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'session_index',
               label: '會期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'temp_session_index',
               label: '臨時會期',
               type: 'number',
               determined_by: 'date',
-              disabled: true
+              disabled: true,
+              required: true
             },
             {
               id: 'title',
@@ -1408,8 +1458,7 @@ export default {
             {
               id: 'g0v_link',
               label: 'g0v連結',
-              type: 'text',
-              required: true
+              type: 'text'
             },
             {
               id: 'source_link',
@@ -1445,24 +1494,28 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
               label: '短網址',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'date',
               label: '日期',
               type: 'date',
-              postPreparer: preparers.date2Timestamp
+              postPreparer: preparers.date2Timestamp,
+              required: true
             },
             {
               id: 'type',
               label: '類型',
               type: 'select',
-              directory: 'timeline_event_type'
+              directory: 'timeline_event_type',
+              required: true
             },
             {
               id: 'image',
@@ -1477,7 +1530,8 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'content',
@@ -1693,18 +1747,21 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
               label: '短網址',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'type',
               label: '類型',
               type: 'select',
-              directory: 'timeline_type'
+              directory: 'timeline_type',
+              required: true
             },
             {
               id: 'image',
@@ -1714,7 +1771,8 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'description',
@@ -1743,7 +1801,8 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
@@ -1754,17 +1813,20 @@ export default {
               id: 'type',
               label: '類型',
               type: 'select',
-              directory: 'figure_type'
+              directory: 'figure_type',
+              required: true
             },
             {
               id: 'image',
               label: '圖像',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'description',
@@ -1791,6 +1853,7 @@ export default {
               label: '資料集型別',
               type: 'select',
               directory: 'figure_data_set_type',
+              required: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['data_set_id'], 'api_switch')
               ]
@@ -1802,6 +1865,7 @@ export default {
                 lab_bill_data_set: 'lab_bill_data_set',
                 lab_statement_data_set: 'lab_statement_data_set'
               },
+              required: true,
               type: 'select'
             }
           ],
@@ -1829,7 +1893,8 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
@@ -1839,33 +1904,39 @@ export default {
             {
               id: 'image',
               label: '圖像',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              required: true
             },
             {
               id: 'tagline',
               label: '標語',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'intro',
               label: '簡介',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             },
             {
               id: 'description',
               label: '敘述',
-              type: 'textarea'
+              type: 'textarea',
+              required: true
             }
           ],
           options: {
@@ -1884,7 +1955,8 @@ export default {
               id: 'timeline_id',
               label: '大事紀',
               type: 'select',
-              directory: 'timeline'
+              directory: 'timeline',
+              required: true
             }
           ],
           options: {
@@ -1906,19 +1978,22 @@ export default {
               id: 'type',
               prop: 'type',
               label: '類型',
-              type: 'select'
+              type: 'select',
+              required: true
             },
             {
               id: 'url',
               prop: 'url',
               label: 'URL',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'title',
               prop: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             }
           ]
         }
@@ -1938,12 +2013,14 @@ export default {
             {
               id: 'name',
               label: '名稱',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'version_no',
               label: '版本號',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'slug',
@@ -1954,18 +2031,21 @@ export default {
               id: 'term_index',
               label: '屆期',
               type: 'select',
-              directory: 'term'
+              directory: 'term',
+              required: true
             },
             {
               id: 'start_date',
               label: '起始日',
               type: 'date',
+              required: true,
               postPreparer: preparers.date2Timestamp
             },
             {
               id: 'end_date',
               label: '終止日',
               type: 'date',
+              required: true,
               postPreparer: preparers.date2Timestamp
             }
           ],
@@ -1986,6 +2066,7 @@ export default {
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic',
+              required: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['act_dir_id', 'act_feature_ids'], 'st')
               ]
@@ -1994,25 +2075,29 @@ export default {
               id: 'act_id',
               label: '關聯法案',
               type: 'select',
-              directory: 'act'
+              directory: 'act',
+              required: true
             },
             {
               id: 'act_dir_id',
               label: '關聯修法方向',
               type: 'select',
-              directory: 'act_dir'
+              directory: 'act_dir',
+              required: true
             },
             {
               id: 'act_feature_ids',
               label: '法案比較',
               type: 'multiselect',
-              directory: 'act_feature'
+              directory: 'act_feature',
+              required: true
             },
             {
               id: 'bill_ids',
               label: '提案',
               type: 'multiselect',
-              directory: 'rs_bill'
+              directory: 'rs_bill',
+              required: true
             }
           ],
           options: {
@@ -2048,12 +2133,14 @@ export default {
             {
               id: 'name',
               label: '名稱',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'version_no',
               label: '版本號',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'slug',
@@ -2065,6 +2152,7 @@ export default {
               label: '屆期',
               type: 'select',
               directory: 'term',
+              required: true,
               cascadeCrossSection: {
                 should_have_spoken_condition: ['should_have_spoken_sessions']
               }
@@ -2072,12 +2160,14 @@ export default {
             {
               id: 'start_date',
               label: '起始日',
-              type: 'date'
+              type: 'date',
+              required: true
             },
             {
               id: 'end_date',
               label: '終止日',
-              type: 'date'
+              type: 'date',
+              required: true
             }
           ],
           options: {
@@ -2097,6 +2187,7 @@ export default {
               label: '關聯小議題',
               type: 'select',
               directory: 'specific_topic',
+              required: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['st_question_id'], 'st')
               ]
@@ -2105,7 +2196,8 @@ export default {
               id: 'st_question_id',
               label: '爭點',
               type: 'select',
-              directory: 'st_question'
+              directory: 'st_question',
+              required: true
             }
           ],
           options: {
@@ -2124,7 +2216,8 @@ export default {
               id: 'should_have_spoken_committees',
               label: '委員會',
               type: 'multiselect',
-              directory: 'committee'
+              directory: 'committee',
+              required: true
             },
             {
               id: 'should_have_spoken_sessions',
@@ -2132,6 +2225,7 @@ export default {
               type: 'multiselect',
               directory: 'session',
               disabled: true,
+              required: true,
               cascadeAction: {
                 keyName: 'sessions',
                 labelName: 'session_index',
@@ -2160,7 +2254,8 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
@@ -2171,7 +2266,8 @@ export default {
               id: 'type',
               label: '類別',
               type: 'select',
-              directory: 'lab_data_report_type'
+              directory: 'lab_data_report_type',
+              required: true
             },
             {
               id: 'image',
@@ -2181,19 +2277,22 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              required: true
             },
             {
               id: 'figure_data_set_type',
               label: '圖表資料集型別',
               type: 'select',
               directory: 'figure_data_set_type',
+              required: true,
               cascadeUpdate: [
                 cascade.appointDirectory(['figure_data_set_id'])
               ]
@@ -2201,7 +2300,8 @@ export default {
             {
               id: 'figure_data_set_id',
               label: '圖表資料集',
-              type: 'select'
+              type: 'select',
+              required: true
             }
           ],
           options: {
@@ -2224,13 +2324,15 @@ export default {
               prop: 'id',
               label: '圖表',
               type: 'select',
-              directory: 'figure'
+              directory: 'figure',
+              required: true
             },
             {
               id: 'index',
               prop: 'index',
               label: '排序',
-              type: 'number'
+              type: 'number',
+              required: true
             }
           ]
         }
@@ -2251,7 +2353,8 @@ export default {
               id: 'status',
               label: '狀態',
               type: 'select',
-              directory: 'composition_status'
+              directory: 'composition_status',
+              required: true
             },
             {
               id: 'slug',
@@ -2266,13 +2369,15 @@ export default {
             {
               id: 'title',
               label: '標題',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'st_id',
               label: '關聯小議題',
               type: 'select',
-              directory: 'specific_topic'
+              directory: 'specific_topic',
+              required: true
             }
           ],
           options: {
