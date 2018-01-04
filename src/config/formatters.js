@@ -125,5 +125,8 @@ export default {
   composition_status(row, col) {
     let status = row[col.property]
     return options.composition_status[status] ? options.composition_status[status].label : row[col.property]
+  },
+  figure_data_set_st(row, col) {
+    return row.data_set.st ? row.data_set.st.title : ''
   }
 }

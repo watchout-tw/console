@@ -727,6 +727,16 @@ export default {
       {
         prop: 'title',
         label: '標題'
+      },
+      {
+        prop: 'data_set',
+        label: '小議題',
+        formatter: formatters.figure_data_set_st
+      },
+      {
+        prop: 'data_set',
+        label: '關連資料集',
+        formatter: formatters.name
       }
     ]
   },
