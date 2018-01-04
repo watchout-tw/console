@@ -702,7 +702,7 @@ export default {
   },
   figures: {
     api: '/console/comp/figures',
-    paged: false,
+    paged: true,
     filters: [
       {
         id: 'title',
