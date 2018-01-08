@@ -984,7 +984,8 @@ export default {
       },
       {
         prop: 'figure_data_set_type',
-        label: '資料集類型'
+        label: '資料集類型',
+        formatter: formatters.figure_data_set_type
       },
       {
         prop: 'figure_data_set',

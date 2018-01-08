@@ -128,5 +128,9 @@ export default {
   },
   figure_data_set_st(row, col) {
     return row.data_set.st ? row.data_set.st.title : ''
+  },
+  figure_data_set_type(row, col) {
+    let type = row[col.property]
+    return options.figure_data_set_type[type] ? options.figure_data_set_type[type].label : row[col.property]
   }
 }
