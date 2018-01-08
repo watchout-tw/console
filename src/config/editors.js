@@ -1784,6 +1784,25 @@ export default {
             labelWidth: labelWidth(4)
           }
         }
+      },
+      {
+        id: 'event',
+        title: '大事紀事件',
+        description: '這個大事紀的事件',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'event_ids',
+              label: '事件',
+              type: 'multiselect',
+              directory: 'timeline_event'
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(4)
+          }
+        }
       }
     ]
   },
