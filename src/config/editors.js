@@ -1826,7 +1826,8 @@ export default {
             {
               id: 'slug',
               label: '短網址',
-              type: 'text'
+              type: 'text',
+              required: true
             },
             {
               id: 'type',
