@@ -65,7 +65,6 @@ export default {
           } else {
             this.config.disabled = true
           }
-          this.model = []
         }
       }
     }
