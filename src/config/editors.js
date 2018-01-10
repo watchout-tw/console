@@ -1700,7 +1700,7 @@ export default {
           is_reference: true,
           fields: [
             {
-              id: 'data_report',
+              id: 'data_reports',
               label: '數據分析報告',
               type: 'multiselect',
               directory: 'data_report'
