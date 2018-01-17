@@ -373,7 +373,11 @@ export default {
     id: 'figure',
     api: '/console/comp/figures',
     value: 'id',
-    label: 'title'
+    label: 'title',
+    paging: {
+      page: true,
+      all: true
+    }
   },
   figure_data_set_type: {
     id: 'figure_data_set_type',
