@@ -285,12 +285,7 @@ export default {
   },
   timeline_type: {
     id: 'timeline_type',
-    options: [
-      {
-        value: 'basic',
-        label: '基本'
-      }
-    ]
+    options: Object.values(options.timeline_type)
   },
   timeline_event: {
     id: 'timeline_event',

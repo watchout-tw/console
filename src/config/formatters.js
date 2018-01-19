@@ -132,5 +132,9 @@ export default {
   figure_data_set_type(row, col) {
     let type = row[col.property]
     return options.figure_data_set_type[type] ? options.figure_data_set_type[type].label : row[col.property]
+  },
+  timeline_type(row, col) {
+    let type = row[col.property]
+    return options.timeline_type[type] ? options.timeline_type[type].label : row[col.property]
   }
 }

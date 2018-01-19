@@ -104,5 +104,11 @@ export default {
       group: '議題實驗室',
       label: '發言資料集'
     }
+  },
+  timeline_type: {
+    basic: {
+      value: 'basic',
+      label: '基本'
+    }
   }
 }
