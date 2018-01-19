@@ -647,7 +647,8 @@ export default {
     columns: [
       {
         prop: 'status',
-        label: '狀態'
+        label: '狀態',
+        formatter: formatters.composition_status
       },
       {
         prop: 'date',
@@ -656,7 +657,8 @@ export default {
       },
       {
         prop: 'type',
-        label: '類型'
+        label: '類型',
+        formatter: formatters.timeline_event_type
       },
       {
         prop: 'tagline',

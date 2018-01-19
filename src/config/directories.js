@@ -301,52 +301,7 @@ export default {
   },
   timeline_event_type: {
     id: 'timeline_event_type',
-    options: [
-      {
-        value: 'term_start',
-        label: '屆期起始'
-      },
-      {
-        value: 'session_start',
-        label: '會期起始'
-      },
-      {
-        value: 'reps_assume_office',
-        label: '委員就職'
-      },
-      {
-        value: 'rs_statements',
-        label: '發言'
-      },
-      {
-        value: 'rs_bills',
-        label: '提案'
-      },
-      {
-        value: 'bill_legislative_step',
-        label: '提案審議進度'
-      },
-      {
-        value: 'rs_votes',
-        label: '表決'
-      },
-      {
-        value: 'data_reports',
-        label: '數據分析報告'
-      },
-      {
-        value: 'insights',
-        label: '分析評論'
-      },
-      {
-        value: 'social_event',
-        label: '社會事件'
-      },
-      {
-        value: 'general_update',
-        label: '一般更新'
-      }
-    ]
+    options: Object.values(options.timeline_event_type)
   },
   data_report: {
     id: 'data_report',

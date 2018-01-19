@@ -110,5 +110,51 @@ export default {
       value: 'basic',
       label: '基本'
     }
+  },
+  timeline_event_type: {
+    term_start: {
+      value: 'term_start',
+      label: '屆期起始'
+    },
+    session_start: {
+      value: 'session_start',
+      label: '會期起始'
+    },
+    reps_assume_office: {
+      value: 'reps_assume_office',
+      label: '委員就職'
+    },
+    rs_statements: {
+      value: 'rs_statements',
+      label: '發言'
+    },
+    rs_bills: {
+      value: 'rs_bills',
+      label: '提案'
+    },
+    bill_legislative_step: {
+      value: 'bill_legislative_step',
+      label: '提案審議進度'
+    },
+    rs_votes: {
+      value: 'rs_votes',
+      label: '表決'
+    },
+    data_reports: {
+      value: 'data_reports',
+      label: '數據分析報告'
+    },
+    insights: {
+      value: 'insights',
+      label: '分析評論'
+    },
+    social_event: {
+      value: 'social_event',
+      label: '社會事件'
+    },
+    general_update: {
+      value: 'general_update',
+      label: '一般更新'
+    }
   }
 }

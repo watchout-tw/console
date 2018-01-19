@@ -136,5 +136,9 @@ export default {
   timeline_type(row, col) {
     let type = row[col.property]
     return options.timeline_type[type] ? options.timeline_type[type].label : row[col.property]
+  },
+  timeline_event_type(row, col) {
+    let type = row[col.property]
+    return options.timeline_event_type[type] ? options.timeline_event_type[type].label : row[col.property]
   }
 }
