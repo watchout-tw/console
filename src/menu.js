@@ -196,6 +196,28 @@ var menu = [
         title: '數據分析報告'
       }
     ]
+  },
+  {
+    id: 'ask',
+    name: '給問',
+    pages: [
+      {
+        id: 'ask_questions',
+        directory: 'ask_questions',
+        editor: 'ask_question',
+        routingIndex: 'id',
+        name: '提問',
+        title: '提問'
+      },
+      {
+        id: 'ask_answers',
+        directory: 'ask_answers',
+        editor: 'ask_answer',
+        routingIndex: 'id',
+        name: '回答',
+        title: '回答'
+      }
+    ]
   }
 ]
 
