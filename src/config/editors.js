@@ -3,6 +3,8 @@ import formatters from '@/config/formatters'
 import * as preparers from '@/config/preparers'
 import cascade from '@/util/cascade'
 
+/* Interface types: form, table, checklist, scoreboard */
+
 export default {
   term: {
     api: '/console/lab/terms',
