@@ -140,5 +140,25 @@ export default {
   timeline_event_type(row, col) {
     let type = row[col.property]
     return options.timeline_event_type[type] ? options.timeline_event_type[type].label : row[col.property]
+  },
+  ask_question_game(row, col) {
+    let game = row[col.property]
+    return game.title ? game.title : ''
+  },
+  ask_question_persona(row, col) {
+    let persona = row[col.property]
+    return persona.id ? persona.id : ''
+  },
+  ask_answer_game(row, col) {
+    let question = row[col.property]
+    return question.game.title ? question.game.title : ''
+  },
+  ask_answer_question(row, col) {
+    let question = row[col.property]
+    return question.title ? question.title : ''
+  },
+  ask_answer_persona(row, col) {
+    let persona = row[col.property]
+    return persona.name ? persona.name : ''
   }
 }

@@ -1036,5 +1036,62 @@ export default {
         label: '關聯小議題'
       }
     ]
+  },
+  ask_questions: {
+    api: '/console/ask/questions',
+    paged: true,
+    filters: [],
+    key: 'id',
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'game',
+        label: '哪個給問？',
+        formatter: formatters.ask_question_game
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      },
+      {
+        prop: 'persona',
+        label: '提問人',
+        formatter: formatters.ask_question_persona
+      },
+      {
+        prop: 'topic_id',
+        label: '議題'
+      }
+    ]
+  },
+  ask_answers: {
+    api: '/console/ask/answers',
+    paged: true,
+    filters: [],
+    key: 'id',
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'question',
+        label: '哪個給問？',
+        formatter: formatters.ask_answer_game
+      },
+      {
+        prop: 'question',
+        label: '原始問題',
+        formatter: formatters.ask_answer_question
+      },
+      {
+        prop: 'persona',
+        label: '回答人',
+        formatter: formatters.ask_answer_persona
+      }
+    ]
   }
 }
