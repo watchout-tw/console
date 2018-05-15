@@ -2406,5 +2406,87 @@ export default {
         }
       }
     ]
+  },
+  ask_question: {
+    api: '/console/ask/questions',
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個提問的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status',
+              required: true
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'content',
+              label: '內容',
+              type: 'textarea',
+              required: true
+            }
+          ]
+        }
+      }
+    ]
+  },
+  ask_answer: {
+    api: '/console/ask/answers',
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個回答的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status',
+              required: true
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text'
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text'
+            },
+            {
+              id: 'content',
+              label: '內容',
+              type: 'textarea',
+              required: true
+            }
+          ]
+        }
+      }
+    ]
   }
 }
