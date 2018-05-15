@@ -160,27 +160,28 @@ export default {
       this.$router.push({name: this.page.routes.list.name})
     },
     prepare() {
-      var tempModel = clone.deepClone(this.model)
+      var newModel = {}
+      newModel.id = this.model.id
       for(let section of this.sections) {
         if(section.interface.type === 'form') {
           for(let field of section.interface.fields) {
-            if(section.interface.is_reference && !tempModel[field.id]) {
+            if(section.interface.is_reference && !this.model[field.id]) {
               continue
             }
-            tempModel[field.id] = sanitizer.cleanField(tempModel[field.id])
-            if(field.postPreparer && tempModel.hasOwnProperty(field.id)) {
-              tempModel[field.id] = field.postPreparer(tempModel[field.id])
+            newModel[field.id] = sanitizer.cleanField(this.model[field.id])
+            if(field.postPreparer && this.model.hasOwnProperty(field.id)) {
+              newModel[field.id] = field.postPreparer(this.model[field.id])
             }
           }
         } else if(section.interface.type === 'checklist') {
-          if(section.interface.postPreparer && tempModel.hasOwnProperty(section.id)) {
-            tempModel[section.id] = section.interface.postPreparer(tempModel[section.id])
+          if(section.interface.postPreparer && this.model.hasOwnProperty(section.id)) {
+            newModel[section.id] = section.interface.postPreparer(this.model[section.id])
           }
-        } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1 && tempModel[section.id]) {
+        } else if(['table', 'events'].findIndex(type => type === section.interface.type) > -1 && this.model[section.id]) {
           const propListKey = section.interface.propListIsCalled
           const preparerKey = section.interface.preparerKeyIsAt
 
-          var arrayToPrepare = tempModel[section.id]
+          var arrayToPrepare = clone.deepClone(this.model[section.id])
           for(let obj of arrayToPrepare) {
             for(let propObj of section.interface[propListKey]) {
               const key = propObj[preparerKey]
@@ -192,22 +193,23 @@ export default {
               }
             }
           }
+          newModel[section.id] = arrayToPrepare
         }
         // ***dirty hack: 在把有 is_reference 的資料送出去前，把 model.data 裡的 null 給清乾淨
-        if(section.interface.is_reference && tempModel.type) {
-          if(tempModel.type === section.id) {
+        if(section.interface.is_reference && this.model.type) {
+          if(this.model.type === section.id) {
             var newData = {}
             for(let field of section.interface.fields) {
-              newData[field.id] = tempModel.data[field.id]
+              newData[field.id] = this.model.data[field.id]
             }
-            tempModel.data = newData
+            newModel.data = newData
           }
         }
       }
-      if(!tempModel.id && (this.$route.params.id && this.$route.params.id !== 'create')) {
-        tempModel.id = this.$route.params.id
+      if(!this.model.id && (this.$route.params.id && this.$route.params.id !== 'create')) {
+        newModel.id = this.$route.params.id
       }
-      return tempModel
+      return newModel
     },
     submit() {
       this.lockSave = true
