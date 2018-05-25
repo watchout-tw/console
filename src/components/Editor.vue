@@ -172,6 +172,9 @@ export default {
             if(field.postPreparer && this.model.hasOwnProperty(field.id)) {
               newModel[field.id] = field.postPreparer(this.model[field.id])
             }
+            if(field.allowNull && this.model.hasOwnProperty(field.id) && !this.model[field.id]) {
+              delete newModel[field.id]
+            }
           }
         } else if(section.interface.type === 'checklist') {
           if(section.interface.postPreparer && this.model.hasOwnProperty(section.id)) {
