@@ -1062,7 +1062,7 @@ export default {
         formatter: formatters.ask_question_persona
       },
       {
-        prop: 'topic_id',
+        prop: 'topic',
         label: '議題'
       }
     ]

@@ -64,3 +64,15 @@ export function prepareIndexId(targetArray) {
 export function tryToParseInt(val) {
   return isNaN(val) ? val : +val
 }
+
+export function prepareName(obj) {
+  return obj.name ? obj.name : ''
+}
+
+export function prepareTitle(obj) {
+  return obj.title ? obj.title : ''
+}
+
+export function prepareObjId(obj) {
+  return obj.id ? obj.id : null
+}

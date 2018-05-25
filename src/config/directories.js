@@ -361,5 +361,17 @@ export default {
     api: '/console/lab/statement_data_sets',
     value: 'id',
     label: 'name'
+  },
+  ask_game: {
+    id: 'ask_game',
+    api: '/console/ask/games',
+    value: 'id',
+    label: 'title'
+  },
+  topic: {
+    id: 'topic',
+    api: '/console/park/topics',
+    value: 'id',
+    label: 'title'
   }
 }

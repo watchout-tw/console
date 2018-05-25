@@ -147,7 +147,7 @@ export default {
   },
   ask_question_persona(row, col) {
     let persona = row[col.property]
-    return persona.id ? persona.id : ''
+    return persona.name ? persona.name : '無顯示名稱'
   },
   ask_answer_game(row, col) {
     let question = row[col.property]

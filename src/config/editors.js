@@ -2429,7 +2429,22 @@ export default {
             {
               id: 'slug',
               label: '短網址',
-              type: 'text'
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'game',
+              label: '給問',
+              type: 'select',
+              directory: 'ask_game',
+              required: true
+            },
+            {
+              id: 'topic',
+              label: '議題',
+              type: 'select',
+              directory: 'topic',
+              required: true
             },
             {
               id: 'image',
@@ -2447,6 +2462,57 @@ export default {
               label: '內容',
               type: 'textarea',
               required: true
+            },
+            {
+              id: 'index',
+              label: '排序',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'persona',
+              label: '提問人',
+              type: 'number',
+              getTransformer: preparers.prepareObjId,
+              required: true
+            }
+            // {
+            //   id: 'assigned_personas',
+            //   label: '指定回答人',
+            //   type: 'multiselect',
+            //   directory: ''
+            // }
+          ]
+        }
+      },
+      {
+        id: 'references',
+        title: '參考資料',
+        description: '這個提問的參考資料',
+        interface: {
+          type: 'table',
+          name: '參考資料',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
+          columns: [
+            {
+              id: 'title',
+              prop: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'url',
+              prop: 'url',
+              label: '連結',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              prop: 'description',
+              label: '敘述',
+              type: 'textarea'
             }
           ]
         }
@@ -2473,7 +2539,8 @@ export default {
             {
               id: 'slug',
               label: '短網址',
-              type: 'text'
+              type: 'text',
+              allowNull: true
             },
             {
               id: 'image',
@@ -2485,6 +2552,53 @@ export default {
               label: '內容',
               type: 'textarea',
               required: true
+            },
+            {
+              id: 'persona',
+              label: '提問人',
+              type: 'number',
+              getTransformer: preparers.prepareObjId,
+              required: true
+            },
+            {
+              id: 'question',
+              label: '問題',
+              type: 'number',
+              updateForbidden: true,
+              getTransformer: preparers.prepareObjId,
+              required: true
+            }
+          ]
+        }
+      },
+      {
+        id: 'references',
+        title: '參考資料',
+        description: '這個回答的參考資料',
+        interface: {
+          type: 'table',
+          name: '參考資料',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
+          columns: [
+            {
+              id: 'title',
+              prop: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'url',
+              prop: 'url',
+              label: '連結',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              prop: 'description',
+              label: '敘述',
+              type: 'textarea'
             }
           ]
         }
