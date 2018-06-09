@@ -199,7 +199,7 @@ var menu = [
   },
   {
     id: 'ask',
-    name: '給問',
+    name: '給問嗎？',
     pages: [
       {
         id: 'ask_questions',
