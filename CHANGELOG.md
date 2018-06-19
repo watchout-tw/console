@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this document. Format 
 
 ## Unreleased
 
+### Added
+- park/topics list and editor
+- ask_games list and editor
+
+### Fixed
+- patchForm has been using wrong variable name (pageID v.s. page.id)
+
 ## 1.0.1
 > 2018-05-26 02:36
 
