@@ -1037,6 +1037,30 @@ export default {
       }
     ]
   },
+  ask_games: {
+    api: '/console/ask/games',
+    paged: false,
+    filters: [],
+    key: 'id',
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'battlefield',
+        label: '戰場'
+      },
+      {
+        prop: 'title',
+        label: '標題'
+      }
+    ]
+  },
   ask_questions: {
     api: '/console/ask/questions',
     paged: true,
@@ -1091,6 +1115,26 @@ export default {
         prop: 'persona',
         label: '回答人',
         formatter: formatters.ask_answer_persona
+      }
+    ]
+  },
+  topics: {
+    api: '/console/park/topics',
+    paged: false,
+    filters: [],
+    key: 'id',
+    columns: [
+      {
+        prop: 'status',
+        label: '狀態'
+      },
+      {
+        prop: 'type',
+        label: '類型'
+      },
+      {
+        prop: 'title',
+        label: '標題'
       }
     ]
   }

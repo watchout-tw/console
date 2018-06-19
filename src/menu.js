@@ -202,6 +202,14 @@ var menu = [
     name: '給問嗎？',
     pages: [
       {
+        id: 'ask_games',
+        directory: 'ask_games',
+        editor: 'ask_game',
+        routingIndex: 'slug',
+        name: '給問',
+        title: '給問'
+      },
+      {
         id: 'ask_questions',
         directory: 'ask_questions',
         editor: 'ask_question',
@@ -216,6 +224,20 @@ var menu = [
         routingIndex: 'id',
         name: '回答',
         title: '回答'
+      }
+    ]
+  },
+  {
+    id: 'park',
+    name: '中央公園',
+    pages: [
+      {
+        id: 'topics',
+        directory: 'topics',
+        editor: 'topic',
+        routingIndex: 'id',
+        name: '議題分類',
+        title: '議題分類'
       }
     ]
   }

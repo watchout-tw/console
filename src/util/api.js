@@ -4,6 +4,7 @@ import QueryString from 'query-string'
 
 const queryBase = {
   'name': ['committees'],
+  'slug': ['ask_games'],
   'id': ['caucuses', 'parties']
 }
 

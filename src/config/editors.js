@@ -2409,6 +2409,118 @@ export default {
       }
     ]
   },
+  ask_game: {
+    api: '/console/ask/games',
+    apiResource: 'slug',
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個給問的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status',
+              required: true
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'year',
+              label: '年份',
+              type: 'number',
+              required: true
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'battlefield',
+              label: '戰場',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'before_title',
+              label: 'before_title',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'after_title',
+              label: 'after_title',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'index',
+              label: '排序',
+              type: 'number',
+              allowNull: true
+            }
+          ],
+          options: {
+            labelWidth: labelWidth(6)
+          }
+        }
+      },
+      {
+        id: 'matches',
+        title: '給問活動',
+        description: '這個給問的實體活動',
+        interface: {
+          type: 'table',
+          name: '給問活動',
+          propListIsCalled: 'columns',
+          preparerKeyIsAt: 'prop',
+          columns: [
+            {
+              id: 'title',
+              prop: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'url',
+              prop: 'url',
+              label: '連結',
+              type: 'text'
+            },
+            {
+              id: 'description',
+              prop: 'description',
+              label: '敘述',
+              type: 'textarea'
+            }
+          ]
+        }
+      }
+    ]
+  },
   ask_question: {
     api: '/console/ask/questions',
     sections: [
@@ -2445,6 +2557,12 @@ export default {
               type: 'select',
               directory: 'topic',
               required: true
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'text',
+              allowNull: true
             },
             {
               id: 'image',
