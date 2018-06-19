@@ -2722,5 +2722,63 @@ export default {
         }
       }
     ]
+  },
+  topic: {
+    api: '/console/park/topics',
+    sections: [
+      {
+        id: 'base',
+        title: '基本資料',
+        description: '這個議題的基本資料',
+        interface: {
+          type: 'form',
+          fields: [
+            {
+              id: 'status',
+              label: '狀態',
+              type: 'select',
+              directory: 'composition_status',
+              required: true
+            },
+            {
+              id: 'slug',
+              label: '短網址',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'type',
+              label: '類型',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'index',
+              label: '排序',
+              type: 'number',
+              allowNull: true
+            },
+            {
+              id: 'image',
+              label: '圖像',
+              type: 'text',
+              allowNull: true
+            },
+            {
+              id: 'title',
+              label: '標題',
+              type: 'text',
+              required: true
+            },
+            {
+              id: 'description',
+              label: '內容',
+              type: 'textarea',
+              allowNull: true
+            }
+          ]
+        }
+      }
+    ]
   }
 }
