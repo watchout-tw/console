@@ -91,7 +91,7 @@ export function postForm (reqObj) {
 }
 
 export function patchForm (reqObj) {
-  let url = `${reqObj.api}/${reqObj.content[getQueryBase(reqObj.pageID)]}`
+  let url = `${reqObj.api}/${reqObj.content[getQueryBase(reqObj.page.id)]}`
   if (reqObj.content.hasOwnProperty('id')) {
     delete reqObj.content.id
   }
