@@ -27,8 +27,9 @@ export default {
     console.log(`This is the Console App (${Vue.config.mode})`)
     if(Vue.config.mode === 'production') {
       axios.defaults.baseURL = 'https://core.watchout.tw'
-    } else if(Vue.config.mode === 'staging') {
-      axios.defaults.baseURL = 'https://staging.core.watchout.tw'
+      // XXX: we don't have staging api for now
+    // } else if(Vue.config.mode === 'staging') {
+      // axios.defaults.baseURL = 'https://staging.core.watchout.tw'
     } else {
       axios.defaults.baseURL = 'https://dev.core.watchout.tw'
     }
