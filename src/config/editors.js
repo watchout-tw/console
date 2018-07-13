@@ -3,7 +3,10 @@ import formatters from '@/config/formatters'
 import * as preparers from '@/config/preparers'
 import cascade from '@/util/cascade'
 
-/* Interface types: form, table, checklist, scoreboard */
+/* Interface types: form, table, checklist, scoreboard
+   api: api endpoint of item
+   deletable: has delete api endpoint or not
+*/
 
 export default {
   term: {
@@ -2523,6 +2526,7 @@ export default {
   },
   ask_question: {
     api: '/console/ask/questions',
+    deletable: true,
     sections: [
       {
         id: 'base',

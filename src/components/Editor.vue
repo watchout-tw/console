@@ -14,7 +14,7 @@
   </section>
   <el-button @click="submit()" :disabled="lockSave" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
-  <el-button @click="remove()" :disabled="lockSave" type="danger" class="remove">刪除</el-button>
+  <el-button v-if="isDeleteable" @click="remove()" :disabled="lockSave" type="danger" class="remove">刪除</el-button>
 </div>
 </template>
 
@@ -67,6 +67,11 @@ export default {
   watch: {
     '$route'(to, from) {
       this.update()
+    }
+  },
+  computed: {
+    isDeleteable () {
+      return editors[this.page.editor].deletable
     }
   },
   methods: {
