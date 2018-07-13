@@ -98,3 +98,8 @@ export function patchForm (reqObj) {
   }
   return axios.patch(url, reqObj.content)
 }
+
+export function deleteItem (reqObj) {
+  let url = `${reqObj.api}/${reqObj.id}`
+  return axios.delete(url)
+}
