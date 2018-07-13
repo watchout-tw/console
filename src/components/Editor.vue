@@ -14,6 +14,7 @@
   </section>
   <el-button @click="submit()" :disabled="lockSave" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
+  <el-button @click="remove()" :disabled="lockSave" type="danger" class="remove">刪除</el-button>
 </div>
 </template>
 
@@ -40,7 +41,8 @@ function scrollToTop() {
 const SITE_TITLE = '→沃草←中控室'
 const messages = {
   failure: '編輯失敗',
-  success: '編輯成功'
+  success: '編輯成功',
+  confirmDelete: '刪錯了就要拜偷工程師幫你救回來了，真的要刪嗎？'
 }
 
 export default {
@@ -266,7 +268,18 @@ export default {
       scrollToTop()
     },
     remove () {
-
+      if (confirm(messages.confirmDelete)) {
+        api.deleteItem({
+          api: editors[this.page.editor].api,
+          id: this.$route.params.id
+        }).then(response => {
+          this.$router.push({name: this.page.routes.list.name})
+          this.$message({
+            message: messages.success,
+            type: 'success'
+          })
+        })
+      }
     }
   },
   components: {
@@ -288,6 +301,10 @@ export default {
     > .title {
       margin: 0.5rem 0;
     }
+  }
+  > .remove {
+    position: absolute;
+    right: 1rem;
   }
 }
 
