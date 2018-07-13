@@ -12,7 +12,7 @@
     <editor-events v-else-if="sectionIs(section, 'events')" :config="section.interface" :events.sync="model[section.id]" :page="page" :parentInitialized="initialized"></editor-events>
     <editor-score-board v-else-if="sectionIs(section, 'score_board')" :config="section.interface" :scores.sync="model[section.id]" :columnIds="model[section.interface.column_name]" :rowIds="model[section.interface.row_name]"></editor-score-board>
   </section>
-  <el-button @click="submit()" :disabled=lockSave type="primary">儲存</el-button>
+  <el-button @click="submit()" :disabled="lockSave" type="primary">儲存</el-button>
   <el-button @click="goBack()">取消</el-button>
 </div>
 </template>
@@ -264,6 +264,9 @@ export default {
         })
       }
       scrollToTop()
+    },
+    remove () {
+
     }
   },
   components: {
