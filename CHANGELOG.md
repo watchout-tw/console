@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this document. Format 
 ### Added
 - park/topics list and editor
 - ask_games list and editor
+- [Feature] Delete item, add an button, and make its visibility configable
 
 ### Fixed
 - patchForm has been using wrong variable name (pageID v.s. page.id)
