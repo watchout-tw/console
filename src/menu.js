@@ -240,6 +240,22 @@ var menu = [
         title: '議題分類'
       }
     ]
+  },
+  {
+    id: 'tools',
+    name: '小工具',
+    customInterface: true,
+    customComponents: ['waa'],
+    pages: [
+      {
+        id: 'waa',
+        directory: 'waa',
+        editor: 'waa',
+        customEditUrl: '/edit',
+        name: '短網址',
+        title: '短網址'
+      }
+    ]
   }
 ]
 
@@ -253,7 +269,7 @@ for(let group of menu) {
         title: page.name
       },
       edit: {
-        path: `${page.basePath}/:id`,
+        path: `${page.basePath}${page.customEditUrl ? page.customEditUrl : '/:id'}`,
         name: `${group.id}_${page.id}_edit`,
         title: '編輯' + page.name
       }

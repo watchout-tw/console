@@ -4,8 +4,13 @@ import Meta from 'vue-meta'
 import Hello from '@/components/Hello'
 import List from '@/components/List'
 import Editor from '@/components/Editor'
+import Waa from '@/components/Waa'
 import menu from '@/menu'
 import * as util from 'common/src/lib/util'
+
+const customInterface = {
+  waa: Waa
+}
 
 Vue.use(Router)
 Vue.use(Meta, {
@@ -29,26 +34,31 @@ var routes = [
     component: Hello
   }
 ]
+
+const setRoute = (path, name, component, page) => {
+  routes.push({
+    path: path,
+    name: name,
+    component: component,
+    props: {
+      page
+    },
+    beforeEnter: checkAuth
+  })
+}
+
 for(let group of menu) {
+  if(group.customInterface) {
+    for(let component of group.customComponents) {
+      let page = group.pages[0]
+      setRoute(page.routes.list.path, page.routes.list.name, customInterface[component], page)
+      setRoute(page.routes.edit.path, page.routes.edit.name, customInterface[component], page)
+    }
+    continue
+  }
   for(let page of group.pages) {
-    routes.push({
-      path: page.routes.list.path,
-      name: page.routes.list.name,
-      component: List,
-      props: {
-        page
-      },
-      beforeEnter: checkAuth
-    })
-    routes.push({
-      path: page.routes.edit.path,
-      name: page.routes.edit.name,
-      component: Editor,
-      props: {
-        page
-      },
-      beforeEnter: checkAuth
-    })
+    setRoute(page.routes.list.path, page.routes.list.name, List, page)
+    setRoute(page.routes.edit.path, page.routes.edit.name, Editor, page)
   }
 }
 
