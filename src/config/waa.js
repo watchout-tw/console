@@ -11,6 +11,9 @@ export default {
   updateAPI: {
     url: '/update'
   },
+  uploadImageAPI: {
+    url: 'https://us-central1-i-waa-tw.cloudfunctions.net/image-dev'
+  },
   openGraphType: [
     'article',
     'book',

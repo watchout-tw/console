@@ -27,7 +27,7 @@
         <p v-if="field.type == 'string'">{{data[field.id]}}</p>
         <el-input v-if="field.type == 'text-area'" type="textarea" v-model="data[field.id]"></el-input>
         <el-input v-if="field.type == 'input'" v-model="data[field.id]"></el-input>
-        <el-input v-if="field.type == 'image'" type="file" v-model="data[field.id]"></el-input>
+        <image-selector v-if="field.type == 'image'" :value.sync="data[field.id]"></image-selector>
         <el-select v-if="field.type == 'select'" v-model="data[field.id]" placeholder="Select">
             <el-option v-for="item in waaConfig[field.optionName]" :key="item" :label="item" :value="item"></el-option>
         </el-select>
@@ -42,8 +42,14 @@
 import axios from 'axios'
 import waaConfig from '@/config/waa'
 import { labelWidth } from '@/util/element'
+import ImageSelector from './ImageSelector'
 
-axios.defaults.headers.post['Content-Type'] = 'application/json'
+let imageUploadSetting = {
+  headers: {
+    'watchout-auth': localStorage['watchout-token'],
+    'Content-Type': 'application/json'
+  }
+}
 
 export default {
   name: 'waa',
@@ -99,7 +105,7 @@ export default {
       }
     },
     async loadDetail() {
-      try{
+      try {
         let detail = await axios[waaConfig.detailAPI.method](`${waaConfig.apiUrl}${waaConfig.detailAPI.url}${this.hash}`)
         this.data = detail.data.data
         this.invalidHash = false
@@ -110,7 +116,14 @@ export default {
       }
     },
     async save() {
-      try{
+      try {
+        for(let target of ['openGraphImage', 'twitterImage']) {
+          let image = this.data[target]
+          if(image.slice(0, 10) === 'data:image') {
+            let imageUploadResult = await axios.post(`${waaConfig.uploadImageAPI.url}`, {image: image.slice(image.indexOf('base64') + 6, image.length)}, imageUploadSetting)
+            this.data[target] = imageUploadResult.data.image
+          }
+        }
         let result = await axios.post(`${waaConfig.apiUrl}${waaConfig.updateAPI.url}/${this.hash}`, this.data)
         if(result.status === 200) {
           alert('更新成功')
@@ -119,6 +132,9 @@ export default {
         console.log(e)
       }
     }
+  },
+  components: {
+    ImageSelector
   }
 }
 </script>
