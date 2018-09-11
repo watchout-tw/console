@@ -1878,7 +1878,6 @@ export default {
               label: '資料集型別',
               type: 'select',
               directory: 'figure_data_set_type',
-              required: true,
               cascadeUpdate: [
                 cascade.applyConstraint(['data_set_id'], 'api_switch')
               ]
@@ -1890,7 +1889,6 @@ export default {
                 lab_bill_data_set: 'lab_bill_data_set',
                 lab_statement_data_set: 'lab_statement_data_set'
               },
-              required: true,
               type: 'select'
             }
           ],

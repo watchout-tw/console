@@ -1137,5 +1137,13 @@ export default {
         label: '標題'
       }
     ]
+  },
+  waa: {
+    api: '',
+    paged: false,
+    filters: [],
+    key: 'id',
+    columns: [
+    ]
   }
 }
