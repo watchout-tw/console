@@ -4,7 +4,7 @@
     <el-table-column prop="version_no" label="提案"></el-table-column>
     <el-table-column v-for="(column, index) in columns" prop="feature" :label="column && column.feature" key="id">
       <template scope="scope">
-        <el-input-number size="small" v-model="scope.row.score_per_act_feature[index].score"></el-input-number>
+        <el-input-number size="small" v-model="scope.row.score_per_act_feature[index].score" @change="update"></el-input-number>
         <div>{{scope.row.score_per_act_feature[index].short_content}}</div>
       </template>
     </el-table-column>
@@ -50,6 +50,18 @@ export default {
     }
   },
   methods: {
+    getScore(bill, col) {
+      for(let s in this.scores) {
+        if(this.scores[s].bill_id === bill) {
+          for(let t in this.scores[s].score_per_act_feature) {
+            if(this.scores[s].score_per_act_feature[t].act_feature_id === col) {
+              return this.scores[s].score_per_act_feature[t].score
+            }
+          }
+        }
+      }
+      return 0
+    },
     queryRs_bill (newObj) {
       api.getItem({ api: '/console/lab/rs_bills', id: newObj.id })
       .then(response => {
@@ -63,7 +75,7 @@ export default {
               return af.act_feature_id === col.id
             })
             return {
-              score: 0,
+              score: this.getScore(newObj.id, col.id),
               act_feature_id: col.id,
               short_content: curActFeature ? curActFeature.short_content : ''
             }
@@ -103,13 +115,12 @@ export default {
             return af.act_feature_id === newObj.id
           })
           row.score_per_act_feature.splice(newIndex, 0, {
-            score: 0,
+            score: this.getScore(row.bill_id, newObj.id),
             act_feature_id: newObj.id,
             short_content: curActFeature ? curActFeature.short_content : ''
           })
         })
       }
-      this.$emit('update:scores', this.rows)
     },
     // 增加、減少 bill 時，score board 並不會知道哪個 element 增加、減少
     // 所以在每次 watch 到 rowIds 有變動時，靠這邊來做 Diff 來知道是增加、減少
@@ -138,6 +149,8 @@ export default {
           this.queryRs_bill(newObj)
         }
       }
+    },
+    update() {
       this.$emit('update:scores', this.rows)
     },
     initiateTableColumn () {
