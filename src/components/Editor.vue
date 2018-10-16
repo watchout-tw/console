@@ -204,6 +204,8 @@ export default {
             }
           }
           newModel[section.id] = arrayToPrepare
+        } else if(section.interface.type === 'score_board') {
+          newModel[section.id] = this.model[section.id]
         }
         // ***dirty hack: 在把有 is_reference 的資料送出去前，把 model.data 裡的 null 給清乾淨
         if(section.interface.is_reference && this.model.type) {
